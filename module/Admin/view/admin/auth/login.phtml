@@ -1,0 +1,33 @@
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url(
+        'Login/process',
+        array(
+            'action'     => 'authenticate',
+        )
+    )
+);
+$form->setAttribute('class', 'form-signin');
+$form->prepare();
+?>
+<div class="card card-container">
+    <div class="page-header">
+        <h4 class=""> Risk Manager Admin V 1.0 </h4>
+    </div>
+    <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+    <img id="profile-img" class="profile-img-card" src="/img/new-sda-logo_shadow.png" />
+    <p id="profile-name" class="profile-name-card"></p>
+    <?php
+        echo $this->form()->openTag($form);
+        echo $this->formCollection($form);
+        echo $this->form()->closeTag();
+
+        if ($this->messages){
+            foreach($this->messages as $message)
+            {
+                echo '<div class="alert alert-warning"><strong>Msg: </strong>'.$message.'</div>';
+            }
+        }    
+    ?>
+ </div>
+

@@ -1,0 +1,31 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+<?php
+    echo $this->headTitle('Admin RiskMan');
+    echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+    echo $this->headLink(
+            //change this to set an icon for the admin page
+            array('rel' => 'icon', 'type' => 'image/png', 'href' => $this->basePath('/img/favicon.png'))
+        )
+        ->prependStylesheet('/examples/dashboard/assets/css/bootstrap.min.css')
+        ->prependStylesheet('/examples/dashboard/assets/css/animate.min.css')
+        ->prependStylesheet('/examples/dashboard/assets/css/light-bootstrap-dashboard.css')
+        ->prependStylesheet('/app/css/main.css');
+?>
+        <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="/examples/dashboard/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="wrapper">
+            <div ng-view>
+                
+            </div>
+        </div>
+        <script data-main="/app/js/app/requirejs.config" src="/app/js/lib/requirejs/require.js"></script>
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>
