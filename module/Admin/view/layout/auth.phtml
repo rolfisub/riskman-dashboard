@@ -1,0 +1,39 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+<?php
+    echo $this->headTitle('Login RiskMan');
+    echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+    echo $this->headLink(
+            //change this to set an icon for the admin page
+            array('rel' => 'icon', 'type' => 'image/png', 'href' => $this->basePath('/img/favicon.png'))
+            )
+        ->prependStylesheet('/examples/dashboard/assets/css/bootstrap.min.css')        
+        ->prependStylesheet('/app/css/auth.css');
+?>
+    </head>
+    <body>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="container">
+                    <?php echo $this->content; ?>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <hr>
+            <div class="container center-block">
+              <div class="row">
+                <div class="col-sm-6" style="color: white;"><p class="pull-left">
+                    &copy; Copyright 2016 - <?php echo date('Y') ?>
+                    Author: Rolf Bansbach Benavides <br>
+                    Powered by: Softecdigital Solutions SDA.
+                </p></div>
+              </div>
+            </div>
+        </footer>
+        <script data-main="/app/js/require.config.auth" src="/app/js/lib/requirejs/require.js"></script>
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>
