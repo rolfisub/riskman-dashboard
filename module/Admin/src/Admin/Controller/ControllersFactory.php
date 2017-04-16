@@ -29,7 +29,7 @@ class ControllersFactory implements AbstractFactoryInterface
     
     public function __invoke(ContainerInterface $serviceLocator, $requestedName, array $options = null) 
     {
-        $services = $serviceLocator->getServiceLocator();
+        $services = $serviceLocator;
         if (class_exists($requestedName)) {
             switch ($requestedName){
                 case 'Admin\\Controller\\IndexController':

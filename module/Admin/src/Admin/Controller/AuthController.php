@@ -17,7 +17,7 @@ class AuthController extends AbstractActionController
     protected $viewModel;
     public function __construct($sm) {
         if($this->sm === null){
-            $this->sm = $sm->getServiceLocator();
+            $this->sm = $sm;
         }
        
         

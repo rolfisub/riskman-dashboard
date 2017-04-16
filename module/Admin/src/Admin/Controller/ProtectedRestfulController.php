@@ -23,7 +23,7 @@ class ProtectedRestfulController extends AbstractRestfulController
     
     public function __construct($cn) 
     {
-        $sm = $cn->getServiceLocator();
+        $sm = $cn;
         $this->auth = $sm->get('myAuthService');
     }
     
