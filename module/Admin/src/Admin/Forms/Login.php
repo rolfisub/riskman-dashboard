@@ -2,42 +2,70 @@
 
 namespace Admin\Forms;
  
-use Zend\Form\Annotation;
+use Zend\Form\Form;
+//use Zend\Form\Element;
  
 /**
  * @Annotation\Hydrator("Zend\Stdlib\Hydrator\ObjectProperty")
  * @Annotation\Name("Login")
  */
-class Login
+class Login extends Form
 {
-    /**
-     * @Annotation\Type("Zend\Form\Element\Text")
-     * @Annotation\Required({"required":"true" })
-     * @Annotation\Filter({"name":"StripTags"})
-     * @Annotation\Options({"label":"Username"})
-     * @Annotation\Attributes({"class":"form-control"})
-     */
-    public $username;
-     
-    /**
-     * @Annotation\Type("Zend\Form\Element\Password")
-     * @Annotation\Required({"required":"true" })
-     * @Annotation\Filter({"name":"StripTags"})
-     * @Annotation\Options({"label":"Password"})
-     * @Annotation\Attributes({"class":"form-control"})
-     */
-    public $password;
-     
-    /**
-     * @Annotation\Type("Zend\Form\Element\Checkbox")
-     * @Annotation\Options({"label":"Remember me: "})
-     * @Annotation\Attributes({"class":"checkbox-inline"})
-     */
-    public $rememberme;
-     
-    /**
-     * @Annotation\Type("Zend\Form\Element\Submit")
-     * @Annotation\Attributes({"value":"Login","class":"btn btn-lg btn-primary btn-block btn-signin"})
-     */
-    public $submit;
+    public function __construct() 
+    {
+        
+        parent::__construct();
+        
+        //username
+        $this->add([
+            'name' => 'username',
+            'options' => [
+                'label' => 'Username'
+            ],
+            'attributes' => [
+                'class' => 'form-control',
+                'required' => true
+            ],
+            'type' => 'Text'
+        ]);
+        
+        //password
+        $this->add([
+            'name' => 'password',
+            'options' => [
+                'label' => 'Password'
+            ],
+            'attributes' => [
+                'class' => 'form-control',
+                'required' => true
+            ],
+            'type' => 'Zend\Form\Element\Password'
+        ]);
+        
+        //rememberme
+        $this->add([
+            'name' => 'rememberme',
+            'options' => [
+                'label' => 'Remember me: '
+            ],
+            'attributes' => [
+                'class' => 'checkbox-inline'               
+            ],
+            'type' => 'Zend\Form\Element\Checkbox'
+        ]);
+        
+        //submit
+        $this->add([
+            'name' => 'submit',
+            'options' => [
+                'value' => 'Login'
+            ],
+            'attributes' => [
+                'class' => 'btn btn-lg btn-primary btn-block btn-signin',
+            ],
+            'type' => 'Zend\Form\Element\Submit'
+        ]);
+    }
+    
+    
 }

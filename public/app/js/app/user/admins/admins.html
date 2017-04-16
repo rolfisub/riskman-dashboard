@@ -1,0 +1,58 @@
+<dp-header></dp-header>
+<main-panel>
+    <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Administrators</h4>
+                <p class="category">Add, Edit or Remove administrator accounts</p>
+                <button
+                    type="button"
+                    class="btn btn-success btn-fill btn-wd"
+                    title="{{newadminPop.title}}" 
+                    data-content="{{newadminPop.content}}" 
+                    data-template-url="../app/js/app/user/admins/newadmin.html" 
+                    data-animation="am-flip-x" 
+                    data-auto-close="1" 
+                    data-placement="bottom-left"
+                    bs-popover
+                >
+                    <i class="fa fa-user"></i>
+                    Create New
+                </button>               
+            </div>
+            <div class="content table-responsive table-full-width">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Actions</th>
+                            <th>User Name</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr 
+                            ng-repeat="admin in data"
+                            >
+                            <td class="td-actions">
+                                <a href="#" rel="tooltip" title="" class="btn btn-warning btn-simple btn-xs" data-original-title="Edit Profile">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="#" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </td>
+                            <td>{{admin.user_name}}</td>
+                            <td>{{admin.first_name + ' ' + admin.last_name}}</td>
+                            <td>{{admin.email}}</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</main-panel>
+<dp-footer></dp-footer>
