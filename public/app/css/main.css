@@ -1,0 +1,15 @@
+/* 
+    Created on : Feb 28, 2017, 1:11:58 AM
+    Author     : rolf
+*/
+
+.spinner-card img{
+    width: 100%;
+    height: 100%;
+    float: left;
+    position: absolute;
+    /* top: 25%; */
+    /* left: 25%; */
+    background: rgba(0,0,0,0.10)
+}
+
