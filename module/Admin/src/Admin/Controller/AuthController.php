@@ -4,7 +4,7 @@ namespace Admin\Controller;
  
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Form\Annotation\AnnotationBuilder;
-use Zend\View\Model\ViewModel;
+use Zend\View\Model\ViewModel; 
  
 use Admin\Forms\Login;
  
@@ -17,7 +17,7 @@ class AuthController extends AbstractActionController
     protected $viewModel;
     public function __construct($sm) {
         if($this->sm === null){
-            $this->sm = $sm->getServiceLocator();
+            $this->sm = $sm;
         }
        
         
@@ -48,8 +48,7 @@ class AuthController extends AbstractActionController
     {
         if (!$this->form) {
             $login = new Login();
-            $builder = new AnnotationBuilder();
-            $this->form = $builder->createForm($login);
+            $this->form = $login;
         }
          
         return $this->form;

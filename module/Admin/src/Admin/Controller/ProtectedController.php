@@ -24,7 +24,7 @@ class ProtectedController extends AbstractActionController
     
     public function __construct($cn) 
     {
-        $sm = $cn->getServiceLocator();
+        $sm = $cn;
         $this->auth = $sm->get('myAuthService');
     }
     
