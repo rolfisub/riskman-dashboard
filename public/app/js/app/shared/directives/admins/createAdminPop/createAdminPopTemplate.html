@@ -10,6 +10,11 @@
             ng-hide="genericError.valid">
             {{genericError.msg}}
         </div>
+        <div 
+            class="alert alert-success"
+            ng-show="successMsg.show">
+            {{successMsg.msg}}
+        </div>
         <div class="input-group">
             <div class="input-group-addon">Name</div>
             <input 
@@ -102,7 +107,7 @@
         <br>
       </div>
       <div class="form-actions">
-        <button type="button" class="btn btn-danger" ng-click="$hide()">Cancel</button>
+        <button type="button" class="btn btn-danger" ng-click="$hide()">Close</button>
         <button 
             type="button" 
             class="btn btn-primary" 
