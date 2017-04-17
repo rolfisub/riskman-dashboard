@@ -54,8 +54,6 @@ define('admins/service',['admin'], function(admin){
         
         this.createAdmin = function()
         {
-            console.log('admin.create_data');
-            console.log(admin.create_data);
             return api.create('/admins', admin.create_data);
         };
         
