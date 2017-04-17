@@ -5,6 +5,11 @@
     <form name="popoverForm">
       <p ng-bind-html="content" style="min-width:100px;"></p>
       <div class="form-group">
+        <div 
+            class="alert alert-danger"
+            ng-hide="genericError.valid">
+            {{genericError.msg}}
+        </div>
         <div class="input-group">
             <div class="input-group-addon">Name</div>
             <input 

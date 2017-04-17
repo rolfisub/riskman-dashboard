@@ -60,22 +60,22 @@ class Admin extends AbstractEntity
         //min 4 max 32
         $strlen = new StringLength(['min'=>'4', 'max'=>'32']);
         if(!$strlen->isValid($this->data['username'])){
-            throw new Error400('username needs to be between 4 and 32 in length ?', 'test');
+            throw new Error400('username needs to be between 4 and 32 in length');
         }
         $alnum = new Alnum();
         if(!$alnum->isValid($this->data['username'])){
-            throw new Error400('username can only contain alpha numeric characters ?', 'test');
+            throw new Error400('username can only contain alpha numeric characters ?');
         }
         //password
         $password = new Password();
         if(!$password->isValid($this->data['password'])) {
-            throw new Error400('?', $password->getMessages());
+            throw new Error400($password->getMessages());
         }
         
         //email
         $email = new EmailAddress();
         if (!$email->isValid($this->data['email'])) {
-            throw new Error400('?', $email->getMessages());
+            throw new Error400($email->getMessages());
         }
         
         //firstname & lastname
