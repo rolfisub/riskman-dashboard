@@ -36,16 +36,7 @@
                                 <a href="#" rel="tooltip" title="" class="btn btn-warning btn-simple btn-xs" data-original-title="Edit Profile">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a 
-                                    href="#" 
-                                    rel="tooltip" 
-                                    title="" 
-                                    class="btn btn-danger btn-simple btn-xs" 
-                                    data-original-title="Remove"
-                                    ng-click="deleteAdmin(admin.user_name)"
-                                    >
-                                    <i class="fa fa-times"></i>
-                                </a>
+                                <delete-admin-pop username="admin.user_name"></delete-admin-pop> 
                             </td>
                             <td>{{admin.user_name}}</td>
                             <td>{{admin.first_name + ' ' + admin.last_name}}</td>
