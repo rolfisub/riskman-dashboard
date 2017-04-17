@@ -179,7 +179,7 @@ class AdminsMapper extends AbstractMapper
         return $admin;
     }
     
-    private function getAdminId(Admin $admin)
+    public function getAdminId(Admin $admin)
     {
         $s = new Select('admins');
         $s->columns(['id'])
