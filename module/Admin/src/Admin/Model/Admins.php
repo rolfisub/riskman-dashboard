@@ -55,8 +55,14 @@ class Admins
         ]);
         
         if($this->mapper->isAdminUserExist($admin)) {
-            //yes we can delete here
-            return $this->mapper->deleteAdmin($admin);
+            //make sure we dont delete admin.id = 1
+            $id = $this->mapper->getAdminId($admin);
+            if($id == 1) {
+                throw new Error400('You can\'t delete the main Admin account.');
+            } else {
+                //yes we can delete here
+                return $this->mapper->deleteAdmin($admin);
+            }
         } else {
             //throw error 400
             throw new Error400('Admin ' . $user . ' doesn\'t exist.');

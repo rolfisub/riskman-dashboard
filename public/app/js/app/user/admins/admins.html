@@ -7,6 +7,16 @@
                 <h4 class="title">Administrators</h4>
                 <p class="category">Add, Edit or Remove administrator accounts</p>
                 <create-admin-pop></create-admin-pop>
+                <div 
+                    class="alert alert-success"
+                    ng-show="genericSuccessMsg.show">
+                    {{genericSuccessMsg.msg}}
+                </div>
+                <div 
+                    class="alert alert-danger"
+                    ng-show="genericErrorMsg.show">
+                    {{genericErrorMsg.msg}}
+                </div>
             </div>
             <div class="content table-responsive table-full-width">
                 <table class="table">
