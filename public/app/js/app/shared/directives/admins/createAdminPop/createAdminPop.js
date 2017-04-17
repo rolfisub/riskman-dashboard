@@ -62,6 +62,10 @@ define('admins/createAdminPop',['admin'], function(admin){
                     msg:'',
                     valid:true
                 };
+                $scope.successMsg = {
+                    msg:'Admin created.',
+                    show: false
+                };
 
                 $scope.validateCreateField = function(field) {
                     $scope.createDataStatus = createValidator.validateObjectField(field, $scope.createDataStatus, $scope.dataCreate);
@@ -97,11 +101,13 @@ define('admins/createAdminPop',['admin'], function(admin){
                         $scope.genericError.msg = '';
                         $scope.genericError.valid = true;
                         $scope.reset();
+                        $scope.successMsg.show = true;
                         $scope.$parent.init();
                     }, function(err) {
                         if(err.status === 400) {
                             $scope.genericError.msg = err.data.feedback[0];
                             $scope.genericError.valid = false;
+                            $scope.successMsg.show = false;
                         } else {
                             adminsSrv.errorCallBack(err);
                         }
