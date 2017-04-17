@@ -113,6 +113,7 @@ define('admins/createAdminPop',['admin'], function(admin){
                         }
                     });
                 };
+                
             }]
         };
     });

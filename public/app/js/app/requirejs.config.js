@@ -52,7 +52,8 @@ require.config({
         'mainpanel': 'app/shared/directives/mainpanel/mainpanel',
         'navbar': 'app/shared/directives/navbar/navbar',
         'sidebar': 'app/shared/directives/sidebar/sidebar',
-        'admins/createAdminPop': 'app/shared/directives/admins/createAdminPop/createAdminPop'
+        'admins/createAdminPop': 'app/shared/directives/admins/createAdminPop/createAdminPop',
+        'admins/deleteAdminPop': 'app/shared/directives/admins/deleteAdminPop/deleteAdminPop'
         
         //admin controllers
         //'admin/hello': 'app/admin/hello/hello',
