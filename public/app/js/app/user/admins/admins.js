@@ -35,6 +35,17 @@ define('admins',[
             }
         ];
         
+        $scope.deleteAdmin = function(admin) {
+            var r = adminsSrv.deleteAdmin(admin);
+            r.then(function(res){
+                //code 200
+                $scope.init();
+            }, function(err){
+                //code 400 >
+                console.log(err);
+            });
+        };
+        
         $scope.init();
         
     }]);

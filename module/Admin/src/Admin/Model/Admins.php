@@ -10,6 +10,7 @@ namespace Admin\Model;
 
 use Admin\Mapper\AdminsMapper;
 use Admin\Entity\Admin;
+use Admin\Error\Error400;
 /**
  * Description of Admins
  *
@@ -42,6 +43,27 @@ class Admins
             return $this->mapper->createAdmin($admin);
         }
     }
+    
+    /**
+     * deletes an admin if it exists
+     * @param string $user
+     */
+    public function deleteAdmin($user)
+    {
+        $admin = new Admin([
+            'username' => $user
+        ]);
+        
+        if($this->mapper->isAdminUserExist($admin)) {
+            //yes we can delete here
+            return $this->mapper->deleteAdmin($admin);
+        } else {
+            //throw error 400
+            throw new Error400('Admin ' . $user . ' doesn\'t exist.');
+        }
+    }
+    
+    
     
     
 }
