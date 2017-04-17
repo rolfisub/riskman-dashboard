@@ -69,6 +69,10 @@ define('admins/service',['admin'], function(admin){
             api.errorCallback(response);
         };
         
+        this.deleteAdmin = function(admin) {
+            return api.deleteById('/admins', admin);
+        };
+        
 
     }]);
 });

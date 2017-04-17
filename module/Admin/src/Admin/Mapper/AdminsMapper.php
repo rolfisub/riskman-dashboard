@@ -10,6 +10,7 @@ namespace Admin\Mapper;
 
 use Admin\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Delete;
 use Zend\Db\Sql\Update;
 use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Where;
@@ -115,7 +116,7 @@ class AdminsMapper extends AbstractMapper
      * @param Admin $admin
      * @return boolean
      */
-    private function isAdminUserExist(Admin $admin)
+    public function isAdminUserExist(Admin $admin)
     {
        $a = $this->getAdminByUser($admin->data['username']);
        if($a->data['username'] !== null){
@@ -189,6 +190,18 @@ class AdminsMapper extends AbstractMapper
             return $data[0]['id'];
         }
         return null;
+    }
+    
+    public function deleteAdmin(Admin $admin) 
+    {
+        $d = new Delete('admins');
+        $d->where([
+            'user_name' => $admin->data['username']
+        ]);
+        $res = $this->queryObject($d);
+        return [
+            'admin' => $admin
+        ];
     }
     
     

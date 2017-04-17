@@ -89,7 +89,13 @@ define('api',['admin'], function(admin){
                 url: baseUrl + url
             });
         };
-
+        
+        this.deleteById = function(url, param) {
+            return $http({
+                method: 'DELETE',
+                url: baseUrl + url + '/' + param
+            });
+        };
     }]);
 });
 
