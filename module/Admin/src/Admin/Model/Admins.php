@@ -25,6 +25,11 @@ class Admins
         $this->mapper = $mapper;
     }
     
+    
+    /**
+     * Gets a list of existing admins
+     * @return array
+     */
     public function getAdminsData()
     {
         return $this->mapper->getAdminsData();
@@ -48,28 +53,55 @@ class Admins
      * deletes an admin if it exists
      * @param string $user
      */
-    public function deleteAdmin($user)
+    public function deleteAdmin($username)
+    {
+        if($this->isAdminExistentAndNotMain($username)) {
+            $admin = new Admin([
+                'username' => $user
+            ]);
+            return $this->mapper->deleteAdmin($admin);
+        }
+    }
+    
+    
+            
+    /**
+     * gets an admin by its username for editing, while is not the main admin
+     * @param string $username
+     * @return array
+     */
+    public function getAdminByUsername($username) 
+    {
+        if($this->isAdminExistentAndNotMain($username)) {
+            $admin = $this->mapper->getAdminByUser($username);
+            return $admin->toArray();
+        }
+    }
+    
+    /**
+     * checks that the admin exists, and that is not the main admin
+     * @param string $username
+     * @return boolean
+     * @throws Error400
+     */
+    private function isAdminExistentAndNotMain ($username) 
     {
         $admin = new Admin([
-            'username' => $user
+            'username' => $username
         ]);
         
         if($this->mapper->isAdminUserExist($admin)) {
             //make sure we dont delete admin.id = 1
             $id = $this->mapper->getAdminId($admin);
             if($id == 1) {
-                throw new Error400('You can\'t delete the main Admin account.');
+                throw new Error400('You can\'t modify the main Admin account.');
             } else {
-                //yes we can delete here
-                return $this->mapper->deleteAdmin($admin);
+                //yes we can do things
+                return true;
             }
         } else {
             //throw error 400
             throw new Error400('Admin ' . $user . ' doesn\'t exist.');
         }
     }
-    
-    
-    
-    
 }

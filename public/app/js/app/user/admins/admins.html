@@ -6,7 +6,7 @@
             <div class="header">
                 <h4 class="title">Administrators</h4>
                 <p class="category">Add, Edit or Remove administrator accounts</p>
-                <create-admin-pop></create-admin-pop>
+                <create-admin-pop ng-show="admins.config.add.show"></create-admin-pop>
                 <div 
                     class="alert alert-success"
                     ng-show="genericSuccessMsg.show">
@@ -33,10 +33,16 @@
                             ng-repeat="admin in data"
                             >
                             <td class="td-actions">
-                                <a href="#" rel="tooltip" title="" class="btn btn-warning btn-simple btn-xs" data-original-title="Edit Profile">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <delete-admin-pop username="admin.user_name"></delete-admin-pop> 
+                                <edit-admin-pop 
+                                    ng-show="admins.config.edit.show" 
+                                    username="admin.user_name"
+                                    >                                        
+                                </edit-admin-pop>
+                                <delete-admin-pop 
+                                    ng-show="admins.config.delete.show" 
+                                    username="admin.user_name"
+                                    >
+                                </delete-admin-pop> 
                             </td>
                             <td>{{admin.user_name}}</td>
                             <td>{{admin.first_name + ' ' + admin.last_name}}</td>
