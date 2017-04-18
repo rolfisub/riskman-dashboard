@@ -116,4 +116,9 @@ class Admin extends AbstractEntity
         
     }
     
+    public function toArray()
+    {
+        return $this->data;
+    }
+    
 }

@@ -218,37 +218,46 @@ define('adminsCreate/validator',['admin'], function(admin){
             return result;
         };
         
-        this.validateField = function(field, createData) {
+        this.validateField = function(field, data) {
             if(field === 'username') {
-                return this.username(createData.username);
+                return this.username(data.username);
             }
             if(field === 'password') {
-                return this.password(createData.password);
+                return this.password(data.password);
             }
             if(field === 'password2') {
-                return this.password2(createData.password, createData.password2);
+                return this.password2(data.password, data.password2);
             }
             if(field === 'firstname') {
-                return this.firstname(createData.firstname);
+                return this.firstname(data.firstname);
             }
             if(field === 'lastname') {
-                return this.lastname(createData.lastname);
+                return this.lastname(data.lastname);
             }
             if(field === 'email') {
-                return this.email(createData.email);
+                return this.email(data.email);
             }
         };
         
-        this.isFormValid = function(createData) {
+        this.isEditValid = function(data) {
+            //check form is valid
+            return isFormValid(data);
+        };
+        
+        this.isCreateValid = function(createData) {
             //check form is not empty
             var isEmpty = this.isCreateDataEmpty(createData);
             if(isEmpty) {
                 return false;
             }
+            return this.isFormValid(createData);
+        };
+        
+        this.isFormValid = function(data) {
             //check form is valid
             var isValid = true;
-            angular.forEach(createDataStatus, function(value, key) {
-                value = this.validateField(key, createData);
+            angular.forEach(data, function(value, key) {
+                value = this.validateField(key, data);
                 if(!value.valid) {
                     isValid = false;
                 }

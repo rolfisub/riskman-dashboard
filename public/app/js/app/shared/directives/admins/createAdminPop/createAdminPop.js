@@ -69,7 +69,9 @@ define('admins/createAdminPop',['admin'], function(admin){
 
                 $scope.validateCreateField = function(field) {
                     $scope.createDataStatus = createValidator.validateObjectField(field, $scope.createDataStatus, $scope.dataCreate);
-                    $scope.createForm.isValid = createValidator.isFormValid($scope.dataCreate);
+                    console.log($scope.createDataStatus);
+                    $scope.createForm.isValid = createValidator.isCreateValid($scope.dataCreate);
+                    console.log($scope.createForm);
                 };
                 
                 $scope.reset = function(){

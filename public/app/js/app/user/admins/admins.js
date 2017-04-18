@@ -12,6 +12,7 @@ define('admins',[
     'mainpanel',
     'admins/createAdminPop',
     'admins/deleteAdminPop',
+    'admins/editAdminPop',
     'admins/service',
     'adminsCreate/validator'
 ], function(admin){
@@ -45,6 +46,25 @@ define('admins',[
             msg: '',
             show: false
         };
+        
+        $scope.admins = {
+            config: {
+                edit: {
+                    show: true,
+                    title: 'edit'
+                },
+                delete: {
+                    show: true,
+                    title: 'delete'
+                },
+                add: {
+                    show: true,
+                    title: 'add'
+                }
+            }
+        };
+        
+        
         
         $scope.init();
         

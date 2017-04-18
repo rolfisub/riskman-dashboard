@@ -22,7 +22,7 @@ define('admins/service',['admin'], function(admin){
                 email:'',
                 firstname:'',
                 lastname:''
-            }
+            },
         };
         
         this.setUserName = function(username) {
@@ -55,6 +55,14 @@ define('admins/service',['admin'], function(admin){
         this.createAdmin = function()
         {
             return api.create('/admins', admin.create_data);
+        };
+        
+        this.updateAdmin = function(id){
+            return api.update('/admins/' + id, admin.create_data);
+        };
+        
+        this.getAdminByUsername = function(username) {
+            return api.read('/admins/' + username);
         };
         
         
