@@ -5,19 +5,22 @@
  * @author    Rolf Bansbach
  */
 
-define('admins/editAdminPop',['admin'], function(admin){
+define('admins/editAdminPop',['admin', 'adminsEdit/validator'], function(admin){
     admin.dp.directive('editAdminPop', function(){
         return {
             restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
             replace: true,
             scope: { username: '=' },
             templateUrl: "/app/js/app/shared/directives/admins/editAdminPop/editAdminPop.html",
-            controller: ['$scope', 'adminsSrv', 'adminCreateValidate', function ($scope, adminsSrv, createValidator) {
+            controller: ['$scope', 'adminsSrv', 'adminEditValidate', function ($scope, adminsSrv, editValidator) {
                  $scope.dataEdit = {
-                    password:'',
                     email:'',
                     firstname:'',
-                    lastname:''
+                    lastname:'',
+                    password:'',
+                    passwordnew:'',
+                    passwordnew2:'',
+                    username:''
                 };
 
                 $scope.editAdminPop = {
@@ -27,10 +30,6 @@ define('admins/editAdminPop',['admin'], function(admin){
                 };
 
                 $scope.editDataStatus = {
-                    password:{
-                        msg:'',
-                        valid:true
-                    },
                     email:{
                         msg:'',
                         valid:true
@@ -42,7 +41,19 @@ define('admins/editAdminPop',['admin'], function(admin){
                     lastname:{
                         msg:'',
                         valid:true
-                    }
+                    },
+                    password:{
+                        msg:'',
+                        valid:true
+                    },
+                    passwordnew:{
+                        msg:'',
+                        valid:true
+                    },
+                    passwordnew2:{
+                        msg:'',
+                        valid:true
+                    },
 
                 };
                 $scope.genericError = {
@@ -50,7 +61,7 @@ define('admins/editAdminPop',['admin'], function(admin){
                     valid:true
                 };
                 $scope.successMsg = {
-                    msg:'Admin created.',
+                    msg:'Admin Updated.',
                     show: false
                 };
                 $scope.editForm = {
@@ -58,8 +69,8 @@ define('admins/editAdminPop',['admin'], function(admin){
                 };
 
                 $scope.validateEditField = function(field) {
-                    $scope.editDataStatus = createValidator.validateObjectField(field, $scope.editDataStatus, $scope.dataEdit);
-                    $scope.editForm.isValid = createValidator.isEditValid($scope.dataEdit);
+                    $scope.editDataStatus = editValidator.validateObjectField(field, $scope.editDataStatus, $scope.dataEdit);
+                    $scope.editForm.isValid = editValidator.isEditValid($scope.dataEdit);
                 };
                 
                 $scope.reset = function(){
@@ -67,26 +78,46 @@ define('admins/editAdminPop',['admin'], function(admin){
                     $scope.dataEdit.firstname = '';
                     $scope.dataEdit.lastname = '';
                     $scope.dataEdit.password = '';
+                    $scope.dataEdit.passwordnew = '';
+                    $scope.dataEdit.passwordnew2 = '';
                     $scope.editDataStatus.email.valid = true;
                     $scope.editDataStatus.firstname.valid = true;
                     $scope.editDataStatus.lastname.valid = true;
                     $scope.editDataStatus.password.valid = true;
+                    $scope.editDataStatus.passwordnew.valid = true;
+                    $scope.editDataStatus.passwordnew2.valid = true;
                     $scope.genericError.valid = true;
                 };
                 
                 $scope.getAdmin = function(){
+                    $scope.reset();
                     var r = adminsSrv.getAdminByUsername($scope.username);
                     r.then(function(response){
-                        $scope.dataEdit = response.data;
+                        $scope.dataEdit = angular.merge($scope.dataEdit, response.data);
                     },
                     function(error){
-                        console.log(error);
+                        adminsSrv.errorCallBack(error);
                     });
-                    
                 };
 
                 $scope.editAdmin = function(){
+                    console.log($scope.dataEdit);
+                    adminsSrv.resetUpdateData();
+                    adminsSrv.setUpdatePassword($scope.dataEdit.password);
+                    adminsSrv.setUpdatePasswordNew($scope.dataEdit.passwordnew);
+                    adminsSrv.setUpdatePasswordNew2($scope.dataEdit.passwordnew2);
+                    adminsSrv.setUpdateEmail($scope.dataEdit.email);
+                    adminsSrv.setUpdateFirstName($scope.dataEdit.firstname);
+                    adminsSrv.setUpdateLastName($scope.dataEdit.lastname);
                     
+                    var r = adminsSrv.updateAdmin($scope.dataEdit.username);
+                    
+                    r.then(function(res){
+                        console.log(res);
+                    }, function(err){
+                        adminsSrv.errorCallBack(err);
+                    });
+                    //var r = adminSrv.u
                 };
                 
             }]

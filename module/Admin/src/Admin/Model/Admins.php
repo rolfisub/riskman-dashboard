@@ -51,20 +51,35 @@ class Admins
     
     /**
      * deletes an admin if it exists
-     * @param string $user
+     * @param string $username
      */
     public function deleteAdmin($username)
     {
         if($this->isAdminExistentAndNotMain($username)) {
             $admin = new Admin([
-                'username' => $user
+                'username' => $username
             ]);
             return $this->mapper->deleteAdmin($admin);
         }
     }
     
-    
-            
+    /**
+     * updates an admin if exists and valid
+     * @param string $username
+     * @param array $data
+     * @return array
+     */
+    public function updateAdmin($username, $data) 
+    {
+        if($this->isAdminExistentAndNotMain($username)) {
+            $admin = new Admin($data);
+            $admin->data['username'] = $username;
+            if($admin->checkUpdateValid()){
+                return $this->mapper->updateAdmin($admin);
+            }
+        }
+    }
+ 
     /**
      * gets an admin by its username for editing, while is not the main admin
      * @param string $username
@@ -72,10 +87,8 @@ class Admins
      */
     public function getAdminByUsername($username) 
     {
-        if($this->isAdminExistentAndNotMain($username)) {
-            $admin = $this->mapper->getAdminByUser($username);
-            return $admin->toArray();
-        }
+        $admin = $this->mapper->getAdminByUser($username);
+        return $admin->toArray();   
     }
     
     /**
@@ -89,7 +102,6 @@ class Admins
         $admin = new Admin([
             'username' => $username
         ]);
-        
         if($this->mapper->isAdminUserExist($admin)) {
             //make sure we dont delete admin.id = 1
             $id = $this->mapper->getAdminId($admin);
@@ -104,4 +116,7 @@ class Admins
             throw new Error400('Admin ' . $user . ' doesn\'t exist.');
         }
     }
+    
+    
+    
 }
