@@ -73,7 +73,6 @@ class AdminsMapper extends AbstractMapper
         $s->from(['a'=>'admins'])
             ->columns([
                 'user_name as username',
-                'pass_word as password',
                 'datetime'
             ])
             ->join(
@@ -102,7 +101,6 @@ class AdminsMapper extends AbstractMapper
         if(isset($data[0])) {
             return [
                 'username' => $data[0]['username'],
-                'password' => $data[0]['password'],
                 'email' => $data[0]['email'],
                 'firstname' => $data[0]['first_name'],
                 'lastname' => $data[0]['last_name']
@@ -125,7 +123,12 @@ class AdminsMapper extends AbstractMapper
        return false;
     }
     
-    
+    /**
+     * 
+     * @param Admin $admin
+     * @return type
+     * @throws Error400
+     */
     public function createAdmin(Admin $admin)
     {
         //check if username already taken
@@ -142,6 +145,45 @@ class AdminsMapper extends AbstractMapper
         return [
             'admin' => $admin
         ];
+    }
+    
+    /**
+     * 
+     * @param Admin $admin
+     * @throws Error400
+     */
+    public function updateAdmin(Admin $admin)
+    {
+        //check if username exists
+        if(!$this->isAdminUserExist($admin)) {
+            throw new Error400('username doesn\'t exist.');
+        }
+        
+        //if sending current pasword verify is matching records
+        if(isset($this->data['password'])) {
+            if(!$this->isPasswordMatch($admin)) {
+                throw new Error400('password doesn\'t match current password.');
+            }
+        }
+    }
+    
+    /**
+     * 
+     * @param Admin $admin
+     */
+    private function isPasswordMatch (Admin $admin)
+    {
+        $password = $admin->data['password'];
+        //$currentPassword = 
+    }
+    
+    /**
+     * 
+     * @param Admin $admin
+     */
+    private function getPasswordHashFromDB (Admin $admin)
+    {
+        
     }
     
     /**
@@ -163,7 +205,11 @@ class AdminsMapper extends AbstractMapper
         return $admin;
     }
     
-    
+    /**
+     * Creates an admin in the database
+     * @param Admin $admin
+     * @return Admin
+     */
     private function createAdminInfo(Admin $admin) 
     {
         $id = $admin->data['id'];
@@ -179,6 +225,11 @@ class AdminsMapper extends AbstractMapper
         return $admin;
     }
     
+    /**
+     * Gets an admin Id by username
+     * @param Admin $admin
+     * @return type
+     */
     public function getAdminId(Admin $admin)
     {
         $s = new Select('admins');
@@ -192,13 +243,18 @@ class AdminsMapper extends AbstractMapper
         return null;
     }
     
+    /**
+     * Deletes and admin in the database
+     * @param Admin $admin
+     * @return type
+     */
     public function deleteAdmin(Admin $admin) 
     {
         $d = new Delete('admins');
         $d->where([
             'user_name' => $admin->data['username']
         ]);
-        $res = $this->queryObject($d);
+        $this->queryObject($d);
         return [
             'admin' => $admin
         ];

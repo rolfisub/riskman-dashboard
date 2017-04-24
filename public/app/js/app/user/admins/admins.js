@@ -13,8 +13,7 @@ define('admins',[
     'admins/createAdminPop',
     'admins/deleteAdminPop',
     'admins/editAdminPop',
-    'admins/service',
-    'adminsCreate/validator'
+    'admins/service'
 ], function(admin){
     admin.cp.register('admins',[
         '$scope',        
@@ -24,7 +23,7 @@ define('admins',[
             var r = adminsSrv.getAdminsList()
             r.then(function(response){
                 $scope.data = response.data.admins_data;
-            },adminsSrv.errorCallBack);
+            }, adminsSrv.errorCallBack);
         };
         
         $scope.data = [

@@ -44,12 +44,22 @@ class AdminsRestController extends ProtectedRestfulController
     
     /**
      * deletes and admin by its username
-     * @param string $id
+     * @param string $username
      * @return JsonModel response
      */
     public function delete($username) 
     {
         return new JsonModel($this->model->deleteAdmin($username));
+    }
+    
+    /**
+     * updates an admin based on the provided array
+     * @param type $username
+     * @param type $data
+     */
+    public function update($username, $data) 
+    {
+        return new JsonModel($this->model->updateAdmin($username, $data));
     }
     
     

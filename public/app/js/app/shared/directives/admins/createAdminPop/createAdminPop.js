@@ -5,7 +5,7 @@
  * @author    Rolf Bansbach
  */
 
-define('admins/createAdminPop',['admin'], function(admin){
+define('admins/createAdminPop',['admin', 'adminsCreate/validator'], function(admin){
     admin.dp.directive('createAdminPop', function(){
         return {
             restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
@@ -69,9 +69,7 @@ define('admins/createAdminPop',['admin'], function(admin){
 
                 $scope.validateCreateField = function(field) {
                     $scope.createDataStatus = createValidator.validateObjectField(field, $scope.createDataStatus, $scope.dataCreate);
-                    console.log($scope.createDataStatus);
                     $scope.createForm.isValid = createValidator.isCreateValid($scope.dataCreate);
-                    console.log($scope.createForm);
                 };
                 
                 $scope.reset = function(){
@@ -92,11 +90,11 @@ define('admins/createAdminPop',['admin'], function(admin){
 
                 $scope.createAdmin = function(){
                     adminsSrv.resetCreateData();
-                    adminsSrv.setUserName($scope.dataCreate.username);
-                    adminsSrv.setPassword($scope.dataCreate.password);
-                    adminsSrv.setEmail($scope.dataCreate.email);
-                    adminsSrv.setFirstName($scope.dataCreate.firstname);
-                    adminsSrv.setLastName($scope.dataCreate.lastname);
+                    adminsSrv.setCreateUserName($scope.dataCreate.username);
+                    adminsSrv.setCreatePassword($scope.dataCreate.password);
+                    adminsSrv.setCreateEmail($scope.dataCreate.email);
+                    adminsSrv.setCreateFirstName($scope.dataCreate.firstname);
+                    adminsSrv.setCreateLastName($scope.dataCreate.lastname);
 
                     var r = adminsSrv.createAdmin();
                     r.then(function(res){

@@ -34,7 +34,10 @@ require.config({
         //services:
         'api':'app/shared/services/api/api.service',
         'admins/service':'app/shared/services/admins/admins',
+        'adminFields/validator' : 'app/shared/services/validators/admins/adminFields',
         'adminsCreate/validator' : 'app/shared/services/validators/admins/adminsCreate',
+        'adminsEdit/validator' : 'app/shared/services/validators/admins/adminsEdit',
+        
         
         //user controllers
         'home': 'app/user/home/home',
