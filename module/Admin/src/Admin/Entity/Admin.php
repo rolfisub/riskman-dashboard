@@ -39,7 +39,8 @@ class Admin extends AbstractEntity
         ])
         ->setUpdateOptFields([
             'password',
-            'passwordnew',            
+            'passwordnew',
+            'passwordnew2',            
             'email',
             'firstname',
             'lastname'
@@ -86,7 +87,7 @@ class Admin extends AbstractEntity
         }
         
         //password
-        if(isset($this->data['password'])) {
+        if(isset($this->data['password']) && !empty($this->data['password'])) {
             //check for minimum
             $password = new Password();
             if(!$password->isValid($this->data['password'])) {
@@ -94,12 +95,12 @@ class Admin extends AbstractEntity
             }
             
             //hash password
-            $this->data['password'] = $this->getHash($this->data['password']);
+            //$this->data['password'] = $this->getHash($this->data['password']);
             
         }
         
         //passwordnew
-        if(isset($this->data['passwordnew'])) {
+        if(isset($this->data['passwordnew']) && !empty($this->data['passwordnew'])) {
             //check for minimum
             $password = new Password();
             if(!$password->isValid($this->data['passwordnew'])) {
@@ -107,11 +108,12 @@ class Admin extends AbstractEntity
             }
             
             //check that password is set
-            if(!isst($this->data['password'])) {
+            if(!isset($this->data['password']) || empty($this->data['password'])) {
                 throw new Error400('Please provide current password to update it.');
             }
             
-            $this->data['passwordnew'] = $this->getHash($this->data['passwordnew']);
+            //hash password
+            //$this->data['passwordnew'] = $this->getHash($this->data['passwordnew']);
         }
         
         return true;
@@ -171,10 +173,9 @@ class Admin extends AbstractEntity
      * returns the hash of a string using BCrypt
      * @return string hash
      */
-    private function getHash()
+    public function getHash($input)
     {
-        $b = new Bcrypt();
-        return $b->create($this->data['password']);
+        return (new Bcrypt())->create($input);
     }
     
     public function toArray()

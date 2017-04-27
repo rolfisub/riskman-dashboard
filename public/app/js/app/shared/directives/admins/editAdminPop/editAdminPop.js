@@ -87,6 +87,7 @@ define('admins/editAdminPop',['admin', 'adminsEdit/validator'], function(admin){
                     $scope.editDataStatus.passwordnew.valid = true;
                     $scope.editDataStatus.passwordnew2.valid = true;
                     $scope.genericError.valid = true;
+                    $scope.successMsg.show = false;
                 };
                 
                 $scope.getAdmin = function(){
@@ -101,7 +102,6 @@ define('admins/editAdminPop',['admin', 'adminsEdit/validator'], function(admin){
                 };
 
                 $scope.editAdmin = function(){
-                    console.log($scope.dataEdit);
                     adminsSrv.resetUpdateData();
                     adminsSrv.setUpdatePassword($scope.dataEdit.password);
                     adminsSrv.setUpdatePasswordNew($scope.dataEdit.passwordnew);
@@ -113,11 +113,16 @@ define('admins/editAdminPop',['admin', 'adminsEdit/validator'], function(admin){
                     var r = adminsSrv.updateAdmin($scope.dataEdit.username);
                     
                     r.then(function(res){
-                        console.log(res);
+                        $scope.getAdmin();
+                        $scope.successMsg.show = true;
                     }, function(err){
+                        if(err.status === 400) {
+                            $scope.successMsg.show = false;
+                            $scope.genericError.valid = false;
+                            $scope.genericError.msg = err.data.feedback[0];
+                        }
                         adminsSrv.errorCallBack(err);
-                    });
-                    //var r = adminSrv.u
+                    });                   
                 };
                 
             }]
