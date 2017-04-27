@@ -57,7 +57,7 @@ abstract class AbstractEntity
      */
     public function setUpdateReqFields (array $fields) 
     {
-        $this->create_req_fields = $fields;
+        $this->update_req_fields = $fields;
         return $this;
     }
     /**
@@ -66,7 +66,7 @@ abstract class AbstractEntity
      */
     public function setUpdateOptFields (array $fields)
     {
-        $this->create_opt_fields = $fields;
+        $this->update_opt_fields = $fields;
         return $this;
     }
     
@@ -98,7 +98,7 @@ abstract class AbstractEntity
         foreach($this->update_req_fields as $key => $value) 
         {
             if(!isset($this->data[$value])) {
-                $e = new Error400('required field: ? is missing from request', $value);
+                $e = new Error400('required field: ' . $value . ' is missing from request');
                 //var_dump($e);die();
                 throw $e;
             }
@@ -116,7 +116,7 @@ abstract class AbstractEntity
         foreach($this->create_req_fields as $key => $value) 
         {
             if(!isset($this->data[$value])) {
-                $e = new Error400('required field: ? is missing from request', $value);
+                $e = new Error400('required field: ' . $value . ' is missing from request');
                 //var_dump($e);die();
                 throw $e;
             }
@@ -134,7 +134,7 @@ abstract class AbstractEntity
         foreach($this->data as $key => $value) 
         {
             if(!$this->isUpdateFieldOptField($key) && !$this->isUpdateFieldReqField($key)) {
-                throw new Error400('field: ? is not part of this API', $key);
+                throw new Error400('alien field: ' . $key . ' is not part of this API');
             }
         }
         return true;
@@ -150,7 +150,7 @@ abstract class AbstractEntity
         foreach($this->data as $key => $value) 
         {
             if(!$this->isCreateFieldOptField($key) && !$this->isCreateFieldReqField($key)) {
-                throw new Error400('field: ? is not part of this API', $key);
+                throw new Error400('alien field: ' . $key . ' is not part of this API');
             }
         }
         return true;

@@ -25,7 +25,7 @@ define('adminFields/validator',['admin'], function(admin){
                     msg : field + ' can\'t be empty.'
                 };
             }
-            if(username.length <= 4) {
+            if(username.length < 4) {
                 return {
                     valid : false,
                     msg : field + ' can\'t be less than 4 characters.'
