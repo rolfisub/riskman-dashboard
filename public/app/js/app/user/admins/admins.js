@@ -22,7 +22,7 @@ define('admins',[
         $scope.init = function() {
             var r = adminsSrv.getAdminsList()
             r.then(function(response){
-                $scope.data = response.data.admins_data;
+                $scope.data = response.data.admins_data;                
             }, adminsSrv.errorCallBack);
         };
         

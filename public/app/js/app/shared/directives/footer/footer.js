@@ -18,7 +18,7 @@ define('footer',['admin'], function(admin){
                     $scope.footerData = {
                         year: currentYear,
                         sitename: 'Riskman, Inc.' // TODO: This needs to come from the database, not hardcoded in here.
-                    }
+                    };
             }]
         };
     });
