@@ -102,12 +102,16 @@ define('admins/createAdminPop',['admin', 'adminsCreate/validator'], function(adm
                         $scope.genericError.valid = true;
                         $scope.reset();
                         $scope.successMsg.show = true;
+                        $scope.successMsg.msg = 'Admin Created.';
+                        $scope.$parent.genericSuccessMsg.show = true;
+                        $scope.$parent.genericSuccessMsg.msg = 'Admin Created.';
                         $scope.$parent.init();
                     }, function(err) {
                         if(err.status === 400) {
                             $scope.genericError.msg = err.data.feedback[0];
                             $scope.genericError.valid = false;
                             $scope.successMsg.show = false;
+                            $scope.$parent.genericSuccessMsg.show = true;
                         } else {
                             adminsSrv.errorCallBack(err);
                         }

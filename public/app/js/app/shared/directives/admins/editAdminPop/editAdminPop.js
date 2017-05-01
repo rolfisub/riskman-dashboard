@@ -60,10 +60,6 @@ define('admins/editAdminPop',['admin', 'adminsEdit/validator'], function(admin){
                     msg:'',
                     valid:true
                 };
-                $scope.successMsg = {
-                    msg:'Admin Updated.',
-                    show: false
-                };
                 $scope.editForm = {
                     isValid: true
                 };
@@ -87,7 +83,6 @@ define('admins/editAdminPop',['admin', 'adminsEdit/validator'], function(admin){
                     $scope.editDataStatus.passwordnew.valid = true;
                     $scope.editDataStatus.passwordnew2.valid = true;
                     $scope.genericError.valid = true;
-                    $scope.successMsg.show = false;
                 };
                 
                 $scope.getAdmin = function(){
@@ -114,10 +109,12 @@ define('admins/editAdminPop',['admin', 'adminsEdit/validator'], function(admin){
                     
                     r.then(function(res){
                         $scope.getAdmin();
-                        $scope.successMsg.show = true;
+                        $scope.$parent.init();
+                        $scope.$parent.genericSuccessMsg.show = true;
+                        $scope.$parent.genericSuccessMsg.msg = 'Admin Updated.';
                     }, function(err){
                         if(err.status === 400) {
-                            $scope.successMsg.show = false;
+                            $scope.$parent.genericSuccessMsg.show = false;
                             $scope.genericError.valid = false;
                             $scope.genericError.msg = err.data.feedback[0];
                         }
