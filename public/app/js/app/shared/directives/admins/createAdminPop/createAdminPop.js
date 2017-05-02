@@ -111,13 +111,12 @@ define('admins/createAdminPop',['admin', 'adminsCreate/validator'], function(adm
                             $scope.genericError.msg = err.data.feedback[0];
                             $scope.genericError.valid = false;
                             $scope.successMsg.show = false;
-                            $scope.$parent.genericSuccessMsg.show = true;
+                            $scope.$parent.genericSuccessMsg.show = false;
                         } else {
                             adminsSrv.errorCallBack(err);
                         }
                     });
                 };
-                
             }]
         };
     });
