@@ -57,11 +57,9 @@ class Login extends Form
         //submit
         $this->add([
             'name' => 'submit',
-            'options' => [
-                'value' => 'Login'
-            ],
             'attributes' => [
                 'class' => 'btn btn-lg btn-primary btn-block btn-signin',
+                'value' => 'Login'
             ],
             'type' => 'Zend\Form\Element\Submit'
         ]);
