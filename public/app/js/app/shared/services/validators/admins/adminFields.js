@@ -123,7 +123,7 @@ define('adminFields/validator',['admin'], function(admin){
         };
         
         this.firstname = function(firstname) {
-            var field = 'Firstname';
+            var field = 'First Name';
             if(firstname.length === 0) {
                 return {
                     valid : false,
@@ -137,7 +137,7 @@ define('adminFields/validator',['admin'], function(admin){
         };
         
         this.lastname = function(lastname) {
-            var field = 'Lastname';
+            var field = 'Last Name';
             if(lastname.length === 0) {
                 return {
                     valid : false,
