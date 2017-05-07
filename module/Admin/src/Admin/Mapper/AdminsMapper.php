@@ -10,6 +10,7 @@ namespace Admin\Mapper;
 
 use Admin\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Delete;
 use Zend\Db\Sql\Update;
 use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Where;
@@ -72,7 +73,6 @@ class AdminsMapper extends AbstractMapper
         $s->from(['a'=>'admins'])
             ->columns([
                 'user_name as username',
-                'pass_word as password',
                 'datetime'
             ])
             ->join(
@@ -101,7 +101,6 @@ class AdminsMapper extends AbstractMapper
         if(isset($data[0])) {
             return [
                 'username' => $data[0]['username'],
-                'password' => $data[0]['password'],
                 'email' => $data[0]['email'],
                 'firstname' => $data[0]['first_name'],
                 'lastname' => $data[0]['last_name']
@@ -115,7 +114,7 @@ class AdminsMapper extends AbstractMapper
      * @param Admin $admin
      * @return boolean
      */
-    private function isAdminUserExist(Admin $admin)
+    public function isAdminUserExist(Admin $admin)
     {
        $a = $this->getAdminByUser($admin->data['username']);
        if($a->data['username'] !== null){
@@ -124,7 +123,12 @@ class AdminsMapper extends AbstractMapper
        return false;
     }
     
-    
+    /**
+     * 
+     * @param Admin $admin
+     * @return type
+     * @throws Error400
+     */
     public function createAdmin(Admin $admin)
     {
         //check if username already taken
@@ -141,6 +145,91 @@ class AdminsMapper extends AbstractMapper
         return [
             'admin' => $admin
         ];
+    }
+    
+    /**
+     * 
+     * @param Admin $admin
+     * @throws Error400
+     */
+    public function updateAdmin(Admin $admin)
+    {
+        //check if username exists
+        if(!$this->isAdminUserExist($admin)) {
+            throw new Error400('username doesn\'t exist.');
+        }
+        
+        //if sending current pasword verify is matching records
+        if(isset($admin->data['password']) && !empty($admin->data['password'])) {
+            if(!$this->isPasswordMatch($admin)) {
+                throw new Error400('password doesn\'t match current password.');
+            }
+        }
+        
+        //are we updating password?
+        if(isset($admin->data['passwordnew']) && !empty($admin->data['passwordnew'])) {
+            $this->setNewPassword($admin);
+        }
+        
+        //update admin info
+        $id = $this->getAdminId($admin);
+        $u = new Update('admins_info');
+        $u->set([
+            'email' => $admin->data['email'],
+            'first_name' => $admin->data['firstname'],
+            'last_name' => $admin->data['lastname']
+        ]);
+        $u->where([
+            'id' => $id
+        ]);
+        $this->queryObject($u);
+        return [
+            'admin' => $admin->toArray()
+        ];
+    }
+    
+    /**
+     * 
+     * @param string $newPssword
+     */
+    private function setNewPassword(Admin $admin)
+    {
+        $u = new Update('admins');
+        $u->set([
+            'pass_word' => $admin->getHash($admin->data['passwordnew'])
+        ]);
+        $u->where([
+            'id' => $this->getAdminId($admin)
+        ]);
+        $this->queryObject($u);
+        return true;
+    }
+    
+    /**
+     * 
+     * @param Admin $admin
+     */
+    private function isPasswordMatch(Admin $admin)
+    {
+        sleep(1);//method to avoid brute force
+        return (new Bcrypt())->verify($admin->data['password'], $this->getPasswordHashFromDB($admin));
+    }
+    
+    /**
+     * 
+     * @param Admin $admin
+     */
+    private function getPasswordHashFromDB (Admin $admin)
+    {
+        $s = new Select();
+        $s->from(['a'=>'admins'])
+            ->columns([
+                'pass_word as password'
+            ])
+            ->where(['a.user_name'=> $admin->data['username']]);
+        $result = $this->queryObject($s);
+        $data = $result->toArray();
+        return $data[0]['password'];
     }
     
     /**
@@ -162,7 +251,11 @@ class AdminsMapper extends AbstractMapper
         return $admin;
     }
     
-    
+    /**
+     * Creates an admin in the database
+     * @param Admin $admin
+     * @return Admin
+     */
     private function createAdminInfo(Admin $admin) 
     {
         $id = $admin->data['id'];
@@ -178,7 +271,12 @@ class AdminsMapper extends AbstractMapper
         return $admin;
     }
     
-    private function getAdminId(Admin $admin)
+    /**
+     * Gets an admin Id by username
+     * @param Admin $admin
+     * @return type
+     */
+    public function getAdminId(Admin $admin)
     {
         $s = new Select('admins');
         $s->columns(['id'])
@@ -189,6 +287,23 @@ class AdminsMapper extends AbstractMapper
             return $data[0]['id'];
         }
         return null;
+    }
+    
+    /**
+     * Deletes and admin in the database
+     * @param Admin $admin
+     * @return type
+     */
+    public function deleteAdmin(Admin $admin) 
+    {
+        $d = new Delete('admins');
+        $d->where([
+            'user_name' => $admin->data['username']
+        ]);
+        $this->queryObject($d);
+        return [
+            'admin' => $admin
+        ];
     }
     
     

@@ -19,19 +19,13 @@ class AuthController extends AbstractActionController
         if($this->sm === null){
             $this->sm = $sm;
         }
-       
-        
-        
     }
     
     public function getAuthService()
     {
-        
         if (! $this->authservice) {
-            
             $this->authservice = $this->sm->get('myAuthService');
         }
-         
         return $this->authservice;
     }
      

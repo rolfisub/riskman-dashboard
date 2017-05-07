@@ -36,12 +36,11 @@ define('home',[
         var getGeneralStats = function(){
             var rg = api.read('/stats/general_api_stats');
             rg.then(function(response){
-                console.log(response);
                 $scope.data.general_api_stats = response.data.general_api_stats;
                 spinnerService.hide('generalSpinner');  
-            }, function(){
-                console.log(response);
+            }, function(err){
                 spinnerService.hide('generalSpinner');
+                api.errorCallback(err);
             });
         };
         

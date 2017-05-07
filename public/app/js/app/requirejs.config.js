@@ -34,7 +34,10 @@ require.config({
         //services:
         'api':'app/shared/services/api/api.service',
         'admins/service':'app/shared/services/admins/admins',
+        'adminFields/validator' : 'app/shared/services/validators/admins/adminFields',
         'adminsCreate/validator' : 'app/shared/services/validators/admins/adminsCreate',
+        'adminsEdit/validator' : 'app/shared/services/validators/admins/adminsEdit',
+        
         
         //user controllers
         'home': 'app/user/home/home',
@@ -51,7 +54,10 @@ require.config({
         'footer': 'app/shared/directives/footer/footer',
         'mainpanel': 'app/shared/directives/mainpanel/mainpanel',
         'navbar': 'app/shared/directives/navbar/navbar',
-        'sidebar': 'app/shared/directives/sidebar/sidebar'
+        'sidebar': 'app/shared/directives/sidebar/sidebar',
+        'admins/createAdminPop': 'app/shared/directives/admins/createAdminPop/createAdminPop',
+        'admins/deleteAdminPop': 'app/shared/directives/admins/deleteAdminPop/deleteAdminPop',
+        'admins/editAdminPop': 'app/shared/directives/admins/editAdminPop/editAdminPop'
         
         //admin controllers
         //'admin/hello': 'app/admin/hello/hello',

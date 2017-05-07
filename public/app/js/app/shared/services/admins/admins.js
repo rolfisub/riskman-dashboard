@@ -22,24 +22,65 @@ define('admins/service',['admin'], function(admin){
                 email:'',
                 firstname:'',
                 lastname:''
+            },
+            update_data: {
+                password:'',
+                passwordnew:'',
+                passwordnew2:'',
+                email:'',
+                firstname:'',
+                lastname:''
             }
         };
         
-        this.setUserName = function(username) {
+        this.setCreateUserName = function(username) {
             admin.create_data.username = username;
         };
-        this.setPassword = function(password) {
+        this.setCreatePassword = function(password) {
             admin.create_data.password = password;
         };
-        this.setEmail = function(email) {
+        this.setCreateEmail = function(email) {
             admin.create_data.email = email;
         };
-        this.setFirstName = function(firstname) {
+        this.setCreateFirstName = function(firstname) {
             admin.create_data.firstname = firstname;
         };
-        this.setLastName = function(lastname) {
+        this.setCreateLastName = function(lastname) {
             admin.create_data.lastname = lastname;
         };
+        
+        
+        
+        this.setUpdateEmail = function(email) {
+            admin.update_data.email = email;
+        };
+        this.setUpdateFirstName = function(firstname) {
+            admin.update_data.firstname = firstname;
+        };
+        this.setUpdateLastName = function(lastname) {
+            admin.update_data.lastname = lastname;
+        };
+        this.setUpdatePassword = function(password) {
+            admin.update_data.password = password;
+        };
+        this.setUpdatePasswordNew = function(password) {
+            admin.update_data.passwordnew = password;
+        };
+        this.setUpdatePasswordNew2 = function(password) {
+            admin.update_data.passwordnew2 = password;
+        };
+        
+        this.resetUpdateData = function(){
+            admin.update_data = {
+                password:'',
+                passwordnew:'',
+                passwordnew2:'',
+                email:'',
+                firstname:'',
+                lastname:''
+            };
+        };
+        
         
         this.resetCreateData = function(){
             admin.create_data = {
@@ -54,9 +95,15 @@ define('admins/service',['admin'], function(admin){
         
         this.createAdmin = function()
         {
-            console.log('admin.create_data');
-            console.log(admin.create_data);
             return api.create('/admins', admin.create_data);
+        };
+        
+        this.updateAdmin = function(id){
+            return api.update('/admins/' + id, admin.update_data);
+        };
+        
+        this.getAdminByUsername = function(username) {
+            return api.read('/admins/' + username);
         };
         
         
@@ -69,6 +116,10 @@ define('admins/service',['admin'], function(admin){
         
         this.errorCallBack = function(response) {
             api.errorCallback(response);
+        };
+        
+        this.deleteAdmin = function(admin) {
+            return api.deleteById('/admins', admin);
         };
         
 

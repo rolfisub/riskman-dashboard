@@ -16,42 +16,50 @@ class AdminsRestController extends ProtectedRestfulController
     protected $model;
     public function __construct($cn,  Admins $model) 
     {
-       $this->model = $model;
-       parent::__construct($cn);
+        $this->model = $model;
+        parent::__construct($cn);
     }
     /**
      * Get a list of the admin data
      */
     public function getList() 
     {
-       return new JsonModel($this->model->getAdminsData());
+        return new JsonModel($this->model->getAdminsData());
     }
     
-    public function get($name)
+    public function get($username)
     {
-//        switch ($name) 
-//        {
-//            case 'general_api_model':
-//                return new JsonModel($this->model->getApiGeneralStats());
-//            case 'book_api_model':
-//                return new JsonModel($this->model->getBookApiStats());            
-//            case 'last24_activity':
-//                return new JsonModel($this->model->get24HrsGraphData());
-//            case 'monthly_activity':
-//                return new JsonModel($this->model->getMonthlyGraphData());
-//            case 'users_model':
-//                return new JsonModel($this->model->getUsersStats());
-//        }
-        return;
+        return new JsonModel($this->model->getAdminByUsername($username));
     }
     
     /**
      * Creates an admin
-     * @param JsonModel $data
+     * @param array $data
+     * @return JsonModel response
      */
     public function create($data)
     {
         return new JsonModel($this->model->createAdmin($data));
+    }
+    
+    /**
+     * deletes and admin by its username
+     * @param string $username
+     * @return JsonModel response
+     */
+    public function delete($username) 
+    {
+        return new JsonModel($this->model->deleteAdmin($username));
+    }
+    
+    /**
+     * updates an admin based on the provided array
+     * @param type $username
+     * @param type $data
+     */
+    public function update($username, $data) 
+    {
+        return new JsonModel($this->model->updateAdmin($username, $data));
     }
     
     
