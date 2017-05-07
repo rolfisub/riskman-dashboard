@@ -6,22 +6,19 @@
             <div class="header">
                 <h4 class="title">Administrators</h4>
                 <p class="category">Add, Edit or Remove administrator accounts</p>
-                <button
-                    type="button"
-                    class="btn btn-success btn-fill btn-wd"
-                    title="{{newadminPop.title}}" 
-                    data-content="{{newadminPop.content}}" 
-                    data-template-url="../app/js/app/user/admins/newadmin.html" 
-                    data-animation="am-flip-x" 
-                    data-auto-close="1" 
-                    data-placement="bottom-left"
-                    bs-popover
-                >
-                    <i class="fa fa-user"></i>
-                    Create New
-                </button>               
+                <create-admin-pop ng-show="admins.config.add.show"></create-admin-pop>
+                <div 
+                    class="alert alert-success"
+                    ng-show="genericSuccessMsg.show">
+                    {{genericSuccessMsg.msg}}
+                </div>
+                <div 
+                    class="alert alert-danger"
+                    ng-show="genericErrorMsg.show">
+                    {{genericErrorMsg.msg}}
+                </div>
             </div>
-            <div class="content table-responsive table-full-width">
+            <div class="content table">
                 <table class="table">
                     <thead>
                         <tr>
@@ -36,12 +33,16 @@
                             ng-repeat="admin in data"
                             >
                             <td class="td-actions">
-                                <a href="#" rel="tooltip" title="" class="btn btn-warning btn-simple btn-xs" data-original-title="Edit Profile">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="#" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove">
-                                    <i class="fa fa-times"></i>
-                                </a>
+                                <edit-admin-pop 
+                                    ng-show="admins.config.edit.show" 
+                                    username="admin.user_name"
+                                    >                                        
+                                </edit-admin-pop>
+                                <delete-admin-pop 
+                                    ng-show="admins.config.delete.show" 
+                                    username="admin.user_name"
+                                    >
+                                </delete-admin-pop> 
                             </td>
                             <td>{{admin.user_name}}</td>
                             <td>{{admin.first_name + ' ' + admin.last_name}}</td>
