@@ -36,7 +36,9 @@ lbd = {
         }  
     },
     initRightMenu: function(){  
+        
          if(!navbar_initialized){
+             console.log('initRightMenu');
             $navbar = $('nav').find('.navbar-collapse').first().clone(true);
             
             $sidebar = $('.sidebar');
@@ -110,7 +112,7 @@ lbd = {
                     
                 }
             });
-            navbar_initialized = true;
+            
         }
    
     }
@@ -124,7 +126,9 @@ $(document).ready(function(){
     
     // Init navigation toggle for small screens   
     if(window_width <= 991){
-        lbd.initRightMenu();   
+        
+        setTimeout(lbd.initRightMenu, 1500);
+        
     }
      
     //  Activate the tooltips   
@@ -150,7 +154,9 @@ $(document).ready(function(){
 // activate collapse right menu when the windows is resized 
 $(window).resize(function(){
     if($(window).width() <= 991){
+        
         lbd.initRightMenu();   
+        
     }
 });
     
@@ -174,3 +180,20 @@ function debounce(func, wait, immediate) {
 		if (immediate && !timeout) func.apply(context, args);
 	};
 };
+
+
+
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+var observer = new MutationObserver(function(mutations, observer) {
+    // fired when a mutation occurs
+    console.log(mutations, observer);
+    // ...
+    lbd.initRightMenu();
+});
+
+observer.observe(document.body, {
+  subtree: true,
+  attributes: true
+  //...
+});

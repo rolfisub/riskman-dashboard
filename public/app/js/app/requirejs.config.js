@@ -25,8 +25,15 @@ require.config({
         'click.outside': 'lib/angular-click-outside/angular.click.outside',
         'string': 'lib/ng-string/ng-string.min',
         'angular-spinners': 'lib/angular-spinners/angular-spinners',
-        'angular-strap':'lib/angular-strap/dist/angular-strap',
-        'angular-strap/tpl':'lib/angular-strap/dist/angular-strap.tpl',
+        'angular-strap': 'lib/angular-strap/dist/angular-strap',
+        'angular-strap/tpl': 'lib/angular-strap/dist/angular-strap.tpl',
+        'jquery': 'lib/jquery-1.10.2',
+        'lbd': 'lib/light-bootstrap-dashboard',
+        'bootstrapjs': 'lib/bootstrap.min',
+        'bootstrap-chk-rad-swt': 'lib/bootstrap-checkbox-radio-switch',
+        'chartist':'lib/chartist.min',
+        'bootstrap-notify':'lib/bootstrap-notify',
+        
         
         //main application module
         'admin': 'app/admin',
@@ -34,7 +41,10 @@ require.config({
         //services:
         'api':'app/shared/services/api/api.service',
         'admins/service':'app/shared/services/admins/admins',
+        'adminFields/validator' : 'app/shared/services/validators/admins/adminFields',
         'adminsCreate/validator' : 'app/shared/services/validators/admins/adminsCreate',
+        'adminsEdit/validator' : 'app/shared/services/validators/admins/adminsEdit',
+        
         
         //user controllers
         'home': 'app/user/home/home',
@@ -51,7 +61,10 @@ require.config({
         'footer': 'app/shared/directives/footer/footer',
         'mainpanel': 'app/shared/directives/mainpanel/mainpanel',
         'navbar': 'app/shared/directives/navbar/navbar',
-        'sidebar': 'app/shared/directives/sidebar/sidebar'
+        'sidebar': 'app/shared/directives/sidebar/sidebar',
+        'admins/createAdminPop': 'app/shared/directives/admins/createAdminPop/createAdminPop',
+        'admins/deleteAdminPop': 'app/shared/directives/admins/deleteAdminPop/deleteAdminPop',
+        'admins/editAdminPop': 'app/shared/directives/admins/editAdminPop/editAdminPop'
         
         //admin controllers
         //'admin/hello': 'app/admin/hello/hello',
@@ -64,7 +77,8 @@ require.config({
     //wrapper for compatibility and lib dependencies
     shim: {
         'angular':{
-            exports:'angular'
+            exports:'angular',
+            deps: ['jquery']
         },
         'ngRoute':{
             deps:['angular']
@@ -102,6 +116,24 @@ require.config({
         },
         'angular-strap/tpl':{
             deps:['angular-strap']
+        },
+        'lbd': {
+            deps:['jquery','bootstrapjs', 'bootstrap-chk-rad-swt', 'chartist','bootstrap-notify' ]
+        },
+        'bootstrapjs':{
+            deps:['jquery']  
+        },
+        'bootstrap-chk-rad-swt':{
+            deps:['bootstrapjs']
+        },
+        'chartist':{
+            deps:['bootstrapjs']
+        },
+        'bootstrap-notify':{
+            deps:['bootstrapjs']
+        },
+        'admin': {
+            deps:['lbd']
         }
         
     }
