@@ -20,25 +20,25 @@
             'app.core',
             'app.header',
             'app.sidebar',
-            'app.ripple',
-            'app.floatbutton',
-            'app.layouts',
+            //'app.ripple',
+            //'app.floatbutton',
+            //'app.layouts',
             'app.menu',
             'app.preloader',
             'app.loadingbar',
-            'app.translate',
+            //'app.translate',
             'app.settings',
             'app.utils',
             'app.dashboard',
-            'app.charts',
-            'app.cards',
-            'app.elements',
-            'app.forms',
-            'app.tables',
-            'app.bootstrapui',
-            'app.maps',
-            'app.pages',
-            'app.user'
+            //'app.charts',
+            //'app.cards',
+            //'app.elements',
+            //'app.forms',
+            //'app.tables',
+            //'app.bootstrapui',
+            //'app.maps',
+            //'app.pages',
+            //'app.user'
         ]);
 })();
 
@@ -216,16 +216,16 @@
     'use strict';
 
     angular
-        .module('app.user', []);
+        .module('app.utils', [
+            'app.colors'
+        ]);
 })();
 
 (function() {
     'use strict';
 
     angular
-        .module('app.utils', [
-            'app.colors'
-        ]);
+        .module('app.user', []);
 })();
 
 (function() {
@@ -4181,7 +4181,7 @@
             order: 99
         };
 
-        Menu.addItem(menuItem);
+        //Menu.addItem(menuItem);
 
     }
 })();
@@ -6699,85 +6699,6 @@
 
 (function() {
     'use strict';
-
-    angular
-        .module('app.user')
-        .run(userRun);
-
-    userRun.$inject = ['Menu'];
-
-    function userRun(Menu) {
-
-        var menuItem = {
-            name: 'User',
-            sref: 'user',
-            order: 9,
-            iconclass: 'ion-person-stalker',
-            imgpath: 'app/img/icons/person-stalker.svg',
-            subitems: [{
-                name: 'Login',
-                sref: 'user.login'
-            }, {
-                name: 'Signup',
-                sref: 'user.signup'
-            }, {
-                name: 'Lock',
-                sref: 'user.lock'
-            }, {
-                name: 'Recover',
-                sref: 'user.recover'
-            }]
-        };
-
-        Menu.addItem(menuItem);
-
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.user')
-        .run(userRoute);
-
-    userRoute.$inject = ['Router'];
-    function userRoute(Router){
-
-        Router.state('user', {
-            url: '/user',
-            title: 'User',
-            abstract: true,
-            template: '<div class="page-container bg-blue-grey-900"><div ui-view class="ng-fadeInLeftShort"></div></div>',
-            require: ['modernizr', 'icons', 'ng-mfb', 'md-colors']
-        })
-        .state('user.login', {
-            url: '/login',
-            title: 'Login',
-            templateUrl: 'login.html'
-        })
-        .state('user.signup', {
-            url: '/signup',
-            title: 'Signup',
-            templateUrl: 'signup.html'
-        })
-        .state('user.lock', {
-            url: '/lock',
-            title: 'Lock',
-            templateUrl: 'lock.html'
-        })
-        .state('user.recover', {
-            url: '/recover',
-            title: 'Recover',
-            templateUrl: 'recover.html'
-        })
-        ;
-    }
-
-})();
-
-(function() {
-    'use strict';
     angular
         .module('app.utils')
         .service('Browser', Browser);
@@ -6888,6 +6809,85 @@
                 });
             });
         }
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.user')
+        .run(userRun);
+
+    userRun.$inject = ['Menu'];
+
+    function userRun(Menu) {
+
+        var menuItem = {
+            name: 'User',
+            sref: 'user',
+            order: 9,
+            iconclass: 'ion-person-stalker',
+            imgpath: 'app/img/icons/person-stalker.svg',
+            subitems: [{
+                name: 'Login',
+                sref: 'user.login'
+            }, {
+                name: 'Signup',
+                sref: 'user.signup'
+            }, {
+                name: 'Lock',
+                sref: 'user.lock'
+            }, {
+                name: 'Recover',
+                sref: 'user.recover'
+            }]
+        };
+
+        Menu.addItem(menuItem);
+
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.user')
+        .run(userRoute);
+
+    userRoute.$inject = ['Router'];
+    function userRoute(Router){
+
+        Router.state('user', {
+            url: '/user',
+            title: 'User',
+            abstract: true,
+            template: '<div class="page-container bg-blue-grey-900"><div ui-view class="ng-fadeInLeftShort"></div></div>',
+            require: ['modernizr', 'icons', 'ng-mfb', 'md-colors']
+        })
+        .state('user.login', {
+            url: '/login',
+            title: 'Login',
+            templateUrl: 'login.html'
+        })
+        .state('user.signup', {
+            url: '/signup',
+            title: 'Signup',
+            templateUrl: 'signup.html'
+        })
+        .state('user.lock', {
+            url: '/lock',
+            title: 'Lock',
+            templateUrl: 'lock.html'
+        })
+        .state('user.recover', {
+            url: '/recover',
+            title: 'Recover',
+            templateUrl: 'recover.html'
+        })
+        ;
     }
 
 })();
