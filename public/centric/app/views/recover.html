@@ -1,0 +1,37 @@
+
+<div class="container-full">
+  <div ng-init="rec.mailSent = false" class="container container-xs">
+    <div class="text-center mv-lg"><img src="app/img/user/01.jpg" class="img-circle mb block-center img-responsive thumb64"/>
+      <p>Brian Walker</p>
+    </div>
+    <div ng-if="rec.mailSent" class="card bg-success ng-fadeIn">
+      <div class="card-heading"><em class="ion-checkmark-round pull-right icon-lg"></em>
+        <h4 class="mt0">Mail Sent!</h4>
+      </div>
+      <div class="card-body">
+        <p>Please check your inbox and follow instructions to reset your password.</p>
+      </div>
+      <div class="card-footer text-right"><a ui-sref="user.login" class="btn btn-success btn-flat text-white">Login<em class="ion-ios-arrow-thin-right icon-fw"></em></a></div>
+    </div>
+    <form name="loginForm" novalidate="" ng-submit="rec.mailSent = true" ng-if="!rec.mailSent" class="card form-validate">
+      <div class="card-heading">
+        <p class="text-center text-inherit">Fill with your mail to receive instructions on how to reset your password.</p>
+      </div>
+      <div class="card-offset pb0">
+        <div ng-if="loginForm.$valid" class="card-offset-item text-right ng-fadeInLeftShort">
+          <button type="submit" class="btn btn-success btn-circle btn-lg"><em class="ion-checkmark-round"></em></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="mda-form-group float-label mda-input-group">
+          <div class="mda-form-control">
+            <input type="email" name="accountName" ng-model="account.name" required="" class="form-control"/>
+            <div class="mda-form-control-line"></div>
+            <label>Email address</label>
+          </div>
+          <div ng-messages="loginForm.accountName.$error" class="text-danger"><span ng-message="email">This field must be a valid email address</span></div><span class="mda-input-group-addon"><em class="ion-ios-email-outline icon-lg"></em></span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

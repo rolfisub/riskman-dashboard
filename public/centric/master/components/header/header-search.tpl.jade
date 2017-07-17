@@ -1,0 +1,11 @@
+.modal-body
+    .pull-left
+        button.btn.btn-flat(type='button', ng-click='mod.close()')
+            em.ion-arrow-left-c.icon-24
+    .pull-right
+        button.btn.btn-flat(type='button')
+            em.ion-android-microphone.icon-24
+    form.oh(action="")
+        .mda-form-control.pt0
+            input.form-control.header-input-search(type='text', placeholder="{{ 'header.SEARCH' | translate }}")
+            .mda-form-control-line

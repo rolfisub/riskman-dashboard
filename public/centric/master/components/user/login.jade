@@ -1,0 +1,33 @@
+.container-full
+    .container.container-xs
+        img.mv-lg.block-center.img-responsive.thumb64(src="app/img/logo.png")
+        form.card.b0.form-validate(action="", name="loginForm", novalidate='')
+            .card-offset.pb0
+                .card-offset-item.text-right.ng-fadeInRightShort(ng-if="loginForm.$invalid || loginForm.$pristine")
+                    a.btn-raised.btn.btn-info.btn-circle.btn-lg(ui-sref="user.signup")
+                        em.ion-person-add
+                .card-offset-item.text-right.ng-fadeInLeftShort(ng-if="loginForm.$valid")
+                    .btn.btn-success.btn-circle.btn-lg
+                        em.ion-checkmark-round
+            .card-heading
+                .card-title.text-center Login
+            .card-body
+                .mda-form-group.float-label.mda-input-group
+                    .mda-form-control
+                        input.form-control(type='email', name="accountName" ng-model="account.name", required="")
+                        .mda-form-control-line
+                        label Email address
+                    .text-danger(ng-messages="loginForm.accountName.$error")
+                        span(ng-message="email") This field must be a valid email address
+                    span.mda-input-group-addon
+                        em.ion-ios-email-outline.icon-lg
+                .mda-form-group.float-label.mda-input-group
+                    .mda-form-control
+                        input.form-control(type='password', name="accountPassword", ng-model="account.password", required="")
+                        .mda-form-control-line
+                        label Password
+                    span.mda-input-group-addon
+                        em.ion-ios-locked-outline.icon-lg
+            button.btn.btn-primary.btn-flat(type="button", ng-disabled="loginForm.$invalid || loginForm.$pristine") Authenticate
+        .text-center.text-sm
+            a.text-inherit(ui-sref="user.recover") Forgot password?

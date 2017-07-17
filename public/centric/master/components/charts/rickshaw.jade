@@ -1,0 +1,26 @@
+
+.container-fluid(ng-controller='ChartRickshawController as chart')
+    .card
+        .card-heading Area graph
+        .card-body
+            rickshaw(rickshaw-options='chart.options2', rickshaw-series='chart.series2')
+    .row
+        .col-md-6
+            .card
+                .card-heading Bar graph
+                .card-body
+                  rickshaw(rickshaw-options='chart.options3', rickshaw-series='chart.series3')
+        .col-md-6
+            .card
+                .card-heading Scatterplot graph
+                .card-body
+                  rickshaw(rickshaw-options='chart.options4', rickshaw-series='chart.series4', rickshaw-features="chart.features4")
+    .card
+        .card-heading Rickshaw graph - Palettes
+        .card-body
+            rickshaw(rickshaw-options='chart.options0', rickshaw-features='chart.features0', rickshaw-series='chart.series0')
+            form.form-inline.mt-lg
+                select.form-control(ng-model='chart.renderer0', ng-options='renderer.name for renderer in chart.renderers', ng-change='chart.rendererChanged(0)')
+                select.form-control(ng-model='chart.palette0', ng-options='palette for palette in chart.palettes', ng-change='chart.paletteChanged(0)')
+                button.btn.btn-primary(ng-click='chart.changeSeriesData(0)') Change series data
+

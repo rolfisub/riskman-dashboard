@@ -1,0 +1,243 @@
+.container-fluid
+    // UISELECT
+    .card(ng-controller="uiSelectController as uisel")
+        .card-heading
+            // START dropdown
+            .pull-right.dropdown(uib-dropdown='dropdown2')
+                button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='')
+                    em.ion-android-more-vertical
+                ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                    li
+                        a(href='', ng-click='uisel.enable()') Enable
+                    li
+                        a(href='', ng-click='uisel.disable()') Disable
+                    li
+                        a(href='', ng-click='uisel.clear()') Clear
+            // END dropdown
+            .card-title uiSelect
+            .text-muted AngularJS native version of Select2 and Selectize.
+
+        .card-body
+            .form-horizontal
+                .form-group
+                    .col-md-3.col-sm-4
+                        p.m0 Address
+                    .col-md-5.col-sm-8
+                        ui-select(ng-model='uisel.address.selected', theme='bootstrap', ng-disabled='uisel.disabled', reset-search-input='false')
+                            ui-select-match(placeholder='Enter an address...') {{$select.selected.formatted_address}}
+                            ui-select-choices(repeat='address in uisel.addresses | filter: $select.search track by $index', refresh='uisel.refreshAddresses($select.search)', refresh-delay='0')
+                                div(ng-bind-html='address.formatted_address | highlight: $select.search')
+                    .col-md-4.hidden-xs.hidden-sm.oh
+                        .text-sm.text-muted.mt-sm Selected: {{uisel.address.selected.formatted_address}}
+
+                .form-group
+                    .col-md-3.col-sm-4
+                        p.m0 Persons
+                    .col-md-5.col-sm-8
+                        ui-select(ng-model='uisel.person.selected', theme='bootstrap', ng-disabled='uisel.disabled')
+                            ui-select-match(placeholder='Select or search a name/age...') {{$select.selected.name}}
+                            ui-select-choices(repeat='person in uisel.people | propsFilter: {name: $select.search, age: $select.search}')
+                                div(ng-bind-html='person.name | highlight: $select.search')
+                                small
+                                    | email: {{person.email}}        age:
+                                    span(ng-bind-html="''+person.age | highlight: $select.search")
+                    .col-md-4.hidden-xs.hidden-sm.oh
+                        .text-sm.text-muted.mt-sm Selected: {{uisel.person.selected}}
+
+                .form-group
+                    .col-md-3.col-sm-4
+                        p.m0 Countries
+                    .col-md-5.col-sm-8
+                        ui-select.text-left(ng-model='uisel.country.selected', theme='bootstrap', ng-disabled='uisel.disabled')
+                            ui-select-match(placeholder='Select or search a country in the list...') {{$select.selected.name}}
+                            ui-select-choices(repeat='country in uisel.countries | filter: $select.search')
+                                span(ng-bind-html='country.name | highlight: $select.search')
+                                small(ng-bind-html='country.code | highlight: $select.search')
+                    .col-md-4.hidden-xs.hidden-sm.oh
+                        .text-sm.text-muted.mt-sm Selected: {{uisel.country.selected}}
+
+
+                .form-group
+                    .col-md-3.col-sm-4
+                        p.m0 Array of strings
+                    .col-md-5.col-sm-8
+                        ui-select(multiple='', ng-model='uisel.multipleDemo.colors', theme='bootstrap', ng-disabled='uisel.disabled')
+                            ui-select-match(placeholder='Select colors...') {{$item}}
+                            ui-select-choices(repeat='color in uisel.availableColors | filter:$select.search') {{color}}
+                    .col-md-4.hidden-xs.hidden-sm.oh
+                        .text-sm.text-muted.mt-sm Selected: {{uisel.multipleDemo.colors}}
+
+                .form-group
+                    .col-md-3.col-sm-4
+                        p.m0 Array of objects
+                    .col-md-5.col-sm-8
+                        ui-select(multiple='', ng-model='uisel.multipleDemo.selectedPeople', theme='bootstrap', ng-disabled='uisel.disabled')
+                            ui-select-match(placeholder='Select uisel.person...') {{$item.name}} &lt;{{$item.email}}&gt;
+                            ui-select-choices(repeat='person in uisel.people | propsFilter: {name: $select.search, age: $select.search}')
+                                div(ng-bind-html='person.name | highlight: $select.search')
+                                small
+                                    | email: {{person.email}}        age:
+                                    span(ng-bind-html="''+person.age | highlight: $select.search")
+                    .col-md-4.hidden-xs.hidden-sm.oh
+                        .text-sm.text-muted.mt-sm Selected: {{uisel.multipleDemo.selectedPeople}}
+
+
+                .form-group
+                    .col-md-3.col-sm-4
+                        p.m0 Array of objects with single property binding
+                    .col-md-5.col-sm-8
+                        ui-select(multiple='', ng-model='uisel.multipleDemo.selectedPeopleSimple', theme='bootstrap', ng-disabled='uisel.disabled')
+                            ui-select-match(placeholder='Select uisel.person...') {{$item.name}} &lt;{{$item.email}}&gt;
+                            ui-select-choices(repeat='person.email as person in uisel.people | propsFilter: {name: $select.search, age: $select.search}')
+                                div(ng-bind-html='person.name | highlight: $select.search')
+                                small
+                                    | email: {{person.email}}        age:
+                                    span(ng-bind-html="''+person.age | highlight: $select.search")
+                    .col-md-4.hidden-xs.hidden-sm.oh
+                        .text-sm.text-muted.mt-sm Selected: {{uisel.multipleDemo.selectedPeopleSimple}}
+
+                .form-group
+                    .col-md-3.col-sm-4
+                        p.m0 Array of objects (with groupBy)
+                    .col-md-5.col-sm-8
+                        ui-select(multiple='', ng-model='uisel.multipleDemo.selectedPeopleWithGroupBy', theme='bootstrap', ng-disabled='uisel.disabled')
+                            ui-select-match(placeholder='Select uisel.person...') {{$item.name}} &lt;{{$item.email}}&gt;
+                            ui-select-choices(group-by='uisel.someGroupFn', repeat='person in uisel.people | propsFilter: {name: $select.search, age: $select.search}')
+                                div(ng-bind-html='person.name | highlight: $select.search')
+                                small
+                                    | email: {{person.email}}        age:
+                                    span(ng-bind-html="''+person.age | highlight: $select.search")
+                    .col-md-4.hidden-xs.hidden-sm.oh
+                        .text-sm.text-muted.mt-sm Selected: {{uisel.multipleDemo.selectedPeopleWithGroupBy}}
+    // END UISELECT
+    .card
+        .card-heading Calendar
+        .card-body
+            div(ng-controller='DatepickerDemoCtrl as dp')
+                .well.well-sm
+                    .m0 Selected date is:
+                     strong.ml: em {{dp.dt | date:'fullDate' }}
+                h5 Inline
+                .row.text-center
+                    .col-md-4
+                        .ui-datepicker-responsive
+                            .ui-datepicker.dp-head-primary.dp-table-primary(uib-datepicker, ng-model='dp.dt')
+                    .col-md-4
+                        .ui-datepicker-responsive
+                            .ui-datepicker.dp-head-info.dp-table-info(uib-datepicker, ng-model='dp.dt')
+                    .col-md-4
+                        .ui-datepicker-responsive
+                            .ui-datepicker.dp-head-pink.dp-table-pink(uib-datepicker, ng-model='dp.dt')
+                h5 Popup
+                .row
+                    .col-md-12
+                        .ui-datepicker.dp-head-success.dp-table-success.shadow-clear
+                            .input-group
+                                input.form-control(type='text', uib-datepicker-popup="{{dp.format}}", ng-model='dt', is-open='dp.opened', datepicker-options='dp.dateOptions', ng-required='true', close-text='Close')
+
+                                span.input-group-btn
+                                    button.btn.btn-default(type='button', ng-click='dp.open($event)')
+                                        em.ion-calendar
+                .row
+                    .col-md-12
+                        label Format:
+                        select.form-control(ng-model='dp.format', ng-options='f for f in dp.formats')
+                            option
+                hr
+                button.btn.btn-sm.btn-info(type='button', ng-click='dp.today()') Today
+                button.btn.btn-sm.btn-default(type='button', ng-click="dp.dt = '2009-08-24'") 2009-08-24
+                button.btn.btn-sm.btn-danger(type='button', ng-click='dp.clear()') Clear
+                button.btn.btn-sm.btn-default(type='button', ng-click='dp.toggleMin()', uib-tooltip='After today restriction') Min date
+    .card
+        .card-heading Time picker
+        .card-body
+            .row(ng-controller='TimepickerDemoCtrl as tp')
+                .col-md-6
+                    div(uib-timepicker, ng-model='tp.mytime', ng-change='tp.changed()', hour-step='tp.hstep', minute-step='tp.mstep', show-meridian='tp.ismeridian')
+                    pre.alert.alert-info.
+                        Time is: {{tp.mytime | date:'shortTime' }}
+                .col-md-6
+                    .row
+                        .col-xs-6
+                            | Hours step is:
+                            select.form-control(ng-model='tp.hstep', ng-options='opt for opt in tp.options.hstep')
+                        .col-xs-6
+                            | Minutes step is:
+                            select.form-control(ng-model='tp.mstep', ng-options='opt for opt in tp.options.mstep')
+                    hr
+                    button.btn.btn-info(ng-click='tp.toggleMode()') 12H / 24H
+                    button.btn.btn-default(ng-click='tp.update()') Set to 14:00
+                    button.btn.btn-danger(ng-click='tp.clear()') Clear
+
+    .card
+        .card-heading Range Sliders
+        .card-body(ng-controller='RangeSliderController as rslider')
+            p.clearfix
+                span.pull-left Single
+                span.pull-right Curent Value {{rslider.value}}
+            slider(ng-model='value', floor='1', ceiling='100')
+            p
+            p.clearfix
+                span.pull-left Single with formatting
+                span.pull-right Curent Value {{rslider.formatted}}
+            slider(ng-model='rslider.formatted', translate-fn='priceFormat', floor='1', ceiling='100')
+            p.clearfix
+                span.pull-left Range
+                span.pull-right Min:{{rslider.range.min}} - Max:{{rslider.range.max}}
+            slider(ng-model='rslider.range.min', ng-model-range='rslider.range.max', floor='1', ceiling='100')
+
+            p Color options
+
+            slider.slider-success(ng-model='rslider.range2.min', ng-model-range='rslider.range2.max', floor='1', ceiling='100')
+            slider.slider-info(ng-model='rslider.range2.min', ng-model-range='rslider.range2.max', floor='1', ceiling='100')
+            slider.slider-warning(ng-model='rslider.range2.min', ng-model-range='rslider.range2.max', floor='1', ceiling='100')
+            slider.slider-danger(ng-model='rslider.range2.min', ng-model-range='rslider.range2.max', floor='1', ceiling='100')
+            slider.slider-inverse(ng-model='rslider.range2.min', ng-model-range='rslider.range2.max', floor='1', ceiling='100')
+
+    .card
+        .card-heading Note editors (textarea)
+        .card-body
+            .card: .card-body
+                .note-area
+                    textarea.form-control(rows="10") In elementum magna sed sapien gravida scelerisque.
+            p With margin
+            .card: .card-body
+                .note-area.note-area-margin
+                    textarea.form-control(rows="10") Curabitur tellus mauris, fringilla sed tempus eget, convallis id orci.
+
+    .card
+        .card-heading Color pickers
+        .card-body(ng-controller="ColorPickerController as cpicker")
+            .row
+                .col-sm-6
+                    .panel
+                      .panel-heading hex: {{ cpicker.hexPicker.color }}
+                      .panel-body
+                        p
+                          button.btn.btn-primary(ng-click='cpicker.resetColor()') Update Model
+                        .rel-wrapper
+                            input.form-control(colorpicker='', ng-model='cpicker.hexPicker.color', colorpicker-parent="true", type='text')
+                .col-sm-6
+                    .panel
+                      .panel-heading rgb: {{ cpicker.rgbPicker.color }}
+                      .panel-body
+                        p
+                          button.btn.btn-primary(ng-click='cpicker.resetRBGColor()') Update Model
+                        .rel-wrapper
+                            input.form-control(colorpicker='rgb', ng-model='cpicker.rgbPicker.color', colorpicker-parent="true", type='text')
+                .col-sm-6
+                    .panel
+                      .panel-heading rgba: {{ cpicker.rgbaPicker.color }}
+                      .panel-body
+                        p
+                          button.btn.btn-primary(ng-click='cpicker.resetRBGAColor()') Update Model
+                        .rel-wrapper
+                            input.form-control(colorpicker='rgba', colorpicker-position='right', ng-model='cpicker.rgbaPicker.color', colorpicker-parent="true", type='text')
+                .col-sm-6
+                    .panel
+                      .panel-heading Non input element model value: {{ cpicker.nonInput.color }}
+                      .panel-body
+                        p
+                          button.btn.btn-primary(ng-click='cpicker.resetNonInputColor()') Update Model
+                        .rel-wrapper
+                            button.btn.btn-success(colorpicker='', type='button', colorpicker-position='top', colorpicker-parent="true", ng-model='cpicker.nonInput.color') Change color

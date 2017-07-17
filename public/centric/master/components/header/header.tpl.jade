@@ -1,0 +1,35 @@
+nav(ng-controller="HeaderController as header")
+    ul
+        li.visible-xs.visible-sm.hidden-md(ng-class="{'active': sidebarVisible}")
+            a.menu-link(href='', ng-click="toggleSidebar()", ng-class="app.header.menulink")
+                span: em
+        li.hidden-xs.hidden-sm(ng-class="{'active': sidebarOffcanvasVisible}", ng-if="app.sidebar.offcanvas")
+            a.menu-link(href='', ng-click="toggleSidebarOffcanvasVisible()", ng-class="app.header.menulink")
+                span: em
+    h2.header-title(ng-bind="$state.$current.title")
+    ul.pull-right
+        li
+            a(href='', ng-click="header.openModalSearch()").ripple
+                em.ion-ios-search-strong
+        li.dropdown(uib-dropdown='')
+            a.dropdown-toggle.has-badge(href='', uib-dropdown-toggle='').ripple
+                em.ion-person
+                sup.badge.bg-danger 3
+            ul.dropdown-menu.dropdown-menu-right.md-dropdown-menu(dropdown-menu='')
+                li.ripple.ripple-block
+                    a(href='')
+                        em.ion-home.icon-fw
+                        | Profile
+                li.ripple.ripple-block
+                    a(href='')
+                        em.ion-gear-a.icon-fw
+                        | Settings
+                li.divider(role='presentation')
+                li.ripple.ripple-block
+                    a(href='')
+                        em.ion-log-out.icon-fw
+                        | Logout
+        li
+            a(href='', ng-click="header.openModalBar()").ripple
+                em.ion-gear-b
+

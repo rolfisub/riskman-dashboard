@@ -1,0 +1,20 @@
+
+<div ng-controller="NestableController as nest" class="container-fluid">
+  <div ng-nestable="" ng-model="nest.items">
+    <!-- this element is the template for each menu item-->
+    <!-- the $item is available on scope and is the reference to the menu item object-->
+    <div class="card m0 b0">
+      <div class="mda-list">
+        <div class="mda-list-item">
+          <div class="mda-list-item-icon item-grab"><em class="ion-drag icon-lg"></em></div>
+          <div class="mda-list-item-icon bg-info"><em class="ion-coffee icon-lg"></em></div>
+          <div class="mda-list-item-text mda-2-line">
+            <h3>{{$item.text}}</h3>
+            <h4>Brunch this weekend?</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" ng-click="nest.add()" class="btn btn-primary">Add another</button>
+</div>

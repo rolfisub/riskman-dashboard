@@ -1,0 +1,60 @@
+.container-fluid(ng-controller="RadialChartsController as radchart")
+
+    h4.page-header.clearfix.mt0
+        .pull-left Knob
+        .pull-right
+            button.btn.btn-sm.btn-primary(type="button", ng-click="radchart.randomize('knob')")
+                em.ion-refresh
+    .row
+        .col-lg-3.col-sm-6
+            .card
+                .card-heading Default
+                .card-body.text-center
+                    knob(knob-data='radchart.knobLoaderData1', knob-options='radchart.knobLoaderOptions1', knob-max="100")
+        .col-lg-3.col-sm-6
+            .card
+                .card-heading Ready only
+                .card-body.text-center
+                    knob(knob-data='radchart.knobLoaderData2', knob-options='radchart.knobLoaderOptions2', knob-max="100")
+        .col-lg-3.col-sm-6
+            .card
+                .card-heading Offset and arc
+                .card-body.text-center
+                    knob(knob-data='radchart.knobLoaderData4', knob-options='radchart.knobLoaderOptions4', knob-max="100")
+        .col-lg-3.col-sm-6
+            .card
+                .card-heading Display previous
+                .card-body.text-center
+                    knob(knob-data='radchart.knobLoaderData3', knob-options='radchart.knobLoaderOptions3', knob-max="100")
+
+
+    h4.page-header.clearfix
+        .pull-left Easypie Charts
+        .pull-right
+            button.btn.btn-sm.btn-primary(type="button", ng-click="radchart.randomize('easy')")
+                em.ion-refresh
+    .row
+        .col-lg-3.col-sm-6
+            .card
+                .card-heading Default
+                .card-body.text-center
+                    .easypie-chart(easypiechart='', options='radchart.pieOptions1', percent='radchart.piePercent1')
+                        span {{radchart.piePercent1}}
+        .col-lg-3.col-sm-6
+            .card
+                .card-heading Slim
+                .card-body.text-center
+                    .easypie-chart(easypiechart='', options='radchart.pieOptions2', percent='radchart.piePercent2')
+                        span {{radchart.piePercent2}}
+        .col-lg-3.col-sm-6
+            .card
+                .card-heading Track color
+                .card-body.text-center
+                    .easypie-chart(easypiechart='', options='radchart.pieOptions3', percent='radchart.piePercent3')
+                        span {{radchart.piePercent3}}
+        .col-lg-3.col-sm-6
+            .card
+                .card-heading Scale color
+                .card-body.text-center
+                    .easypie-chart(easypiechart='', options='radchart.pieOptions4', percent='radchart.piePercent4')
+                        span {{radchart.piePercent4}}

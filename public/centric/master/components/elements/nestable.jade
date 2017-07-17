@@ -1,0 +1,17 @@
+.container-fluid(ng-controller="NestableController as nest")
+    div(ng-nestable='', ng-model='nest.items')
+        // this element is the template for each menu item
+        // the $item is available on scope and is the reference to the menu item object
+        .card.m0.b0
+            .mda-list
+                .mda-list-item
+                    .mda-list-item-icon.item-grab
+                        em.ion-drag.icon-lg
+                    .mda-list-item-icon.bg-info
+                        em.ion-coffee.icon-lg
+                    .mda-list-item-text.mda-2-line
+                        h3 {{$item.text}}
+                        h4 Brunch this weekend?
+    //- pre {{nest.items | json}}
+
+    button.btn.btn-primary(type="button", ng-click="nest.add()") Add another

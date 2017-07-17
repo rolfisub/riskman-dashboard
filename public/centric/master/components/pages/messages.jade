@@ -1,0 +1,418 @@
+.container.container-md(ng-controller="MessagesController as msg")
+    p.ph Today
+    .card
+        table.table.table-hover.table-fixed.va-middle
+            tbody
+                tr(ng-click="msg.display()")
+                    td.wd-xxs
+                        .initial32.bg-indigo-500 E
+                    td.text-ellipsis.wd-sm Erin Alvarez
+                    td.text-ellipsis Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras nunc velit, bibendum vel imperdiet eget, posuere nec diam. 
+                    td.wd-xxs
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        img.img-circle.thumb32(src="app/img/user/04.jpg", alt="user")
+                    td.text-ellipsis Nathan Richardson
+                    td.text-ellipsis Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        .initial32.bg-green-500 K
+                    td.text-ellipsis Kelly Hernandez
+                    td.text-ellipsis Integer sit amet vulputate mauris. Praesent nulla est, molestie at auctor vulputate, semper eu sapien. Fusce dolor lacus, interdum eu tincidunt sed, aliquet vel turpis. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        img.img-circle.thumb32(src="app/img/user/06.jpg", alt="user")
+                    td.text-ellipsis Nathan Richardson
+                    td.text-ellipsis Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        img.img-circle.thumb32(src="app/img/user/05.jpg", alt="user")
+                    td.text-ellipsis Oscar Stanley
+                    td.text-ellipsis Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+
+    p.ph Yesterday
+    .card
+        table.table.table-hover.table-fixed.va-middle
+            tbody
+                tr(ng-click="msg.display()")
+                    td.wd-xxs
+                        .initial32.bg-blue-500 T
+                    td.text-ellipsis.wd-sm Timmothy Terry
+                    td.text-ellipsis Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris hendrerit nibh eu nisi congue dapibus. 
+                    td.wd-xxs
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        img.img-circle.thumb32(src="app/img/user/01.jpg", alt="user")
+                    td.text-ellipsis Nathan Richardson
+                    td.text-ellipsis Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        .initial32.bg-green-500 N
+                    td.text-ellipsis Nina Brown
+                    td.text-ellipsis Etiam eu ipsum dui, et tincidunt orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        img.img-circle.thumb32(src="app/img/user/06.jpg", alt="user")
+                    td.text-ellipsis Nathan Richardson
+                    td.text-ellipsis Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        img.img-circle.thumb32(src="app/img/user/03.jpg", alt="user")
+                    td.text-ellipsis Myrtle James
+                    td.text-ellipsis Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        .initial32.bg-amber-500 T
+                    td.text-ellipsis Ted Vasquez
+                    td.text-ellipsis Praesent vel nisi nibh.Integer imperdiet, turpis nec viverra egestas, magna sapien convallis velit, nec vestibulum turpis dui vel dui. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        .initial32.bg-pink-500 L
+                    td.text-ellipsis Lillian Snyder
+                    td.text-ellipsis Praesent vel nisi nibh.Integer imperdiet, turpis nec viverra egestas, magna sapien convallis velit, nec vestibulum turpis dui vel dui. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+
+    p.ph 2 days ago
+    .card
+        table.table.table-hover.table-fixed.va-middle
+            tbody
+                tr(ng-click="msg.display()")
+                    td.wd-xxs
+                        .initial32.bg-blue-500 T
+                    td.text-ellipsis.wd-sm Timmothy Terry
+                    td.text-ellipsis Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris hendrerit nibh eu nisi congue dapibus. 
+                    td.wd-xxs
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        img.img-circle.thumb32(src="app/img/user/01.jpg", alt="user")
+                    td.text-ellipsis Nathan Richardson
+                    td.text-ellipsis Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        .initial32.bg-green-500 N
+                    td.text-ellipsis Nina Brown
+                    td.text-ellipsis Etiam eu ipsum dui, et tincidunt orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        img.img-circle.thumb32(src="app/img/user/06.jpg", alt="user")
+                    td.text-ellipsis Nathan Richardson
+                    td.text-ellipsis Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        img.img-circle.thumb32(src="app/img/user/03.jpg", alt="user")
+                    td.text-ellipsis Myrtle James
+                    td.text-ellipsis Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        .initial32.bg-amber-500 T
+                    td.text-ellipsis Ted Vasquez
+                    td.text-ellipsis Praesent vel nisi nibh.Integer imperdiet, turpis nec viverra egestas, magna sapien convallis velit, nec vestibulum turpis dui vel dui. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+                tr(ng-click="msg.display()")
+                    td
+                        .initial32.bg-pink-500 L
+                    td.text-ellipsis Lillian Snyder
+                    td.text-ellipsis Praesent vel nisi nibh.Integer imperdiet, turpis nec viverra egestas, magna sapien convallis velit, nec vestibulum turpis dui vel dui. 
+                    td
+                        // START dropdown
+                        .pull-right.dropdown(uib-dropdown='dropdown2')
+                            button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='', ng-click="$event.stopPropagation()")
+                                em.ion-android-more-vertical
+                            ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                li: a(href='')
+                                    em.ion-reply.icon-fw
+                                    | Reply
+                                li: a(href='')
+                                    em.ion-forward.icon-fw
+                                    | Forward
+                                li: a(href='')
+                                    em.ion-trash-a.icon-fw
+                                    | Spam
+                        // END dropdown
+
+    .floatbutton(ng-controller="FloatButtonController as ctrl")
+        button(mfb-menu='', position='{{ctrl.chosen.position}}', effect='{{ctrl.chosen.effect}}', active-icon='ion-edit', resting-icon='ion-edit', ng-mouseenter='hovered()', ng-mouseleave='hovered()', toggling-method='{{ctrl.chosen.method}}', menu-state='ctrl.menuState', main-action='msg.compose()')
+

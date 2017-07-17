@@ -1,0 +1,116 @@
+
+<div ng-controller="DataTableController as table" class="container-fluid">
+  <!-- Zero Configuration-->
+  <div class="card">
+    <div class="card-heading">Bootstrap Basic</div>
+    <table datatable="" dt-options="table.dtOptionsBs" class="table table-striped mv-lg">
+      <thead>
+        <tr>
+          <th>Card Id</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>123123123</td>
+          <td>Hannah</td>
+          <td>Burns</td>
+          <td>26</td>
+        </tr>
+        <tr>
+          <td>33333344444</td>
+          <td>Addison</td>
+          <td>Payne</td>
+          <td>32</td>
+        </tr>
+        <tr>
+          <td>9998888999</td>
+          <td>Kylie</td>
+          <td>Hudson</td>
+          <td>100</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- ngRepeat + ngResource-->
+  <div class="card">
+    <div class="card-heading">Dynamic (ngRepeat + ngResource)</div>
+    <div class="card-body">
+      <table datatable="ng" dt-options="table.dtOptions" class="table table-striped mv-lg">
+        <thead>
+          <tr>
+            <th>Person ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="person in table.persons">
+            <td>{{ person.id }}</td>
+            <td>{{ person.firstName }}</td>
+            <td>{{ person.lastName }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Chaning data-->
+  <div class="card">
+    <div class="card-heading">Change content</div>
+    <div class="card-body">
+      <form ng-submit="table.addPerson()" class="form-inline">
+        <table datatable="ng" dt-options="table.dtOptions" dt-column-defs="table.dtColumnDefs" class="table table-striped mv-lg">
+          <thead>
+            <tr>
+              <th>
+                <div class="form-group">
+                  <label>
+                    <input type="number" name="id" ng-model="table.person2Add.id" value="" class="form-control"/>
+                  </label>
+                </div>
+              </th>
+              <th>
+                <div class="form-group">
+                  <label>
+                    <input type="text" name="firstName" ng-model="table.person2Add.firstName" value="" class="form-control"/>
+                  </label>
+                </div>
+              </th>
+              <th>
+                <div class="form-group">
+                  <label>
+                    <input type="text" name="lastName" ng-model="table.person2Add.lastName" value="" class="form-control"/>
+                  </label>
+                </div>
+              </th>
+              <th>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-labeled btn-success"><span class="btn-label"><em class="ion-plus-round"></em></span>Add</button>
+                </div>
+              </th>
+            </tr>
+            <tr>
+              <th>Hero ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="hero in table.heroes">
+              <td>{{ hero.id }}</td>
+              <td>{{ hero.firstName }}</td>
+              <td>{{ hero.lastName }}</td>
+              <td>
+                <button type="button" ng-click="table.modifyPerson($index)" class="btn btn-sm btn-warning"><em class="ion-edit"></em></button>
+                <button type="button" ng-click="table.removePerson($index)" class="btn btn-sm btn-danger"><em class="ion-trash-b"></em></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>

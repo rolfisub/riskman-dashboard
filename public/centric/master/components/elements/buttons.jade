@@ -1,0 +1,253 @@
+mixin dropdown_button(type)
+    // START button group
+    .btn-group.mb-sm(uib-dropdown='dropdown')
+        button.btn.dropdown-toggle.ripple(type='button', ng-disabled='disabled', class="btn-#{type}", uib-dropdown-toggle="")
+            = type
+            span.caret
+        ul.dropdown-menu(role='menu')
+            li
+                a(href='#') Action
+            li
+                a(href='#') Another action
+            li
+                a(href='#') Something else here
+            li.divider
+            li
+                a(href='#') Separated link
+    // END button group
+
+mixin dropdown_split(type)
+    // START button group
+    .btn-group(uib-dropdown='dropdown')
+        button.btn(type='button', class="btn-#{type}") Action
+        button.btn.dropdown-toggle.ripple(type='button', class="btn-#{type}", uib-dropdown-toggle="")
+            span.caret
+            span.sr-only= type
+        ul.dropdown-menu(role='menu')
+            li
+                a(href='#') Action
+            li
+                a(href='#') Another action
+            li
+                a(href='#') Something else here
+            li.divider
+            li
+                a(href='#') Separated link
+    // END button group
+
+.container.container-lg
+
+    // START card
+    .card
+        .card-body
+            h5.mt0 Button colors
+            button.mb-sm.btn.btn-default.ripple(type='button') Default
+            button.mb-sm.btn.btn-primary.ripple(type='button') Primary
+            button.mb-sm.btn.btn-success.ripple(type='button') Success
+            button.mb-sm.btn.btn-info.ripple(type='button') Info
+            button.mb-sm.btn.btn-warning.ripple(type='button') Warning
+            button.mb-sm.btn.btn-danger.ripple(type='button') Danger
+            button.mb-sm.btn.btn-inverse.ripple(type='button') Inverse
+            br
+            br
+            a(href="").btn.btn-link.ripple Button Link
+            button(type='button').btn.btn-default.mr.ripple
+                strong button tag
+            a(href="").btn.btn-default.ripple
+                strong anchor tag
+    // END card
+    // START card
+    .card
+        .card-body
+            h5.mt0 Button Flat
+            p
+                button.btn.btn-flat.btn-default.ripple(type='button') Default
+                button.btn.btn-flat.btn-primary.ripple(type='button') Primary
+                button.btn.btn-flat.btn-success.ripple(type='button') Success
+                button.btn.btn-flat.btn-info.ripple(type='button') Info
+                button.btn.btn-flat.btn-warning.ripple(type='button') Warning
+                button.btn.btn-flat.btn-danger.ripple(type='button') Danger
+                button.btn.btn-flat.btn-inverse.ripple(type='button') Inverse
+    // END card
+    // START card
+    .card
+        .card-body
+            h5.mt0 Button Raised
+            p
+                button.btn.btn-raised.btn-default.ripple(type='button') Default
+                button.btn.btn-raised.btn-primary.ripple(type='button') Primary
+                button.btn.btn-raised.btn-success.ripple(type='button') Success
+                button.btn.btn-raised.btn-info.ripple(type='button') Info
+                button.btn.btn-raised.btn-warning.ripple(type='button') Warning
+                button.btn.btn-raised.btn-danger.ripple(type='button') Danger
+                button.btn.btn-raised.btn-inverse.ripple(type='button') Inverse
+    // END card
+    // START card
+    .card
+        .card-body
+            h5.mt0 Button Circle
+            p
+                button.btn.btn-circle.btn-default.ripple(type='button') D
+                button.btn.btn-circle.btn-primary.ripple(type='button') P
+                button.btn.btn-circle.btn-success.ripple(type='button') S
+                button.btn.btn-circle.btn-info.ripple(type='button') I
+                button.btn.btn-circle.btn-warning.ripple(type='button') W
+                button.btn.btn-circle.btn-danger.ripple(type='button') D
+                button.btn.btn-circle.btn-inverse.ripple(type='button') I
+    // END card
+    // START card
+    .card
+        .card-body
+            h5.mt0 Button Labeled
+            // Success button with label
+            button.btn.btn-labeled.btn-success.ripple(type='button')
+                span.btn-label
+                    i.ion-checkmark-round
+                | Success
+            // Danger button with label
+            button.btn.btn-labeled.btn-danger.ripple(type='button')
+                span.btn-label
+                    i.ion-close-round
+                | Danger
+            // Info button with label
+            button.btn.btn-labeled.btn-info.ripple(type='button')
+                span.btn-label
+                    i.ion-alert
+                | Info
+            // Warning button with label
+            button.btn.btn-labeled.btn-warning.ripple(type='button')
+                span.btn-label
+                    i.ion-nuclear
+                | Warning
+            br
+            br
+            // Standard button with label
+            button.btn.btn-labeled.btn-default.ripple(type='button')
+                span.btn-label
+                    i.ion-arrow-left-c
+                | Left
+            // Standard button with label on the right side
+            button.btn.btn-labeled.btn-default.ripple(type='button')
+                | Right
+                span.btn-label.btn-label-right
+                    i.ion-arrow-right-c
+    // END card
+    // START card
+    .card
+        .card-body
+            h5.mt0 Button sizing
+            .row
+                .col-md-4
+                    p
+                        button.btn.btn-primary.btn-xl.ripple(type='button') X-Large button
+                        button.btn.btn-default.btn-xl.ripple(type='button') X-Large button
+                .col-md-4
+                    p
+                        button.btn.btn-primary.btn-lg.ripple(type='button') Large button
+                        button.btn.btn-default.btn-lg.ripple(type='button') Large button
+                    p
+                        button.btn.btn-primary.ripple(type='button') Default button
+                        button.btn.btn-default.ripple(type='button') Default button
+                .col-md-4
+                    p
+                        button.btn.btn-primary.btn-sm.ripple(type='button') Small button
+                        button.btn.btn-default.btn-sm.ripple(type='button') Small button
+                    p
+                        button.btn.btn-primary.btn-xs.ripple(type='button') Extra small button
+                        button.btn.btn-default.btn-xs.ripple(type='button') Extra small button
+    // END card
+    // START card
+    .card
+        .card-body
+            h5.mt0 Button group
+            p
+            .btn-group
+                button.btn.btn-default.ripple(type='button') Left
+                button.btn.btn-default.ripple(type='button') Middle
+                button.btn.btn-default.ripple(type='button') Right
+            p
+            p
+            .btn-group
+                button.btn.btn-default.ripple(type='button') 1
+                button.btn.btn-default.ripple(type='button') 2
+                button.btn.btn-default.ripple(type='button') 3
+                button.btn.btn-default.ripple(type='button') 4
+            .btn-group
+                button.btn.btn-default.ripple(type='button') 5
+                button.btn.btn-default.ripple(type='button') 6
+                button.btn.btn-default.ripple(type='button') 7
+            .btn-group
+                button.btn.btn-default.ripple(type='button') 8
+    // END card
+    // START card
+    .card
+        .card-body
+            h5.mt0 Button Pills
+            p Pill left
+            p
+                button.btn.btn-pill-left.btn-default.ripple(type='button') Default
+                button.btn.btn-pill-left.btn-primary.ripple(type='button') Primary
+                button.btn.btn-pill-left.btn-success.ripple(type='button') Success
+                button.btn.btn-pill-left.btn-info.ripple(type='button') Info
+                button.btn.btn-pill-left.btn-warning.ripple(type='button') Warning
+                button.btn.btn-pill-left.btn-danger.ripple(type='button') Danger
+                button.btn.btn-pill-left.btn-inverse.ripple(type='button') Inverse
+
+            p Pill right
+            p
+                button.btn.btn-pill-right.btn-default.ripple(type='button') Default
+                button.btn.btn-pill-right.btn-primary.ripple(type='button') Primary
+                button.btn.btn-pill-right.btn-success.ripple(type='button') Success
+                button.btn.btn-pill-right.btn-info.ripple(type='button') Info
+                button.btn.btn-pill-right.btn-warning.ripple(type='button') Warning
+                button.btn.btn-pill-right.btn-danger.ripple(type='button') Danger
+                button.btn.btn-pill-right.btn-inverse.ripple(type='button') Inverse
+    // END card
+    // START card
+    .card
+        .card-body
+            h5.mt0 Button Oval
+            button.btn.btn-oval.btn-default.ripple(type='button') Default
+            button.btn.btn-oval.btn-primary.ripple(type='button') Primary
+            button.btn.btn-oval.btn-success.ripple(type='button') Success
+            button.btn.btn-oval.btn-info.ripple(type='button') Info
+            button.btn.btn-oval.btn-warning.ripple(type='button') Warning
+            button.btn.btn-oval.btn-danger.ripple(type='button') Danger
+            button.btn.btn-oval.btn-inverse.ripple(type='button') Inverse
+    // END card
+    // START card
+    .card
+        .card-body
+            h5.mt0 Button Square
+            button.btn.btn-square.btn-default.ripple(type='button') Default
+            button.btn.btn-square.btn-primary.ripple(type='button') Primary
+            button.btn.btn-square.btn-success.ripple(type='button') Success
+            button.btn.btn-square.btn-info.ripple(type='button') Info
+            button.btn.btn-square.btn-warning.ripple(type='button') Warning
+            button.btn.btn-square.btn-danger.ripple(type='button') Danger
+            button.btn.btn-square.btn-inverse.ripple(type='button') Inverse
+    // END card
+    // START card
+    .card
+        .card-body
+            h5.mt0 Button dropdown
+            +dropdown_button('default')
+            +dropdown_button('primary')
+            +dropdown_button('success')
+            +dropdown_button('info')
+            +dropdown_button('warning')
+            +dropdown_button('danger')
+            +dropdown_button('inverse')
+    // END card
+    // START card
+    .card
+        .card-body
+            h5.mt0.ellipsis Split button dropdown
+            +dropdown_split('default')
+            +dropdown_split('primary')
+            +dropdown_split('success')
+            +dropdown_split('info')
+            +dropdown_split('warning')
+            +dropdown_split('danger')
+            +dropdown_split('inverse')
+    // END card

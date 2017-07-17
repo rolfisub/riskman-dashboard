@@ -1,0 +1,24 @@
+
+<div ng-controller="VectorMapController as vmap" class="container-fluid">
+  <div class="card">
+    <div class="card-heading">
+      <div class="pull-right"><span class="mr text-muted">Show last year events</span>
+        <label class="switch switch-info">
+          <input type="checkbox" ng-model="vmap.showAllMarkers" ng-change="vmap.displayAllMarkers(vmap.showAllMarkers)"/><span></span>
+        </label>
+      </div>
+      <div class="card-title">World Events</div>
+    </div>
+    <div class="card-body">
+      <div vector-map="" map-options="vmap.options" map-series="vmap.series" map-markers="vmap.markers" class="vector-map"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-heading">
+      <div class="card-title">Usa Makers</div>
+    </div>
+    <div class="card-body">
+      <div vector-map="" map-options="vmap.usa_options" map-series="vmap.series" map-markers="vmap.usa_markers" class="vector-map"></div>
+    </div>
+  </div>
+</div>

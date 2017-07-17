@@ -1,0 +1,27 @@
+
+<div class="container-full">
+  <div class="container container-xs">
+    <div class="text-center mv-lg"><img src="app/img/user/01.jpg" class="img-circle mb block-center img-responsive thumb64"/>
+      <p>Brian Walker</p>
+    </div>
+    <form name="loginForm" novalidate="" ng-submit="$state.go('app.dashboard')" class="card form-validate">
+      <div class="card-heading">
+        <p class="text-center">Type your password to unlock terminal</p>
+      </div>
+      <div class="card-offset pb0">
+        <div ng-if="loginForm.$valid" class="card-offset-item text-right ng-fadeInLeftShort">
+          <button type="submit" class="btn btn-success btn-circle btn-lg"><em class="ion-checkmark-round"></em></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="mda-form-group float-label mda-input-group">
+          <div class="mda-form-control">
+            <input type="password" name="accountPassword" ng-model="account.password" required="" class="form-control"/>
+            <div class="mda-form-control-line"></div>
+            <label>Password</label>
+          </div><a ui-sref="user.login" class="mda-form-msg right">Not you?</a><span class="mda-input-group-addon"><em class="ion-ios-locked-outline icon-lg"></em></span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

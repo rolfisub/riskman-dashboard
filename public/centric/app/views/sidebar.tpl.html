@@ -1,0 +1,28 @@
+
+<div ng-if="app.sidebar.showheader" class="sidebar-header">
+  <div ng-click="toggleSidebarOffcanvasVisible()" ng-if="app.sidebar.offcanvas &amp;&amp; sidebarOffcanvasVisible" class="pull-right pt-lg text-muted hidden"><em class="ion-close-round"></em></div><a href="" class="sidebar-header-logo"><img src="app/img/logo.svg" svg-replace=""/><span class="sidebar-header-logo-text">Centric</span></a>
+</div>
+<div class="sidebar-content">
+  <div ng-if="app.sidebar.showtoolbar" class="sidebar-toolbar text-center"><a href=""><img src="app/img/user/01.jpg" alt="Profile" class="img-circle thumb64"/></a>
+    <div class="mt">{{ 'WELCOME' | translate }}, Willie Webb</div>
+  </div>
+  <nav ng-controller="MenuController as menu" class="sidebar-nav">
+    <!-- 1st level items-->
+    <ul>
+      <li ng-repeat="item in menu.items | orderBy: 'order' track by $index" ng-class="{ 'active': $state.includes(item.sref) || $state.is(item.sref) || $state.includes(item.srefParent)}">
+        <!-- support for direct links--><a href="{{item.href}}" ng-if="item.href" class="ripple"><span ng-if="item.subitems.length" class="pull-right nav-caret"><em class="ion-ios-arrow-right"></em></span><span class="pull-right nav-label"><span ng-bind="item.label.count" ng-class="item.label.classname"></span></span><span class="nav-icon"><em ng-if="item.iconclass" ng-class="item.iconclass"></em><img ng-if="item.imgpath" svg-replace="" ng-src="{{item.imgpath}}"/></span><span ng-bind="item.name"></span></a>
+        <!-- support for route states links--><a ui-sref="{{item.sref}}" ng-if="!item.href &amp;&amp; !item.subitems.length" class="ripple"><span ng-if="item.subitems.length" class="pull-right nav-caret"><em class="ion-ios-arrow-right"></em></span><span class="pull-right nav-label"><span ng-bind="item.label.count" ng-class="item.label.classname"></span></span><span class="nav-icon"><em ng-if="item.iconclass" ng-class="item.iconclass"></em><img ng-if="item.imgpath" svg-replace="svg-replace" ng-src="{{item.imgpath}}"/></span><span ng-bind="item.name"></span></a>
+        <!-- parent menu items have empty links--><a href="" ng-if="!item.href &amp;&amp; item.subitems.length" class="ripple"><span ng-if="item.subitems.length" class="pull-right nav-caret"><em class="ion-ios-arrow-right"></em></span><span class="pull-right nav-label"><span ng-bind="item.label.count" ng-class="item.label.classname"></span></span><span class="nav-icon"><em ng-if="item.iconclass" ng-class="item.iconclass"></em><img ng-if="item.imgpath" svg-replace="svg-replace" ng-src="{{item.imgpath}}"/></span><span ng-bind="item.name"></span></a>
+        <!-- 2nd level items-->
+        <ul ng-if="item.subitems.length" class="sidebar-subnav">
+          <li ng-repeat="sitem in item.subitems" ng-class="{ 'active': $state.includes(sitem.sref) || $state.is(sitem.sref) || $state.includes(sitem.srefParent)}"><a ui-sref="{{sitem.sref}}" class="ripple"><span ng-if="sitem.subitems.length" class="pull-right nav-caret"><em class="ion-ios-arrow-right"></em></span><span class="pull-right nav-label"><span ng-bind="sitem.label.count" ng-class="sitem.label.classname"></span></span><span ng-if="sitem.iconclass" class="nav-icon"><em ng-class="sitem.iconclass"></em><span ng-if="sitem.svgpath" ng-include="sitem.svgpath"></span></span><span ng-bind="sitem.name"></span></a>
+            <!-- 3rd level items-->
+            <ul ng-if="sitem.subitems.length" class="sidebar-subnav">
+              <li ng-repeat="ssitem in sitem.subitems" ui-sref-active="active"><a ui-sref="{{ssitem.sref}}"><span ng-if="ssitem.subitems.length" class="pull-right nav-caret"><em class="ion-ios-arrow-right"></em></span><span class="pull-right nav-label"><span ng-bind="ssitem.label.count" ng-class="ssitem.label.classname"></span></span><em ng-class="ssitem.iconclass" ng-if="ssitem.iconclass"></em><span ng-bind="ssitem.name"></span></a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>

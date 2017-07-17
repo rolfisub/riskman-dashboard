@@ -1,0 +1,16 @@
+// top navbar
+header.header-container(ng-include="'app/views/header.tpl.html'")
+
+// sidebar
+aside.sidebar-container(ng-include="'app/views/sidebar.tpl.html'")
+.sidebar-layout-obfuscator(ng-click='closeSidebar()')
+
+// Main section
+main.main-container
+
+    // Page content
+    section(ui-view="", autoscroll="false", ng-class="app.viewAnimation")
+
+    // Page footer
+    footer
+        span 2017 - Centric app.

@@ -1,0 +1,95 @@
+
+<div ng-controller="FlotChartController as chart" class="container-fluid">
+  <!-- START row-->
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-heading">
+          <div class="card-title">Area</div>
+        </div>
+        <div class="card-body">
+          <flot dataset="chart.areaData" options="chart.areaOptions" class="flot-chart flot-chart-lg"></flot>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-heading">
+          <div class="card-title">Area Spline</div>
+        </div>
+        <div class="card-body">
+          <flot dataset="chart.splineData" options="chart.splineOptions" class="flot-chart flot-chart-lg"></flot>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-heading">
+          <div class="card-title">Bar</div>
+        </div>
+        <div class="card-body">
+          <flot dataset="chart.barData" options="chart.barOptions" class="flot-chart flot-chart-lg"></flot>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END row-->
+  <!-- START row-->
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-heading">
+          <div class="card-title">Pie</div>
+        </div>
+        <div class="card-body">
+          <flot dataset="chart.pieData" options="chart.pieOptions" class="flot-chart flot-chart-lg"></flot>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-heading">
+          <div class="card-title">Donut</div>
+        </div>
+        <div class="card-body">
+          <flot dataset="chart.donutData" options="chart.donutOptions" class="flot-chart flot-chart-lg"></flot>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-heading">
+          <div class="card-title">Bar - Stacked</div>
+        </div>
+        <div class="card-body">
+          <flot dataset="chart.barStackeData" options="chart.barStackedOptions" class="flot-chart flot-chart-lg"></flot>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END row-->
+  <!-- START row-->
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-heading">
+          <div class="card-title">Real Time</div>
+        </div>
+        <div class="card-body">
+          <flot dataset="chart.realTimeData" options="chart.realTimeOptions" class="flot-chart flot-chart-lg"></flot>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-heading">
+          <div class="card-title">Line</div>
+        </div>
+        <div class="card-body">
+          <flot dataset="chart.lineData" options="chart.lineOptions" class="flot-chart flot-chart-lg"></flot>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END row-->
+</div>
