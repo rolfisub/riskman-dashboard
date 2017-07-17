@@ -18,7 +18,7 @@
             order: 99
         };
 
-        Menu.addItem(menuItem);
+        //Menu.addItem(menuItem);
 
     }
 })();
