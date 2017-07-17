@@ -1,0 +1,5 @@
+div(ng-controller='TabsDeepController as dt')
+    uib-tabset(justified="true")
+        uib-tab(ng-repeat='t in dt.tabs', heading='{{t.heading}}', select='dt.go(t.route)', active='t.active')
+
+.container-fluid.text-center(ui-view='')

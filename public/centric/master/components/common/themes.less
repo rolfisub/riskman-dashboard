@@ -1,0 +1,76 @@
+/**
+ * Themes
+ */
+
+@import '../common/variables';
+@import '../common/mixins';
+
+.theme-1 {
+    .theme-sidebar(#fff, @text-color, @mdc-blue-700, #fff);
+    .theme-header(@mdc-blue-700, #fff);
+}
+
+.theme-2 {
+    .theme-sidebar(@mdc-blue-grey-900, #fff, @mdc-blue-grey-900, #fff);
+    .theme-header(@mdc-blue-700, #fff);
+    .theme-content(@mdc-blue-grey-50);
+}
+
+.theme-3 {
+    .theme-sidebar(@mdc-blue-grey-900, #fff, @mdc-blue-grey-900, #fff);
+    .theme-header(@mdc-blue-grey-800, #fff);
+    .theme-content-dark(@mdc-blue-grey-800);
+    .theme-sidebar-items(@brand-primary, @brand-success);
+}
+
+.theme-4 {
+    .theme-sidebar(@mdc-blue-grey-900, #fff, @mdc-blue-grey-900, #fff);
+    .theme-header(@brand-success, #fff);
+    .theme-content(@gray-lighter);
+    .theme-sidebar-items(@brand-success, lighten(@brand-success, 25%));
+}
+
+.theme-5 {
+    .theme-sidebar(@mdc-blue-grey-900, #fff, @mdc-blue-grey-900, #fff);
+    .theme-header(@brand-info, #fff);
+    .theme-content(@gray-lighter);
+    .theme-sidebar-items(@brand-info, lighten(@brand-info, 25%));
+}
+
+.theme-6 {
+    .theme-sidebar(@mdc-blue-grey-900, #fff, @mdc-blue-grey-900, #fff);
+    .theme-header(@mdc-deep-purple-300, #fff);
+    .theme-content(@gray-lighter);
+    .theme-sidebar-items(@mdc-deep-purple-300, lighten(@mdc-deep-purple-300, 25%));
+}
+
+.theme-7 {
+    .theme-sidebar(#fff, @text-color, @mdc-blue-grey-700, #fff);
+    .theme-header(@mdc-blue-grey-700, #fff);
+    .theme-content(@mdc-blue-grey-50);
+}
+
+.theme-8 {
+    .theme-sidebar(@mdc-blue-grey-900, #fff, @mdc-blue-grey-900, #fff);
+    .theme-header(#fff, @text-color);
+    .theme-content(@mdc-blue-grey-50);
+    .theme-sidebar-items(@brand-primary, #f1f1f1);
+}
+
+.theme-9 {
+    .theme-sidebar(#fff, @text-color, #fff, @text-color);
+    .theme-header(#fff, @text-color);
+    .theme-content(@mdc-blue-grey-50);
+    .theme-sidebar-items(darken(@mdc-blue-grey-300, 10%), @mdc-blue-grey-300);
+}
+
+// Theme previews for settings panel
+.preview-theme-1 { .preview-theme(@mdc-blue-700,#fff,#f1f2f3); }
+.preview-theme-2 { .preview-theme(@mdc-blue-700, @mdc-blue-grey-900,@mdc-blue-grey-50); }
+.preview-theme-3 { .preview-theme(@mdc-blue-grey-800, @mdc-blue-grey-900, @mdc-blue-grey-800); }
+.preview-theme-4 { .preview-theme(@brand-success, #fff, @gray-lighter); }
+.preview-theme-5 { .preview-theme(@brand-info, #fff, @gray-lighter); }
+.preview-theme-6 { .preview-theme(@mdc-deep-purple-300, #fff, @gray-lighter); }
+.preview-theme-7 { .preview-theme(@mdc-blue-grey-700, #fff, @mdc-blue-grey-50); }
+.preview-theme-8 { .preview-theme(#fff, @mdc-blue-grey-900,@mdc-blue-grey-50); }
+.preview-theme-9 { .preview-theme(#fff, #fff,@mdc-blue-grey-50); }

@@ -1,0 +1,79 @@
+
+<div ng-controller="NgTableController as table" class="container-fluid">
+  <div class="card">
+    <div class="card-heading">
+      <button ng-click="table.tableParams.sorting({})" class="pull-right btn btn-default btn-sm">Clear sorting</button>
+      <div class="card-title">Sorting</div>
+    </div>
+    <table ng-table="table.tableParams" class="ng-table-wrapper table table-striped">
+      <tbody>
+        <tr ng-repeat="user in $data">
+          <td data-title="'Name'" sortable="'name'">{{user.name}}</td>
+          <td data-title="'Age'" sortable="'age'">{{user.age}}</td>
+          <td data-title="'Money'" sortable="'money'"><span ng-class="{ 'plus': user.money &gt;= 0,'minus': user.money &lt; 0 }">{{user.money}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-heading">
+      <div class="card-title">Filters</div>
+    </div>
+    <table ng-table="table.tableParams2" show-filter="true" class="ng-table-wrapper table table-striped">
+      <tbody>
+        <tr ng-repeat="user in $data">
+          <td data-title="'Name'" filter="{ 'name': 'text' }">{{user.name}}</td>
+          <td data-title="'Age'" filter="{ 'age': 'text' }">{{user.age}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-heading">
+      <button ng-click="table.tableParams3.data[1].$selected = true" class="pull-right btn-sm btn btn-default">Select 2nd Row</button>
+      <div class="card-title">Select Rows</div>
+    </div>
+    <table ng-table="table.tableParams3" class="ng-table-wrapper table table-striped ng-table-rowselected">
+      <tr ng-repeat="user in $data" ng-click="user.$selected = !user.$selected; changeSelection(user)" ng-class="{'active': user.$selected}">
+        <td data-title="'Name'">{{user.name}}</td>
+        <td data-title="'Age'">{{user.age}}</td>
+      </tr>
+    </table>
+    <div class="card-body"><strong>Selected users:</strong>{{ table.data | filter:{"$selected": true} }}</div>
+  </div>
+  <div class="card">
+    <div class="card-heading">
+      <div class="card-title">Editable</div>
+    </div>
+    <table ng-table="tableParams4" class="ng-table-wrapper table table-striped">
+      <tr ng-repeat="user in $data" ng-class="{ 'edit': user.$edit }">
+        <td data-title="'Name'"><span ng-if="!user.$edit">{{user.name}}</span>
+          <div ng-if="user.$edit">
+            <input type="text" ng-model="user.name" class="form-control"/>
+          </div>
+        </td>
+        <td data-title="'Age'" width="200" class="text-center"><span ng-if="!user.$edit">{{user.age}}</span>
+          <div ng-if="user.$edit">
+            <input type="number" ng-model="user.age" class="form-control"/>
+          </div>
+        </td>
+        <td data-title="'Actions'" width="200" class="text-center"><a ng-if="!user.$edit" href="" ng-click="user.$edit = true" class="btn btn-default btn-flat"><em class="ion-edit"></em></a><a ng-if="user.$edit" href="" ng-click="user.$edit = false" class="btn btn-info"><em class="ion-checkmark-round"></em></a></td>
+      </tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-heading"><a ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv" class="pull-right btn btn-sm btn-primary">Export to CSV</a>
+      <div class="card-title">Table Export</div>
+    </div>
+    <div class="table-responsive">
+      <table ng-table="table.tableParams5" export-csv="csv" class="ng-table-wrapper table table-striped">
+        <tbody>
+          <tr ng-repeat="user in $data">
+            <td data-title="'Name'">{{user.name}}</td>
+            <td data-title="'Age'">{{user.age}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

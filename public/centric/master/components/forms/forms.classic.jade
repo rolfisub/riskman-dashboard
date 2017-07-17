@@ -1,0 +1,360 @@
+.container-fluid
+    h5.mt0 Classic form controls and custom variants
+    p.mb-lg Standard Bootstrap form and input controls with customized UI variations
+
+    .card
+        .card-body
+            form.form-horizontal(method='get', action="/")
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Rounded Corners
+                        .col-sm-10
+                            input.form-control.rounded(type='text')
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label With help
+                        .col-sm-10
+                            input.form-control(type='text')
+                            span.help-block A block of help text that breaks onto a new line and may extend beyond one line.
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label(for='target-input-id') Label focus
+                        .col-sm-10
+                            input#target-input-id.form-control(type='text')
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Password
+                        .col-sm-10
+                            input.form-control(type='password', name='some-password')
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Placeholder
+                        .col-sm-10
+                            input.form-control(type='text', placeholder='placeholder')
+                fieldset
+                    .form-group
+                        label.col-lg-2.control-label Disabled
+                        .col-lg-10
+                            input.form-control(type='text', placeholder='Disabled input here...', disabled='')
+                fieldset
+                    .form-group
+                        label.col-lg-2.control-label Static control
+                        .col-lg-10
+                            p.form-control-static email@example.com
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Checkboxes and radios
+                        .col-sm-10
+                            .checkbox
+                                label
+                                    input(type='checkbox', value='')
+                                    | Option one is this and that—be sure to include why it's great
+                            .radio
+                                label
+                                    input#optionsRadios1(type='radio', name='optionsRadios', value='option1', checked='')
+                                    | Option one is this and that—be sure to include why it's great
+                            .radio
+                                label
+                                    input#optionsRadios2(type='radio', name='optionsRadios', value='option2')
+                                    | Option two can be something else and selecting it will deselect option one
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Inline checkboxes
+                        .col-sm-10
+                            label.checkbox.checkbox-inline
+                                input#inlineCheckbox1(type='checkbox', value='option1')
+                                |  a
+                            label.checkbox-inline
+                                input#inlineCheckbox2(type='checkbox', value='option2')
+                                |  b
+                            label.checkbox-inline
+                                input#inlineCheckbox3(type='checkbox', value='option3')
+                                |  c
+                fieldset.last-child
+                    .form-group
+                        label.col-sm-2.control-label Select
+                        .col-sm-10
+                            select.form-control(name='account')
+                                option Option 1
+                                option Option 2
+                                option Option 3
+                                option Option 4
+                            br
+                            .row
+                                .col-lg-4
+                                    select.form-control(multiple='')
+                                        option Option 1
+                                        option Option 2
+                                        option Option 3
+                                        option Option 4
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Custom Checkboxes &amp; Radios
+                        .col-sm-10
+                            .checkbox.c-checkbox
+                                label
+                                    input(type='checkbox', value='')
+                                    span.ion-checkmark-round
+                                    |  Option one
+                            .checkbox.c-checkbox
+                                label
+                                    input(type='checkbox', checked='', value='')
+                                    span.ion-checkmark-round
+                                    |  Option two checked
+                            .checkbox.c-checkbox
+                                label
+                                    input(type='checkbox', checked='', disabled='', value='')
+                                    span.ion-checkmark-round
+                                    |  Option three checked and disabled
+                            .checkbox.c-checkbox
+                                label
+                                    input(type='checkbox', disabled='', value='')
+                                    span.ion-checkmark-round
+                                    |  Option four disabled
+                    .form-group
+                        label.col-sm-2.control-label
+                            | Radios
+                        .col-sm-10
+                            .radio.c-radio.c-radio-nofont
+                                label
+                                    input(type='radio', name='a', value='option1')
+                                    span
+                                    |  Option one
+                            .radio.c-radio.c-radio-nofont
+                                label
+                                    input(type='radio', name='a', value='option2', checked='')
+                                    span
+                                    |  Option two checked
+                            .radio.c-radio.c-radio-nofont
+                                label
+                                    input(type='radio', value='option2', checked='', disabled='')
+                                    span
+                                    |  Option three checked and disabled
+                            .radio.c-radio.c-radio-nofont
+                                label
+                                    input(type='radio', name='a', disabled='')
+                                    span
+                                    |  Option four disabled
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Inline checkboxes
+                        .col-sm-10
+                            label.checkbox-inline.c-checkbox
+                                input#inlineCheckbox10(type='checkbox', value='option1')
+                                span.ion-checkmark-round
+                                |  a
+                            label.checkbox-inline.c-checkbox
+                                input#inlineCheckbox20(type='checkbox', value='option2')
+                                span.ion-checkmark-round
+                                |  b
+                            label.checkbox-inline.c-checkbox
+                                input#inlineCheckbox30(type='checkbox', value='option3')
+                                span.ion-checkmark-round
+                                |  c
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Rounded
+                        .col-sm-10
+                            .checkbox.c-checkbox.c-checkbox-rounded
+                                label
+                                    input#roundedcheckbox10(type='checkbox', checked)
+                                    span.ion-checkmark-round
+                                    |  Lorem
+                            .checkbox.c-checkbox.c-checkbox-rounded
+                                label
+                                    input#roundedcheckbox20(type='checkbox')
+                                    span.ion-checkmark-round
+                                    |  Ipsum
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Inline radios
+                        .col-sm-10
+                            label.radio-inline.c-radio
+                                input#inlineradio1(type='radio', name="i-radio", value='option1', checked)
+                                span.ion-record
+                                |  a
+                            label.radio-inline.c-radio
+                                input#inlineradio2(type='radio', name="i-radio", value='option2')
+                                span.ion-record
+                                |  b
+                            label.radio-inline.c-radio
+                                input#inlineradio3(type='radio', name="i-radio", value='option3')
+                                span.ion-record
+                                |  c
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Custom icons
+                        .col-sm-10
+                            label.radio-inline.c-radio
+                                input#inlineradio10(type='radio', name="i-radio", value='option1', checked)
+                                span.ion-checkmark-round
+                                |  a
+                            label.radio-inline.c-radio
+                                input#inlineradio20(type='radio', name="i-radio", value='option2', checked)
+                                span.ion-person
+                                |  b
+                            label.radio-inline.c-radio
+                                input#inlineradio30(type='radio', name="i-radio", value='option3', checked)
+                                span.ion-waterdrop
+                                |  c
+                            br
+                            label.checkbox-inline.c-checkbox
+                                input#inlinecheckbox10(type='checkbox', value='option1', checked)
+                                span.ion-star
+                                |  a
+                            label.checkbox-inline.c-checkbox
+                                input#inlinecheckbox20(type='checkbox', value='option2', checked)
+                                span.ion-heart
+                                |  b
+                            label.checkbox-inline.c-checkbox
+                                input#inlinecheckbox30(type='checkbox', value='option3', checked)
+                                span.ion-ios-bell
+                                |  c
+                fieldset
+                    .form-group.has-success
+                        label.col-sm-2.control-label Input with success
+                        .col-sm-10
+                            input.form-control(type='text')
+                fieldset
+                    .form-group.has-warning
+                        label.col-sm-2.control-label Input with warning
+                        .col-sm-10
+                            input.form-control(type='text')
+                fieldset
+                    .form-group.has-error
+                        label.col-sm-2.control-label Input with error
+                        .col-sm-10
+                            input.form-control(type='text')
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Control sizing
+                        .col-sm-10
+                            input.form-control.input-lg(type='text', placeholder='.input-lg')
+                            br
+                            input.form-control(type='text', placeholder='Default input')
+                            br
+                            input.form-control.input-sm(type='text', placeholder='.input-sm')
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Column sizing
+                        .col-sm-10
+                            .row
+                                .col-md-2
+                                    input.form-control(type='text', placeholder='.col-md-2')
+                                .col-md-3
+                                    input.form-control(type='text', placeholder='.col-md-3')
+                                .col-md-4
+                                    input.form-control(type='text', placeholder='.col-md-4')
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Input groups
+                        .col-sm-10
+                            .input-group
+                                span.input-group-addon @
+                                input.form-control(type='text', placeholder='Username')
+                            br
+                            .input-group
+                                input.form-control(type='text')
+                                span.input-group-addon .00
+                            br
+                            .input-group
+                                span.input-group-addon $
+                                input.form-control(type='text')
+                                span.input-group-addon .00
+                            br
+                            .input-group
+                                span.input-group-addon
+                                    input(type='checkbox')
+                                input.form-control(type='text')
+                            br
+                            .input-group
+                                span.input-group-addon
+                                    input(type='radio')
+                                input.form-control(type='text')
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Button addons
+                        .col-sm-10
+                            .input-group
+                                span.input-group-btn
+                                    button.btn.btn-default(type='button') Go!
+                                input.form-control(type='text')
+                            br
+                            .input-group
+                                input.form-control(type='text')
+                                span.input-group-btn
+                                    button.btn.btn-default(type='button') Go!
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label With dropdowns
+                        .col-sm-10
+                            .input-group
+                                .input-group-btn(uib-dropdown="")
+                                    button.btn.btn-default(type='button', uib-dropdown-toggle="")
+                                        | Action
+                                        span.caret
+                                    ul.dropdown-menu
+                                        li
+                                            a(href='') Action
+                                        li
+                                            a(href='') Another action
+                                        li
+                                            a(href='') Something else here
+                                        li.divider
+                                        li
+                                            a(href='') Separated link
+                                input.form-control(type='text')
+                            br
+                            .input-group
+                                input.form-control(type='text')
+                                .input-group-btn(uib-dropdown="")
+                                    button.btn.btn-default(type='button', uib-dropdown-toggle="")
+                                        | Action
+                                        span.caret
+                                    ul.dropdown-menu.pull-right
+                                        li
+                                            a(href='') Action
+                                        li
+                                            a(href='') Another action
+                                        li
+                                            a(href='') Something else here
+                                        li.divider
+                                        li
+                                            a(href='') Separated link
+                fieldset
+                    .form-group
+                        label.col-sm-2.control-label Segmented
+                        .col-sm-10
+                            .input-group
+                                .input-group-btn(uib-dropdown="")
+                                    button.btn.btn-default(type='button', tabindex='-1') Action
+                                    button.btn.btn-default(type='button', uib-dropdown-toggle="")
+                                        span.caret
+                                    ul.dropdown-menu
+                                        li
+                                            a(href='') Action
+                                        li
+                                            a(href='') Another action
+                                        li
+                                            a(href='') Something else here
+                                        li.divider
+                                        li
+                                            a(href='') Separated link
+                                input.form-control(type='text')
+                            br
+                            .input-group
+                                input.form-control(type='text')
+                                .input-group-btn(uib-dropdown="")
+                                    button.btn.btn-default(type='button', tabindex='-1') Action
+                                    button.btn.btn-default(type='button', uib-dropdown-toggle="")
+                                        span.caret
+                                    ul.dropdown-menu.pull-right
+                                        li
+                                            a(href='') Action
+                                        li
+                                            a(href='') Another action
+                                        li
+                                            a(href='') Something else here
+                                        li.divider
+                                        li
+                                            a(href='') Separated link

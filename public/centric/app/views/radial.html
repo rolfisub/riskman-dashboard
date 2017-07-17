@@ -1,0 +1,83 @@
+
+<div ng-controller="RadialChartsController as radchart" class="container-fluid">
+  <h4 class="page-header clearfix mt0">
+    <div class="pull-left">Knob</div>
+    <div class="pull-right">
+      <button type="button" ng-click="radchart.randomize('knob')" class="btn btn-sm btn-primary"><em class="ion-refresh"></em></button>
+    </div>
+  </h4>
+  <div class="row">
+    <div class="col-lg-3 col-sm-6">
+      <div class="card">
+        <div class="card-heading">Default</div>
+        <div class="card-body text-center">
+          <knob knob-data="radchart.knobLoaderData1" knob-options="radchart.knobLoaderOptions1" knob-max="100"></knob>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card">
+        <div class="card-heading">Ready only</div>
+        <div class="card-body text-center">
+          <knob knob-data="radchart.knobLoaderData2" knob-options="radchart.knobLoaderOptions2" knob-max="100"></knob>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card">
+        <div class="card-heading">Offset and arc</div>
+        <div class="card-body text-center">
+          <knob knob-data="radchart.knobLoaderData4" knob-options="radchart.knobLoaderOptions4" knob-max="100"></knob>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card">
+        <div class="card-heading">Display previous</div>
+        <div class="card-body text-center">
+          <knob knob-data="radchart.knobLoaderData3" knob-options="radchart.knobLoaderOptions3" knob-max="100"></knob>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h4 class="page-header clearfix">
+    <div class="pull-left">Easypie Charts</div>
+    <div class="pull-right">
+      <button type="button" ng-click="radchart.randomize('easy')" class="btn btn-sm btn-primary"><em class="ion-refresh"></em></button>
+    </div>
+  </h4>
+  <div class="row">
+    <div class="col-lg-3 col-sm-6">
+      <div class="card">
+        <div class="card-heading">Default</div>
+        <div class="card-body text-center">
+          <div easypiechart="" options="radchart.pieOptions1" percent="radchart.piePercent1" class="easypie-chart"><span>{{radchart.piePercent1}}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card">
+        <div class="card-heading">Slim</div>
+        <div class="card-body text-center">
+          <div easypiechart="" options="radchart.pieOptions2" percent="radchart.piePercent2" class="easypie-chart"><span>{{radchart.piePercent2}}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card">
+        <div class="card-heading">Track color</div>
+        <div class="card-body text-center">
+          <div easypiechart="" options="radchart.pieOptions3" percent="radchart.piePercent3" class="easypie-chart"><span>{{radchart.piePercent3}}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card">
+        <div class="card-heading">Scale color</div>
+        <div class="card-body text-center">
+          <div easypiechart="" options="radchart.pieOptions4" percent="radchart.piePercent4" class="easypie-chart"><span>{{radchart.piePercent4}}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+.container-full
+    .container.container-xs
+        img.mv-lg.block-center.img-responsive.thumb64(src="app/img/logo.png")
+        form.card.b0.form-validate(action="", name="createForm", novalidate='')
+            .card-offset.pb0
+                .card-offset-item.text-right.ng-fadeInLeftShort(ng-if="createForm.$valid")
+                    .btn.btn-success.btn-circle.btn-lg
+                        em.ion-checkmark-round
+            .card-heading
+                .card-title.text-center Create account
+            .card-body
+                .mda-form-group.float-label.mda-input-group
+                    .mda-form-control
+                        input.form-control(type='email', name="accountName" ng-model="account.name", required="")
+                        .mda-form-control-line
+                        label Email address
+                    .text-danger(ng-messages="createForm.accountName.$error")
+                        span(ng-message="email") This field must be a valid email address
+                    span.mda-input-group-addon
+                        em.ion-ios-email-outline.icon-lg
+                .mda-form-group.float-label.mda-input-group
+                    .mda-form-control
+                        input.form-control(type='password', name="accountPassword", ng-model="account.password", required="")
+                        .mda-form-control-line
+                        label Password
+                    span.mda-input-group-addon
+                        em.ion-ios-locked-outline.icon-lg
+                .mda-form-group.float-label.mda-input-group
+                    .mda-form-control
+                        input.form-control(type='password', name="accountPassword2", ng-model="account.password2", required="")
+                        .mda-form-control-line
+                        label Confirm password
+                    span.mda-input-group-addon
+                        em.ion-ios-locked-outline.icon-lg
+            button.btn.btn-primary.btn-flat(type="button", ng-disabled="createForm.$invalid || createForm.$pristine") Create
+
+            .card-body.bg-gray-lighter.text-center.text-sm
+                span.spr By registering I accept the
+                a.spr(href="") Terms of Service
+                span.spr and
+                a.spr(href="") Privacy

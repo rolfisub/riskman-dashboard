@@ -1,0 +1,13 @@
+
+<!-- top navbar-->
+<header ng-include="'app/views/header.tpl.html'" class="header-container"></header>
+<!-- sidebar-->
+<aside ng-include="'app/views/sidebar.tpl.html'" class="sidebar-container"></aside>
+<div ng-click="closeSidebar()" class="sidebar-layout-obfuscator"></div>
+<!-- Main section-->
+<main class="main-container">
+  <!-- Page content-->
+  <section ui-view="" autoscroll="false" ng-class="app.viewAnimation"></section>
+  <!-- Page footer-->
+  <footer><span>2017 - Centric app.</span></footer>
+</main>

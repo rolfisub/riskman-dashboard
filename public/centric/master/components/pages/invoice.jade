@@ -1,0 +1,86 @@
+.container.container-fluid
+    .card
+        .card-body
+            .row
+                .col-xs-6
+                    h3.m0 Centric Inc.
+                    small.text-muted Nulla viverra dignissim metus ac placerat
+                .col-xs-6.text-right
+                    h5.mv Invoice no. #2456544
+            hr
+            .row
+                .col-md-2
+                    h4.m0 Deliver to:
+                .col-md-10
+                    address
+                        strong Twitter, Inc.
+                        br
+                        |   1355 Market Street, Suite 900
+                        br
+                        |   San Francisco, CA 94103
+                        br
+                        abbr(title='Phone') P:
+                        |  (123) 456-7890
+                    address.mb0
+                        strong Full Name
+                        br
+                        a(href='mailto:#') first.last@example.com
+            .mv-lg
+            .table-responsive.mv-lg
+                table.table.table-bordered
+                    thead
+                        tr
+                            th Item #
+                            th Description
+                            th Quantity
+                            th Unit Price
+                            th.text-right Total
+                    tbody
+                        tr
+                            td 1001
+                            td Iphone 5s - 64Gb
+                            td 3
+                            td $ 200
+                            td.text-right $ 600
+                        tr
+                            td 2002
+                            td Iphone 6s - 128Gb
+                            td 5
+                            td $ 500
+                            td.text-right $ 2500
+                        tr
+                            td 3010
+                            td Ipad 11z - 512Gb
+                            td 1
+                            td $ 650
+                            td.text-right $ 650
+                        tr
+                            td 3009
+                            td iMac ProRetina 17
+                            td 6
+                            td $ 1100
+                            td.text-right $ 6600
+
+            .row
+                .col-md-6
+                    p: strong Bottom words for this invoice
+                    p: small Nulla egestas faucibus tincidunt. Praesent non nulla et ligula luctus mattis eget at lacus. Pellentesque convallis mauris eu elit imperdiet quis eleifend quam aliquet. Suspendisse vehicula, magna non tristique tincidunt, massa nisi luctus tellus, vel laoreet sem lectus ut nibh. Vestibulum purus ipsum.
+                hr.visible-xs.visible-sm
+                .col-md-1.col-lg-3
+                .col-md-5.col-lg-3.text-right
+                    p.clearfix
+                        strong.pull-left Sub Total:
+                        span.pull-right 10300.00
+                    p.clearfix
+                        strong.pull-left Promo code:
+                        span.pull-right ABC-XYZ
+                    p.clearfix
+                        strong.pull-left Tax (10%):
+                        span.pull-right 1030.00
+                    hr
+                    h3.m0.text-right USD 11330.00
+            hr
+            .clearfix
+                button.btn.btn-info.pull-left.mr(type='button') Edit
+                button.btn.btn-default.pull-left(type='button') Print
+                button.btn.btn-success.pull-right(type='button') Send Invoice

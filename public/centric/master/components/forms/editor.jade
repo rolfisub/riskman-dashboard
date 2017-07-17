@@ -1,0 +1,9 @@
+.container-fluid(ng-controller="FormEditorController as editor")
+
+    h5.mt0 Summernote
+    p.mb-lg Super simple WYSIWYG Editor based on Bootstrap
+    summernote(ng-model="editor.summernoteText", height="280")
+
+    h5 Summernote airmode
+    p.mb-lg To reveal toolbar, select a text where you want to shape up
+    summernote.summernote-air.well.reader-block(airmode='', ng-model='editor.airmodeText')

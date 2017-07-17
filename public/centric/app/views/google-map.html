@@ -1,0 +1,17 @@
+
+<div ng-controller="GMapController as gmap" class="container-fluid">
+  <div class="card">
+    <div class="card-heading">Basic Map</div>
+    <div class="card-body">
+      <ui-gmap-google-map center="gmap.map.center" zoom="gmap.map.zoom" class="gmap"></ui-gmap-google-map>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-heading">Draggable markers</div>
+    <div class="card-body">
+      <ui-gmap-google-map center="gmap.map1.center" zoom="gmap.map1.zoom" draggable="true" options="gmap.options">
+        <ui-gmap-marker coords="gmap.marker.coords" options="gmap.marker.options" events="gmap.marker.events" idkey="gmap.marker.id"></ui-gmap-marker>
+      </ui-gmap-google-map>
+    </div>
+  </div>
+</div>

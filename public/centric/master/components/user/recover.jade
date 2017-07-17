@@ -1,0 +1,32 @@
+.container-full
+    .container.container-xs(ng-init="rec.mailSent = false")
+        .text-center.mv-lg
+            img.img-circle.mb.block-center.img-responsive.thumb64(src="app/img/user/01.jpg")
+            p Brian Walker
+        .card.bg-success.ng-fadeIn(ng-if="rec.mailSent")
+            .card-heading
+                em.ion-checkmark-round.pull-right.icon-lg
+                h4.mt0 Mail Sent!
+            .card-body
+                p Please check your inbox and follow instructions to reset your password.
+            .card-footer.text-right
+                a.btn.btn-success.btn-flat.text-white(ui-sref="user.login")
+                    | Login
+                    em.ion-ios-arrow-thin-right.icon-fw
+        form.card.form-validate(name="loginForm", novalidate='', ng-submit="rec.mailSent = true", ng-if="!rec.mailSent")
+            .card-heading
+                p.text-center.text-inherit Fill with your mail to receive instructions on how to reset your password.
+            .card-offset.pb0
+                .card-offset-item.text-right.ng-fadeInLeftShort(ng-if="loginForm.$valid")
+                    button.btn.btn-success.btn-circle.btn-lg(type="submit")
+                        em.ion-checkmark-round
+            .card-body
+                .mda-form-group.float-label.mda-input-group
+                    .mda-form-control
+                        input.form-control(type='email', name="accountName" ng-model="account.name", required="")
+                        .mda-form-control-line
+                        label Email address
+                    .text-danger(ng-messages="loginForm.accountName.$error")
+                        span(ng-message="email") This field must be a valid email address
+                    span.mda-input-group-addon
+                        em.ion-ios-email-outline.icon-lg
