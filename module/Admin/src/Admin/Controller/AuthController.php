@@ -87,7 +87,6 @@ class AuthController extends AbstractActionController
                 }
                  
                 if ($result->isValid()) {
-                    $redirect = 'Home';
                     //check if it has rememberMe :
                     if ($request->getPost('rememberme') == 1 ) {
                         $this->getSessionStorage()
