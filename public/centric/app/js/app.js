@@ -38,7 +38,8 @@
             //'app.bootstrapui',
             //'app.maps',
             //'app.pages',
-            //'app.user'
+            'app.services',
+            'app.user'
         ]);
 })();
 
@@ -74,6 +75,13 @@
     'use strict';
 
     angular
+        .module('app.dashboard', []);
+})();
+
+(function() {
+    'use strict';
+
+    angular
         .module('app.core', [
             'app.router',
             'ngRoute',
@@ -88,13 +96,6 @@
             'ngResource',
             'ui.utils'
         ]);
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard', []);
 })();
 
 (function() {
@@ -188,6 +189,13 @@
     'use strict';
 
     angular
+        .module('app.services', []);
+})();
+
+(function() {
+    'use strict';
+
+    angular
         .module('app.settings', []);
 })();
 
@@ -216,8 +224,8 @@
     'use strict';
 
     angular
-        .module('app.utils', [
-            'app.colors'
+        .module('app.user', [
+            'app.services'
         ]);
 })();
 
@@ -225,7 +233,9 @@
     'use strict';
 
     angular
-        .module('app.user', []);
+        .module('app.utils', [
+            'app.colors'
+        ]);
 })();
 
 (function() {
@@ -1879,94 +1889,6 @@
     'use strict';
 
     angular
-        .module('app.core')
-        .config(coreConfig);
-
-    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide'];
-
-    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide) {
-
-        var core = angular.module('app.core');
-        // registering components after bootstrap
-        core.controller = $controllerProvider.register;
-        core.directive = $compileProvider.directive;
-        core.filter = $filterProvider.register;
-        core.factory = $provide.factory;
-        core.service = $provide.service;
-        core.constant = $provide.constant;
-        core.value = $provide.value;
-
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .constant('APP_MEDIAQUERY', {
-            'desktopLG': 1200,
-            'desktop': 992,
-            'tablet': 767,
-            'mobile': 480
-        });
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .run(coreRoute);
-
-    coreRoute.$inject = ['Router'];
-
-    function coreRoute(Router) {
-
-        Router.state('app', {
-            url: '/app',
-            abstract: true,
-            templateUrl: 'core.layout.html',
-            require: ['icons', 'ng-mfb', 'md-colors', 'screenfull']
-        });
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .run(coreRun);
-
-    coreRun.$inject = ['$rootScope'];
-
-    function coreRun($rootScope) {
-
-        $rootScope.theme = function() {
-            return $rootScope.app.theme;
-        }
-
-        $rootScope.layout = function() {
-            return [
-
-                $rootScope.sidebarVisible ? 'sidebar-visible' : '',
-                $rootScope.app.sidebar.offcanvas ? 'sidebar-offcanvas' : '',
-                $rootScope.sidebarOffcanvasVisible ? 'offcanvas-visible' : ''
-
-            ].join(' ');
-
-        }
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
@@ -2532,6 +2454,94 @@
 
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .config(coreConfig);
+
+    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide'];
+
+    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide) {
+
+        var core = angular.module('app.core');
+        // registering components after bootstrap
+        core.controller = $controllerProvider.register;
+        core.directive = $compileProvider.directive;
+        core.filter = $filterProvider.register;
+        core.factory = $provide.factory;
+        core.service = $provide.service;
+        core.constant = $provide.constant;
+        core.value = $provide.value;
+
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .constant('APP_MEDIAQUERY', {
+            'desktopLG': 1200,
+            'desktop': 992,
+            'tablet': 767,
+            'mobile': 480
+        });
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .run(coreRoute);
+
+    coreRoute.$inject = ['Router'];
+
+    function coreRoute(Router) {
+
+        Router.state('app', {
+            url: '/app',
+            abstract: true,
+            templateUrl: 'core.layout.html',
+            require: ['icons', 'ng-mfb', 'md-colors', 'screenfull']
+        });
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .run(coreRun);
+
+    coreRun.$inject = ['$rootScope'];
+
+    function coreRun($rootScope) {
+
+        $rootScope.theme = function() {
+            return $rootScope.app.theme;
+        }
+
+        $rootScope.layout = function() {
+            return [
+
+                $rootScope.sidebarVisible ? 'sidebar-visible' : '',
+                $rootScope.app.sidebar.offcanvas ? 'sidebar-offcanvas' : '',
+                $rootScope.sidebarOffcanvasVisible ? 'offcanvas-visible' : ''
+
+            ].join(' ');
+
+        }
+    }
+
+})();
 (function() {
     'use strict';
 
@@ -5822,6 +5832,136 @@
     }
 })();
 
+/**
+ * Main api CRUD service
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+
+/**
+ * API service wrapper to make Ajax calls for Trxade
+*/
+(function() {
+    'use strict';
+    angular
+        .module("app.services")
+        .service('api', ['$http', function ($http) {
+
+        //'/rest' path is assumed as base path
+        var baseUrl = '/rest';
+
+        /**
+         * Sets base url if needed
+         * @param {string} url
+         * @returns {null}
+         */
+        this.setBaseUrl = function (url) {
+            baseUrl = url;
+        };
+
+        /**
+         * Default handler for Ajax errors, log to console the response object
+         * @param {object} response
+         * @returns {response}
+         */
+        this.errorCallback = function(response) {
+            var value = {
+                string: 'Error:', 
+                data: response
+            };
+            console.log(value);
+            return response;
+        }; 
+
+        /**
+         * Makes a POST HTTP request
+         * @param {string} url
+         * @param {object} data
+         * @returns {request}
+         */
+        this.create = function(url, data){
+            return $http({
+               method: 'POST',
+               url: baseUrl + url,
+               data: data
+            });
+        };
+
+        /**
+         * Makes a GET HTTP request
+         * @param {string} url
+         * @returns {request}
+         */
+        this.read = function(url){
+            return $http({
+               method: 'GET',
+               url: baseUrl + url
+            });
+        };
+
+        /**
+         * Makes a PUT HTTP request
+         * @param {string} url
+         * @param {object} data
+         * @returns {request}
+         */
+        this.update = function(url, data) {
+            return $http({
+                method: 'PUT',
+                url: baseUrl + url,
+                data: data
+            });
+        };
+
+        /**
+         * Makes a DELETE HTTP request
+         * @param {string} url
+         * @returns {request}
+         */
+        this.delete = function(url) {
+            return $http({
+                method: 'DELETE',
+                url: baseUrl + url
+            });
+        };
+
+        this.deleteById = function(url, param) {
+            return $http({
+                method: 'DELETE',
+                url: baseUrl + url + '/' + param
+            });
+        };
+    }]);
+
+})();
+/**
+ * Main api CRUD service
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+
+/**
+ * API service wrapper to make Ajax calls for Trxade
+*/
+(function() {
+    'use strict';
+    angular
+        .module("app.services")
+        .service('auth', ['api', function (api) {
+
+        this.auth = function(data) {
+            if(data.username && data.password) {
+                return api.create('/auth', data);
+            } 
+            return false;
+        };
+    }]);
+
+})();
 (function() {
     'use strict';
 
@@ -6699,6 +6839,119 @@
 
 (function() {
     'use strict';
+
+    angular
+        .module('app.user', ['app.services'])
+        .controller('loginCtrl', ['$scope','auth','$state', function($scope, auth, $state) {
+            
+            $scope.model =  {
+                username: '',
+                password: ''
+            };
+            
+            $scope.auth = function() {
+                var r = auth.auth($scope.model);
+                r.then(function(res){
+                    if(res.data.success) {
+                        $state.go('app.dashboard');
+                    } 
+                }, function(err) {
+                    console.log(err);
+                });
+            };
+            
+            var init = function() {
+                console.log('init');
+                
+            };
+            
+            init();
+            
+            
+    
+        }]);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.user')
+        .run(userRun);
+
+    userRun.$inject = ['Menu'];
+
+    function userRun(Menu) {
+
+        var menuItem = {
+            name: 'User',
+            sref: 'user',
+            order: 9,
+            iconclass: 'ion-person-stalker',
+            imgpath: 'app/img/icons/person-stalker.svg',
+            subitems: [{
+                name: 'Login',
+                sref: 'user.login'
+            }, {
+                name: 'Signup',
+                sref: 'user.signup'
+            }, {
+                name: 'Lock',
+                sref: 'user.lock'
+            }, {
+                name: 'Recover',
+                sref: 'user.recover'
+            }]
+        };
+
+        Menu.addItem(menuItem);
+
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.user')
+        .run(userRoute);
+
+    userRoute.$inject = ['Router'];
+    function userRoute(Router){
+
+        Router.state('user', {
+            url: '/user',
+            title: 'User',
+            abstract: true,
+            template: '<div class="page-container bg-blue-grey-900"><div ui-view class="ng-fadeInLeftShort"></div></div>',
+            require: ['modernizr', 'icons', 'ng-mfb', 'md-colors']
+        })
+        .state('user.login', {
+            url: '/login',
+            title: 'Login',
+            templateUrl: 'login.html'
+        })
+        .state('user.signup', {
+            url: '/signup',
+            title: 'Signup',
+            templateUrl: 'signup.html'
+        })
+        .state('user.lock', {
+            url: '/lock',
+            title: 'Lock',
+            templateUrl: 'lock.html'
+        })
+        .state('user.recover', {
+            url: '/recover',
+            title: 'Recover',
+            templateUrl: 'recover.html'
+        })
+        ;
+    }
+
+})();
+
+(function() {
+    'use strict';
     angular
         .module('app.utils')
         .service('Browser', Browser);
@@ -6809,85 +7062,6 @@
                 });
             });
         }
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.user')
-        .run(userRun);
-
-    userRun.$inject = ['Menu'];
-
-    function userRun(Menu) {
-
-        var menuItem = {
-            name: 'User',
-            sref: 'user',
-            order: 9,
-            iconclass: 'ion-person-stalker',
-            imgpath: 'app/img/icons/person-stalker.svg',
-            subitems: [{
-                name: 'Login',
-                sref: 'user.login'
-            }, {
-                name: 'Signup',
-                sref: 'user.signup'
-            }, {
-                name: 'Lock',
-                sref: 'user.lock'
-            }, {
-                name: 'Recover',
-                sref: 'user.recover'
-            }]
-        };
-
-        Menu.addItem(menuItem);
-
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.user')
-        .run(userRoute);
-
-    userRoute.$inject = ['Router'];
-    function userRoute(Router){
-
-        Router.state('user', {
-            url: '/user',
-            title: 'User',
-            abstract: true,
-            template: '<div class="page-container bg-blue-grey-900"><div ui-view class="ng-fadeInLeftShort"></div></div>',
-            require: ['modernizr', 'icons', 'ng-mfb', 'md-colors']
-        })
-        .state('user.login', {
-            url: '/login',
-            title: 'Login',
-            templateUrl: 'login.html'
-        })
-        .state('user.signup', {
-            url: '/signup',
-            title: 'Signup',
-            templateUrl: 'signup.html'
-        })
-        .state('user.lock', {
-            url: '/lock',
-            title: 'Lock',
-            templateUrl: 'lock.html'
-        })
-        .state('user.recover', {
-            url: '/recover',
-            title: 'Recover',
-            templateUrl: 'recover.html'
-        })
-        ;
     }
 
 })();

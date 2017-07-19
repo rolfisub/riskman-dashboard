@@ -7,6 +7,7 @@
 namespace Admin\Controller;
 
 use Admin\Entity\Auth;
+use Admin\Error\Error400;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
 
@@ -70,9 +71,7 @@ class AuthRestController extends AbstractRestfulController
                 ]);
             }
             sleep(3);//avoid brute force attacks
-            return new JsonModel([
-                'success' => false
-            ]);
+            throw new Error400('success', false);
         }
     }
     

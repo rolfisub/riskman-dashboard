@@ -38,7 +38,8 @@
             //'app.bootstrapui',
             //'app.maps',
             //'app.pages',
-            //'app.user'
+            'app.services',
+            'app.user'
         ]);
 })();
 
