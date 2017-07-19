@@ -45,6 +45,15 @@ return array(
                     ),
                 ),
             ),
+            'LoginRest' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/auth',
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\AuthRestController',
+                    ),
+                ),
+            ),
             'StatsRest' => array(
                 'type'    => 'Segment',
                 'options' => array(
