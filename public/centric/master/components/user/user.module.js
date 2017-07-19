@@ -2,5 +2,7 @@
     'use strict';
 
     angular
-        .module('app.user', []);
+        .module('app.user', [
+            'app.services'
+        ]);
 })();

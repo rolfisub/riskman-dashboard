@@ -1,35 +1,27 @@
 
-<div class="container-full">
+<div ng-controller="loginCtrl" class="container-full">
   <div class="container container-xs"><img src="app/img/logo.png" class="mv-lg block-center img-responsive thumb64"/>
     <form action="" name="loginForm" novalidate="" class="card b0 form-validate">
-      <div class="card-offset pb0">
-        <div ng-if="loginForm.$invalid || loginForm.$pristine" class="card-offset-item text-right ng-fadeInRightShort"><a ui-sref="user.signup" class="btn-raised btn btn-info btn-circle btn-lg"><em class="ion-person-add"></em></a></div>
-        <div ng-if="loginForm.$valid" class="card-offset-item text-right ng-fadeInLeftShort">
-          <div class="btn btn-success btn-circle btn-lg"><em class="ion-checkmark-round"></em></div>
-        </div>
-      </div>
       <div class="card-heading">
         <div class="card-title text-center">Login</div>
       </div>
       <div class="card-body">
         <div class="mda-form-group float-label mda-input-group">
           <div class="mda-form-control">
-            <input type="email" name="accountName" ng-model="account.name" required="" class="form-control"/>
+            <input type="text" name="username" ng-model="model.username" required="required" class="form-control"/>
             <div class="mda-form-control-line"></div>
-            <label>Email address</label>
-          </div>
-          <div ng-messages="loginForm.accountName.$error" class="text-danger"><span ng-message="email">This field must be a valid email address</span></div><span class="mda-input-group-addon"><em class="ion-ios-email-outline icon-lg"></em></span>
+            <label>User Name</label>
+          </div><span class="mda-input-group-addon"><em class="ion-ios-email-outline icon-lg"></em></span>
         </div>
         <div class="mda-form-group float-label mda-input-group">
           <div class="mda-form-control">
-            <input type="password" name="accountPassword" ng-model="account.password" required="" class="form-control"/>
+            <input type="password" name="password" ng-model="model.password" required="" class="form-control"/>
             <div class="mda-form-control-line"></div>
             <label>Password</label>
           </div><span class="mda-input-group-addon"><em class="ion-ios-locked-outline icon-lg"></em></span>
         </div>
       </div>
-      <button type="button" ng-disabled="loginForm.$invalid || loginForm.$pristine" class="btn btn-primary btn-flat">Authenticate</button>
+      <button type="button" ng-disabled="loginForm.$invalid || loginForm.$pristine" ng-click="auth()" class="btn btn-primary btn-flat">Authenticate</button>
     </form>
-    <div class="text-center text-sm"><a ui-sref="user.recover" class="text-inherit">Forgot password?</a></div>
   </div>
 </div>
