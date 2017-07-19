@@ -10,6 +10,7 @@ namespace Admin\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\MvcEvent as e;
 use Admin\Auth\RiskManAuthService;
+use Admin\Error\Error403;
 /**
  * Description of ProtectedController
  *
