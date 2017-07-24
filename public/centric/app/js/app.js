@@ -30,6 +30,7 @@
             'app.settings',
             'app.utils',
             'app.dashboard',
+            'app.home',
             //'app.charts',
             //'app.cards',
             //'app.elements',
@@ -75,13 +76,6 @@
     'use strict';
 
     angular
-        .module('app.dashboard', []);
-})();
-
-(function() {
-    'use strict';
-
-    angular
         .module('app.core', [
             'app.router',
             'ngRoute',
@@ -96,6 +90,13 @@
             'ngResource',
             'ui.utils'
         ]);
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.dashboard', []);
 })();
 
 (function() {
@@ -124,6 +125,13 @@
 
     angular
         .module('app.header', []);
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.home', []);
 })();
 
 (function() {
@@ -1889,6 +1897,94 @@
     'use strict';
 
     angular
+        .module('app.core')
+        .config(coreConfig);
+
+    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide'];
+
+    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide) {
+
+        var core = angular.module('app.core');
+        // registering components after bootstrap
+        core.controller = $controllerProvider.register;
+        core.directive = $compileProvider.directive;
+        core.filter = $filterProvider.register;
+        core.factory = $provide.factory;
+        core.service = $provide.service;
+        core.constant = $provide.constant;
+        core.value = $provide.value;
+
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .constant('APP_MEDIAQUERY', {
+            'desktopLG': 1200,
+            'desktop': 992,
+            'tablet': 767,
+            'mobile': 480
+        });
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .run(coreRoute);
+
+    coreRoute.$inject = ['Router'];
+
+    function coreRoute(Router) {
+
+        Router.state('app', {
+            url: '/app',
+            abstract: true,
+            templateUrl: 'core.layout.html',
+            require: ['icons', 'ng-mfb', 'md-colors', 'screenfull']
+        });
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .run(coreRun);
+
+    coreRun.$inject = ['$rootScope'];
+
+    function coreRun($rootScope) {
+
+        $rootScope.theme = function() {
+            return $rootScope.app.theme;
+        }
+
+        $rootScope.layout = function() {
+            return [
+
+                $rootScope.sidebarVisible ? 'sidebar-visible' : '',
+                $rootScope.app.sidebar.offcanvas ? 'sidebar-offcanvas' : '',
+                $rootScope.sidebarOffcanvasVisible ? 'offcanvas-visible' : ''
+
+            ].join(' ');
+
+        }
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
@@ -2454,94 +2550,6 @@
 
 })();
 
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .config(coreConfig);
-
-    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide'];
-
-    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide) {
-
-        var core = angular.module('app.core');
-        // registering components after bootstrap
-        core.controller = $controllerProvider.register;
-        core.directive = $compileProvider.directive;
-        core.filter = $filterProvider.register;
-        core.factory = $provide.factory;
-        core.service = $provide.service;
-        core.constant = $provide.constant;
-        core.value = $provide.value;
-
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .constant('APP_MEDIAQUERY', {
-            'desktopLG': 1200,
-            'desktop': 992,
-            'tablet': 767,
-            'mobile': 480
-        });
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .run(coreRoute);
-
-    coreRoute.$inject = ['Router'];
-
-    function coreRoute(Router) {
-
-        Router.state('app', {
-            url: '/app',
-            abstract: true,
-            templateUrl: 'core.layout.html',
-            require: ['icons', 'ng-mfb', 'md-colors', 'screenfull']
-        });
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .run(coreRun);
-
-    coreRun.$inject = ['$rootScope'];
-
-    function coreRun($rootScope) {
-
-        $rootScope.theme = function() {
-            return $rootScope.app.theme;
-        }
-
-        $rootScope.layout = function() {
-            return [
-
-                $rootScope.sidebarVisible ? 'sidebar-visible' : '',
-                $rootScope.app.sidebar.offcanvas ? 'sidebar-offcanvas' : '',
-                $rootScope.sidebarOffcanvasVisible ? 'offcanvas-visible' : ''
-
-            ].join(' ');
-
-        }
-    }
-
-})();
 (function() {
     'use strict';
 
@@ -4171,6 +4179,106 @@
 
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.home')
+        .controller('HomeController', HomeController);
+
+    HomeController.$inject = ['$scope', 'home'];
+
+    function HomeController($scope, home) {
+        var c = this;
+        
+        c.apiStats = {};
+        
+        c.init = function() {
+            var r = home.getGeneralServerStats();
+            
+            r.then(function(res){
+                c.apiStats = res.data.general_api_stats;
+            }, function(err){
+                console.log(err);
+            });
+        };
+        
+        c.init();
+        
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.home')
+        .run(homeRun);
+    homeRun.$inject = ['Menu'];
+
+    function homeRun(Menu) {
+
+        var menuItem = {
+            name: 'Home',
+            sref: 'app.home',
+            // iconclass: 'ion-aperture',
+            imgpath: 'app/img/icons/aperture.svg',
+            order: 1,
+            label: {
+                count: 2,
+                classname: 'badge bg-success'
+            }
+        };
+
+        Menu.addItem(menuItem);
+
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.home')
+        .run(homeRoute);
+
+    homeRoute.$inject = ['Router'];
+
+    function homeRoute(Router) {
+
+        Router.state('app.home', {
+            url: '/home',
+            title: 'Home',
+            templateUrl: 'home.html',
+            require: ['angular-flot', 'easypiechart', 'sparkline', 'vector-map', 'vector-map-maps']
+        });
+    }
+
+})();
+
+/**
+ * Main api CRUD service
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+
+/**
+ * API service wrapper to make Ajax calls for Trxade
+*/
+(function() {
+    'use strict';
+    angular
+        .module("app.home")
+        .service('home', ['api', function (api) {
+                
+        this.getGeneralServerStats = function() {
+            return api.read('/stats/general_api_stats');
+        };
+        
+    }]);
+
+})();
 (function() {
     'use strict';
 
