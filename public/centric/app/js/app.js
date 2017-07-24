@@ -4060,11 +4060,19 @@
         .controller('HeaderModalController', HeaderModalController)
         .controller('HeaderModalSearchController', HeaderModalSearchController);
 
-    HeaderController.$inject = ['$uibModal'];
+    HeaderController.$inject = ['$uibModal', 'auth', '$state'];
 
-    function HeaderController($uibModal) {
+    function HeaderController($uibModal, auth, $state) {
         var vm = this;
-
+        
+        
+        vm.logout = function() {
+            var r = auth.logout();
+            r.then(function(res){
+                $state.go('user.login');
+            }, auth.onError);
+        };
+        
         activate();
 
         ////////////////
@@ -4198,9 +4206,7 @@
             
             r.then(function(res){
                 c.apiStats = res.data.general_api_stats;
-            }, function(err){
-                console.log(err);
-            });
+            }, home.onError);
         };
         
         c.init();
@@ -4274,6 +4280,10 @@
                 
         this.getGeneralServerStats = function() {
             return api.read('/stats/general_api_stats');
+        };
+        
+        this.onError = function(err) {
+            return api.errorCallback(err);
         };
         
     }]);
@@ -5955,7 +5965,7 @@
     'use strict';
     angular
         .module("app.services")
-        .service('api', ['$http', function ($http) {
+        .service('api', ['$http','$state', function ($http, $state) {
 
         //'/rest' path is assumed as base path
         var baseUrl = '/rest';
@@ -5975,12 +5985,17 @@
          * @returns {response}
          */
         this.errorCallback = function(response) {
-            var value = {
-                string: 'Error:', 
-                data: response
-            };
-            console.log(value);
-            return response;
+            if(response.status === 403) {
+                $state.go('user.login');
+            } else {
+                var value = {
+                    string: 'Error:', 
+                    data: response
+                };
+                console.log(value);
+                return response;
+            }
+            
         }; 
 
         /**
@@ -6022,6 +6037,23 @@
                 data: data
             });
         };
+        
+        /**
+         * Makes a DELETE HTTP request
+         * @param {string} url
+         * @param {object} data 
+         * @returns {request}
+         */
+        this.deleteList = function(url, data) {
+            return $http({
+                method: 'DELETE',
+                url: baseUrl + url,
+                data: data,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+        };
 
         /**
          * Makes a DELETE HTTP request
@@ -6059,13 +6091,25 @@
     'use strict';
     angular
         .module("app.services")
-        .service('auth', ['api', function (api) {
+        .service('auth', ['api','$state', function (api, $state) {
 
         this.auth = function(data) {
             if(data.username && data.password) {
                 return api.create('/auth', data);
             } 
             return false;
+        };
+        
+        this.logout = function() {
+            var data = {
+                id: 'me'
+            };
+            
+            return api.deleteList('/auth', data);
+        };
+        
+        this.onError = function(err) {
+            return api.errorCallback(err);
         };
     }]);
 
@@ -6957,13 +7001,19 @@
                 password: ''
             };
             
+            
+            $scope.errorLogin = {
+                msg: ''
+            };
+            
             $scope.auth = function() {
                 var r = auth.auth($scope.model);
                 r.then(function(res){
                     if(res.data.success) {
-                        $state.go('app.dashboard');
+                        $state.go('app.home');
                     } 
                 }, function(err) {
+                    $scope.errorLogin.msg = err.data.feedback[0];
                     console.log(err);
                 });
             };

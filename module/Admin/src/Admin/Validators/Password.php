@@ -30,7 +30,7 @@ class Password extends AbstractValidator
 
     public function isValid($value)
     {
-        $this->setValue($value);
+        $this->setValue('Password');
 
         $isValid = true;
 

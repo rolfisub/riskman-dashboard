@@ -15,7 +15,7 @@
                         em.ion-ios-email-outline.icon-lg
                 .mda-form-group.float-label.mda-input-group
                     .mda-form-control
-                        input.form-control(type='password', name="password", ng-model="model.password", required="")
+                        input.form-control(type='password', name="password", ng-model="model.password", required="required")
                         .mda-form-control-line
                         label Password
                     span.mda-input-group-addon
@@ -25,3 +25,5 @@
                 ng-disabled="loginForm.$invalid || loginForm.$pristine",
                 ng-click="auth()"
             ) Authenticate
+            .alert-warning(ng-if="errorLogin.msg") {{errorLogin.msg}}
+            

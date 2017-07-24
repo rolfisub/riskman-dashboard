@@ -13,7 +13,7 @@
     'use strict';
     angular
         .module("app.services")
-        .service('api', ['$http', function ($http) {
+        .service('api', ['$http','$state', function ($http, $state) {
 
         //'/rest' path is assumed as base path
         var baseUrl = '/rest';
@@ -33,12 +33,17 @@
          * @returns {response}
          */
         this.errorCallback = function(response) {
-            var value = {
-                string: 'Error:', 
-                data: response
-            };
-            console.log(value);
-            return response;
+            if(response.status === 403) {
+                $state.go('user.login');
+            } else {
+                var value = {
+                    string: 'Error:', 
+                    data: response
+                };
+                console.log(value);
+                return response;
+            }
+            
         }; 
 
         /**
@@ -78,6 +83,23 @@
                 method: 'PUT',
                 url: baseUrl + url,
                 data: data
+            });
+        };
+        
+        /**
+         * Makes a DELETE HTTP request
+         * @param {string} url
+         * @param {object} data 
+         * @returns {request}
+         */
+        this.deleteList = function(url, data) {
+            return $http({
+                method: 'DELETE',
+                url: baseUrl + url,
+                data: data,
+                headers: {
+                    "Content-Type": "application/json"
+                }
             });
         };
 
