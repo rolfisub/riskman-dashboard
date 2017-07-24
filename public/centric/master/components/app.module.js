@@ -30,6 +30,7 @@
             'app.settings',
             'app.utils',
             'app.dashboard',
+            'app.home',
             //'app.charts',
             //'app.cards',
             //'app.elements',
