@@ -17,9 +17,7 @@
             
             r.then(function(res){
                 c.apiStats = res.data.general_api_stats;
-            }, function(err){
-                console.log(err);
-            });
+            }, home.onError);
         };
         
         c.init();

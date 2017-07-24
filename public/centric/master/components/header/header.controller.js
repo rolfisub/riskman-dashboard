@@ -7,11 +7,19 @@
         .controller('HeaderModalController', HeaderModalController)
         .controller('HeaderModalSearchController', HeaderModalSearchController);
 
-    HeaderController.$inject = ['$uibModal'];
+    HeaderController.$inject = ['$uibModal', 'auth', '$state'];
 
-    function HeaderController($uibModal) {
+    function HeaderController($uibModal, auth, $state) {
         var vm = this;
-
+        
+        
+        vm.logout = function() {
+            var r = auth.logout();
+            r.then(function(res){
+                $state.go('user.login');
+            }, auth.onError);
+        };
+        
         activate();
 
         ////////////////

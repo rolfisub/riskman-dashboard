@@ -70,8 +70,21 @@ class AuthRestController extends AbstractRestfulController
                     'success' => true
                 ]);
             }
-            sleep(3);//avoid brute force attacks
-            throw new Error400('success', false);
+            sleep(1);//avoid brute force attacks
+            throw new Error400('Invalid Credentials');
+        }
+    }
+    
+    public function deleteList($data) {
+        $id = isset($data['id']) ? $data['id'] : 'notme';
+        if($id == 'me') {
+            $this->getSessionStorage()->forgetMe();
+            $this->getAuthService()->clearIdentity();
+            return new JsonModel([
+                'success' => true
+            ]);
+        } else { 
+            throw new Error400('Invalid Credentials:' . $id);
         }
     }
     

@@ -10,13 +10,19 @@
                 password: ''
             };
             
+            
+            $scope.errorLogin = {
+                msg: ''
+            };
+            
             $scope.auth = function() {
                 var r = auth.auth($scope.model);
                 r.then(function(res){
                     if(res.data.success) {
-                        $state.go('app.dashboard');
+                        $state.go('app.home');
                     } 
                 }, function(err) {
+                    $scope.errorLogin.msg = err.data.feedback[0];
                     console.log(err);
                 });
             };

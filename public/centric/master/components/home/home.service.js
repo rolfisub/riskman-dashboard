@@ -19,6 +19,10 @@
             return api.read('/stats/general_api_stats');
         };
         
+        this.onError = function(err) {
+            return api.errorCallback(err);
+        };
+        
     }]);
 
 })();
