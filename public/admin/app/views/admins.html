@@ -6,3 +6,43 @@
     </div>
   </div>
 </div>
+<div ng-controller="AdminsController as admins" class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-lg-8">
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Actions</th>
+                <th>User</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="admin in admins.myAdmins">
+                <td>
+                  <p class="m0">Action1</p>
+                </td>
+                <td>
+                  <p class="m0">{{admin.user_name}}</p>
+                </td>
+                <td>
+                  <p class="m0">{{admin.first_name}}</p>
+                </td>
+                <td>
+                  <p class="m0">{{admin.last_name}}</p>
+                </td>
+                <td>
+                  <p class="m0">{{admin.email}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

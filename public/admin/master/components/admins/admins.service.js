@@ -14,7 +14,10 @@
     angular
         .module("app.admins")
         .service('admins', ['api', function (api) {
-                
+        
+        this.getAdmins = function() {
+            return api.read('/admins');
+        };
         
         this.onError = function(err) {
             return api.errorCallback(err);
