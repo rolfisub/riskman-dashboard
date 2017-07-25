@@ -18,7 +18,7 @@
             // You may have to set <base> tag in index and a routing configuration in your server
             html5Mode: false,
             // defaults to dashboard
-            defaultRoute: '/app/dashboard'
+            defaultRoute: '/user/login'
         };
 
         // public access to change configuration

@@ -15,6 +15,13 @@
                 msg: ''
             };
             
+            $scope.keypress = function(event) {
+                var keyCode = event.keyCode;
+                if(keyCode === 13) {
+                    $scope.auth();
+                }
+            };
+            
             $scope.auth = function() {
                 var r = auth.auth($scope.model);
                 r.then(function(res){
@@ -23,12 +30,12 @@
                     } 
                 }, function(err) {
                     $scope.errorLogin.msg = err.data.feedback[0];
-                    console.log(err);
+                    //console.log(err);
                 });
             };
             
             var init = function() {
-                console.log('init');
+                //console.log('init');
                 
             };
             

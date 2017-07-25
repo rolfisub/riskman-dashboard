@@ -69,6 +69,13 @@
     'use strict';
 
     angular
+        .module('app.colors', []);
+})();
+
+(function() {
+    'use strict';
+
+    angular
         .module('app.core', [
             'app.router',
             'ngRoute',
@@ -125,13 +132,6 @@
 
     angular
         .module('app.home', []);
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors', []);
 })();
 
 (function() {
@@ -1821,6 +1821,73 @@
                     });
                 }
             }
+        }
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors')
+        .constant('APP_COLORS', {
+            'gray-darker':            '#263238',
+            'gray-dark':              '#455A64',
+            'gray':                   '#607D8B',
+            'gray-light':             '#90A4AE',
+            'gray-lighter':           '#ECEFF1',
+
+            'primary':                '#448AFF',
+            'success':                '#4CAF50',
+            'info':                   '#03A9F4',
+            'warning':                '#FFB300',
+            'danger':                 '#F44336'
+        })
+        ;
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .run(colorsRun);
+
+    colorsRun.$inject = ['$rootScope', 'Colors'];
+
+    function colorsRun($rootScope, Colors) {
+
+        // Allows to use branding color with interpolation
+        // <tag attribute="{{ colorByName('primary') }}" />
+        $rootScope.colorByName = Colors.byName;
+
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors')
+        .service('Colors', Colors);
+
+    Colors.$inject = ['APP_COLORS'];
+
+    function Colors(APP_COLORS) {
+        this.byName = byName;
+
+        ////////////////
+
+        function byName(name) {
+            var color = APP_COLORS[name];
+            if (!color && materialColors) {
+                var c = name.split('-'); // red-500, blue-a100, deepPurple-500, etc
+                if (c.length)
+                    color = (materialColors[c[0]] || {})[c[1]];
+            }
+            return (color || '#fff');
         }
     }
 
@@ -4225,73 +4292,6 @@
 (function() {
     'use strict';
 
-    angular
-        .module('app.colors')
-        .constant('APP_COLORS', {
-            'gray-darker':            '#263238',
-            'gray-dark':              '#455A64',
-            'gray':                   '#607D8B',
-            'gray-light':             '#90A4AE',
-            'gray-lighter':           '#ECEFF1',
-
-            'primary':                '#448AFF',
-            'success':                '#4CAF50',
-            'info':                   '#03A9F4',
-            'warning':                '#FFB300',
-            'danger':                 '#F44336'
-        })
-        ;
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .run(colorsRun);
-
-    colorsRun.$inject = ['$rootScope', 'Colors'];
-
-    function colorsRun($rootScope, Colors) {
-
-        // Allows to use branding color with interpolation
-        // <tag attribute="{{ colorByName('primary') }}" />
-        $rootScope.colorByName = Colors.byName;
-
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors')
-        .service('Colors', Colors);
-
-    Colors.$inject = ['APP_COLORS'];
-
-    function Colors(APP_COLORS) {
-        this.byName = byName;
-
-        ////////////////
-
-        function byName(name) {
-            var color = APP_COLORS[name];
-            if (!color && materialColors) {
-                var c = name.split('-'); // red-500, blue-a100, deepPurple-500, etc
-                if (c.length)
-                    color = (materialColors[c[0]] || {})[c[1]];
-            }
-            return (color || '#fff');
-        }
-    }
-
-})();
-
-(function() {
-    'use strict';
-
     // This component is only used to provide a link in the menu
     // to the jQuery demo. It shows the menu support for direct
     // links using 'href' property.
@@ -5820,7 +5820,7 @@
             // You may have to set <base> tag in index and a routing configuration in your server
             html5Mode: false,
             // defaults to dashboard
-            defaultRoute: '/app/dashboard'
+            defaultRoute: '/user/login'
         };
 
         // public access to change configuration
@@ -7006,6 +7006,13 @@
                 msg: ''
             };
             
+            $scope.keypress = function(event) {
+                var keyCode = event.keyCode;
+                if(keyCode === 13) {
+                    $scope.auth();
+                }
+            };
+            
             $scope.auth = function() {
                 var r = auth.auth($scope.model);
                 r.then(function(res){
@@ -7014,12 +7021,12 @@
                     } 
                 }, function(err) {
                     $scope.errorLogin.msg = err.data.feedback[0];
-                    console.log(err);
+                    //console.log(err);
                 });
             };
             
             var init = function() {
-                console.log('init');
+                //console.log('init');
                 
             };
             
