@@ -29,7 +29,7 @@
             //'app.translate',
             'app.settings',
             'app.utils',
-            'app.dashboard',
+            //'app.dashboard',
             'app.home',
             //'app.charts',
             //'app.cards',
