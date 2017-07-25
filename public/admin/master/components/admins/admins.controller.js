@@ -10,12 +10,14 @@
     function AdminsController($scope, admins) {
         var c = this;
         
+        c.myAdmins = [];
+        
         c.init = function() {
-//            var r = admins.();
-//            
-//            r.then(function(res){
-//                c.apiStats = res.data.general_api_stats;
-//            }, admins.onError);
+            var r = admins.getAdmins();
+            
+            r.then(function(res){
+                c.myAdmins = res.data.admins_data;
+            }, admins.onError);
         };
         
         c.init();
