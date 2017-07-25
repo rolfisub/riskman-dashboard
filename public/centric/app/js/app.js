@@ -29,7 +29,7 @@
             //'app.translate',
             'app.settings',
             'app.utils',
-            'app.dashboard',
+            //'app.dashboard',
             'app.home',
             //'app.charts',
             //'app.cards',
@@ -63,13 +63,6 @@
 
     angular
         .module('app.charts', []);
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors', []);
 })();
 
 (function() {
@@ -132,6 +125,13 @@
 
     angular
         .module('app.home', []);
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors', []);
 })();
 
 (function() {
@@ -1821,73 +1821,6 @@
                     });
                 }
             }
-        }
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors')
-        .constant('APP_COLORS', {
-            'gray-darker':            '#263238',
-            'gray-dark':              '#455A64',
-            'gray':                   '#607D8B',
-            'gray-light':             '#90A4AE',
-            'gray-lighter':           '#ECEFF1',
-
-            'primary':                '#448AFF',
-            'success':                '#4CAF50',
-            'info':                   '#03A9F4',
-            'warning':                '#FFB300',
-            'danger':                 '#F44336'
-        })
-        ;
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .run(colorsRun);
-
-    colorsRun.$inject = ['$rootScope', 'Colors'];
-
-    function colorsRun($rootScope, Colors) {
-
-        // Allows to use branding color with interpolation
-        // <tag attribute="{{ colorByName('primary') }}" />
-        $rootScope.colorByName = Colors.byName;
-
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors')
-        .service('Colors', Colors);
-
-    Colors.$inject = ['APP_COLORS'];
-
-    function Colors(APP_COLORS) {
-        this.byName = byName;
-
-        ////////////////
-
-        function byName(name) {
-            var color = APP_COLORS[name];
-            if (!color && materialColors) {
-                var c = name.split('-'); // red-500, blue-a100, deepPurple-500, etc
-                if (c.length)
-                    color = (materialColors[c[0]] || {})[c[1]];
-            }
-            return (color || '#fff');
         }
     }
 
@@ -4229,10 +4162,10 @@
             // iconclass: 'ion-aperture',
             imgpath: 'app/img/icons/aperture.svg',
             order: 1,
-            label: {
-                count: 2,
-                classname: 'badge bg-success'
-            }
+//            label: {
+//                count: 2,
+//                classname: 'badge bg-success'
+//            }
         };
 
         Menu.addItem(menuItem);
@@ -4289,6 +4222,73 @@
     }]);
 
 })();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors')
+        .constant('APP_COLORS', {
+            'gray-darker':            '#263238',
+            'gray-dark':              '#455A64',
+            'gray':                   '#607D8B',
+            'gray-light':             '#90A4AE',
+            'gray-lighter':           '#ECEFF1',
+
+            'primary':                '#448AFF',
+            'success':                '#4CAF50',
+            'info':                   '#03A9F4',
+            'warning':                '#FFB300',
+            'danger':                 '#F44336'
+        })
+        ;
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .run(colorsRun);
+
+    colorsRun.$inject = ['$rootScope', 'Colors'];
+
+    function colorsRun($rootScope, Colors) {
+
+        // Allows to use branding color with interpolation
+        // <tag attribute="{{ colorByName('primary') }}" />
+        $rootScope.colorByName = Colors.byName;
+
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors')
+        .service('Colors', Colors);
+
+    Colors.$inject = ['APP_COLORS'];
+
+    function Colors(APP_COLORS) {
+        this.byName = byName;
+
+        ////////////////
+
+        function byName(name) {
+            var color = APP_COLORS[name];
+            if (!color && materialColors) {
+                var c = name.split('-'); // red-500, blue-a100, deepPurple-500, etc
+                if (c.length)
+                    color = (materialColors[c[0]] || {})[c[1]];
+            }
+            return (color || '#fff');
+        }
+    }
+
+})();
+
 (function() {
     'use strict';
 
