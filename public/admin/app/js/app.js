@@ -31,6 +31,7 @@
             'app.utils',
             //'app.dashboard',
             'app.home',
+            'app.admins',
             //'app.charts',
             //'app.cards',
             //'app.elements',
@@ -44,6 +45,15 @@
         ]);
 })();
 
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.admins', [
+            'app.services'
+        ]);
+})();
 
 (function() {
     'use strict';
@@ -246,6 +256,99 @@
         ]);
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.admins')
+        .controller('AdminsController', AdminsController);
+
+    AdminsController.$inject = ['$scope', 'admins'];
+
+    function AdminsController($scope, admins) {
+        var c = this;
+        
+        c.init = function() {
+//            var r = admins.();
+//            
+//            r.then(function(res){
+//                c.apiStats = res.data.general_api_stats;
+//            }, admins.onError);
+        };
+        
+        c.init();
+        
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.admins')
+        .run(adminsRun);
+
+    adminsRun.$inject = ['Menu'];
+
+    function adminsRun(Menu) {
+
+        var menuItem = {
+            name: 'Administrators',
+            sref: 'app.admins',
+            order: 9,
+           //iconclass: 'ion-person-stalker',
+            imgpath: 'app/img/icons/person-stalker.svg',
+        };
+
+        Menu.addItem(menuItem);
+
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.admins')
+        .run(adminsRoute);
+
+    adminsRoute.$inject = ['Router'];
+    function adminsRoute(Router){
+
+        Router.state('app.admins', {
+            url: '/admins',
+            title: 'Administrators',
+            templateUrl: 'admins.html',
+            require: ['modernizr', 'icons', 'ng-mfb', 'md-colors']
+        });
+    }
+
+})();
+
+/**
+ * Main api CRUD service
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+
+/**
+ * API service wrapper to make Ajax calls for Trxade
+*/
+(function() {
+    'use strict';
+    angular
+        .module("app.admins")
+        .service('admins', ['api', function (api) {
+                
+        
+        this.onError = function(err) {
+            return api.errorCallback(err);
+        };
+        
+    }]);
+
+})();
 (function() {
     'use strict';
 

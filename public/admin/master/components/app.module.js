@@ -31,6 +31,7 @@
             'app.utils',
             //'app.dashboard',
             'app.home',
+            'app.admins',
             //'app.charts',
             //'app.cards',
             //'app.elements',
