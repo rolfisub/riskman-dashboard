@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.home')
+        .module('riskman.home')
         .run(homeRun);
     homeRun.$inject = ['Menu'];
 
@@ -10,7 +10,7 @@
 
         var menuItem = {
             name: 'Home',
-            sref: 'app.home',
+            sref: 'riskman.home',
             // iconclass: 'ion-aperture',
             imgpath: 'app/img/icons/aperture.svg',
             order: 1,

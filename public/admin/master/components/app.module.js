@@ -30,8 +30,6 @@
             'app.settings',
             'app.utils',
             'app.dashboard',
-            'app.home',
-            'app.admins',
             'app.charts',
             'app.cards',
             'app.elements',
@@ -40,8 +38,8 @@
             'app.bootstrapui',
             'app.maps',
             'app.pages',
-            'app.services',
-            'app.user'
+            'app.user',
+            'riskman'
         ]);
 })();
 

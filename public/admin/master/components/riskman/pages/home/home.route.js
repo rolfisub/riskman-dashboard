@@ -2,18 +2,18 @@
     'use strict';
 
     angular
-        .module('app.home')
+        .module('riskman.home')
         .run(homeRoute);
 
     homeRoute.$inject = ['Router'];
 
     function homeRoute(Router) {
 
-        Router.state('app.home', {
+        Router.state('riskman.home', {
             url: '/home',
             title: 'Home',
             templateUrl: 'home.html',
-            require: ['angular-flot', 'easypiechart', 'sparkline', 'vector-map', 'vector-map-maps']
+            require: ['angular-flot', 'easypiechart', 'sparkline', 'vector-map', 'vector-map-maps'],
         });
     }
 

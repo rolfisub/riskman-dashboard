@@ -12,7 +12,7 @@
 (function() {
     'use strict';
     angular
-        .module("app.home")
+        .module("riskman.home")
         .service('home', ['api', function (api) {
                 
         this.getGeneralServerStats = function() {

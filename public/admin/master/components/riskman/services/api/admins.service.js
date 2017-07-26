@@ -9,7 +9,7 @@
 (function() {
     'use strict';
     angular
-        .module("app.services")
+        .module("riskman.services")
         .service('admins', ['api', function (api) {
         
         /*

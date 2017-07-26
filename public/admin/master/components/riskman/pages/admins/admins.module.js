@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('riskman.services', []);
+        .module('riskman.admins', []);
 })();

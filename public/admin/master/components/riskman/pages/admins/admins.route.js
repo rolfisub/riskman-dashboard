@@ -2,17 +2,18 @@
     'use strict';
 
     angular
-        .module('app.admins')
+        .module('riskman.admins')
         .run(adminsRoute);
 
     adminsRoute.$inject = ['Router'];
     function adminsRoute(Router){
 
-        Router.state('app.admins', {
+        Router.state('riskman.admins', {
             url: '/admins',
             title: 'Administrators',
             templateUrl: 'admins.html',
-            require: ['modernizr', 'icons', 'ng-mfb', 'md-colors']
+            require: ['modernizr', 'icons', 'ng-mfb', 'md-colors'],
+            parent:'riskman'
         });
     }
 
