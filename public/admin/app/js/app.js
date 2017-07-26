@@ -20,40 +20,31 @@
             'app.core',
             'app.header',
             'app.sidebar',
-            //'app.ripple',
-            //'app.floatbutton',
-            //'app.layouts',
+            'app.ripple',
+            'app.floatbutton',
+            'app.layouts',
             'app.menu',
             'app.preloader',
             'app.loadingbar',
-            //'app.translate',
+            'app.translate',
             'app.settings',
             'app.utils',
-            //'app.dashboard',
+            'app.dashboard',
             'app.home',
             'app.admins',
-            //'app.charts',
-            //'app.cards',
-            //'app.elements',
-            //'app.forms',
-            //'app.tables',
-            //'app.bootstrapui',
-            //'app.maps',
-            //'app.pages',
+            'app.charts',
+            'app.cards',
+            'app.elements',
+            'app.forms',
+            'app.tables',
+            'app.bootstrapui',
+            'app.maps',
+            'app.pages',
             'app.services',
             'app.user'
         ]);
 })();
 
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.admins', [
-            'app.services'
-        ]);
-})();
 
 (function() {
     'use strict';
@@ -127,13 +118,6 @@
     'use strict';
 
     angular
-        .module('app.header', []);
-})();
-
-(function() {
-    'use strict';
-
-    angular
         .module('app.forms', []);
 })();
 
@@ -141,7 +125,7 @@
     'use strict';
 
     angular
-        .module('app.home', []);
+        .module('app.header', []);
 })();
 
 (function() {
@@ -207,13 +191,6 @@
     'use strict';
 
     angular
-        .module('app.services', []);
-})();
-
-(function() {
-    'use strict';
-
-    angular
         .module('app.settings', []);
 })();
 
@@ -258,102 +235,32 @@
 
 (function() {
     'use strict';
-
     angular
-        .module('app.admins')
-        .controller('AdminsController', AdminsController);
-
-    AdminsController.$inject = ['$scope', 'admins'];
-
-    function AdminsController($scope, admins) {
-        var c = this;
-        
-        c.myAdmins = [];
-        
-        c.init = function() {
-            var r = admins.getAdmins();
-            
-            r.then(function(res){
-                c.myAdmins = res.data.admins_data;
-            }, admins.onError);
-        };
-        
-        c.init();
-        
-    }
+        .module("app.directives");
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.admins')
-        .run(adminsRun);
-
-    adminsRun.$inject = ['Menu'];
-
-    function adminsRun(Menu) {
-
-        var menuItem = {
-            name: 'Administrators',
-            sref: 'app.admins',
-            order: 9,
-           //iconclass: 'ion-person-stalker',
-            imgpath: 'app/img/icons/person-stalker.svg',
-        };
-
-        Menu.addItem(menuItem);
-
-    }
+        .module('app.services', []);
 })();
 
 (function() {
     'use strict';
 
     angular
-        .module('app.admins')
-        .run(adminsRoute);
-
-    adminsRoute.$inject = ['Router'];
-    function adminsRoute(Router){
-
-        Router.state('app.admins', {
-            url: '/admins',
-            title: 'Administrators',
-            templateUrl: 'admins.html',
-            require: ['modernizr', 'icons', 'ng-mfb', 'md-colors']
-        });
-    }
-
+        .module('app.admins', [
+            'app.services'
+        ]);
 })();
 
-/**
- * Main api CRUD service
- *
- * @package   RiskMan
- * @author    Rolf
- * 
- */
-
-/**
- * API service wrapper to make Ajax calls for Trxade
-*/
 (function() {
     'use strict';
-    angular
-        .module("app.admins")
-        .service('admins', ['api', function (api) {
-        
-        this.getAdmins = function() {
-            return api.read('/admins');
-        };
-        
-        this.onError = function(err) {
-            return api.errorCallback(err);
-        };
-        
-    }]);
 
+    angular
+        .module('app.home', []);
 })();
+
 (function() {
     'use strict';
 
@@ -3251,142 +3158,6 @@
     'use strict';
 
     angular
-        .module('app.header')
-        .controller('HeaderController', HeaderController)
-        .controller('HeaderModalController', HeaderModalController)
-        .controller('HeaderModalSearchController', HeaderModalSearchController);
-
-    HeaderController.$inject = ['$uibModal', 'auth', '$state'];
-
-    function HeaderController($uibModal, auth, $state) {
-        var vm = this;
-        
-        
-        vm.logout = function() {
-            var r = auth.logout();
-            r.then(function(res){
-                $state.go('user.login');
-            }, auth.onError);
-        };
-        
-        activate();
-
-        ////////////////
-
-        function activate() {
-            // Header Search
-            vm.openModalSearch = function() {
-
-                var modalSearchInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'app/views/header-search.tpl.html',
-                    controller: 'HeaderModalSearchController as mod',
-                    // position via css class
-                    windowClass: 'modal-top',
-                    backdropClass: 'modal-backdrop-soft',
-                    // sent data to the modal instance (injectable into controller)
-                    resolve: {
-                        data: function() {
-                            return {
-                                title: 'Search'
-                            };
-                        }
-                    }
-                });
-
-                modalSearchInstance.result.then(function( /*data*/ ) {
-                    // use data from modal here
-                }, function() {
-                    // Modal dismissed
-                });
-            };
-
-            // Settings panel (right sidebar)
-            vm.openModalBar = function() {
-
-                var modalBarInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'app/views/settings.tpl.html',
-                    controller: 'HeaderModalController as mod',
-                    // position via css class
-                    windowClass: 'modal-right',
-                    backdropClass: 'modal-backdrop-soft',
-                    // sent data to the modal instance (injectable into controller)
-                    resolve: {
-                        data: function() {
-                            return {
-                                title: 'Settings'
-                            };
-                        }
-                    }
-                });
-
-                modalBarInstance.result.then(function( /*data*/ ) {
-                    // use data from modal here
-                }, function() {
-                    // Modal dismissed
-                });
-            };
-
-        }
-    }
-
-    HeaderModalController.$inject = ['$uibModalInstance', 'data'];
-
-    function HeaderModalController($uibModalInstance, data) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-            vm.modalTitle = data.title;
-
-            vm.close = function() {
-                $uibModalInstance.close( /* data for promise*/ );
-            };
-
-            vm.cancel = function() {
-                $uibModalInstance.dismiss('cancel');
-            };
-        }
-    }
-    HeaderModalSearchController.$inject = ['$uibModalInstance', '$timeout', 'data'];
-
-    function HeaderModalSearchController($uibModalInstance, $timeout, data) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-            vm.modalTitle = data.title;
-
-            // input autofocus
-            $timeout(function() {
-                document.querySelector('.header-input-search').focus();
-            }, 300);
-
-            vm.close = function() {
-                $uibModalInstance.close( /* data for promise*/ );
-            };
-
-            vm.cancel = function() {
-                $uibModalInstance.dismiss('cancel');
-            };
-        }
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
         .module('app.forms')
         .controller('ColorPickerController', ColorPickerController);
 
@@ -4299,104 +4070,138 @@
     'use strict';
 
     angular
-        .module('app.home')
-        .controller('HomeController', HomeController);
+        .module('app.header')
+        .controller('HeaderController', HeaderController)
+        .controller('HeaderModalController', HeaderModalController)
+        .controller('HeaderModalSearchController', HeaderModalSearchController);
 
-    HomeController.$inject = ['$scope', 'home'];
+    HeaderController.$inject = ['$uibModal', 'auth', '$state'];
 
-    function HomeController($scope, home) {
-        var c = this;
+    function HeaderController($uibModal, auth, $state) {
+        var vm = this;
         
-        c.apiStats = {};
         
-        c.init = function() {
-            var r = home.getGeneralServerStats();
-            
+        vm.logout = function() {
+            var r = auth.logout();
             r.then(function(res){
-                c.apiStats = res.data.general_api_stats;
-            }, home.onError);
+                $state.go('user.login');
+            }, auth.onError);
         };
         
-        c.init();
-        
+        activate();
+
+        ////////////////
+
+        function activate() {
+            // Header Search
+            vm.openModalSearch = function() {
+
+                var modalSearchInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'app/views/header-search.tpl.html',
+                    controller: 'HeaderModalSearchController as mod',
+                    // position via css class
+                    windowClass: 'modal-top',
+                    backdropClass: 'modal-backdrop-soft',
+                    // sent data to the modal instance (injectable into controller)
+                    resolve: {
+                        data: function() {
+                            return {
+                                title: 'Search'
+                            };
+                        }
+                    }
+                });
+
+                modalSearchInstance.result.then(function( /*data*/ ) {
+                    // use data from modal here
+                }, function() {
+                    // Modal dismissed
+                });
+            };
+
+            // Settings panel (right sidebar)
+            vm.openModalBar = function() {
+
+                var modalBarInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'app/views/settings.tpl.html',
+                    controller: 'HeaderModalController as mod',
+                    // position via css class
+                    windowClass: 'modal-right',
+                    backdropClass: 'modal-backdrop-soft',
+                    // sent data to the modal instance (injectable into controller)
+                    resolve: {
+                        data: function() {
+                            return {
+                                title: 'Settings'
+                            };
+                        }
+                    }
+                });
+
+                modalBarInstance.result.then(function( /*data*/ ) {
+                    // use data from modal here
+                }, function() {
+                    // Modal dismissed
+                });
+            };
+
+        }
     }
-})();
-(function() {
-    'use strict';
 
-    angular
-        .module('app.home')
-        .run(homeRun);
-    homeRun.$inject = ['Menu'];
+    HeaderModalController.$inject = ['$uibModalInstance', 'data'];
 
-    function homeRun(Menu) {
+    function HeaderModalController($uibModalInstance, data) {
+        var vm = this;
 
-        var menuItem = {
-            name: 'Home',
-            sref: 'app.home',
-            // iconclass: 'ion-aperture',
-            imgpath: 'app/img/icons/aperture.svg',
-            order: 1,
-//            label: {
-//                count: 2,
-//                classname: 'badge bg-success'
-//            }
-        };
+        activate();
 
-        Menu.addItem(menuItem);
+        ////////////////
 
+        function activate() {
+
+            vm.modalTitle = data.title;
+
+            vm.close = function() {
+                $uibModalInstance.close( /* data for promise*/ );
+            };
+
+            vm.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+            };
+        }
     }
-})();
+    HeaderModalSearchController.$inject = ['$uibModalInstance', '$timeout', 'data'];
 
-(function() {
-    'use strict';
+    function HeaderModalSearchController($uibModalInstance, $timeout, data) {
+        var vm = this;
 
-    angular
-        .module('app.home')
-        .run(homeRoute);
+        activate();
 
-    homeRoute.$inject = ['Router'];
+        ////////////////
 
-    function homeRoute(Router) {
+        function activate() {
 
-        Router.state('app.home', {
-            url: '/home',
-            title: 'Home',
-            templateUrl: 'home.html',
-            require: ['angular-flot', 'easypiechart', 'sparkline', 'vector-map', 'vector-map-maps']
-        });
+            vm.modalTitle = data.title;
+
+            // input autofocus
+            $timeout(function() {
+                document.querySelector('.header-input-search').focus();
+            }, 300);
+
+            vm.close = function() {
+                $uibModalInstance.close( /* data for promise*/ );
+            };
+
+            vm.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+            };
+        }
     }
 
 })();
 
-/**
- * Main api CRUD service
- *
- * @package   RiskMan
- * @author    Rolf
- * 
- */
-
-/**
- * API service wrapper to make Ajax calls for Trxade
-*/
-(function() {
-    'use strict';
-    angular
-        .module("app.home")
-        .service('home', ['api', function (api) {
-                
-        this.getGeneralServerStats = function() {
-            return api.read('/stats/general_api_stats');
-        };
-        
-        this.onError = function(err) {
-            return api.errorCallback(err);
-        };
-        
-    }]);
-
-})();
 (function() {
     'use strict';
 
@@ -6058,170 +5863,6 @@
     }
 })();
 
-/**
- * Main api CRUD service
- *
- * @package   RiskMan
- * @author    Rolf
- * 
- */
-
-/**
- * API service wrapper to make Ajax calls for Trxade
-*/
-(function() {
-    'use strict';
-    angular
-        .module("app.services")
-        .service('api', ['$http','$state', function ($http, $state) {
-
-        //'/rest' path is assumed as base path
-        var baseUrl = '/rest';
-
-        /**
-         * Sets base url if needed
-         * @param {string} url
-         * @returns {null}
-         */
-        this.setBaseUrl = function (url) {
-            baseUrl = url;
-        };
-
-        /**
-         * Default handler for Ajax errors, log to console the response object
-         * @param {object} response
-         * @returns {response}
-         */
-        this.errorCallback = function(response) {
-            if(response.status === 403) {
-                $state.go('user.login');
-            } else {
-                var value = {
-                    string: 'Error:', 
-                    data: response
-                };
-                console.log(value);
-                return response;
-            }
-            
-        }; 
-
-        /**
-         * Makes a POST HTTP request
-         * @param {string} url
-         * @param {object} data
-         * @returns {request}
-         */
-        this.create = function(url, data){
-            return $http({
-               method: 'POST',
-               url: baseUrl + url,
-               data: data
-            });
-        };
-
-        /**
-         * Makes a GET HTTP request
-         * @param {string} url
-         * @returns {request}
-         */
-        this.read = function(url){
-            return $http({
-               method: 'GET',
-               url: baseUrl + url
-            });
-        };
-
-        /**
-         * Makes a PUT HTTP request
-         * @param {string} url
-         * @param {object} data
-         * @returns {request}
-         */
-        this.update = function(url, data) {
-            return $http({
-                method: 'PUT',
-                url: baseUrl + url,
-                data: data
-            });
-        };
-        
-        /**
-         * Makes a DELETE HTTP request
-         * @param {string} url
-         * @param {object} data 
-         * @returns {request}
-         */
-        this.deleteList = function(url, data) {
-            return $http({
-                method: 'DELETE',
-                url: baseUrl + url,
-                data: data,
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-        };
-
-        /**
-         * Makes a DELETE HTTP request
-         * @param {string} url
-         * @returns {request}
-         */
-        this.delete = function(url) {
-            return $http({
-                method: 'DELETE',
-                url: baseUrl + url
-            });
-        };
-
-        this.deleteById = function(url, param) {
-            return $http({
-                method: 'DELETE',
-                url: baseUrl + url + '/' + param
-            });
-        };
-    }]);
-
-})();
-/**
- * Main api CRUD service
- *
- * @package   RiskMan
- * @author    Rolf
- * 
- */
-
-/**
- * API service wrapper to make Ajax calls for Trxade
-*/
-(function() {
-    'use strict';
-    angular
-        .module("app.services")
-        .service('auth', ['api','$state', function (api, $state) {
-
-        this.auth = function(data) {
-            if(data.username && data.password) {
-                return api.create('/auth', data);
-            } 
-            return false;
-        };
-        
-        this.logout = function() {
-            var data = {
-                id: 'me'
-            };
-            
-            return api.deleteList('/auth', data);
-        };
-        
-        this.onError = function(err) {
-            return api.errorCallback(err);
-        };
-    }]);
-
-})();
 (function() {
     'use strict';
 
@@ -7338,3 +6979,1299 @@
     }
 
 })();
+
+/**
+ * Admins rest interface
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+
+(function() {
+    'use strict';
+    angular
+        .module("app.services")
+        .service('admins', ['api', function (api) {
+        
+        /*
+         * data for actions
+         */
+        var admin = {
+            create_data: {
+                username:'',
+                password:'',
+                email:'',
+                firstname:'',
+                lastname:''
+            },
+            update_data: {
+                password:'',
+                passwordnew:'',
+                passwordnew2:'',
+                email:'',
+                firstname:'',
+                lastname:''
+            }
+        };
+        
+        this.setCreateUserName = function(username) {
+            admin.create_data.username = username;
+        };
+        this.setCreatePassword = function(password) {
+            admin.create_data.password = password;
+        };
+        this.setCreateEmail = function(email) {
+            admin.create_data.email = email;
+        };
+        this.setCreateFirstName = function(firstname) {
+            admin.create_data.firstname = firstname;
+        };
+        this.setCreateLastName = function(lastname) {
+            admin.create_data.lastname = lastname;
+        };
+        
+        
+        
+        this.setUpdateEmail = function(email) {
+            admin.update_data.email = email;
+        };
+        this.setUpdateFirstName = function(firstname) {
+            admin.update_data.firstname = firstname;
+        };
+        this.setUpdateLastName = function(lastname) {
+            admin.update_data.lastname = lastname;
+        };
+        this.setUpdatePassword = function(password) {
+            admin.update_data.password = password;
+        };
+        this.setUpdatePasswordNew = function(password) {
+            admin.update_data.passwordnew = password;
+        };
+        this.setUpdatePasswordNew2 = function(password) {
+            admin.update_data.passwordnew2 = password;
+        };
+        
+        this.resetUpdateData = function(){
+            admin.update_data = {
+                password:'',
+                passwordnew:'',
+                passwordnew2:'',
+                email:'',
+                firstname:'',
+                lastname:''
+            };
+        };
+        
+        
+        this.resetCreateData = function(){
+            admin.create_data = {
+                username:'',
+                password:'',
+                email:'',
+                firstname:'',
+                lastname:''
+            };
+        };
+        
+        
+        this.createAdmin = function()
+        {
+            return api.create('/admins', admin.create_data);
+        };
+        
+        this.updateAdmin = function(id){
+            return api.update('/admins/' + id, admin.update_data);
+        };
+        
+        this.getAdminByUsername = function(username) {
+            return api.read('/admins/' + username);
+        };
+        
+        
+        
+        //private functions
+        this.getAdminsList = function() {   
+            return api.read('/admins');
+        };
+        
+        
+        this.onError = function(response) {
+            api.errorCallback(response);
+        };
+        
+        this.deleteAdmin = function(admin) {
+            return api.deleteById('/admins', admin);
+        };
+        
+
+    }]);
+})();
+
+
+/**
+ * Main api CRUD service
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+
+/**
+ * API service wrapper to make Ajax calls for Trxade
+*/
+(function() {
+    'use strict';
+    angular
+        .module("app.services")
+        .service('api', ['$http','$state', function ($http, $state) {
+
+        //'/rest' path is assumed as base path
+        var baseUrl = '/rest';
+
+        /**
+         * Sets base url if needed
+         * @param {string} url
+         * @returns {null}
+         */
+        this.setBaseUrl = function (url) {
+            baseUrl = url;
+        };
+
+        /**
+         * Default handler for Ajax errors, log to console the response object
+         * @param {object} response
+         * @returns {response}
+         */
+        this.errorCallback = function(response) {
+            if(response.status === 403) {
+                $state.go('user.login');
+            } else {
+                var value = {
+                    string: 'Error:', 
+                    data: response
+                };
+                console.log(value);
+                return response;
+            }
+            
+        }; 
+
+        /**
+         * Makes a POST HTTP request
+         * @param {string} url
+         * @param {object} data
+         * @returns {request}
+         */
+        this.create = function(url, data){
+            return $http({
+               method: 'POST',
+               url: baseUrl + url,
+               data: data
+            });
+        };
+
+        /**
+         * Makes a GET HTTP request
+         * @param {string} url
+         * @returns {request}
+         */
+        this.read = function(url){
+            return $http({
+               method: 'GET',
+               url: baseUrl + url
+            });
+        };
+
+        /**
+         * Makes a PUT HTTP request
+         * @param {string} url
+         * @param {object} data
+         * @returns {request}
+         */
+        this.update = function(url, data) {
+            return $http({
+                method: 'PUT',
+                url: baseUrl + url,
+                data: data
+            });
+        };
+        
+        /**
+         * Makes a DELETE HTTP request
+         * @param {string} url
+         * @param {object} data 
+         * @returns {request}
+         */
+        this.deleteList = function(url, data) {
+            return $http({
+                method: 'DELETE',
+                url: baseUrl + url,
+                data: data,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+        };
+
+        /**
+         * Makes a DELETE HTTP request
+         * @param {string} url
+         * @returns {request}
+         */
+        this.delete = function(url) {
+            return $http({
+                method: 'DELETE',
+                url: baseUrl + url
+            });
+        };
+
+        this.deleteById = function(url, param) {
+            return $http({
+                method: 'DELETE',
+                url: baseUrl + url + '/' + param
+            });
+        };
+    }]);
+
+})();
+/**
+ * Main api CRUD service
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+
+/**
+ * API service wrapper to make Ajax calls for Trxade
+*/
+(function() {
+    'use strict';
+    angular
+        .module("app.services")
+        .service('auth', ['api','$state', function (api, $state) {
+
+        this.auth = function(data) {
+            if(data.username && data.password) {
+                return api.create('/auth', data);
+            } 
+            return false;
+        };
+        
+        this.logout = function() {
+            var data = {
+                id: 'me'
+            };
+            
+            return api.deleteList('/auth', data);
+        };
+        
+        this.onError = function(err) {
+            return api.errorCallback(err);
+        };
+    }]);
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.admins')
+        .controller('AdminsController', AdminsController);
+
+    AdminsController.$inject = ['$scope', 'admins'];
+
+    function AdminsController($scope, admins) {
+        var c = this;
+        
+        c.myAdmins = [];
+        
+        c.init = function() {
+            var r = admins.getAdminsList();
+            
+            r.then(function(res){
+                c.myAdmins = res.data.admins_data;
+            }, admins.onError);
+        };
+        
+        c.init();
+        
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.admins')
+        .run(adminsRun);
+
+    adminsRun.$inject = ['Menu'];
+
+    function adminsRun(Menu) {
+
+        var menuItem = {
+            name: 'Administrators',
+            sref: 'app.admins',
+            order: 9,
+           //iconclass: 'ion-person-stalker',
+            imgpath: 'app/img/icons/person-stalker.svg',
+        };
+
+        Menu.addItem(menuItem);
+
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.admins')
+        .run(adminsRoute);
+
+    adminsRoute.$inject = ['Router'];
+    function adminsRoute(Router){
+
+        Router.state('app.admins', {
+            url: '/admins',
+            title: 'Administrators',
+            templateUrl: 'admins.html',
+            require: ['modernizr', 'icons', 'ng-mfb', 'md-colors']
+        });
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.home')
+        .controller('HomeController', HomeController);
+
+    HomeController.$inject = ['$scope', 'home'];
+
+    function HomeController($scope, home) {
+        var c = this;
+        
+        c.apiStats = {};
+        
+        c.init = function() {
+            var r = home.getGeneralServerStats();
+            
+            r.then(function(res){
+                c.apiStats = res.data.general_api_stats;
+            }, home.onError);
+        };
+        
+        c.init();
+        
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.home')
+        .run(homeRun);
+    homeRun.$inject = ['Menu'];
+
+    function homeRun(Menu) {
+
+        var menuItem = {
+            name: 'Home',
+            sref: 'app.home',
+            // iconclass: 'ion-aperture',
+            imgpath: 'app/img/icons/aperture.svg',
+            order: 1,
+//            label: {
+//                count: 2,
+//                classname: 'badge bg-success'
+//            }
+        };
+
+        Menu.addItem(menuItem);
+
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.home')
+        .run(homeRoute);
+
+    homeRoute.$inject = ['Router'];
+
+    function homeRoute(Router) {
+
+        Router.state('app.home', {
+            url: '/home',
+            title: 'Home',
+            templateUrl: 'home.html',
+            require: ['angular-flot', 'easypiechart', 'sparkline', 'vector-map', 'vector-map-maps']
+        });
+    }
+
+})();
+
+/**
+ * Main api CRUD service
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+
+/**
+ * API service wrapper to make Ajax calls for Trxade
+*/
+(function() {
+    'use strict';
+    angular
+        .module("app.home")
+        .service('home', ['api', function (api) {
+                
+        this.getGeneralServerStats = function() {
+            return api.read('/stats/general_api_stats');
+        };
+        
+        this.onError = function(err) {
+            return api.errorCallback(err);
+        };
+        
+    }]);
+
+})();
+/**
+ * Testing angular controller and route
+ *
+ * @package   RiskMan
+ * @author    Rolf Bansbach
+ */
+
+(function() {
+    'use strict';
+    angular
+        .module("app.directives")
+        .directive('createAdminPop', function(){
+        return {
+            restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
+            replace: true,
+            // scope: { data: '=' },
+            templateUrl: "createAdminPop.html",
+            controller: ['$scope', 'adminsSrv', 'adminCreateValidate', function ($scope, adminsSrv, createValidator) {
+                 $scope.dataCreate = {
+                    username:'',
+                    password:'',
+                    password2:'',
+                    email:'',
+                    firstname:'',
+                    lastname:''
+                };
+
+                $scope.newadminPop = {
+                    title:'Create New Administrator',
+                    content:'Please fill out the following form <br>to create a new administrator',
+                    hide: true
+                };
+
+                $scope.createDataStatus = {
+                    username:{
+                        msg:'',
+                        valid: true
+                    },
+                    password:{
+                        msg:'',
+                        valid:true
+                    },
+                    password2:{
+                        msg:'',
+                        valid:true
+                    },
+                    email:{
+                        msg:'',
+                        valid:true
+                    },
+                    firstname:{
+                        msg:'',
+                        valid:true
+                    },
+                    lastname:{
+                        msg:'',
+                        valid:true
+                    }
+
+                };
+                $scope.createForm = {
+                    isValid : false
+                };
+                $scope.genericError = {
+                    msg:'',
+                    valid:true
+                };
+                $scope.successMsg = {
+                    msg:'Admin created.',
+                    show: false
+                };
+
+                $scope.validateCreateField = function(field) {
+                    $scope.createDataStatus = createValidator.validateObjectField(field, $scope.createDataStatus, $scope.dataCreate);
+                    $scope.createForm.isValid = createValidator.isCreateValid($scope.dataCreate);
+                };
+                
+                $scope.reset = function(){
+                    $scope.dataCreate.email = '';
+                    $scope.dataCreate.firstname = '';
+                    $scope.dataCreate.lastname = '';
+                    $scope.dataCreate.password = '';
+                    $scope.dataCreate.password2 = '';
+                    $scope.dataCreate.username = '';
+                    $scope.createDataStatus.email.valid = true;
+                    $scope.createDataStatus.firstname.valid = true;
+                    $scope.createDataStatus.lastname.valid = true;
+                    $scope.createDataStatus.password.valid = true;
+                    $scope.createDataStatus.password2.valid = true;
+                    $scope.createDataStatus.username.valid = true;
+                    $scope.genericError.valid = true;
+                };
+
+                $scope.createAdmin = function(){
+                    adminsSrv.resetCreateData();
+                    adminsSrv.setCreateUserName($scope.dataCreate.username);
+                    adminsSrv.setCreatePassword($scope.dataCreate.password);
+                    adminsSrv.setCreateEmail($scope.dataCreate.email);
+                    adminsSrv.setCreateFirstName($scope.dataCreate.firstname);
+                    adminsSrv.setCreateLastName($scope.dataCreate.lastname);
+
+                    var r = adminsSrv.createAdmin();
+                    r.then(function(res){
+                        $scope.genericError.msg = '';
+                        $scope.genericError.valid = true;
+                        $scope.reset();
+                        $scope.successMsg.show = true;
+                        $scope.successMsg.msg = 'Admin Created.';
+                        $scope.$parent.genericSuccessMsg.show = true;
+                        $scope.$parent.genericSuccessMsg.msg = 'Admin Created.';
+                        $scope.$parent.init();
+                    }, function(err) {
+                        if(err.status === 400) {
+                            $scope.genericError.msg = err.data.feedback[0];
+                            $scope.genericError.valid = false;
+                            $scope.successMsg.show = false;
+                            $scope.$parent.genericSuccessMsg.show = false;
+                        } else {
+                            adminsSrv.errorCallBack(err);
+                        }
+                    });
+                };
+            }]
+        };
+    });
+})();
+/**
+ * Testing angular controller and route
+ *
+ * @package   RiskMan
+ * @author    Rolf Bansbach
+ */
+
+(function() {
+    'use strict';
+    angular
+        .module("app.directives")
+        .directive('deleteAdminPop', function(){
+        return {
+            restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
+            replace: true,
+            scope: { username: '=' },
+            templateUrl: "deleteAdminPop.html",
+            controller: ['$scope', 'adminsSrv', function ($scope, adminsSrv) {
+
+                $scope.deladminPop = {
+                    title:'Delete admin account',
+                    content:'Are you sure that you want to delete this account?'
+                };
+                
+                $scope.deleteAdmin = function() {
+                    var r = adminsSrv.deleteAdmin($scope.username);
+                    r.then(function(res){
+                        //code 200
+                        $scope.$parent.init();
+                        $scope.$parent.genericErrorMsg.show = false;
+                        $scope.$parent.genericSuccessMsg.msg = 'Admin deleted.';
+                        $scope.$parent.genericSuccessMsg.show = true;
+                    }, function(err){
+                        //code 400 >
+                        if(err.status === 400) {
+                            $scope.$parent.genericErrorMsg.msg = err.data.feedback[0];
+                            $scope.$parent.genericErrorMsg.show = true;
+                            $scope.$parent.genericSuccessMsg.show = false;
+                        } else {
+                            adminsSrv.errorCallBack(err);
+                        }
+
+                    });
+                };
+                
+                
+            }]
+        };
+    });
+})();
+/**
+ * Testing angular controller and route
+ *
+ * @package   RiskMan
+ * @author    Rolf Bansbach
+ */
+
+(function() {
+    'use strict';
+    angular
+        .module("app.directives")
+        .directive('editAdminPop', function(){
+        return {
+            restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
+            replace: true,
+            scope: { username: '=' },
+            templateUrl: "editAdminPop.html",
+            controller: ['$scope', 'adminsSrv', 'adminEditValidate', function ($scope, adminsSrv, editValidator) {
+                 $scope.dataEdit = {
+                    email:'',
+                    firstname:'',
+                    lastname:'',
+                    password:'',
+                    passwordnew:'',
+                    passwordnew2:'',
+                    username:''
+                };
+
+                $scope.editAdminPop = {
+                    title:'Edit Admin',
+                    content:'Edit admin account information.',
+                    hide: true
+                };
+
+                $scope.editDataStatus = {
+                    email:{
+                        msg:'',
+                        valid:true
+                    },
+                    firstname:{
+                        msg:'',
+                        valid:true
+                    },
+                    lastname:{
+                        msg:'',
+                        valid:true
+                    },
+                    password:{
+                        msg:'',
+                        valid:true
+                    },
+                    passwordnew:{
+                        msg:'',
+                        valid:true
+                    },
+                    passwordnew2:{
+                        msg:'',
+                        valid:true
+                    },
+
+                };
+                $scope.genericError = {
+                    msg:'',
+                    valid:true
+                };
+                $scope.editForm = {
+                    isValid: true
+                };
+
+                $scope.validateEditField = function(field) {
+                    $scope.editDataStatus = editValidator.validateObjectField(field, $scope.editDataStatus, $scope.dataEdit);
+                    $scope.editForm.isValid = editValidator.isEditValid($scope.dataEdit);
+                };
+                
+                $scope.reset = function(){
+                    $scope.dataEdit.email = '';
+                    $scope.dataEdit.firstname = '';
+                    $scope.dataEdit.lastname = '';
+                    $scope.dataEdit.password = '';
+                    $scope.dataEdit.passwordnew = '';
+                    $scope.dataEdit.passwordnew2 = '';
+                    $scope.editDataStatus.email.valid = true;
+                    $scope.editDataStatus.firstname.valid = true;
+                    $scope.editDataStatus.lastname.valid = true;
+                    $scope.editDataStatus.password.valid = true;
+                    $scope.editDataStatus.passwordnew.valid = true;
+                    $scope.editDataStatus.passwordnew2.valid = true;
+                    $scope.genericError.valid = true;
+                };
+                
+                $scope.getAdmin = function(){
+                    $scope.reset();
+                    var r = adminsSrv.getAdminByUsername($scope.username);
+                    r.then(function(response){
+                        $scope.dataEdit = angular.merge($scope.dataEdit, response.data);
+                    },
+                    function(error){
+                        adminsSrv.errorCallBack(error);
+                    });
+                };
+
+                $scope.editAdmin = function(){
+                    adminsSrv.resetUpdateData();
+                    adminsSrv.setUpdatePassword($scope.dataEdit.password);
+                    adminsSrv.setUpdatePasswordNew($scope.dataEdit.passwordnew);
+                    adminsSrv.setUpdatePasswordNew2($scope.dataEdit.passwordnew2);
+                    adminsSrv.setUpdateEmail($scope.dataEdit.email);
+                    adminsSrv.setUpdateFirstName($scope.dataEdit.firstname);
+                    adminsSrv.setUpdateLastName($scope.dataEdit.lastname);
+                    
+                    var r = adminsSrv.updateAdmin($scope.dataEdit.username);
+                    
+                    r.then(function(res){
+                        $scope.getAdmin();
+                        $scope.$parent.init();
+                        $scope.$parent.genericSuccessMsg.show = true;
+                        $scope.$parent.genericSuccessMsg.msg = 'Admin Updated.';
+                    }, function(err){
+                        if(err.status === 400) {
+                            $scope.$parent.genericSuccessMsg.show = false;
+                            $scope.genericError.valid = false;
+                            $scope.genericError.msg = err.data.feedback[0];
+                        }
+                        adminsSrv.errorCallBack(err);
+                    });                   
+                };
+                
+            }]
+        };
+    });
+})();
+/**
+ * Admins Fields Validator service
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+
+(function() {
+    'use strict';
+    angular
+        .module("app.services")
+        .service('adminFields', function () {
+        
+        /**
+         * validates the username field
+         * @param {type} username
+         * @returns { valid: true/false, msg: 'error message'}
+         */
+        this.username = function (username) {
+            var field = 'Username';
+            if(username.length === 0) {
+                return {
+                    valid : false,
+                    msg : field + ' can\'t be empty.'
+                };
+            }
+            if(username.length < 4) {
+                return {
+                    valid : false,
+                    msg : field + ' can\'t be less than 4 characters.'
+                };
+            }
+            return  {
+                valid: true,
+                msg: ''
+            };
+        };
+        
+        var countUppercase = function (str) {
+            var count = 0;
+            var len = str.length;
+            for(var i = 0; i < len; i++) {
+                if(/[A-Z]/.test(str.charAt(i))) count++;
+            }
+            return count;
+        };
+        
+        var countLowercase = function (str) {
+            var count = 0;
+            var len = str.length;
+            for(var i = 0; i < len; i++) {
+                if(/[a-z]/.test(str.charAt(i))) count++;
+            }
+            return count;
+        };
+        
+        var countNumeric = function (str) {
+            var count = 0;
+            var len = str.length;
+            for(var i = 0; i < len; i++) {
+                if(/[0-9]/.test(str.charAt(i))) count++;
+            }
+            return count;
+        };
+        
+        this.password = function(password) {
+            var field = 'Password';
+            if(password.length === 0) {
+                return {
+                    valid : false,
+                    msg : field + ' can\'t be empty.'
+                };
+            }
+            if(password.length < 8) {
+                return {
+                    valid : false,
+                    msg : field + ' can\'t be less than 8 characters.'
+                };
+            }
+            if (countUppercase(password) < 1) {
+                return {
+                    valid : false,
+                    msg : field + ' needs at least 1 Uppercase letter.'
+                };
+            }
+            if (countLowercase(password) < 1) {
+                return {
+                    valid : false,
+                    msg : field + ' needs at least 1 Lowercase letter.'
+                };
+            }
+            if (countNumeric(password) < 1) {
+                return {
+                    valid : false,
+                    msg : field + ' needs at least 1 Digit.'
+                };
+            }
+            return  {
+                valid: true,
+                msg: ''
+            };
+        };
+        
+        
+        
+        this.password2 = function(password, password2) {
+            var field = 'Password';
+            var basic = this.password(password2);
+            if(!basic.valid) {
+                return basic;
+            }
+            if(password !== password2) {
+                return {
+                    valid: false,
+                    msg: field + ' does not match.'
+                };
+            }
+            return  {
+                valid:true,
+                msg:'',
+            };
+        };
+        
+        this.firstname = function(firstname) {
+            var field = 'First Name';
+            if(firstname.length === 0) {
+                return {
+                    valid : false,
+                    msg : field + ' can\'t be empty.'
+                };
+            }
+            return  {
+                valid: true,
+                msg:''
+            };
+        };
+        
+        this.lastname = function(lastname) {
+            var field = 'Last Name';
+            if(lastname.length === 0) {
+                return {
+                    valid : false,
+                    msg : field + ' can\'t be empty.'
+                };
+            }
+            return  {
+                valid: true,
+                msg:''
+            };
+        };
+        
+        this.email = function(email) {
+            var field = 'Email';
+            if(email.length === 0) {
+                return {
+                    valid : false,
+                    msg : field + ' can\'t be empty.'
+                };
+            }
+            var emailPattern = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+            if(!emailPattern.test(email)) {
+                return {
+                    valid : false,
+                    msg : field + ' is not a valid email address.'
+                };
+            }
+            return  {
+                valid: true,
+                msg:''
+            };
+        };
+
+    });
+})();
+
+
+/**
+ * Admins Create Validator library
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+
+(function() {
+    'use strict';
+    angular
+        .module("app.services")
+        .service('adminCreateValidate', ['adminFields', function (fields) {
+        
+        /**
+         * model for errors
+         * @type result
+         */
+        var createDataStatus = {
+            username:{
+                msg:'',
+                valid: true
+            },
+            password:{
+                msg:'',
+                valid:true
+            },
+            password2:{
+                msg:'',
+                valid:true
+            },
+            email:{
+                msg:'',
+                valid:true
+            },
+            firstname:{
+                msg:'',
+                valid:true
+            },
+            lastname:{
+                msg:'',
+                valid:true
+            }
+        };
+        
+        /**
+         * 
+         * @param {type} field
+         * @param {type} dataStatus
+         * @param {type} createData
+         * @returns {unresolved}
+         */
+        this.validateObjectField = function(field, dataStatus, createData) {
+            var result = angular.merge(createDataStatus, dataStatus);
+            if(field === 'username') {
+                result.username = fields.username(createData.username);
+            }
+            if(field === 'password') {
+                result.password = fields.password(createData.password);
+            }
+            if(field === 'password2') {
+                result.password2 = fields.password2(createData.password, createData.password2);
+            }
+            if(field === 'firstname') {
+                result.firstname = fields.firstname(createData.firstname);
+            }
+            if(field === 'lastname') {
+                result.lastname = fields.lastname(createData.lastname);
+            }
+            if(field === 'email') {
+                result.email = fields.email(createData.email);
+            }
+            createDataStatus = result;
+            return result;
+        };
+        
+        /**
+         * 
+         * @param {type} field
+         * @param {type} data
+         * @returns {unresolved}
+         */
+        this.validateField = function(field, data) {
+            if(field === 'username') {
+                return fields.username(data.username);
+            }
+            if(field === 'password') {
+                return fields.password(data.password);
+            }
+            if(field === 'password2') {
+                return fields.password2(data.password, data.password2);
+            }
+            if(field === 'firstname') {
+                return fields.firstname(data.firstname);
+            }
+            if(field === 'lastname') {
+                return fields.lastname(data.lastname);
+            }
+            if(field === 'email') {
+                return fields.email(data.email);
+            }
+        };
+        
+        /**
+         * 
+         * @param {type} createData
+         * @returns {Boolean}
+         */
+        this.isCreateValid = function(createData) {
+            //check form is not empty
+            var isEmpty = this.isCreateDataEmpty(createData);
+            if(isEmpty) {
+                return false;
+            }
+            return this.isFormValid(createData);
+        };
+        
+        /**
+         * 
+         * @param {type} data
+         * @returns {Boolean}
+         */
+        this.isFormValid = function(data) {
+            //check form is valid
+            var isValid = true;
+            angular.forEach(data, function(value, key) {
+                var val = this.validateField(key, data);
+                if(!val.valid) {
+                    isValid = false;
+                }
+            }, this);
+            return isValid;
+        };
+        
+        /**
+         * 
+         * @param {type} createData
+         * @returns {Boolean}
+         */
+        this.isCreateDataEmpty = function(createData){
+            var isEmpty = true;
+            angular.forEach(createData, function(value,key){
+                if(value !== '') {
+                    isEmpty = false;
+                }
+            });
+            return isEmpty;
+        };
+
+    }]);
+})();
+
+
+/**
+ * Admins Edit Validator library
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+(function() {
+    'use strict';
+    angular
+        .module("app.services")
+        .service('adminEditValidate', ['adminFields', function (fields) {
+        
+        /**
+         * model for errors
+         * @type result
+         */
+        var editDataStatus = {
+            username:{
+                msg:'',
+                valid: true
+            },
+            password:{
+                msg:'',
+                valid:true
+            },
+            passwordnew:{
+                msg:'',
+                valid:true
+            },
+            passwordnew2:{
+                msg:'',
+                valid:true
+            },
+            email:{
+                msg:'',
+                valid:true
+            },
+            firstname:{
+                msg:'',
+                valid:true
+            },
+            lastname:{
+                msg:'',
+                valid:true
+            }
+        };
+        
+        /**
+         * 
+         * @param {type} field
+         * @param {type} dataStatus
+         * @param {type} createData
+         * @returns {unresolved}
+         */
+        this.validateObjectField = function(field, dataStatus, editData) {
+            var result = angular.merge(editDataStatus, dataStatus);
+            if(field === 'username') {
+                result.username = fields.username(editData.username);
+            }
+            if(field === 'password') {
+                result.password = fields.password(editData.password);
+            }
+            if(field === 'passwordnew') {
+                result.passwordnew = fields.password(editData.passwordnew);
+            }
+            if(field === 'passwordnew2') {
+                result.passwordnew2 = fields.password2(editData.passwordnew, editData.passwordnew2);
+            }
+            if(field === 'firstname') {
+                result.firstname = fields.firstname(editData.firstname);
+            }
+            if(field === 'lastname') {
+                result.lastname = fields.lastname(editData.lastname);
+            }
+            if(field === 'email') {
+                result.email = fields.email(editData.email);
+            }
+            editDataStatus = result;
+            return result;
+        };
+        
+        /**
+         * 
+         * @param {type} field
+         * @param {type} data
+         * @returns {unresolved}
+         */
+        this.validateField = function(field, data) {
+            if(field === 'username') {
+                return fields.username(data.username);
+            }
+            if(field === 'password') {
+                return fields.password(data.password);
+            }
+            if(field === 'passwordnew') {
+                return fields.password(data.passwordnew);
+            }
+            if(field === 'passwordnew2') {
+                return fields.password2(data.passwordnew, data.passwordnew2);
+            }
+            if(field === 'firstname') {
+                return fields.firstname(data.firstname);
+            }
+            if(field === 'lastname') {
+                return fields.lastname(data.lastname);
+            }
+            if(field === 'email') {
+                return fields.email(data.email);
+            }
+        };
+        
+        /**
+         * 
+         * @param {type} createData
+         * @returns {Boolean}
+         */
+        this.isEditValid = function(editData) {
+            //check form is not empty
+            var isEmpty = this.isDataEmpty(editData);
+            if(isEmpty) {
+                return false;
+            }
+            return this.isFormValid(editData);
+        };
+        
+        /**
+         * 
+         * @param {type} data
+         * @returns {Boolean}
+         */
+        this.isFormValid = function(data) {
+            //check form is valid
+            var isValid = true;
+            var except = [
+                'password',
+                'passwordnew',
+                'passwordnew2'
+            ];
+            angular.forEach(data, function(value, key) {
+                if(except.indexOf(key) === -1) {
+                    var val = this.validateField(key, data);
+                    if(!val.valid) {
+                        isValid = false;
+                    }
+                } else {
+                    if(value !== '') {
+                        var val = this.validateField(key, data);
+                        if(!val.valid) {
+                            isValid = false;
+                        }
+                    }
+                }
+            }, this);
+            
+            //if passwordnew and passwordnew2 is not empty password is required
+            if(data.passwordnew !== '' && data.passwordnew2 !== '' && isValid) {
+                if(data.password === '') {
+                    isValid = false;
+                }
+            }
+            
+            //passwordnew2 cannot be empty if password is defined
+            if(data.passwordnew !== '' && data.passwordnew2 === '') {
+                isValid = false;
+            }
+            
+            
+            return isValid;
+        };
+        
+        /**
+         * 
+         * @param {type} createData
+         * @returns {Boolean}
+         */
+        this.isDataEmpty = function(editData){
+            var isEmpty = false;
+            var optionalEmpty = [
+                'password',
+                'passwordnew',
+                'passwordnew2'
+            ];
+            angular.forEach(editData, function(value, key){
+                if(value === '' && optionalEmpty.indexOf(key) === -1) {
+                    isEmpty = true;
+                }
+            });
+            return isEmpty;
+        };
+    }]);
+})();
+
