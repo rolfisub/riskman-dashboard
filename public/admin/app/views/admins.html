@@ -26,7 +26,10 @@
             <tbody>
               <tr ng-repeat="admin in admins.myAdmins">
                 <td>
-                  <p class="m0"> <a class="btn btn-raised btn-warning ripple m-sm"><span class="ion-ios-compose"></span></a><a class="btn btn-raised btn-danger ripple m-sm"><span class="ion-ios-trash"></span></a></p>
+                  <p class="m0">
+                    <edit-admin-pop ng-show="true" username="admin.user_name"></edit-admin-pop>
+                    <delete-admin-pop ng-show="true" username="admin.user_name"></delete-admin-pop>
+                  </p>
                 </td>
                 <td>
                   <p class="m0">{{admin.user_name}}</p>

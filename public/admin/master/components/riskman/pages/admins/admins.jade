@@ -20,11 +20,9 @@
                         tbody
                             tr(ng-repeat='admin in admins.myAdmins')
                                 td
-                                    p.m0 
-                                        a.btn.btn-raised.btn-warning.ripple.m-sm
-                                            span.ion-ios-compose
-                                        a.btn.btn-raised.btn-danger.ripple.m-sm
-                                            span.ion-ios-trash
+                                    p.m0
+                                        edit-admin-pop(ng-show="true" username="admin.user_name")
+                                        delete-admin-pop(ng-show="true" username="admin.user_name")
                                 td
                                     p.m0 {{admin.user_name}}
                                 td
