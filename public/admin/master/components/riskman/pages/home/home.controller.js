@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.home')
+        .module('riskman.home')
         .controller('HomeController', HomeController);
 
     HomeController.$inject = ['$scope', 'home'];

@@ -30,8 +30,6 @@
             'app.settings',
             'app.utils',
             'app.dashboard',
-            'app.home',
-            'app.admins',
             'app.charts',
             'app.cards',
             'app.elements',
@@ -40,8 +38,8 @@
             'app.bootstrapui',
             'app.maps',
             'app.pages',
-            'app.services',
-            'app.user'
+            'app.user',
+            'riskman'
         ]);
 })();
 
@@ -118,14 +116,14 @@
     'use strict';
 
     angular
-        .module('app.forms', []);
+        .module('app.header', []);
 })();
 
 (function() {
     'use strict';
 
     angular
-        .module('app.header', []);
+        .module('app.forms', []);
 })();
 
 (function() {
@@ -177,6 +175,24 @@
         .module('app.ripple', []);
 })();
 
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+(function() {
+    'use strict';
+    angular
+        .module("riskman",[
+            'riskman.pages',
+            'riskman.services',
+            'riskman.directives'
+        ]);
+})();
+
+
+
 (function() {
     'use strict';
 
@@ -220,7 +236,7 @@
 
     angular
         .module('app.user', [
-            'app.services'
+            'riskman'
         ]);
 })();
 
@@ -236,29 +252,43 @@
 (function() {
     'use strict';
     angular
-        .module("app.directives");
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.services', []);
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.admins', [
-            'app.services'
+        .module("riskman.directives",[
+            'riskman.services'
         ]);
 })();
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+(function() {
+    'use strict';
+    angular
+        .module("riskman.pages",[
+            'riskman.admins',
+            'riskman.home'
+        ]);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('riskman.services', []);
+})();
 
 (function() {
     'use strict';
 
     angular
-        .module('app.home', []);
+        .module('riskman.admins', []);
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('riskman.home', []);
 })();
 
 (function() {
@@ -3158,6 +3188,142 @@
     'use strict';
 
     angular
+        .module('app.header')
+        .controller('HeaderController', HeaderController)
+        .controller('HeaderModalController', HeaderModalController)
+        .controller('HeaderModalSearchController', HeaderModalSearchController);
+
+    HeaderController.$inject = ['$uibModal', 'auth', '$state'];
+
+    function HeaderController($uibModal, auth, $state) {
+        var vm = this;
+        
+        
+        vm.logout = function() {
+            var r = auth.logout();
+            r.then(function(res){
+                $state.go('user.login');
+            }, auth.onError);
+        };
+        
+        activate();
+
+        ////////////////
+
+        function activate() {
+            // Header Search
+            vm.openModalSearch = function() {
+
+                var modalSearchInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'app/views/header-search.tpl.html',
+                    controller: 'HeaderModalSearchController as mod',
+                    // position via css class
+                    windowClass: 'modal-top',
+                    backdropClass: 'modal-backdrop-soft',
+                    // sent data to the modal instance (injectable into controller)
+                    resolve: {
+                        data: function() {
+                            return {
+                                title: 'Search'
+                            };
+                        }
+                    }
+                });
+
+                modalSearchInstance.result.then(function( /*data*/ ) {
+                    // use data from modal here
+                }, function() {
+                    // Modal dismissed
+                });
+            };
+
+            // Settings panel (right sidebar)
+            vm.openModalBar = function() {
+
+                var modalBarInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'app/views/settings.tpl.html',
+                    controller: 'HeaderModalController as mod',
+                    // position via css class
+                    windowClass: 'modal-right',
+                    backdropClass: 'modal-backdrop-soft',
+                    // sent data to the modal instance (injectable into controller)
+                    resolve: {
+                        data: function() {
+                            return {
+                                title: 'Settings'
+                            };
+                        }
+                    }
+                });
+
+                modalBarInstance.result.then(function( /*data*/ ) {
+                    // use data from modal here
+                }, function() {
+                    // Modal dismissed
+                });
+            };
+
+        }
+    }
+
+    HeaderModalController.$inject = ['$uibModalInstance', 'data'];
+
+    function HeaderModalController($uibModalInstance, data) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+            vm.modalTitle = data.title;
+
+            vm.close = function() {
+                $uibModalInstance.close( /* data for promise*/ );
+            };
+
+            vm.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+            };
+        }
+    }
+    HeaderModalSearchController.$inject = ['$uibModalInstance', '$timeout', 'data'];
+
+    function HeaderModalSearchController($uibModalInstance, $timeout, data) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+            vm.modalTitle = data.title;
+
+            // input autofocus
+            $timeout(function() {
+                document.querySelector('.header-input-search').focus();
+            }, 300);
+
+            vm.close = function() {
+                $uibModalInstance.close( /* data for promise*/ );
+            };
+
+            vm.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+            };
+        }
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
         .module('app.forms')
         .controller('ColorPickerController', ColorPickerController);
 
@@ -4064,142 +4230,6 @@
 
         }
     }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.header')
-        .controller('HeaderController', HeaderController)
-        .controller('HeaderModalController', HeaderModalController)
-        .controller('HeaderModalSearchController', HeaderModalSearchController);
-
-    HeaderController.$inject = ['$uibModal', 'auth', '$state'];
-
-    function HeaderController($uibModal, auth, $state) {
-        var vm = this;
-        
-        
-        vm.logout = function() {
-            var r = auth.logout();
-            r.then(function(res){
-                $state.go('user.login');
-            }, auth.onError);
-        };
-        
-        activate();
-
-        ////////////////
-
-        function activate() {
-            // Header Search
-            vm.openModalSearch = function() {
-
-                var modalSearchInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'app/views/header-search.tpl.html',
-                    controller: 'HeaderModalSearchController as mod',
-                    // position via css class
-                    windowClass: 'modal-top',
-                    backdropClass: 'modal-backdrop-soft',
-                    // sent data to the modal instance (injectable into controller)
-                    resolve: {
-                        data: function() {
-                            return {
-                                title: 'Search'
-                            };
-                        }
-                    }
-                });
-
-                modalSearchInstance.result.then(function( /*data*/ ) {
-                    // use data from modal here
-                }, function() {
-                    // Modal dismissed
-                });
-            };
-
-            // Settings panel (right sidebar)
-            vm.openModalBar = function() {
-
-                var modalBarInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'app/views/settings.tpl.html',
-                    controller: 'HeaderModalController as mod',
-                    // position via css class
-                    windowClass: 'modal-right',
-                    backdropClass: 'modal-backdrop-soft',
-                    // sent data to the modal instance (injectable into controller)
-                    resolve: {
-                        data: function() {
-                            return {
-                                title: 'Settings'
-                            };
-                        }
-                    }
-                });
-
-                modalBarInstance.result.then(function( /*data*/ ) {
-                    // use data from modal here
-                }, function() {
-                    // Modal dismissed
-                });
-            };
-
-        }
-    }
-
-    HeaderModalController.$inject = ['$uibModalInstance', 'data'];
-
-    function HeaderModalController($uibModalInstance, data) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-            vm.modalTitle = data.title;
-
-            vm.close = function() {
-                $uibModalInstance.close( /* data for promise*/ );
-            };
-
-            vm.cancel = function() {
-                $uibModalInstance.dismiss('cancel');
-            };
-        }
-    }
-    HeaderModalSearchController.$inject = ['$uibModalInstance', '$timeout', 'data'];
-
-    function HeaderModalSearchController($uibModalInstance, $timeout, data) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-            vm.modalTitle = data.title;
-
-            // input autofocus
-            $timeout(function() {
-                document.querySelector('.header-input-search').focus();
-            }, 300);
-
-            vm.close = function() {
-                $uibModalInstance.close( /* data for promise*/ );
-            };
-
-            vm.cancel = function() {
-                $uibModalInstance.dismiss('cancel');
-            };
-        }
-    }
-
 })();
 
 (function() {
@@ -6742,7 +6772,7 @@
     'use strict';
 
     angular
-        .module('app.user', ['app.services'])
+        .module('app.user', ['riskman'])
         .controller('loginCtrl', ['$scope','auth','$state', function($scope, auth, $state) {
             
             $scope.model =  {
@@ -6766,7 +6796,7 @@
                 var r = auth.auth($scope.model);
                 r.then(function(res){
                     if(res.data.success) {
-                        $state.go('app.home');
+                        $state.go('riskman.home');
                     } 
                 }, function(err) {
                     $scope.errorLogin.msg = err.data.feedback[0];
@@ -6980,6 +7010,98 @@
 
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('riskman.pages')
+        .run(riskmanRoute);
+
+    riskmanRoute.$inject = ['Router'];
+
+    function riskmanRoute(Router) {
+
+        Router.state('riskman', {
+            url: '/riskman',
+            title: 'RiskMan',
+            abstract: true,
+            templateUrl:'core.layout.html',
+            require: ['icons', 'ng-mfb', 'md-colors', 'screenfull']
+        });
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('riskman.admins')
+        .controller('AdminsController', AdminsController);
+
+    AdminsController.$inject = ['$scope', 'admins'];
+
+    function AdminsController($scope, admins) {
+        var c = this;
+        
+        c.myAdmins = [];
+        
+        c.init = function() {
+            var r = admins.getAdminsList();
+            
+            r.then(function(res){
+                c.myAdmins = res.data.admins_data;
+            }, admins.onError);
+        };
+        
+        c.init();
+        
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('riskman.admins')
+        .run(adminsRun);
+
+    adminsRun.$inject = ['Menu'];
+
+    function adminsRun(Menu) {
+
+        var menuItem = {
+            name: 'Administrators',
+            sref: 'riskman.admins',
+            order: 9,
+           //iconclass: 'ion-person-stalker',
+            imgpath: 'app/img/icons/person-stalker.svg',
+        };
+
+        Menu.addItem(menuItem);
+
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('riskman.admins')
+        .run(adminsRoute);
+
+    adminsRoute.$inject = ['Router'];
+    function adminsRoute(Router){
+
+        Router.state('riskman.admins', {
+            url: '/admins',
+            title: 'Administrators',
+            templateUrl: 'admins.html',
+            require: ['modernizr', 'icons', 'ng-mfb', 'md-colors'],
+            parent:'riskman'
+        });
+    }
+
+})();
+
 /**
  * Admins rest interface
  *
@@ -6991,7 +7113,7 @@
 (function() {
     'use strict';
     angular
-        .module("app.services")
+        .module("riskman.services")
         .service('admins', ['api', function (api) {
         
         /*
@@ -7123,7 +7245,7 @@
 (function() {
     'use strict';
     angular
-        .module("app.services")
+        .module("riskman.services")
         .service('api', ['$http','$state', function ($http, $state) {
 
         //'/rest' path is assumed as base path
@@ -7249,7 +7371,7 @@
 (function() {
     'use strict';
     angular
-        .module("app.services")
+        .module("riskman.services")
         .service('auth', ['api','$state', function (api, $state) {
 
         this.auth = function(data) {
@@ -7273,81 +7395,39 @@
     }]);
 
 })();
+/**
+ * Main api CRUD service
+ *
+ * @package   RiskMan
+ * @author    Rolf
+ * 
+ */
+
+/**
+ * API service wrapper to make Ajax calls for Trxade
+*/
 (function() {
     'use strict';
-
     angular
-        .module('app.admins')
-        .controller('AdminsController', AdminsController);
-
-    AdminsController.$inject = ['$scope', 'admins'];
-
-    function AdminsController($scope, admins) {
-        var c = this;
-        
-        c.myAdmins = [];
-        
-        c.init = function() {
-            var r = admins.getAdminsList();
-            
-            r.then(function(res){
-                c.myAdmins = res.data.admins_data;
-            }, admins.onError);
+        .module("riskman.home")
+        .service('home', ['api', function (api) {
+                
+        this.getGeneralServerStats = function() {
+            return api.read('/stats/general_api_stats');
         };
         
-        c.init();
-        
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.admins')
-        .run(adminsRun);
-
-    adminsRun.$inject = ['Menu'];
-
-    function adminsRun(Menu) {
-
-        var menuItem = {
-            name: 'Administrators',
-            sref: 'app.admins',
-            order: 9,
-           //iconclass: 'ion-person-stalker',
-            imgpath: 'app/img/icons/person-stalker.svg',
+        this.onError = function(err) {
+            return api.errorCallback(err);
         };
+        
+    }]);
 
-        Menu.addItem(menuItem);
-
-    }
 })();
-
 (function() {
     'use strict';
 
     angular
-        .module('app.admins')
-        .run(adminsRoute);
-
-    adminsRoute.$inject = ['Router'];
-    function adminsRoute(Router){
-
-        Router.state('app.admins', {
-            url: '/admins',
-            title: 'Administrators',
-            templateUrl: 'admins.html',
-            require: ['modernizr', 'icons', 'ng-mfb', 'md-colors']
-        });
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.home')
+        .module('riskman.home')
         .controller('HomeController', HomeController);
 
     HomeController.$inject = ['$scope', 'home'];
@@ -7373,7 +7453,7 @@
     'use strict';
 
     angular
-        .module('app.home')
+        .module('riskman.home')
         .run(homeRun);
     homeRun.$inject = ['Menu'];
 
@@ -7381,7 +7461,7 @@
 
         var menuItem = {
             name: 'Home',
-            sref: 'app.home',
+            sref: 'riskman.home',
             // iconclass: 'ion-aperture',
             imgpath: 'app/img/icons/aperture.svg',
             order: 1,
@@ -7400,50 +7480,72 @@
     'use strict';
 
     angular
-        .module('app.home')
+        .module('riskman.home')
         .run(homeRoute);
 
     homeRoute.$inject = ['Router'];
 
     function homeRoute(Router) {
 
-        Router.state('app.home', {
+        Router.state('riskman.home', {
             url: '/home',
             title: 'Home',
             templateUrl: 'home.html',
-            require: ['angular-flot', 'easypiechart', 'sparkline', 'vector-map', 'vector-map-maps']
+            require: ['angular-flot', 'easypiechart', 'sparkline', 'vector-map', 'vector-map-maps'],
         });
     }
 
 })();
 
 /**
- * Main api CRUD service
+ * Testing angular controller and route
  *
  * @package   RiskMan
- * @author    Rolf
- * 
+ * @author    Rolf Bansbach
  */
 
-/**
- * API service wrapper to make Ajax calls for Trxade
-*/
 (function() {
     'use strict';
     angular
-        .module("app.home")
-        .service('home', ['api', function (api) {
-                
-        this.getGeneralServerStats = function() {
-            return api.read('/stats/general_api_stats');
-        };
-        
-        this.onError = function(err) {
-            return api.errorCallback(err);
-        };
-        
-    }]);
+        .module("riskman.directives")
+        .directive('deleteAdminPop', function(){
+        return {
+            restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
+            replace: true,
+            scope: { username: '=' },
+            templateUrl: "deleteAdminPop.html",
+            controller: ['$scope', 'admins', function ($scope, adminsSrv) {
 
+                $scope.deladminPop = {
+                    title:'Delete admin account',
+                    content:'Are you sure that you want to delete this account?'
+                };
+                
+                $scope.deleteAdmin = function() {
+                    var r = adminsSrv.deleteAdmin($scope.username);
+                    r.then(function(res){
+                        //code 200
+                        $scope.$parent.init();
+                        $scope.$parent.genericErrorMsg.show = false;
+                        $scope.$parent.genericSuccessMsg.msg = 'Admin deleted.';
+                        $scope.$parent.genericSuccessMsg.show = true;
+                    }, function(err){
+                        //code 400 >
+                        if(err.status === 400) {
+                            $scope.$parent.genericErrorMsg.msg = err.data.feedback[0];
+                            $scope.$parent.genericErrorMsg.show = true;
+                            $scope.$parent.genericSuccessMsg.show = false;
+                        } else {
+                            adminsSrv.errorCallBack(err);
+                        }
+
+                    });
+                };
+                
+                
+            }]
+        };
+    });
 })();
 /**
  * Testing angular controller and route
@@ -7455,14 +7557,15 @@
 (function() {
     'use strict';
     angular
-        .module("app.directives")
+        .module("riskman.directives")
         .directive('createAdminPop', function(){
         return {
             restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
             replace: true,
             // scope: { data: '=' },
             templateUrl: "createAdminPop.html",
-            controller: ['$scope', 'adminsSrv', 'adminCreateValidate', function ($scope, adminsSrv, createValidator) {
+            //template:'<button type="button" class="btn btn-raised btn-success ripple m-sm" title="{{newadminPop.title}}"     data-content="{{newadminPop.content}}"     data-template-url="../views/createAdminPopTemplate.html"     data-animation="am-flip-x"                 data-auto-close="1"                 data-placement="bottom-left"                data-on-show="reset()"                bs-popover    >    <span class="ion-android-person-add"></span></button>',
+            controller: ['$scope', 'admins', 'adminCreateValidate', function ($scope, adminsSrv, createValidator) {
                  $scope.dataCreate = {
                     username:'',
                     password:'',
@@ -7581,64 +7684,14 @@
 (function() {
     'use strict';
     angular
-        .module("app.directives")
-        .directive('deleteAdminPop', function(){
-        return {
-            restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
-            replace: true,
-            scope: { username: '=' },
-            templateUrl: "deleteAdminPop.html",
-            controller: ['$scope', 'adminsSrv', function ($scope, adminsSrv) {
-
-                $scope.deladminPop = {
-                    title:'Delete admin account',
-                    content:'Are you sure that you want to delete this account?'
-                };
-                
-                $scope.deleteAdmin = function() {
-                    var r = adminsSrv.deleteAdmin($scope.username);
-                    r.then(function(res){
-                        //code 200
-                        $scope.$parent.init();
-                        $scope.$parent.genericErrorMsg.show = false;
-                        $scope.$parent.genericSuccessMsg.msg = 'Admin deleted.';
-                        $scope.$parent.genericSuccessMsg.show = true;
-                    }, function(err){
-                        //code 400 >
-                        if(err.status === 400) {
-                            $scope.$parent.genericErrorMsg.msg = err.data.feedback[0];
-                            $scope.$parent.genericErrorMsg.show = true;
-                            $scope.$parent.genericSuccessMsg.show = false;
-                        } else {
-                            adminsSrv.errorCallBack(err);
-                        }
-
-                    });
-                };
-                
-                
-            }]
-        };
-    });
-})();
-/**
- * Testing angular controller and route
- *
- * @package   RiskMan
- * @author    Rolf Bansbach
- */
-
-(function() {
-    'use strict';
-    angular
-        .module("app.directives")
+        .module("riskman.directives")
         .directive('editAdminPop', function(){
         return {
             restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
             replace: true,
             scope: { username: '=' },
             templateUrl: "editAdminPop.html",
-            controller: ['$scope', 'adminsSrv', 'adminEditValidate', function ($scope, adminsSrv, editValidator) {
+            controller: ['$scope', 'admins', 'adminEditValidate', function ($scope, adminsSrv, editValidator) {
                  $scope.dataEdit = {
                     email:'',
                     firstname:'',
@@ -7763,7 +7816,7 @@
 (function() {
     'use strict';
     angular
-        .module("app.services")
+        .module("riskman.services")
         .service('adminFields', function () {
         
         /**
@@ -7940,7 +7993,7 @@
 (function() {
     'use strict';
     angular
-        .module("app.services")
+        .module("riskman.services")
         .service('adminCreateValidate', ['adminFields', function (fields) {
         
         /**
@@ -8092,7 +8145,7 @@
 (function() {
     'use strict';
     angular
-        .module("app.services")
+        .module("riskman.services")
         .service('adminEditValidate', ['adminFields', function (fields) {
         
         /**

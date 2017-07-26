@@ -8,7 +8,7 @@
 (function() {
     'use strict';
     angular
-        .module("app.services")
+        .module("riskman.services")
         .service('adminEditValidate', ['adminFields', function (fields) {
         
         /**

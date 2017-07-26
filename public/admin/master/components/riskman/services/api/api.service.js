@@ -12,7 +12,7 @@
 (function() {
     'use strict';
     angular
-        .module("app.services")
+        .module("riskman.services")
         .service('api', ['$http','$state', function ($http, $state) {
 
         //'/rest' path is assumed as base path

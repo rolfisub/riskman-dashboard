@@ -8,14 +8,14 @@
 (function() {
     'use strict';
     angular
-        .module("app.directives")
+        .module("riskman.directives")
         .directive('editAdminPop', function(){
         return {
             restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
             replace: true,
             scope: { username: '=' },
             templateUrl: "editAdminPop.html",
-            controller: ['$scope', 'adminsSrv', 'adminEditValidate', function ($scope, adminsSrv, editValidator) {
+            controller: ['$scope', 'admins', 'adminEditValidate', function ($scope, adminsSrv, editValidator) {
                  $scope.dataEdit = {
                     email:'',
                     firstname:'',

@@ -12,7 +12,7 @@
 (function() {
     'use strict';
     angular
-        .module("app.services")
+        .module("riskman.services")
         .service('auth', ['api','$state', function (api, $state) {
 
         this.auth = function(data) {
