@@ -14,7 +14,7 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Actions</th>
+                <th>Actions<a class="btn btn-raised btn-success ripple m-sm"><span class="ion-android-person-add"></span></a></th>
                 <th>User</th>
                 <th>First</th>
                 <th>Last</th>
@@ -24,7 +24,7 @@
             <tbody>
               <tr ng-repeat="admin in admins.myAdmins">
                 <td>
-                  <p class="m0"> <a class="btn btn-raised btn-warning ripple m-sm"><span class="glyphicon glyphicon-edit"></span></a><a class="btn btn-raised btn-danger ripple m-sm"><span class="glyphicon glyphicon-ban-circle"></span></a></p>
+                  <p class="m0"> <a class="btn btn-raised btn-warning ripple m-sm"><span class="ion-ios-compose"></span></a><a class="btn btn-raised btn-danger ripple m-sm"><span class="ion-ios-trash"></span></a></p>
                 </td>
                 <td>
                   <p class="m0">{{admin.user_name}}</p>

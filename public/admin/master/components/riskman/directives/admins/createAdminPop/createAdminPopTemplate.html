@@ -1,0 +1,119 @@
+<div class="popover" tabindex="-1" ng-show="content">
+  <div class="arrow"></div>
+  <h3 class="popover-title" ng-bind-html="title" ng-show="title"></h3>
+  <div class="popover-content">
+    <form name="popoverForm">
+      <p ng-bind-html="content" style="min-width:100px;"></p>
+      <div class="form-group">
+        <div 
+            class="alert alert-danger"
+            ng-hide="genericError.valid">
+            {{genericError.msg}}
+        </div>
+        <div 
+            class="alert alert-success"
+            ng-show="successMsg.show">
+            {{successMsg.msg}}
+        </div>
+        <div class="input-group">
+            <div class="input-group-addon">Name</div>
+            <input 
+                class="form-control" 
+                type="text" 
+                placeholder="Enter First Name"
+                ng-model="dataCreate.firstname"
+                ng-change="validateCreateField('firstname')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="createDataStatus.firstname.valid">
+            {{createDataStatus.firstname.msg}}
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">Last Name</div>
+            <input 
+                class="form-control" 
+                type="text" 
+                placeholder="Enter Last Name"
+                ng-model="dataCreate.lastname"
+                ng-change="validateCreateField('lastname')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="createDataStatus.lastname.valid">
+            {{createDataStatus.lastname.msg}}
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">@</div>
+            <input 
+                class="form-control" 
+                type="text"
+                placeholder="Enter email"
+                ng-model="dataCreate.email"
+                ng-change="validateCreateField('email')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="createDataStatus.email.valid">
+            {{createDataStatus.email.msg}}
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">Username</div>
+            <input 
+                class="form-control" 
+                type="text" 
+                placeholder="Enter Username"
+                ng-model="dataCreate.username"
+                ng-change="validateCreateField('username')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="createDataStatus.username.valid">
+            {{createDataStatus.username.msg}}
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">Secret</div>
+            <input 
+                class="form-control" 
+                type="password" 
+                placeholder="Enter Password"
+                ng-model="dataCreate.password"
+                ng-change="validateCreateField('password')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="createDataStatus.password.valid">
+            {{createDataStatus.password.msg}}
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">Repeat</div>
+            <input 
+                class="form-control" 
+                type="password" 
+                placeholder="Enter Password Again"
+                ng-model="dataCreate.password2"
+                ng-change="validateCreateField('password2')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="createDataStatus.password2.valid">
+            {{createDataStatus.password2.msg}}
+        </div>
+        <br>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-danger" ng-click="$hide()">Close</button>
+        <button 
+            type="button" 
+            class="btn btn-primary" 
+            ng-click="createAdmin()"
+            ng-disabled="!createForm.isValid">Save changes</button>
+      </div>
+    </form>
+  </div>
+</div>

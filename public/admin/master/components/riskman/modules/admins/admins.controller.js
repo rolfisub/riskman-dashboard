@@ -13,7 +13,7 @@
         c.myAdmins = [];
         
         c.init = function() {
-            var r = admins.getAdmins();
+            var r = admins.getAdminsList();
             
             r.then(function(res){
                 c.myAdmins = res.data.admins_data;
