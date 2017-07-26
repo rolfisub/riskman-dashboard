@@ -185,6 +185,7 @@
     'use strict';
     angular
         .module("riskman",[
+            'mgcrea.ngStrap',
             'riskman.pages',
             'riskman.services',
             'riskman.directives'
