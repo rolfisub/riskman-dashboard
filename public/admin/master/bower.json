@@ -83,7 +83,8 @@
     "angular-simple-logger": "0.1.7",
     "angular-datamaps": "0.1.2",
     "datatables": "1.10.12",
-    "loaders.css": "0.1.2"
+    "loaders.css": "0.1.2",
+    "angular-strap": "^2.3.12"
   },
   "resolutions": {
     "angular": "1.5.8",
