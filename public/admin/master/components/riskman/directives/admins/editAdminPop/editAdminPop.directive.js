@@ -14,7 +14,7 @@
             restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
             replace: true,
             scope: { username: '=' },
-            templateUrl: "editAdminPop.html",
+            templateUrl: "app/views/editAdminPop.html",
             controller: ['$scope', 'admins', 'adminEditValidate', function ($scope, adminsSrv, editValidator) {
                  $scope.dataEdit = {
                     email:'',

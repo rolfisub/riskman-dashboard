@@ -14,7 +14,7 @@
             restrict: 'E', //This means that it will be used as an element and NOT as an attribute.
             replace: true,
             // scope: { data: '=' },
-            templateUrl: "createAdminPop.html",
+            templateUrl: "app/views/createAdminPop.html",
             //template:'<button type="button" class="btn btn-raised btn-success ripple m-sm" title="{{newadminPop.title}}"     data-content="{{newadminPop.content}}"     data-template-url="../views/createAdminPopTemplate.html"     data-animation="am-flip-x"                 data-auto-close="1"                 data-placement="bottom-left"                data-on-show="reset()"                bs-popover    >    <span class="ion-android-person-add"></span></button>',
             controller: ['$scope', 'admins', 'adminCreateValidate', function ($scope, adminsSrv, createValidator) {
                  $scope.dataCreate = {
