@@ -1,0 +1,27 @@
+.content-heading.bg-white
+    .row
+        .col-sm-9
+            h4.m0.text-thin RiskMan Books
+            small Create, Edit, Enable/Disable Books
+.container-fluid(ng-controller='BooksController as books')
+    .row
+        .col-xs-12.col-lg-8
+            .card.admins-card
+                .table-responsive.admins-table
+                    table.table.table-striped
+                        thead
+                            tr
+                                th Actions
+                                th ID
+                                th Name
+                                th Modified
+                        tbody
+                            tr(ng-repeat='book in books.myBooks')
+                                td
+                                    p.m0 {{}}
+                                td
+                                    p.m0 {{book.id}}
+                                td
+                                    p.m0 {{book.name}}
+                                td
+                                    p.m0 {{book.datetime}}
