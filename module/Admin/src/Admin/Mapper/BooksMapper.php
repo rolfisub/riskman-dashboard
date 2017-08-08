@@ -26,5 +26,25 @@ use Admin\Entity\Book;
  */
 class BooksMapper extends AbstractMapper
 {
+    public function getAllBooks()
+    {
+        return[
+            'books' => $this->_getAllBooks()
+        ];
+    }
     
+    private function _getAllBooks()
+    {
+        $s = new Select();
+        $s->from(['b'=>'books'])
+            ->columns([
+                'id',
+                'name',
+                'enabled',
+                'datetime'
+            ]);
+        $result = $this->queryObject($s);
+        $data = $result->toArray();
+        return $data;
+    }
 }

@@ -24,5 +24,13 @@ class Books
         $this->mapper = $mapper;
     }
     
+    /**
+     * Get list of books
+     */
+    public function getBooks()
+    {
+        return $this->mapper->getAllBooks();
+    }
+    
     
 }
