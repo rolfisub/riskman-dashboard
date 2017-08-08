@@ -22,22 +22,22 @@
             'app.sidebar',
             'app.ripple',
             'app.floatbutton',
-            'app.layouts',
+            //'app.layouts',
             'app.menu',
             'app.preloader',
             'app.loadingbar',
             'app.translate',
             'app.settings',
             'app.utils',
-            'app.dashboard',
-            'app.charts',
-            'app.cards',
-            'app.elements',
-            'app.forms',
-            'app.tables',
-            'app.bootstrapui',
-            'app.maps',
-            'app.pages',
+            //'app.dashboard',
+            //'app.charts',
+            //'app.cards',
+            //'app.elements',
+            //'app.forms',
+            //'app.tables',
+            //'app.bootstrapui',
+            //'app.maps',
+            //'app.pages',
             'app.user',
             'riskman'
         ]);
@@ -102,14 +102,14 @@
     'use strict';
 
     angular
-        .module('app.floatbutton', []);
+        .module('app.elements', []);
 })();
 
 (function() {
     'use strict';
 
     angular
-        .module('app.elements', []);
+        .module('app.floatbutton', []);
 })();
 
 (function() {
@@ -2598,73 +2598,6 @@
     'use strict';
 
     angular
-        .module('app.floatbutton')
-        .controller('FloatButtonController', FloatButtonController);
-
-    FloatButtonController.$inject = ['$window'];
-
-    function FloatButtonController($window) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-            vm.menuState = 'closed';
-            vm.loc = loc;
-            vm.mainAction = mainAction;
-            vm.hovered = hovered;
-
-            vm.chosen = {
-                effect: 'zoomin',
-                position: 'br',
-                method: 'click',
-                action: 'fire'
-            };
-
-            vm.buttons = [{
-                label: 'View on Github',
-                icon: 'ion-social-github',
-                href: '//github.com/nobitagit/ng-material-floating-button/'
-            }, {
-                label: 'Follow me on Github',
-                icon: 'ion-social-octocat',
-                href: '//github.com/nobitagit'
-            }, {
-                label: 'Share on Twitter',
-                icon: 'ion-social-twitter',
-                href: '//twitter.com/share?text=Amazing material floating action button directive!&url=http://nobitagit.github.io/ng-material-floating-button/&hashtags=angular,material,design,button'
-            }];
-
-            function loc(href) {
-                $window.location.href = href;
-            }
-
-            function mainAction() {
-                console.log('Firing Main Action!');
-            }
-
-            function hovered() {
-                // toggle something on hover.
-            }
-
-            vm.toggle = function() {
-                this.menuState = this.menuState === 'closed' ? 'open' : 'closed';
-            };
-
-            vm.closeMenu = function() {
-                this.menuState = 'closed';
-            };
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
         .module('app.elements')
         .run(elementsRun);
     elementsRun.$inject = ['Menu'];
@@ -3178,6 +3111,73 @@
                     text: 'Here\'s a custom image.',
                     imageUrl: '//oitozero.com/img/avatar.jpg'
                 });
+            };
+        }
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.floatbutton')
+        .controller('FloatButtonController', FloatButtonController);
+
+    FloatButtonController.$inject = ['$window'];
+
+    function FloatButtonController($window) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+            vm.menuState = 'closed';
+            vm.loc = loc;
+            vm.mainAction = mainAction;
+            vm.hovered = hovered;
+
+            vm.chosen = {
+                effect: 'zoomin',
+                position: 'br',
+                method: 'click',
+                action: 'fire'
+            };
+
+            vm.buttons = [{
+                label: 'View on Github',
+                icon: 'ion-social-github',
+                href: '//github.com/nobitagit/ng-material-floating-button/'
+            }, {
+                label: 'Follow me on Github',
+                icon: 'ion-social-octocat',
+                href: '//github.com/nobitagit'
+            }, {
+                label: 'Share on Twitter',
+                icon: 'ion-social-twitter',
+                href: '//twitter.com/share?text=Amazing material floating action button directive!&url=http://nobitagit.github.io/ng-material-floating-button/&hashtags=angular,material,design,button'
+            }];
+
+            function loc(href) {
+                $window.location.href = href;
+            }
+
+            function mainAction() {
+                console.log('Firing Main Action!');
+            }
+
+            function hovered() {
+                // toggle something on hover.
+            }
+
+            vm.toggle = function() {
+                this.menuState = this.menuState === 'closed' ? 'open' : 'closed';
+            };
+
+            vm.closeMenu = function() {
+                this.menuState = 'closed';
             };
         }
     }
@@ -6824,7 +6824,7 @@
     userRun.$inject = ['Menu'];
 
     function userRun(Menu) {
-
+        /*
         var menuItem = {
             name: 'User',
             sref: 'user',
@@ -6846,7 +6846,7 @@
             }]
         };
 
-        Menu.addItem(menuItem);
+        Menu.addItem(menuItem);*/
 
     }
 })();
@@ -7053,6 +7053,16 @@
         };
         
         c.init();
+        
+        /**
+         * listens for refresh calls
+         */
+        $scope.$on('initAdmins', function(data){
+            c.init();
+        });
+        
+        
+        
         
     }
 })();
@@ -7605,15 +7615,12 @@
                         $scope.reset();
                         $scope.successMsg.show = true;
                         $scope.successMsg.msg = 'Admin Created.';
-                        $scope.$parent.genericSuccessMsg.show = true;
-                        $scope.$parent.genericSuccessMsg.msg = 'Admin Created.';
-                        $scope.$parent.init();
+                        $scope.$emit('initAdmins', {});
                     }, function(err) {
                         if(err.status === 400) {
                             $scope.genericError.msg = err.data.feedback[0];
                             $scope.genericError.valid = false;
                             $scope.successMsg.show = false;
-                            $scope.$parent.genericSuccessMsg.show = false;
                         } else {
                             adminsSrv.errorCallBack(err);
                         }
@@ -7647,20 +7654,28 @@
                     content:'Are you sure that you want to delete this account?'
                 };
                 
+                $scope.successMsg = {
+                    msg:'Admin deleted',
+                    show: false
+                };
+                
+                $scope.errorMsg = {
+                    msg:'',
+                    show: false
+                };
+                
                 $scope.deleteAdmin = function() {
                     var r = adminsSrv.deleteAdmin($scope.username);
                     r.then(function(res){
                         //code 200
-                        $scope.$parent.init();
-                        $scope.$parent.genericErrorMsg.show = false;
-                        $scope.$parent.genericSuccessMsg.msg = 'Admin deleted.';
-                        $scope.$parent.genericSuccessMsg.show = true;
+                        $scope.$emit('initAdmins', {});
+                        $scope.successMsg.show = true;
                     }, function(err){
                         //code 400 >
                         if(err.status === 400) {
-                            $scope.$parent.genericErrorMsg.msg = err.data.feedback[0];
-                            $scope.$parent.genericErrorMsg.show = true;
-                            $scope.$parent.genericSuccessMsg.show = false;
+                            $scope.errorMsg.msg = err.data.feedback[0];
+                            $scope.errorMsg.show = true;
+                            $scope.successMsg.show = false;
                         } else {
                             adminsSrv.errorCallBack(err);
                         }
@@ -7691,7 +7706,7 @@
             scope: { username: '=' },
             templateUrl: "app/views/editAdminPop.html",
             controller: ['$scope', 'admins', 'adminEditValidate', function ($scope, adminsSrv, editValidator) {
-                 $scope.dataEdit = {
+                $scope.dataEdit = {
                     email:'',
                     firstname:'',
                     lastname:'',
@@ -7731,12 +7746,15 @@
                     passwordnew2:{
                         msg:'',
                         valid:true
-                    },
-
+                    }
                 };
                 $scope.genericError = {
                     msg:'',
-                    valid:true
+                    hide: true
+                };
+                $scope.genericMsg = {
+                    msg:'',
+                    hide: true
                 };
                 $scope.editForm = {
                     isValid: true
@@ -7760,7 +7778,8 @@
                     $scope.editDataStatus.password.valid = true;
                     $scope.editDataStatus.passwordnew.valid = true;
                     $scope.editDataStatus.passwordnew2.valid = true;
-                    $scope.genericError.valid = true;
+                    $scope.genericError.hide = true;
+                    $scope.genericMsg.hide = true;
                 };
                 
                 $scope.getAdmin = function(){
@@ -7770,7 +7789,7 @@
                         $scope.dataEdit = angular.merge($scope.dataEdit, response.data);
                     },
                     function(error){
-                        adminsSrv.errorCallBack(error);
+                        adminsSrv.onError(error);
                     });
                 };
 
@@ -7787,16 +7806,19 @@
                     
                     r.then(function(res){
                         $scope.getAdmin();
-                        $scope.$parent.init();
-                        $scope.$parent.genericSuccessMsg.show = true;
-                        $scope.$parent.genericSuccessMsg.msg = 'Admin Updated.';
+                        $scope.genericMsg.hide = false;
+                        $scope.genericMsg.msg = 'Admin Updated.';
+                        $scope.genericError.hide = true;
+                        $scope.genericError.msg = '';
+                        $scope.$emit('initAdmins', {});
                     }, function(err){
                         if(err.status === 400) {
-                            $scope.$parent.genericSuccessMsg.show = false;
-                            $scope.genericError.valid = false;
+                            $scope.genericError.hide = false;
                             $scope.genericError.msg = err.data.feedback[0];
+                            $scope.genericMsg.hide = true;
+                            $scope.genericMsg.msg = '';
                         }
-                        adminsSrv.errorCallBack(err);
+                        adminsSrv.onError(err);
                     });                   
                 };
                 

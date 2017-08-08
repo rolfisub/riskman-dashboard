@@ -16,7 +16,7 @@
             scope: { username: '=' },
             templateUrl: "app/views/editAdminPop.html",
             controller: ['$scope', 'admins', 'adminEditValidate', function ($scope, adminsSrv, editValidator) {
-                 $scope.dataEdit = {
+                $scope.dataEdit = {
                     email:'',
                     firstname:'',
                     lastname:'',
@@ -56,12 +56,15 @@
                     passwordnew2:{
                         msg:'',
                         valid:true
-                    },
-
+                    }
                 };
                 $scope.genericError = {
                     msg:'',
-                    valid:true
+                    hide: true
+                };
+                $scope.genericMsg = {
+                    msg:'',
+                    hide: true
                 };
                 $scope.editForm = {
                     isValid: true
@@ -85,7 +88,8 @@
                     $scope.editDataStatus.password.valid = true;
                     $scope.editDataStatus.passwordnew.valid = true;
                     $scope.editDataStatus.passwordnew2.valid = true;
-                    $scope.genericError.valid = true;
+                    $scope.genericError.hide = true;
+                    $scope.genericMsg.hide = true;
                 };
                 
                 $scope.getAdmin = function(){
@@ -95,7 +99,7 @@
                         $scope.dataEdit = angular.merge($scope.dataEdit, response.data);
                     },
                     function(error){
-                        adminsSrv.errorCallBack(error);
+                        adminsSrv.onError(error);
                     });
                 };
 
@@ -112,16 +116,19 @@
                     
                     r.then(function(res){
                         $scope.getAdmin();
-                        $scope.$parent.init();
-                        $scope.$parent.genericSuccessMsg.show = true;
-                        $scope.$parent.genericSuccessMsg.msg = 'Admin Updated.';
+                        $scope.genericMsg.hide = false;
+                        $scope.genericMsg.msg = 'Admin Updated.';
+                        $scope.genericError.hide = true;
+                        $scope.genericError.msg = '';
+                        $scope.$emit('initAdmins', {});
                     }, function(err){
                         if(err.status === 400) {
-                            $scope.$parent.genericSuccessMsg.show = false;
-                            $scope.genericError.valid = false;
+                            $scope.genericError.hide = false;
                             $scope.genericError.msg = err.data.feedback[0];
+                            $scope.genericMsg.hide = true;
+                            $scope.genericMsg.msg = '';
                         }
-                        adminsSrv.errorCallBack(err);
+                        adminsSrv.onError(err);
                     });                   
                 };
                 

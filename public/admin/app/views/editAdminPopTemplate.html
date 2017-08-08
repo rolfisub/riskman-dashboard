@@ -1,4 +1,4 @@
-<div class="popover" tabindex="-1" ng-show="content">
+<div class="popover edit-admin-pop" tabindex="-1" ng-show="content">
   <div class="arrow"></div>
   <h3 class="popover-title" ng-bind-html="title" ng-show="title"></h3>
   <div class="popover-content">
@@ -7,8 +7,13 @@
       <div class="form-group">
         <div 
             class="alert alert-danger"
-            ng-hide="genericError.valid">
+            ng-hide="genericError.hide">
             {{genericError.msg}}
+        </div>
+        <div 
+            class="alert alert-success"
+            ng-hide="genericMsg.hide">
+            {{genericMsg.msg}}
         </div>
         <div class="input-group">
             <div class="input-group-addon">Name</div>
