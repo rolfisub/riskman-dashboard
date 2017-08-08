@@ -9,6 +9,7 @@
     angular
         .module("riskman.pages",[
             'riskman.admins',
-            'riskman.home'
+            'riskman.home',
+            'riskman.books'
         ]);
 })();
