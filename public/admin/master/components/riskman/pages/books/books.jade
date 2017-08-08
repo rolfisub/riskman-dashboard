@@ -18,7 +18,11 @@
                         tbody
                             tr(ng-repeat='book in books.myBooks')
                                 td
-                                    p.m0 {{}}
+                                    p.m0
+                                        label.switch.switch-success
+                                            input(type='checkbox', checked="checked", ng-model="book.toggle", ng-click="toggleEnDis(book)")
+                                            span 
+                                        | {{book.enabled === 1? 'Enabled':'Disabled'}}
                                 td
                                     p.m0 {{book.id}}
                                 td
