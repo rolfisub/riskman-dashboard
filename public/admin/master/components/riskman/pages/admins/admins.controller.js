@@ -22,5 +22,15 @@
         
         c.init();
         
+        /**
+         * listens for refresh calls
+         */
+        $scope.$on('initAdmins', function(data){
+            c.init();
+        });
+        
+        
+        
+        
     }
 })();

@@ -1,4 +1,4 @@
-<div class="popover" tabindex="-1" ng-show="content">
+<div class="popover delete-admin-pop" tabindex="-1" ng-show="content">
   <div class="arrow"></div>
   <h3 class="popover-title" ng-bind-html="title" ng-show="title"></h3>
   <div class="popover-content">
@@ -21,5 +21,15 @@
         </div>
       </div>
     </form>
+    <div 
+        class="alert alert-danger"
+        ng-show="errorMsg.show">
+        {{errorMsg.msg}}
+    </div>
+    <div 
+        class="alert alert-success"
+        ng-show="successMsg.show">
+        {{successMsg.msg}}
+    </div>
   </div>
 </div>

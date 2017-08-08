@@ -8,7 +8,7 @@
     userRun.$inject = ['Menu'];
 
     function userRun(Menu) {
-
+        /*
         var menuItem = {
             name: 'User',
             sref: 'user',
@@ -30,7 +30,7 @@
             }]
         };
 
-        Menu.addItem(menuItem);
+        Menu.addItem(menuItem);*/
 
     }
 })();

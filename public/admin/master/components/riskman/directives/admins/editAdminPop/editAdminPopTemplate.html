@@ -7,8 +7,13 @@
       <div class="form-group">
         <div 
             class="alert alert-danger"
-            ng-hide="genericError.valid">
+            ng-hide="genericError.hide">
             {{genericError.msg}}
+        </div>
+        <div 
+            class="alert alert-success"
+            ng-hide="genericMsg.hide">
+            {{genericMsg.msg}}
         </div>
         <div class="input-group">
             <div class="input-group-addon">Name</div>
