@@ -10,7 +10,7 @@
 
         Router.state('riskman.books', {
             url: '/books',
-            title: 'Administrators',
+            title: 'Books',
             templateUrl: 'books.html',
             require: ['modernizr', 'icons', 'ng-mfb', 'md-colors'],
             parent:'riskman'
