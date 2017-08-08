@@ -1,0 +1,9 @@
+
+<div ng-controller="DropzoneController as dz" class="container container-lg">
+  <h5 class="text-center mt0">Dropzone<br/><small>DropzoneJS is an open source library that provides drag&apos;n&apos;drop file uploads with image previews.</small><br/><small class="spr">It’s lightweight, doesn’t depend on any other library (like jQuery) and is</small><small><a href="http://www.dropzonejs.com/" target="_blank">highly customizable</a></small></h5>
+  <form action="#" method="post" enctype="multipart/form-data" ng-dropzone="" dropzone="dropzone" dropzone-config="dz.dropzoneConfig" class="well dropzone">
+    <div class="dropzone-previews"></div>
+    <button type="submit" class="btn btn-primary pull-right">Upload!</button>
+  </form>
+  <p>This demo does not upload files to any server.</p>
+</div>

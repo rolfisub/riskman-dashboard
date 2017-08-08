@@ -1,0 +1,71 @@
+/**
+ * UI Select
+ */
+
+@import '../common/variables';
+@import '../common/mixins';
+
+.ui-select-container {
+
+    .btn,
+    .form-control,
+    &.ui-select-multiple {
+        background-color: transparent !important;
+        border: 0;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(0,0,0,.14);
+        &:hover {
+            background-color: transparent;
+        }
+    }
+
+    .btn-default-focus {
+        outline: 0;
+        box-shadow: 0 0 0 #000;
+        background-color: transparent;
+        color: inherit;
+    }
+
+    .form-control:focus,
+    .btn-default-focus > .btn {
+        border: 0;
+        border-bottom: 2px solid @brand-primary;
+    }
+
+    .ui-select-match {
+        overflow: hidden;
+    }
+
+    .dropdown-menu {
+        top: 105%;
+    }
+
+}
+
+.input-group > .ui-select-bootstrap > input.ui-select-search.form-control {
+    border-radius: 0 !important;
+}
+
+.ui-select-multiple {
+    .ui-select-match-item {
+        border-radius: 20px;
+        border: 0;
+        background-color: fade(@gray-base,16%) !important;
+        padding: 4px 12px;
+        margin: 0 8px 8px 0 !important;
+        .transition(none);
+        &.btn-primary {
+            background-color: @brand-primary;
+            color: #fff;
+            .close, .close:hover {
+                color: #fff !important;
+            }
+        }
+    }
+    &.ui-select-bootstrap .ui-select-match .close {
+        opacity: 1 !important;
+        color: #aaa;
+        line-height: 1 !important;
+    }
+}
+

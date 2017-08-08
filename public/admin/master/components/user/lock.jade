@@ -1,0 +1,21 @@
+.container-full
+    .container.container-xs
+        .text-center.mv-lg
+            img.img-circle.mb.block-center.img-responsive.thumb64(src="app/img/user/01.jpg")
+            p Brian Walker
+        form.card.form-validate(name="loginForm", novalidate='', ng-submit="$state.go('app.dashboard')")
+            .card-heading
+                p.text-center Type your password to unlock terminal
+            .card-offset.pb0
+                .card-offset-item.text-right.ng-fadeInLeftShort(ng-if="loginForm.$valid")
+                    button.btn.btn-success.btn-circle.btn-lg(type="submit")
+                        em.ion-checkmark-round
+            .card-body
+                .mda-form-group.float-label.mda-input-group
+                    .mda-form-control
+                        input.form-control(type='password', name="accountPassword", ng-model="account.password", required="")
+                        .mda-form-control-line
+                        label Password
+                    a.mda-form-msg.right(ui-sref="user.login") Not you?
+                    span.mda-input-group-addon
+                        em.ion-ios-locked-outline.icon-lg

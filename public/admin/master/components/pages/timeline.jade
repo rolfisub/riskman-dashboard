@@ -1,0 +1,74 @@
+.container.container-md(ng-init="timelineModeAlt = false")
+
+    .text-right.mb-lg
+        button.btn.btn-default(ng-click="timelineModeAlt = !timelineModeAlt") Switch timeline
+
+    // START timeline
+    // ul.timeline-alt
+    ul(ng-class="timelineModeAlt ? 'timeline-alt' : 'timeline'")
+        li.timeline-separator(data-datetime="Now")
+        // START timeline item
+        li
+            .timeline-badge.bg-info
+            .timeline-panel
+                .card: .card-body
+                    p: strong Client Meeting
+                    small Pellentesque ut diam velit, eget porttitor risus. Nullam posuere euismod volutpat.
+                    .text-right: a(href="") Av 123 St - Floor 2
+        // END timeline item
+        // START timeline item
+        li.timeline-inverted
+            .timeline-badge.bg-pink-400
+            .timeline-panel
+                .card
+                    .card-body
+                        em.mr.ion-ios-telephone.icon-lg
+                        | Call with Michael
+        // END timeline item
+        // START timeline separator
+        li.timeline-separator(data-datetime="Yesterday")
+        // END timeline separator
+        // START timeline item
+        li
+            .timeline-badge.bg-purple-500
+            .timeline-panel
+                .card: .card-body
+                    p: strong Conference
+                    p Join development group
+                    small
+                        a(href='skype:echo123?call')
+                            em.ion-ios-telephone.mr-sm.icon-lg
+                            |  Call the Skype Echo
+        // END timeline item
+        // START timeline item
+        li.timeline-inverted
+            .timeline-badge.bg-green-500
+            .timeline-panel
+                .card.right: .card-body
+                    p: strong Appointment
+                    p Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam.
+        // END timeline item
+        // START timeline item
+        li
+            .timeline-badge.bg-info
+            .timeline-panel
+                .card.bg-blue-500: .card-body
+                    p: strong Fly
+                    p Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
+        // END timeline item
+        // START timeline separator
+        li.timeline-separator(data-datetime="2 days ago")
+        // END timeline separator
+        // START timeline item
+        li.timeline-inverted
+            .timeline-badge.bg-warning
+            .timeline-panel
+                .card: .card-body
+                    p: strong Relax
+                    p Listen some music
+        // END timeline item
+        // START timeline item
+        li.timeline-end
+            a(href="").timeline-badge.bg-blue-grey-200
+        // END timeline item
+    // END timeline

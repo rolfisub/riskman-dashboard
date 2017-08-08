@@ -1,0 +1,321 @@
+.content-heading.bg-white
+    .row
+        .col-sm-9
+            h4.m0.text-thin Welcome to Centric dashboard
+            small Bootstrap admin dashboard template
+        .col-sm-3.text-right.hidden-xs
+            button.mt-sm.btn.btn-labeled.btn-default.ripple(type='button')
+                | Apps
+                span.btn-label.btn-label-right
+                    i.ion-plus-round
+
+.container-fluid(ng-controller='DashboardController as dash')
+
+    .row
+        .col-xs-6.col-lg-3
+            .card
+                .card-body.pv
+                    .clearfix
+                        .pull-left
+                            h4.m0.text-thin 350
+                            small.m0.text-muted
+                                em.mr-sm.ion-arrow-up-b
+                                | New visitors
+                        .pull-right.mt-lg
+                            sparkline(values="dash.sparkValue2", options="dash.sparkOpts", data-line-color="{{colorByName('green-500')}}")
+        .col-xs-6.col-lg-3
+            .card
+                .card-body.pv
+                    .clearfix
+                        .pull-left
+                            h4.m0.text-thin 10,200
+                            small.m0.text-muted
+                                em.mr-sm.ion-arrow-down-b
+                                | Page views
+                        .pull-right.mt-lg
+                            sparkline(values="dash.sparkValue1", options="dash.sparkOpts", data-line-color="{{colorByName('info')}}")
+        .col-xs-6.col-lg-3.visible-lg
+            .card
+                .card-body.pv
+                    .clearfix
+                        .pull-left
+                            h4.m0.text-thin 880
+                            small.m0.text-muted
+                                em.mr-sm.ion-arrow-up-b
+                                | Last income
+                        .pull-right.mt-lg
+                            sparkline(values="dash.sparkValue3", options="dash.sparkOpts", data-line-color="{{colorByName('purple-400')}}")
+        .col-xs-6.col-lg-3.visible-lg
+            .card
+                .card-body.pv
+                    .clearfix
+                        .pull-left
+                            h4.m0.text-thin 780
+                            small.m0.text-muted
+                                em.mr-sm.ion-arrow-up-b
+                                | Reservations
+                        .pull-right.mt-lg
+                            sparkline(values="dash.sparkValue4", options="dash.sparkOpts", data-line-color="{{colorByName('pink-500')}}")
+    .row
+        .col-lg-9.col-md-12
+            .row
+                .col-lg-8
+                    .card
+                        .card-heading
+                            // START dropdown
+                            .pull-right.dropdown(uib-dropdown='dropdown2')
+                                button.btn.btn-default.btn-flat.btn-flat-icon.ripple(type='button', uib-dropdown-toggle='')
+                                    em.ion-android-more-vertical
+                                ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                    li
+                                        a(href='') Last 30 days
+                                    li
+                                        a(href='') Last week
+                                    li
+                                        a(href='') Last year
+                            // END dropdown
+                            .card-title Analytic board
+                            small Nulla commodo blandit cursus.
+                        .card-body
+                            .pull-right.pr-sm.btn-group.btn-group-sm(role='group', aria-label='...')
+                                button.btn.btn-default.btn-xs.btn-default(type='button') Total
+                                button.btn.btn-default.btn-xs.btn-default(type='button') Average
+                            flot.flot-chart.flot-chart-lg.flot-legend-left(dataset='dash.chartData', options='dash.chartOptions')
+                .col-lg-4
+                    .card
+                        .card-heading
+                            .pull-right
+                                p.m0.text-muted
+                                    em.mr-sm.ion-arrow-up-b
+                                    | 20%
+                            .card-title Earnings
+                            small Based on last month analytics.
+                        .card-body
+                            .btn-group.btn-group-sm(role='group', aria-label='...')
+                                button.btn.btn-default.btn-xs.btn-default(type='button') 2015
+                                button.btn.btn-default.btn-xs.btn-default(type='button') 2016
+                            //- .pv.text-sm.text-center Income vs Outcome
+                            flot.flot-chart(dataset='dash.stackedChartData', options='dash.stackedChartOptions', height="245px")
+            .row
+                .col-xs-12.col-lg-4
+                    .card
+                        .card-heading
+                            .pull-right
+                                span.mr
+                                    em.ion-record.spr.text-primary
+                                    small.va-middle 2016
+                                span
+                                    em.ion-record.spr.text-success
+                                    small.va-middle 2015
+                            .card-title Sales
+                        .card-body
+                            //- .text-sm.pv Nullam fermentum porttitor
+                            flot.flot-chart(dataset='dash.barChartData', options='dash.barChartOptions', height="235")
+                .col-xs-12.col-lg-8
+                    .card
+                        // START table-responsive
+                        .table-responsive
+                            table.table
+                                thead
+                                    tr
+                                        th #
+                                        th Project
+                                        th Completion
+                                        th.text-right Trend
+                                tbody
+                                    tr
+                                        td.va-middle
+                                            span.badge.bg-pink-500 1
+                                        td
+                                            p.m0 Vestibulum
+                                                br
+                                                small.text-thin Nunc posuere eleifend lobortis.
+                                        td.va-middle 50%
+                                        td.text-right.va-middle
+                                            em.ion-arrow-graph-up-right.text-success
+                                    tr
+                                        td.va-middle
+                                            span.badge.bg-purple-400 2
+                                        td
+                                            p.m0 Runfaster
+                                                br
+                                                small.text-thin Nunc posuere eleifend lobortis.
+                                        td.va-middle 30%
+                                        td.text-right.va-middle
+                                            em.ion-arrow-graph-down-right.text-warning
+                                    tr
+                                        td.va-middle
+                                            span.badge.bg-indigo-500 3
+                                        td
+                                            p.m0 Medic Healthcare
+                                                br
+                                                small.text-thin Nunc posuere eleifend lobortis.
+                                        td.va-middle 80%
+                                        td.text-right.va-middle
+                                            em.ion-arrow-graph-up-right.text-success
+                                    tr
+                                        td.va-middle
+                                            span.badge.bg-info 4
+                                        td
+                                            p.m0 Videotubeyou
+                                                br
+                                                small.text-thin Nunc posuere eleifend lobortis.
+                                        td.va-middle 50%
+                                        td.text-right.va-middle
+                                            em.ion-arrow-graph-down-right.text-warning
+                        // END table-responsive
+        .col-lg-3.col-xs-12
+            // Activity feed
+            .card
+                .card-heading
+                    // START dropdown
+                    .pull-right.dropdown(uib-dropdown='dropdown2')
+                        button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='')
+                            em.ion-android-more-vertical
+                        ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                            li
+                                a(href='') Last 30 days
+                            li
+                                a(href='') Last week
+                            li
+                                a(href='') Last year
+                    // END dropdown
+                    .card-title Activity
+                    small What's people doing right now
+                .card-body.bb
+                    p.pull-left.mr
+                        a(href=""): img.img-circle.thumb32(src="app/img/user/04.jpg", alt="User")
+                    .oh
+                        p
+                            strong.spr Adam
+                            span.spr posted in
+                            a(href="") Material
+                        p.bl.pl: i That's awesome!
+                        .clearfix
+                            .pull-left.text-muted
+                                em.ion-android-time.mr-sm
+                                span 2 hours ago
+                .card-body.bb
+                    p.pull-left.mr
+                        a(href=""): img.img-circle.thumb32(src="app/img/user/06.jpg", alt="User")
+                    .oh
+                        p
+                            strong.spr Dora
+                            span added a new task
+                        p
+                            em.ion-calendar.icon-fw
+                            a(href="") Start migration
+                        .clearfix
+                            .pull-left.text-muted
+                                em.ion-android-time.mr-sm
+                                span 3 hours ago
+                            .pull-right
+                                span 2
+                                em.ion-star.ml-sm.text-warning
+                .card-body.bb
+                    p.pull-left.mr
+                        a(href=""): img.img-circle.thumb32(src="app/img/user/07.jpg", alt="User")
+                    .oh
+                        p
+                            strong.spr Kathryn
+                            span.spr published
+                            a(href="") Trip
+                        p
+                            a(href=""): img.mr-sm.thumb48(src="app/img/pic1.jpg", alt="Pic")
+                            a(href=""): img.mr-sm.thumb48(src="app/img/pic2.jpg", alt="Pic")
+                        .clearfix
+                            .pull-left.text-muted
+                                em.ion-android-time.mr-sm
+                                span 4 hours ago
+                            .pull-right
+                                span 2
+                                em.ion-ios-heart.ml-sm.text-danger
+                .card-body.bb
+                    p.pull-left.mr
+                        a(href=""): img.img-circle.thumb32(src="app/img/user/02.jpg", alt="User")
+                    .oh
+                        p
+                            strong.spr Daniel
+                            span.spr joined to
+                            a(href="") Group
+                        p
+                            span.image-list
+                                a(href=""): img.img-circle.thumb32(src="app/img/user/03.jpg", alt="User")
+                                a(href=""): img.img-circle.thumb32(src="app/img/user/04.jpg", alt="User")
+                                a(href=""): img.img-circle.thumb32(src="app/img/user/05.jpg", alt="User")
+                                a(href=""): img.img-circle.thumb32(src="app/img/user/07.jpg", alt="User")
+                                strong: a.ml-sm.link-unstyled(href="") +3
+                        .clearfix
+                            .pull-left.text-muted
+                                em.ion-android-time.mr-sm
+                                span yesterday
+                .card-body.bb
+                    p.pull-left.mr
+                        a(href=""): img.img-circle.thumb32(src="app/img/user/03.jpg", alt="User")
+                    .oh
+                        p
+                            strong.spr Leroy Day
+                            span.spr wakes up!
+                        p.bl.pl: i That's awesome!
+                        .clearfix
+                            .pull-left.text-muted
+                                em.ion-android-time.mr-sm
+                                span 2 weeks ago
+                a(href="").card-footer.btn.btn-flat.btn-default
+                    small.text-center.text-muted.lh1 See more activities
+
+    .row
+        .col-lg-4.col-md-6
+            .card
+                .card-heading.bg-pink-500.ripple.ripple-block
+                    .card-title.text-center(ng-click="dash.today()")
+                        small {{ dash.dt | date: 'MMMM' }}
+                        h4.mv-sm.text-md {{ dash.dt | date: 'dd' }}
+                        span {{ dash.dt | date: 'EEEE' }}
+                .ui-datepicker-responsive
+                    .ui-datepicker.dp-table-pink(uib-datepicker, ng-model='dash.dt', uib-datepicker-options="dash.dpOptions")
+        .col-lg-4.col-md-6
+            .card
+                .card-heading
+                    .card-title
+                        .pull-right: em.ion-ios-people.text-soft.icon-lg
+                        | Resources distribution
+                .card-body.pt0
+                    .vector-map(vector-map="", map-options="dash.usa_options", map-markers="dash.usa_markers", height="240")
+                ul.list-group.m0
+                    li.list-group-item
+                        span Silicon Valley
+                        span.badge.badge-xs.bg-green-500 15
+                    li.list-group-item
+                        span Chicago
+                        span.badge.badge-xs.bg-pink-500 9
+                    li.list-group-item
+                        span Houston
+                        span.badge.badge-xs.bg-purple-500 3
+                    li.list-group-item
+                        span Others
+                        span.badge.badge-xs.bg-blue-500 25
+        .col-lg-4.col-md-12
+            .card
+                .card-heading
+                    .card-title
+                        .pull-right: a(href=""): em.ion-plus-round.text-soft
+                        | Tasks
+                .card-body.text-center.pt0
+                    .easypie-chart.block-center(easypiechart='', options='dash.pieOptionsTask', percent='dash.percentTask')
+                        small.percentage Goal
+                    p.mv 85% productivity
+                .list-group.m0
+                    a(href="").list-group-item.bt0
+                        span.text-sm Work on project presentation
+                        span.pull-right: em.ion-ios-arrow-right
+                    a(href="").list-group-item
+                        span.text-sm Prepare a call with Robert
+                        span.pull-right: em.ion-ios-arrow-right
+                    a(href="").list-group-item
+                        span.text-sm Release a new version
+                        span.pull-right: em.ion-ios-arrow-right
+                    a(href="").list-group-item.bb0
+                        span.text-sm Tell Houston there's no problem
+                        span.pull-right: em.ion-ios-arrow-right
+                flot.flot-chart(dataset='dash.chartTaskData', options='dash.chartTaskOptions', height="90")

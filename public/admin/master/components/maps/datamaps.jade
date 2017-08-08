@@ -1,0 +1,10 @@
+.container-fluid(ng-controller="DatamapsController as dmap")
+    .panel.panel-default
+        .panel-heading Basic Map
+        .panel-body
+            datamap(map='dmap.mapObject')
+
+    .panel.panel-default
+        .panel-heading Customized Arc Map
+        .panel-body
+            datamap(map='dmap.mapObjectArc', plugins='dmap.mapPluginArc', plugin-data='dmap.mapPluginArcData')

@@ -9,6 +9,7 @@
 namespace Admin\Controller;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\Mvc\MvcEvent as e;
+use Admin\Error\Error403;
 /**
  * Description of ProtectedController
  *
@@ -30,7 +31,8 @@ class ProtectedRestfulController extends AbstractRestfulController
     public function onDispatch(e $e) 
     {
         if(!$this->auth->hasIdentity()){
-            return $this->redirect()->toRoute('Login');
+            throw new Error403("User not Authenticated");
+            //return $this->redirect()->toRoute('Login');
         }
         return parent::onDispatch($e);
     }

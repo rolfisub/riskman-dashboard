@@ -1,0 +1,13 @@
+.container-full(ng-controller="GMapFullController as gmapfull")
+    .row.fh.bg-white
+        .col-md-3.fh.hidden-sm.hidden-xs.pr0
+            .p-lg
+                h5.text-center(ng-if="gmapfull.myMarkers.length") Places
+                p.text-center Click on each item to focus a marker in the map
+            .list-group.list-group-unstyle
+                a.list-group-item(ng-repeat='marker in gmapfull.myMarkers', href="", ng-click='gmapfull.myMap.panTo(marker.position.getPosition())')
+                    em.pull-right.ion-ios-arrow-forward
+                    | {{marker.name}}
+        .col-md-9.fh.pl0
+            ui-gmap-google-map.fh(center='gmapfull.map.center', zoom='gmapfull.map.zoom', draggable='true', options='gmapfull.mapOptions')
+                ui-gmap-marker(ng-repeat='marker in gmapfull.myMarkers', coords='marker.coords', idkey='marker.id')

@@ -1,0 +1,176 @@
+// Custom Mixins
+// --------------------------------------------------
+
+@import '../bootstrap/mixins';
+
+
+// Utilities mixins
+
+.bgcolor-variant(@bgcolor, @text-color: #fff) {
+    & {
+        background-color: @@bgcolor;
+        color: @text-color !important;
+    }
+    .text-muted {
+        color: fade(@text-color, 50%);
+    }
+    small {
+        color: inherit;
+    }
+}
+
+.make-bg(@bgcolor, @text-color: #fff) {
+    background-color: @bgcolor;
+    color: @text-color !important;
+}
+
+.thumnbail-size(@sz: 8px) {
+    width: @sz !important;
+    height: @sz !important;
+}
+
+.initial-size(@sz: 8px) {
+    width: @sz !important;
+    height: @sz !important;
+    line-height: @sz;
+    text-align: center;
+    border-radius: 50%;
+}
+
+// Icons sizes
+.icon-size(@size) {
+    .icon-@{size} {
+        font-size: @size * 1px;
+        vertical-align: @size * -1 * 1%;
+    }
+}
+
+
+//== Themes mixins
+
+.theme-header(@header-bg, @header-color) {
+    .layout-container {
+        > header {
+            background-color: @header-bg;
+            color: @header-color;
+        }
+    }
+}
+
+.theme-sidebar(@sidebar-bg, @sidebar-color, @sidebar-header-bg, @sidebar-header-color) {
+    .layout-container {
+        > aside {
+            background-color: @sidebar-bg;
+            color: @sidebar-color;
+            > .sidebar-header {
+                background-color: @sidebar-header-bg;
+                color: @sidebar-header-color;
+            }
+        }
+    }
+}
+
+.theme-sidebar-items(@color1, @color2) {
+    .sidebar-header-logo,
+    .nav-icon {
+        > svg, > em {
+            color: @color1 !important;
+            fill: @color2 !important;
+        }
+    }
+}
+
+
+.theme-content(@content-color) {
+    .layout-container {
+        > main {
+            background-color: @content-color;
+        }
+    }
+}
+
+.theme-content-dark(@content-color) {
+    background-color: darken(@content-color, 4%);
+    .layout-container {
+        > main {
+            .is-dark(@content-color);
+        }
+    }
+}
+
+
+//== Dark theme setup
+
+.is-dark(@base-color) {
+    background-color: darken(@base-color, 4%);
+    color: #f1f1f1;
+
+    .bg-white,
+    .panel,
+    .card,
+    .panel-default > .panel-heading {
+        &:not([class*='bg-']) {
+            background-color: darken(@base-color, 1%);
+            color: inherit;
+        }
+    }
+    .bg-white {
+        background-color: darken(@base-color, 1%);
+        color: inherit;
+    }
+    .well, .jumbotron, .breadcrumb, .modal-content {
+        background-color: darken(@base-color, 1%);
+        color: inherit;
+    }
+    .btn-default {
+        .button-variant(#fff, @base-color, darken(@base-color, 5%));
+    }
+    .open > .dropdown-toggle.btn-default {
+        &, &:hover, &:active, &.active, &:focus {
+            color: #fff;
+            background-color: @base-color;
+            border-color: darken(@base-color, 5%);
+        }
+    }
+    .form-control {
+        color: inherit;
+        background-color: rgba(240,240,240,.1);
+        border-color: rgba(240,240,240,.12);
+        &:focus {
+            border-color: rgba(240,240,240,.36)
+        }
+    }
+    .form-control[disabled],
+    .form-control[readonly],
+    fieldset[disabled] .form-control {
+        background-color: rgba(240,240,240,.1);
+    }
+    select:not([multiple]) {
+        option {
+            color: @text-color;
+        }
+    }
+    .input-group-addon,
+    .input-group-button {
+        background-color: transparent;
+        border: 1px solid fade(@gray-base,26%);
+        color: inherit;
+    }
+    .nav-tabs>li.active {
+        color: #fff;
+    }
+    .note-editor .note-editing-area .note-editable {
+        background-color: rgba(240,240,240,.1);
+    }
+    .photo {
+        background-color: @base-color;
+    }
+}
+
+// Preview for settings panel
+.preview-theme(@prev-header, @prev-sidebar, @prev-content) {
+    .preview-header { background-color: @prev-header; }
+    .preview-sidebar { background-color: @prev-sidebar; }
+    .preview-content { background-color: @prev-content; }
+}
+

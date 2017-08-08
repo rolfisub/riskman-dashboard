@@ -1,0 +1,14 @@
+.modal-body
+    form(action='')
+        .mda-form-group
+            .mda-form-control
+                input.form-control(rows='3', aria-multiline='true', tabindex='0', aria-invalid='false')
+                .mda-form-control-line
+                label To:
+        .mda-form-group
+            .mda-form-control
+                textarea.form-control(rows='3', aria-multiline='true', tabindex='0', aria-invalid='false')
+                .mda-form-control-line
+                label Message
+
+        button.btn.btn-success(type="button", ng-click='mod.close()') Send

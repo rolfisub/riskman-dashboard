@@ -1,0 +1,219 @@
+.container-overlap.bg-blue-500
+    .media.m0.pv
+        .media-left
+            a(href='#')
+                img.media-object.img-circle.thumb64(src='app/img/user/03.jpg', alt='User')
+        .media-body.media-middle
+            h4.media-heading Christine Matthews
+            span.text-muted Sed eget lacus quis diam molestie mollis.
+.container-fluid(ng-controller="ProfileController as user")
+    .row
+        // Left column
+        .col-md-7.col-lg-8
+            form.card(editable-form="", name="user.profileForm")
+                h5.card-heading.pb0
+                    // START dropdown
+                    .pull-right.dropdown(uib-dropdown='dropdown2')
+                        button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='')
+                            em.ion-android-more-vertical
+                        ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                            li
+                                a(href='') Action 1
+                            li
+                                a(href='') Action 2
+                    // END dropdown
+                    | About
+                .card-body
+                    p(editable-textarea="user.data.about" e-form="user.profileForm") {{user.data.about}}
+                .card-divider
+                .card-offset
+                    .card-offset-item.text-right
+                        button(type="button", ng-show="!user.profileForm.$visible", ng-click="user.profileForm.$show()").btn-raised.btn.btn-warning.btn-circle.btn-lg
+                            em.ion-edit
+                        button(type="submit", ng-show="user.profileForm.$visible").btn-raised.btn.btn-success.btn-circle.btn-lg
+                            em.ion-checkmark-round
+                h5.card-heading.pb0 Contact Information
+                .card-body
+                    table.table.table-striped
+                      tbody
+                        tr
+                            td
+                                em.ion-document-text.icon-fw.mr
+                                | Area
+                            td {{user.data.area}}
+                        tr
+                            td
+                                em.ion-egg.icon-fw.mr
+                                | Birthday
+                            td
+                                span(editable-date="user.data.birthday", e-form="user.profileForm") {{ (user.data.birthday | date:"dd/MM/yyyy") || 'empty' }}
+                        tr
+                            td
+                                em.ion-ios-body.icon-fw.mr
+                                | Member since
+                            td
+                                span(editable-date="user.data.membersince", e-form="user.profileForm") {{ (user.data.membersince | date:"dd/MM/yyyy") || 'empty' }}
+                        tr
+                            td
+                                em.ion-man.icon-fw.mr
+                                | Gender
+                            td
+                                span(editable-select="user.data.gender", e-form="user.profileForm", e-ng-options="s.value as s.text for s in user.genders") {{ user.showGender() }}
+                        tr
+                            td
+                                em.ion-android-home.icon-fw.mr
+                                | Address
+                            td
+                                span(editable-text="user.data.address" e-form="user.profileForm") {{user.data.address}}
+                        tr
+                            td
+                                em.ion-email.icon-fw.mr
+                                | Email
+                            td
+                                span(editable-text="user.data.email" e-form="user.profileForm")
+                                    a(href='') {{user.data.email}}
+                        tr
+                            td
+                                em.ion-ios-telephone.icon-fw.mr
+                                | Contact phone
+                            td
+                                span(editable-text="user.data.phone" e-form="user.profileForm") {{user.data.phone}}
+                .card-divider
+                h5.card-heading.pb0 Recent articles
+                .card-body
+                    ul.mda-list
+                        li.mda-list-item.pl0.bb
+                            .mda-list-item-text
+                                h3: a(href="#") Release 3.0 is out
+                                p Proin metus justo, commodo in ultrices...
+                                small.text-muted 2 days ago
+                            .pull-right
+                                .pt-lg: em.icon-2x.ion-checkmark-circled.text-success(uib-tooltip="Active")
+                        li.mda-list-item.pl0.bb
+                            .mda-list-item-text
+                                h3: a(href="#") Improving compatibility
+                                p Proin metus justo, commodo in ultrices...
+                                small.text-muted 3 days ago
+                            .pull-right
+                                .pt-lg: em.icon-2x.ion-checkmark-circled.text-success(uib-tooltip="Active")
+                        li.mda-list-item.pl0
+                            .mda-list-item-text
+                                h3: a(href="#") Small decisions count
+                                p Proin metus justo, commodo in ultrices...
+                                small.text-muted 3 days ago
+                            .pull-right
+                                .pt-lg: em.icon-2x.ion-minus-circled.text-warning(uib-tooltip="Pending")
+
+
+        // Right column
+        .col-md-5.col-lg-4
+            .card
+                h5.card-heading
+                    // START dropdown
+                    .pull-right.dropdown(uib-dropdown='dropdown2')
+                        button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='')
+                            em.ion-android-more-vertical
+                        ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                            li
+                                a(href='') Action 1
+                            li
+                                a(href='') Action 2
+                    // END dropdown
+                    | Contacts
+                .mda-list
+                    .mda-list-item
+                        img.mda-list-item-img(src="app/img/user/01.jpg", alt="List user")
+                        .mda-list-item-text.mda-2-line
+                            h3: a(href="#") Eric Graves
+                            .text-muted.text-ellipsis Ut ac nisi id mauris
+                    .mda-list-item
+                        img.mda-list-item-img(src="app/img/user/02.jpg", alt="List user")
+                        .mda-list-item-text.mda-2-line
+                            h3: a(href="#") Jessie Cox
+                            .text-muted.text-ellipsis Sed lacus nisl luctus
+                    .mda-list-item
+                        img.mda-list-item-img(src="app/img/user/03.jpg", alt="List user")
+                        .mda-list-item-text.mda-2-line
+                            h3: a(href="#") Marie Hall
+                            .text-muted.text-ellipsis Donec congue sagittis mi
+                    .mda-list-item
+                        img.mda-list-item-img(src="app/img/user/04.jpg", alt="List user")
+                        .mda-list-item-text.mda-2-line
+                            h3: a(href="#") Guy Carpenter
+                            .text-muted.text-ellipsis Donec convallis arcu sit
+                .card-body.pv0.text-right
+                    a.btn.btn-flat.btn-info(href="") View all
+                .card-divider
+                h5.card-heading Activity
+                .card-body.pb0
+                    p.pull-left.mr
+                        em.ion-record.text-info
+                    .oh
+                        p
+                            strong.mr-sm Added
+                            span.mr-sm a new issue
+                            a(href="") #5478
+                        .clearfix
+                            .pull-left.text-muted
+                                em.ion-android-time.mr-sm
+                                span an hour ago
+                .card-body.pb0
+                    p.pull-left.mr
+                        em.ion-record.text-danger
+                    .oh
+                        p
+                            strong.mr-sm Commented
+                            span.mr-sm  on the project
+                            a(href="") Material
+                        p.bl.pl: i That's awesome!
+                        .clearfix
+                            .pull-left.text-muted
+                                em.ion-android-time.mr-sm
+                                span 2 hours ago
+                .card-body.pb0
+                    p.pull-left.mr
+                        em.ion-record.text-success
+                    .oh
+                        p
+                            strong.mr-sm Completed
+                            span  all tasks asigned this week
+                        .clearfix
+                            .pull-left.text-muted
+                                em.ion-android-time.mr-sm
+                                span 3 hours ago
+                .card-body.pb0
+                    p.pull-left.mr
+                        em.ion-record.text-info
+                    .oh
+                        p
+                            strong.mr-sm Published
+                            span.mr-sm  new photos on the album
+                            a(href="") WorldTrip
+                        p
+                            a(href=""): img.mr-sm.thumb48(src="app/img/pic4.jpg", alt="Pic")
+                            a(href=""): img.mr-sm.thumb48(src="app/img/pic5.jpg", alt="Pic")
+                            a(href=""): img.mr-sm.thumb48(src="app/img/pic6.jpg", alt="Pic")
+                        .clearfix
+                            .pull-left.text-muted
+                                em.ion-android-time.mr-sm
+                                span 4 hours ago
+                .card-body
+                    .clearfix
+                        p.pull-left.mr
+                            em.ion-record.text-primary
+                        .oh
+                            p
+                                strong.mr-sm Following
+                                span.mr-sm Jane Kuhn
+                            p
+                                span.image-list
+                                    a(href=""): img.img-circle.thumb32(src="app/img/user/03.jpg", alt="User")
+                                    a(href=""): img.img-circle.thumb32(src="app/img/user/04.jpg", alt="User")
+                                    a(href=""): img.img-circle.thumb32(src="app/img/user/05.jpg", alt="User")
+                                    a(href=""): img.img-circle.thumb32(src="app/img/user/06.jpg", alt="User")
+                                    a(href=""): img.img-circle.thumb32(src="app/img/user/07.jpg", alt="User")
+                                    strong: a.ml-sm.link-unstyled(href="") +200
+                            .clearfix
+                                .pull-left.text-muted
+                                    em.ion-android-time.mr-sm
+                                    span yesterday

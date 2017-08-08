@@ -1,0 +1,22 @@
+<div 
+    rel="tooltip" 
+    title="" 
+    data-original-title="Edit Profile" 
+    ng-click="getAdmin()"
+    style="float:left;"
+    >
+    <button
+        type="button"
+        class="btn btn-raised btn-warning ripple m-sm"
+        title="{{editAdminPop.title}}" 
+        data-content="{{editAdminPop.content}}" 
+        data-template-url="app/views/editAdminPopTemplate.html" 
+        data-animation="am-flip-x" 
+        data-auto-close="1" 
+        data-placement="bottom-left"
+        data-viewport="body"
+        bs-popover
+    >
+        <i class="ion-ios-compose"></i>
+    </button>
+</div>
