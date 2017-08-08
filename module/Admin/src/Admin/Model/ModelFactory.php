@@ -23,6 +23,7 @@ class ModelFactory implements AbstractFactoryInterface
         $objects = array(
             0 => 'Admin\\Model\\Stats',
             1 => 'Admin\\Model\\Admins',
+            2 => 'Admin\\Model\\Books',
         );
         return in_array($requestedName, $objects);
     }
@@ -37,6 +38,10 @@ class ModelFactory implements AbstractFactoryInterface
                     return $o;
                 case 'Admin\\Model\\Admins':
                     $mapper = $serviceLocator->get('Admin\\Mapper\\AdminsMapper');
+                    $o = new $requestedName($mapper);
+                    return $o;
+                case 'Admin\\Model\\Books':
+                    $mapper = $serviceLocator->get('Admin\\Mapper\\BooksMapper');
                     $o = new $requestedName($mapper);
                     return $o;
             }
