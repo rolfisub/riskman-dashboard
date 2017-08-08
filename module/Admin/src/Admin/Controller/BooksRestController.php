@@ -24,7 +24,7 @@ class BooksRestController extends ProtectedRestfulController
      */
     public function getList() 
     {
-        return new JsonModel();
+        return new JsonModel($this->model->getBooks());
     }
     
     public function get($username)
