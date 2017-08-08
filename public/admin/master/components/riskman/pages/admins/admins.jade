@@ -1,0 +1,33 @@
+.content-heading.bg-white
+    .row
+        .col-sm-9
+            h4.m0.text-thin RiskMan Administrators
+            small Create, Edit, Delete Administrators
+.container-fluid(ng-controller='AdminsController as admins')
+    .row
+        .col-xs-12.col-lg-8
+            .card.admins-card
+                .table-responsive.admins-table
+                    table.table.table-striped
+                        thead
+                            tr
+                                th Actions
+                                    create-admin-pop(ng-show="true")
+                                th User
+                                th First
+                                th Last
+                                th Email
+                        tbody
+                            tr(ng-repeat='admin in admins.myAdmins')
+                                td
+                                    p.m0
+                                        edit-admin-pop(ng-show="true" username="admin.user_name")
+                                        delete-admin-pop(ng-show="true" username="admin.user_name")
+                                td
+                                    p.m0 {{admin.user_name}}
+                                td
+                                    p.m0 {{admin.first_name}}
+                                td
+                                    p.m0 {{admin.last_name}}
+                                td
+                                    p.m0 {{admin.email}}

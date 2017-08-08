@@ -1,0 +1,29 @@
+.container-full(ng-controller="loginCtrl")
+    .container.container-xs
+        img.mv-lg.block-center.img-responsive.thumb64(src="app/img/logo.png")
+        form.card.b0.form-validate(action="", name="loginForm", novalidate='')
+            
+            .card-heading
+                .card-title.text-center Login
+            .card-body
+                .mda-form-group.float-label.mda-input-group
+                    .mda-form-control
+                        input.form-control(type='text', name="username" ng-model="model.username", required="required")
+                        .mda-form-control-line
+                        label User Name
+                    span.mda-input-group-addon
+                        em.ion-ios-email-outline.icon-lg
+                .mda-form-group.float-label.mda-input-group
+                    .mda-form-control
+                        input.form-control(type='password', name="password", ng-model="model.password", required="required" ng-keypress="keypress($event)")
+                        .mda-form-control-line
+                        label Password
+                    span.mda-input-group-addon
+                        em.ion-ios-locked-outline.icon-lg
+            button.btn.btn-primary.btn-flat(
+                type="button", 
+                ng-disabled="loginForm.$invalid || loginForm.$pristine",
+                ng-click="auth()"
+            ) Authenticate
+            .alert-warning(ng-if="errorLogin.msg") {{errorLogin.msg}}
+            

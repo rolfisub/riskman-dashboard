@@ -1,0 +1,68 @@
+.sidebar-header(ng-if="app.sidebar.showheader")
+    .pull-right.pt-lg.text-muted.hidden(ng-click='toggleSidebarOffcanvasVisible()', ng-if="app.sidebar.offcanvas && sidebarOffcanvasVisible")
+        em.ion-close-round
+    a(href="").sidebar-header-logo
+        //- img(src="app/img/logo.png")
+        img(src="app/img/logo.svg", svg-replace='')
+        span.sidebar-header-logo-text RiskMan
+.sidebar-content
+    .sidebar-toolbar.text-center(ng-if="app.sidebar.showtoolbar")
+        a(href="")
+            img.img-circle.thumb64(src="app/img/user/01.jpg", alt="Profile")
+        .mt {{ 'WELCOME' | translate }}, Willie Webb
+    nav.sidebar-nav(ng-controller="MenuController as menu")
+        // 1st level items
+        ul
+            li(ng-repeat="item in menu.items | orderBy: 'order' track by $index", ng-class="{ 'active': $state.includes(item.sref) || $state.is(item.sref) || $state.includes(item.srefParent)}")
+                // support for direct links
+                a(href="{{item.href}}", ng-if="item.href").ripple
+                    span.pull-right.nav-caret(ng-if="item.subitems.length")
+                        em.ion-ios-arrow-right
+                    span.pull-right.nav-label
+                        span(ng-bind="item.label.count", ng-class="item.label.classname")
+                    span.nav-icon
+                        em(ng-if="item.iconclass", ng-class="item.iconclass")
+                        img(ng-if="item.imgpath", svg-replace='', ng-src="{{item.imgpath}}")
+                    span(ng-bind="item.name")
+                // support for route states links
+                a(ui-sref="{{item.sref}}" ng-if="!item.href && !item.subitems.length").ripple
+                    span.pull-right.nav-caret(ng-if="item.subitems.length")
+                        em.ion-ios-arrow-right
+                    span.pull-right.nav-label
+                        span(ng-bind="item.label.count", ng-class="item.label.classname")
+                    span.nav-icon
+                        em(ng-if="item.iconclass", ng-class="item.iconclass")
+                        img(ng-if="item.imgpath", svg-replace, ng-src="{{item.imgpath}}")
+                    span(ng-bind="item.name")
+                // parent menu items have empty links
+                a(href="" ng-if="!item.href && item.subitems.length").ripple
+                    span.pull-right.nav-caret(ng-if="item.subitems.length")
+                        em.ion-ios-arrow-right
+                    span.pull-right.nav-label
+                        span(ng-bind="item.label.count", ng-class="item.label.classname")
+                    span.nav-icon
+                        em(ng-if="item.iconclass", ng-class="item.iconclass")
+                        img(ng-if="item.imgpath", svg-replace, ng-src="{{item.imgpath}}")
+                    span(ng-bind="item.name")
+                // 2nd level items
+                ul.sidebar-subnav(ng-if="item.subitems.length")
+                    li(ng-repeat="sitem in item.subitems", ng-class="{ 'active': $state.includes(sitem.sref) || $state.is(sitem.sref) || $state.includes(sitem.srefParent)}")
+                        a(ui-sref="{{sitem.sref}}").ripple
+                            span.pull-right.nav-caret(ng-if="sitem.subitems.length")
+                                em.ion-ios-arrow-right
+                            span.pull-right.nav-label
+                                span(ng-bind="sitem.label.count", ng-class="sitem.label.classname")
+                            span.nav-icon(ng-if="sitem.iconclass")
+                                em(ng-class="sitem.iconclass")
+                                span(ng-if="sitem.svgpath", ng-include="sitem.svgpath")
+                            span(ng-bind="sitem.name")
+                        // 3rd level items
+                        ul.sidebar-subnav(ng-if="sitem.subitems.length")
+                            li(ng-repeat="ssitem in sitem.subitems", ui-sref-active="active")
+                                a(ui-sref="{{ssitem.sref}}")
+                                    span.pull-right.nav-caret(ng-if="ssitem.subitems.length")
+                                        em.ion-ios-arrow-right
+                                    span.pull-right.nav-label
+                                        span(ng-bind="ssitem.label.count", ng-class="ssitem.label.classname")
+                                    em(ng-class="ssitem.iconclass", ng-if="ssitem.iconclass")
+                                    span(ng-bind="ssitem.name")

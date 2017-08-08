@@ -1,0 +1,17 @@
+.container-fluid(ng-controller="VectorMapController as vmap")
+    .card
+        .card-heading
+            .pull-right
+                span.mr.text-muted Show last year events
+                label.switch.switch-info
+                    input(type='checkbox', ng-model="vmap.showAllMarkers", ng-change="vmap.displayAllMarkers(vmap.showAllMarkers)")
+                    span
+            .card-title World Events
+        .card-body
+            .vector-map(vector-map="", map-options="vmap.options", map-series="vmap.series", map-markers="vmap.markers")
+
+    .card
+        .card-heading
+            .card-title Usa Makers
+        .card-body
+            .vector-map(vector-map="", map-options="vmap.usa_options", map-series="vmap.series", map-markers="vmap.usa_markers")

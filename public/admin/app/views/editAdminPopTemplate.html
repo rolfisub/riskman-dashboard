@@ -1,0 +1,119 @@
+<div class="popover edit-admin-pop" tabindex="-1" ng-show="content">
+  <div class="arrow"></div>
+  <h3 class="popover-title" ng-bind-html="title" ng-show="title"></h3>
+  <div class="popover-content">
+    <form name="popoverForm">
+      <p ng-bind-html="content" style="min-width:100px;"></p>
+      <div class="form-group">
+        <div 
+            class="alert alert-danger"
+            ng-hide="genericError.hide">
+            {{genericError.msg}}
+        </div>
+        <div 
+            class="alert alert-success"
+            ng-hide="genericMsg.hide">
+            {{genericMsg.msg}}
+        </div>
+        <div class="input-group">
+            <div class="input-group-addon">Name</div>
+            <input
+                class="form-control" 
+                type="text" 
+                placeholder="Enter First Name"
+                ng-model="dataEdit.firstname"
+                ng-change="validateEditField('firstname')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="editDataStatus.firstname.valid">
+            {{editDataStatus.firstname.msg}}
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">Last Name</div>
+            <input
+                class="form-control" 
+                type="text" 
+                placeholder="Enter Last Name"
+                ng-model="dataEdit.lastname"
+                ng-change="validateEditField('lastname')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="editDataStatus.lastname.valid">
+            {{editDataStatus.lastname.msg}}
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">@</div>
+            <input 
+                class="form-control" 
+                type="text"
+                placeholder="Enter email"
+                ng-model="dataEdit.email"
+                ng-change="validateEditField('email')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="editDataStatus.email.valid">
+            {{editDataStatus.email.msg}}
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">Current Password</div>
+            <input 
+                class="form-control" 
+                type="password" 
+                placeholder="Enter Password"
+                ng-model="dataEdit.password"
+                ng-change="validateEditField('password')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="editDataStatus.password.valid">
+            {{editDataStatus.password.msg}}
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">New Password</div>
+            <input 
+                class="form-control" 
+                type="password" 
+                placeholder="Enter Password"
+                ng-model="dataEdit.passwordnew"
+                ng-change="validateEditField('passwordnew')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="editDataStatus.passwordnew.valid">
+            {{editDataStatus.passwordnew.msg}}
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">Confirm New</div>
+            <input 
+                class="form-control" 
+                type="password" 
+                placeholder="Enter Password"
+                ng-model="dataEdit.passwordnew2"
+                ng-change="validateEditField('passwordnew2')">
+        </div>
+        <div 
+            class="alert alert-danger"
+            ng-hide="editDataStatus.passwordnew2.valid">
+            {{editDataStatus.passwordnew2.msg}}
+        </div>
+        <br>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-danger" ng-click="$hide()">Close</button>
+        <button 
+            type="button" 
+            class="btn btn-primary" 
+            ng-click="editAdmin()"
+            ng-disabled="!editForm.isValid">Save changes</button>
+      </div>
+    </form>
+  </div>
+</div>

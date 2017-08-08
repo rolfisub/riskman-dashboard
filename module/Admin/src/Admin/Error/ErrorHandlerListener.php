@@ -76,7 +76,7 @@ class ErrorHandlerListener extends AbstractListenerAggregate
         $model->setTerminal(true);
         $event->setResult($model);
         $event->setViewModel($model);
-        //$event->stopPropagation(true);
+        $event->stopPropagation(true);
     }
 
     /**

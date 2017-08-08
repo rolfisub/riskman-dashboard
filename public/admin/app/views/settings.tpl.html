@@ -1,0 +1,68 @@
+
+<div ng-click="mod.close()" class="modal-header">
+  <div class="pull-right"><em class="ion-close-round text-soft"></em></div>
+  <h4 class="modal-title"><span ng-bind="mod.modalTitle"></span></h4>
+</div>
+<div class="modal-body">
+  <div class="clearfix mb">
+    <div ng-repeat="theme in themes" class="pull-left wd-tiny mb">
+      <div class="setting-color">
+        <label ng-class="'preview-' + theme">
+          <input type="radio" name="setting-theme" ng-model="app.currentTheme" ng-value="$index" ng-change="app.theme = themes[$index]"/><span class="ion-checkmark-round"></span>
+          <div class="t-grid">
+            <div class="t-row">
+              <div class="t-col preview-header"></div>
+              <div class="t-col preview-sidebar"></div>
+              <div class="t-col preview-content"></div>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <p>
+    <label class="mda-checkbox">
+      <input type="checkbox" ng-model="app.sidebar.showheader"/><em class="bg-indigo-500"></em>Sidebar header
+    </label>
+  </p>
+  <p>
+    <label class="mda-checkbox">
+      <input type="checkbox" ng-model="app.sidebar.showtoolbar"/><em class="bg-indigo-500"></em>Sidebar toolbar
+    </label>
+  </p>
+  <p>
+    <label class="mda-checkbox">
+      <input type="checkbox" ng-model="app.sidebar.offcanvas"/><em class="bg-indigo-500"></em>Sidebar offcanvas
+    </label>
+  </p>
+  <hr/>
+  <p>Navigation icon</p>
+  <p>
+    <label class="mda-radio">
+      <input type="radio" name="headerMenulink" ng-model="app.header.menulink" value="menu-link-close"/><em class="bg-indigo-500"></em>Close icon
+    </label>
+  </p>
+  <p>
+    <label class="mda-radio">
+      <input type="radio" name="headerMenulink" ng-model="app.header.menulink" value="menu-link-slide"/><em class="bg-indigo-500"></em>Slide arrow
+    </label>
+  </p>
+  <p>
+    <label class="mda-radio">
+      <input type="radio" name="headerMenulink" ng-model="app.header.menulink" value="menu-link-arrow"/><em class="bg-indigo-500"></em>Big arrow
+    </label>
+  </p>
+  <hr/>
+  <button type="button" toggle-fullscreen="" class="btn btn-default btn-raised">Toggle fullscreen</button>
+  <hr/>
+  <p>Change language</p>
+  <!-- START Language list-->
+  <div uib-dropdown="" is-open="language.listIsOpen" class="btn-group">
+    <button type="button" uib-dropdown-toggle="" class="btn btn-default btn-block btn-raised">{{language.selected}}<span class="caret"></span></button>
+    <ul role="menu" class="dropdown-menu animated fadeInUpShort">
+      <li ng-repeat="(localeId, langName) in language.available"><a ng-click="language.set(localeId, $event)">{{langName}}</a></li>
+    </ul>
+  </div>
+  <!-- END Language list-->
+</div>

@@ -1,0 +1,132 @@
+/**
+ * Tables - Datatables
+ */
+
+@import '../common/variables';
+@import '../common/mixins';
+
+//
+// Custom datatables
+// --------------------------------------------------
+
+table.dataTable {
+    border-bottom: 1px solid fade(@gray-base,26%) !important;
+
+    &,
+    & th,
+    & td {
+        .box-sizing(border-box) !important;
+    }
+
+    tbody tr {
+        background-color: transparent !important;
+        &:nth-of-type(odd) {
+            background-color: fade(@gray-base,6%) !important;
+        }
+    }
+    thead th,
+    thead td {
+        border-bottom: 0 !important;
+    }
+}
+
+
+
+// Input styles
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper select {
+    box-shadow: none;
+    // -webkit-appearance: none;
+    height: 30px; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    // color: inherit !important;
+    background-color: #fff;
+    background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+    border: 1px solid @gray-lighter;
+    border-radius: 4px;
+
+}
+
+// Pagination buttons
+.dataTables_wrapper > .dataTables_paginate .paginate_button {
+    background-image: none !important;
+    background-color: fade(@gray-base,26%) !important;
+    border: 0 !important;
+    &:hover {
+        background-color: @brand-primary !important;
+        color: #fff !important;
+    }
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_processing,
+.dataTables_wrapper .dataTables_paginate {
+    color: inherit !important;
+}
+
+// Input styles
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper select,
+.dataTables_wrapper .form-control {
+    box-shadow: none;
+    // -webkit-appearance: none;
+    height: 30px; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: @gray;
+    background-color: transparent !important;
+    background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid fade(@gray-base,16%);
+    &:focus {
+        border-bottom-color: @brand-info !important;
+    }
+
+}
+
+
+// Pagination styles
+
+.dataTables_wrapper {
+    .pagination>li>a, .pagination>li>span {
+        background-color: fade(@gray-base,16%) ;
+        border-color: fade(@gray-base,26%) ;
+        color: inherit;
+    }
+    .pagination>li>span {
+        cursor: default;
+        &:hover, &:focus {
+            background-color: transparent !important;
+        }
+    }
+
+    .pagination>li>a:focus,
+    .pagination>li>a:hover {
+        background-color: @brand-info;
+        border-color: @brand-info;
+        color: #fff;
+    }
+
+    .pagination>.active>a,
+    .pagination>.active>a:focus,
+    .pagination>.active>a:hover {
+        background-color: @brand-info;
+        border-color: @brand-info;
+        color: #fff;
+    }
+}
+
+.panel .dataTable {
+    width: 100% !important;
+}
+
+.card .dataTables_wrapper>.row,
+.panel .dataTables_wrapper>.row {
+    margin: 0;
+}

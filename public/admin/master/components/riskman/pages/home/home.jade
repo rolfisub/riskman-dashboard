@@ -1,0 +1,23 @@
+.content-heading.bg-white
+    .row
+        .col-sm-9
+            h4.m0.text-thin Welcome to RiskMan Home
+            small General statistics :-)
+            
+.container-fluid(ng-controller='HomeController as home')
+    .row
+        .col-xs-12.col-lg-8
+            .card
+                // START table-responsive
+                .table-responsive
+                    table.table.table-striped
+                        thead
+                            tr
+                                th Stat Name
+                                th Result
+                        tbody
+                            tr(ng-repeat='(name, value) in home.apiStats as data')
+                                td
+                                    p.m0 {{name | uppercase}}
+                                td
+                                    p.m0 {{value}}

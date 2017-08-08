@@ -1,0 +1,216 @@
+.container.container-lg
+
+    .row
+        .col-lg-8.col-xs-12
+            .row
+                .col-sm-6.col-xs-12
+                    .card
+                        .card-heading.bg-pink-500
+                            // START dropdown
+                            .pull-right.dropdown(uib-dropdown='dropdown2')
+                                button.btn.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='')
+                                    em.ion-android-more-vertical
+                                ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                                    li
+                                        a(href='') Option 1
+                                    li
+                                        a(href='') Option 2
+                                    li
+                                        a(href='') Option 3
+                            // END dropdown
+                            .card-title Rolf Bansbach
+                        .card-body
+                            p Nulla egestas faucibus tincidunt.
+                            p.m0
+                                a(href='')
+                                    img.mr-sm.thumb48(src='app/img/pic1.jpg', alt='Pic')
+                                a(href='')
+                                    img.mr-sm.thumb48(src='app/img/pic2.jpg', alt='Pic')
+                                a(href='')
+                                    img.mr-sm.thumb48(src='app/img/pic3.jpg', alt='Pic')
+                                a(href='')
+                                    img.mr-sm.thumb48(src='app/img/pic4.jpg', alt='Pic')
+                        .card-footer
+                            button.btn.btn-flat.btn-default(type="button") Action 1
+                            button.btn.btn-flat.btn-default(type="button") Action 2
+                .col-sm-6.col-xs-12
+                    .card
+                        .card-heading.bg-primary
+                            .card-title Paracosm
+                        .card-offset
+                            .card-offset-item.text-right
+                                button(type="button").btn-raised.btn.btn-info.btn-circle.btn-lg
+                                    em.ion-android-add
+                        .card-body.pt0
+                            p.mb-sm Cras rutrum scelerisque auctor. Donec ultricies blandit venenatis. Nulla facilisi. Praesent diam diam, venenatis lorem par.
+                        .card-footer
+                            button.btn.btn-flat.btn-default(type="button") Action 1
+                            button.btn.btn-flat.btn-default(type="button") Action 2
+            .row
+                .col-sm-6.col-xs-12
+                    .card
+                        .card-item
+                            img.fw.img-responsive(src='app/img/pic5.jpg', alt='MaterialImg')
+                            .card-item-text.text-right Paracosm
+                        .card-offset
+                            .card-offset-item.text-left
+                                button.btn-raised.btn.btn-primary.btn-circle.btn-lg(type="button", ng-init="counter=25", ng-click="counter=counter+1") {{counter}}
+                        .card-body.pt0
+                            h4.m0 Sky red
+                            p.m0
+                                span.mr-sm.text-muted by
+                                a(href='') John
+                .col-sm-6.col-xs-12
+                    .card
+                        .card-item
+                            img.fw.img-responsive(src='app/img/pic4.jpg', alt='MaterialImg')
+                            .card-item-text Paracosm
+                        .card-offset
+                            .card-offset-item.text-center
+                                button(type="button").btn-raised.btn.btn-success.btn-circle.btn-lg
+                                    em.ion-share
+                        .card-body.pt0
+                            h4.m0 Peaceful view
+                            p.m0
+                                span.mr-sm.text-muted by
+                                a(href='') Zachary
+
+        .col-lg-4.col-xs-12
+            .card
+                .card-item
+                    img.fw.img-responsive(src='app/img/pic1.jpg', alt='MaterialImg')
+                    .card-item-text.bg-transparent
+                        h4.text-center Jill Howell
+                .card-offset
+                    .card-offset-item.text-right
+                        button(type="button", ng-click="toggle=!toggle").btn-raised.btn.btn-danger.btn-circle.btn-lg
+                            em.ion-ios-heart-outline(ng-class="toggle ? 'ion-ios-heart':'ion-ios-heart-outline'")
+                .mda-list
+                    .mda-list-item
+                        .mda-list-item-icon
+                            em.ion-android-call.icon-2x.text-primary
+                        .mda-list-item-text.mda-2-line
+                            h3 (123) 456 789
+                            h4.text-muted Home
+                        .mda-list-item-icon.pull-right
+                            em.ion-chatbubbles.icon-lg.text-muted
+                    .mda-list-item
+                        .mda-list-item-icon
+                        .mda-list-item-text.mda-2-line
+                            h3 (123) +15 321 654
+                            h4.text-muted Mobile
+                    .mda-list-item
+                        .mda-list-item-icon
+                            em.ion-android-mail.icon-2x.text-primary
+                        .mda-list-item-text.mda-2-line
+                            h3 jill@mail.com
+                            h4.text-muted Personal
+                        .mda-list-item-icon.pull-right
+                            em.ion-compose.icon-lg.text-muted
+                    .mda-list-item
+                        .mda-list-item-icon
+                        .mda-list-item-text.mda-2-line
+                            h3 jill.howell@work.com
+                            h4.text-muted Work
+    .row
+        .col-lg-4.col-md-6.col-xs-12
+            .card.bg-primary
+                .card-body
+                    .pull-right
+                        em.ion-calendar.icon-2x.text-muted
+                    h4.mv-sm New event
+                    h5 22 Aug, at 10 a.m.
+                .card-footer
+                    button.btn.btn-flat.btn-primary.text-white(type="button") Add to Calendar
+        .col-lg-4.col-md-6.col-xs-12
+            .card.bg-success
+                .card-body
+                    .row
+                        .col-xs-8
+                            em.ion-ios-musical-notes.icon-2x.pull-left
+                            .pl-xl
+                                h5.mv-sm Pellentesque vitae
+                                h6.m0 Aliquam non eros
+                        .col-xs-4
+                            a(href=""): img.img-responsive.img-rounded(src="app/img/user/05.jpg", alt="Image")
+                .card-footer.clearfix
+                    .pull-left
+                        button.btn.btn-flat.btn-success.text-white(type="button") Play now
+                    .pull-right
+                        button.btn.btn-flat.btn-success.text-white(type="button") Next
+        .col-lg-4.col-xs-12
+            .card.bg-info
+                .card-body
+                    p.lead.m0 A simple announce could be added here with any text for users who want to read this.
+                .card-footer.text-right
+                    button.btn.btn-flat.btn-info.text-white(type="button") Ok, Let's Go!
+
+    // Large card
+    .card
+        .card-heading
+            // START dropdown
+            .pull-right.dropdown(uib-dropdown='dropdown2')
+                button.btn.btn-default.btn-flat.btn-flat-icon(type='button', uib-dropdown-toggle='')
+                    em.ion-android-more-vertical
+                ul.dropdown-menu.md-dropdown-menu.dropdown-menu-right(role='menu')
+                    li
+                        a(href='') Option 1
+                    li
+                        a(href='') Option 2
+                    li
+                        a(href='') Option 3
+            // END dropdown
+        .card-body.pt0
+            h3.mt0 Technology
+            p Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
+        .card-footer
+            button.btn.btn-flat.btn-primary(type="button") Read More
+
+    .row
+        .col-lg-3.col-sm-6.col-xs-12
+            .card
+                .card-item
+                    img.fw.img-responsive(src='app/img/pic3.jpg', alt='MaterialImg')
+                .card-body
+                    h4.mt0 Freedom in the air
+                    p.m0 Nunc vitae ipsum elit, non lacinia dui. Sed tempor lacinia tempus. Etiam eget congue nulla. Sed quis eros libero, a euismod nisl.
+
+        .col-lg-3.col-sm-6.col-xs-12
+            .card
+                .card-item
+                    img.fw.img-responsive(src='app/img/pic2.jpg', alt='MaterialImg')
+                .card-body
+                    h4.mt0 Mountain lake
+                    p Cras et dui non erat ornare ornare eget non sapien.
+                    .text-right
+                        button.btn.btn-flat.btn-primary(type="button") Share
+                        button.btn.btn-flat.btn-primary(type="button") More
+        .col-lg-3.col-sm-6.col-xs-12
+            .card
+                .card-item
+                    img.fw.img-responsive(src='app/img/pic1.jpg', alt='MaterialImg')
+                    .card-item-text
+                        a(href="").link-white: em.ion-map.mr.icon-lg
+                        a(href="").link-white: em.ion-ios-heart-outline.mr.icon-lg
+                        a(href="").link-white: em.ion-image.icon-lg
+                .card-body
+                    h4.mt0 Forest trip
+                    p Nullam quis lorem a est auctor venenatis vel vitae ipsum.
+                    hr
+                    .clearfix
+                        .pull-left
+                            span.mr-sm.text-muted by
+                            a(href='') Bonnie
+                        .pull-right.text-muted
+                            em.ion-android-time.mr-sm
+                            span a week ago
+        .col-lg-3.col-sm-6.col-xs-12
+            .card
+                .card-item
+                    img.fw.img-responsive(src='app/img/pic4.jpg', alt='MaterialImg')
+                    p.card-item-text Picture.png
+        .col-lg-3.col-sm-6.col-xs-12
+            .card
+                .card-item
+                    img.fw.img-responsive(src='app/img/pic1.jpg', alt='MaterialImg')
+                    p.card-item-text Image.jpg

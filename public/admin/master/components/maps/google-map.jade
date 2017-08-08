@@ -1,0 +1,10 @@
+.container-fluid(ng-controller="GMapController as gmap")
+    .card
+        .card-heading Basic Map
+        .card-body
+            ui-gmap-google-map.gmap(center='gmap.map.center', zoom='gmap.map.zoom')
+    .card
+        .card-heading Draggable markers
+        .card-body
+            ui-gmap-google-map(center='gmap.map1.center', zoom='gmap.map1.zoom', draggable='true', options='gmap.options')
+                ui-gmap-marker(coords='gmap.marker.coords', options='gmap.marker.options', events='gmap.marker.events', idkey='gmap.marker.id')

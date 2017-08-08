@@ -1,0 +1,86 @@
+.container-fluid(ng-controller='DataTableController as table')
+    // Zero Configuration
+    .card
+        .card-heading Bootstrap Basic
+        table.table.table-striped.mv-lg(datatable='', dt-options='table.dtOptionsBs')
+            thead
+                tr
+                    th Card Id
+                    th First name
+                    th Last name
+                    th Age
+            tbody
+                tr
+                    td 123123123
+                    td Hannah
+                    td Burns
+                    td 26
+                tr
+                    td 33333344444
+                    td Addison
+                    td Payne
+                    td 32
+                tr
+                    td 9998888999
+                    td Kylie
+                    td Hudson
+                    td 100
+
+    // ngRepeat + ngResource
+    .card
+        .card-heading Dynamic (ngRepeat + ngResource)
+        .card-body
+            table.table.table-striped.mv-lg(datatable='ng', dt-options='table.dtOptions')
+                thead
+                    tr
+                        th Person ID
+                        th First Name
+                        th Last Name
+                tbody
+                    tr(ng-repeat='person in table.persons')
+                        td {{ person.id }}
+                        td {{ person.firstName }}
+                        td {{ person.lastName }}
+
+    // Chaning data
+    .card
+        .card-heading Change content
+        .card-body
+            form.form-inline(ng-submit='table.addPerson()')
+                table.table.table-striped.mv-lg(datatable='ng', dt-options='table.dtOptions', dt-column-defs='table.dtColumnDefs')
+                    thead
+                        tr
+                            th
+                                .form-group
+                                    label
+                                        input.form-control(type='number', name='id', ng-model='table.person2Add.id', value='')
+                            th
+                                .form-group
+                                    label
+                                        input.form-control(type='text', name='firstName', ng-model='table.person2Add.firstName', value='')
+                            th
+                                .form-group
+                                    label
+                                        input.form-control(type='text', name='lastName', ng-model='table.person2Add.lastName', value='')
+                            th
+                                .form-group
+                                    button.btn.btn-labeled.btn-success(type='submit')
+                                        span.btn-label
+                                            em.ion-plus-round
+                                        | Add
+                        tr
+                            th Hero ID
+                            th First Name
+                            th Last Name
+                            th
+                    tbody
+                        tr(ng-repeat='hero in table.heroes')
+                            td {{ hero.id }}
+                            td {{ hero.firstName }}
+                            td {{ hero.lastName }}
+                            td
+                                button.btn.btn-sm.btn-warning(type='button', ng-click='table.modifyPerson($index)')
+                                    em.ion-edit
+                                button.btn.btn-sm.btn-danger(type='button', ng-click='table.removePerson($index)')
+                                    em.ion-trash-b
+

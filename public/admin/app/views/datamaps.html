@@ -1,0 +1,15 @@
+
+<div ng-controller="DatamapsController as dmap" class="container-fluid">
+  <div class="panel panel-default">
+    <div class="panel-heading">Basic Map</div>
+    <div class="panel-body">
+      <datamap map="dmap.mapObject"></datamap>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">Customized Arc Map</div>
+    <div class="panel-body">
+      <datamap map="dmap.mapObjectArc" plugins="dmap.mapPluginArc" plugin-data="dmap.mapPluginArcData"></datamap>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+
+<div ng-controller="FormEditorController as editor" class="container-fluid">
+  <h5 class="mt0">Summernote</h5>
+  <p class="mb-lg">Super simple WYSIWYG Editor based on Bootstrap</p>
+  <summernote ng-model="editor.summernoteText" height="280"></summernote>
+  <h5>Summernote airmode</h5>
+  <p class="mb-lg">To reveal toolbar, select a text where you want to shape up</p>
+  <summernote airmode="" ng-model="editor.airmodeText" class="summernote-air well reader-block"></summernote>
+</div>

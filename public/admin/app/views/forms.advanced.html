@@ -1,0 +1,307 @@
+
+<div class="container-fluid">
+  <!-- UISELECT-->
+  <div ng-controller="uiSelectController as uisel" class="card">
+    <div class="card-heading">
+      <!-- START dropdown-->
+      <div uib-dropdown="dropdown2" class="pull-right dropdown">
+        <button type="button" uib-dropdown-toggle="" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+        <ul role="menu" class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+          <li><a href="" ng-click="uisel.enable()">Enable</a></li>
+          <li><a href="" ng-click="uisel.disable()">Disable</a></li>
+          <li><a href="" ng-click="uisel.clear()">Clear</a></li>
+        </ul>
+      </div>
+      <!-- END dropdown-->
+      <div class="card-title">uiSelect</div>
+      <div class="text-muted">AngularJS native version of Select2 and Selectize.</div>
+    </div>
+    <div class="card-body">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-3 col-sm-4">
+            <p class="m0">Address</p>
+          </div>
+          <div class="col-md-5 col-sm-8">
+            <ui-select ng-model="uisel.address.selected" theme="bootstrap" ng-disabled="uisel.disabled" reset-search-input="false">
+              <ui-select-match placeholder="Enter an address...">{{$select.selected.formatted_address}}</ui-select-match>
+              <ui-select-choices repeat="address in uisel.addresses | filter: $select.search track by $index" refresh="uisel.refreshAddresses($select.search)" refresh-delay="0">
+                <div ng-bind-html="address.formatted_address | highlight: $select.search"></div>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="col-md-4 hidden-xs hidden-sm oh">
+            <div class="text-sm text-muted mt-sm">Selected: {{uisel.address.selected.formatted_address}}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3 col-sm-4">
+            <p class="m0">Persons</p>
+          </div>
+          <div class="col-md-5 col-sm-8">
+            <ui-select ng-model="uisel.person.selected" theme="bootstrap" ng-disabled="uisel.disabled">
+              <ui-select-match placeholder="Select or search a name/age...">{{$select.selected.name}}</ui-select-match>
+              <ui-select-choices repeat="person in uisel.people | propsFilter: {name: $select.search, age: $select.search}">
+                <div ng-bind-html="person.name | highlight: $select.search"></div><small>email: {{person.email}}        age:<span ng-bind-html="''+person.age | highlight: $select.search"></span></small>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="col-md-4 hidden-xs hidden-sm oh">
+            <div class="text-sm text-muted mt-sm">Selected: {{uisel.person.selected}}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3 col-sm-4">
+            <p class="m0">Countries</p>
+          </div>
+          <div class="col-md-5 col-sm-8">
+            <ui-select ng-model="uisel.country.selected" theme="bootstrap" ng-disabled="uisel.disabled" class="text-left">
+              <ui-select-match placeholder="Select or search a country in the list...">{{$select.selected.name}}</ui-select-match>
+              <ui-select-choices repeat="country in uisel.countries | filter: $select.search"><span ng-bind-html="country.name | highlight: $select.search"></span><small ng-bind-html="country.code | highlight: $select.search"></small></ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="col-md-4 hidden-xs hidden-sm oh">
+            <div class="text-sm text-muted mt-sm">Selected: {{uisel.country.selected}}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3 col-sm-4">
+            <p class="m0">Array of strings</p>
+          </div>
+          <div class="col-md-5 col-sm-8">
+            <ui-select multiple="" ng-model="uisel.multipleDemo.colors" theme="bootstrap" ng-disabled="uisel.disabled">
+              <ui-select-match placeholder="Select colors...">{{$item}}</ui-select-match>
+              <ui-select-choices repeat="color in uisel.availableColors | filter:$select.search">{{color}}</ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="col-md-4 hidden-xs hidden-sm oh">
+            <div class="text-sm text-muted mt-sm">Selected: {{uisel.multipleDemo.colors}}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3 col-sm-4">
+            <p class="m0">Array of objects</p>
+          </div>
+          <div class="col-md-5 col-sm-8">
+            <ui-select multiple="" ng-model="uisel.multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="uisel.disabled">
+              <ui-select-match placeholder="Select uisel.person...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+              <ui-select-choices repeat="person in uisel.people | propsFilter: {name: $select.search, age: $select.search}">
+                <div ng-bind-html="person.name | highlight: $select.search"></div><small>email: {{person.email}}        age:<span ng-bind-html="''+person.age | highlight: $select.search"></span></small>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="col-md-4 hidden-xs hidden-sm oh">
+            <div class="text-sm text-muted mt-sm">Selected: {{uisel.multipleDemo.selectedPeople}}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3 col-sm-4">
+            <p class="m0">Array of objects with single property binding</p>
+          </div>
+          <div class="col-md-5 col-sm-8">
+            <ui-select multiple="" ng-model="uisel.multipleDemo.selectedPeopleSimple" theme="bootstrap" ng-disabled="uisel.disabled">
+              <ui-select-match placeholder="Select uisel.person...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+              <ui-select-choices repeat="person.email as person in uisel.people | propsFilter: {name: $select.search, age: $select.search}">
+                <div ng-bind-html="person.name | highlight: $select.search"></div><small>email: {{person.email}}        age:<span ng-bind-html="''+person.age | highlight: $select.search"></span></small>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="col-md-4 hidden-xs hidden-sm oh">
+            <div class="text-sm text-muted mt-sm">Selected: {{uisel.multipleDemo.selectedPeopleSimple}}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3 col-sm-4">
+            <p class="m0">Array of objects (with groupBy)</p>
+          </div>
+          <div class="col-md-5 col-sm-8">
+            <ui-select multiple="" ng-model="uisel.multipleDemo.selectedPeopleWithGroupBy" theme="bootstrap" ng-disabled="uisel.disabled">
+              <ui-select-match placeholder="Select uisel.person...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+              <ui-select-choices group-by="uisel.someGroupFn" repeat="person in uisel.people | propsFilter: {name: $select.search, age: $select.search}">
+                <div ng-bind-html="person.name | highlight: $select.search"></div><small>email: {{person.email}}        age:<span ng-bind-html="''+person.age | highlight: $select.search"></span></small>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="col-md-4 hidden-xs hidden-sm oh">
+            <div class="text-sm text-muted mt-sm">Selected: {{uisel.multipleDemo.selectedPeopleWithGroupBy}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END UISELECT-->
+  <div class="card">
+    <div class="card-heading">Calendar</div>
+    <div class="card-body">
+      <div ng-controller="DatepickerDemoCtrl as dp">
+        <div class="well well-sm">
+          <div class="m0">Selected date is:<strong class="ml"><em>{{dp.dt | date:'fullDate' }}</em></strong></div>
+        </div>
+        <h5>Inline</h5>
+        <div class="row text-center">
+          <div class="col-md-4">
+            <div class="ui-datepicker-responsive">
+              <div uib-datepicker="uib-datepicker" ng-model="dp.dt" class="ui-datepicker dp-head-primary dp-table-primary"></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="ui-datepicker-responsive">
+              <div uib-datepicker="uib-datepicker" ng-model="dp.dt" class="ui-datepicker dp-head-info dp-table-info"></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="ui-datepicker-responsive">
+              <div uib-datepicker="uib-datepicker" ng-model="dp.dt" class="ui-datepicker dp-head-pink dp-table-pink"></div>
+            </div>
+          </div>
+        </div>
+        <h5>Popup</h5>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="ui-datepicker dp-head-success dp-table-success shadow-clear">
+              <div class="input-group">
+                <input type="text" uib-datepicker-popup="{{dp.format}}" ng-model="dt" is-open="dp.opened" datepicker-options="dp.dateOptions" ng-required="true" close-text="Close" class="form-control"/><span class="input-group-btn">
+                  <button type="button" ng-click="dp.open($event)" class="btn btn-default"><em class="ion-calendar"></em></button></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label>Format:</label>
+            <select ng-model="dp.format" ng-options="f for f in dp.formats" class="form-control">
+              <option></option>
+            </select>
+          </div>
+        </div>
+        <hr/>
+        <button type="button" ng-click="dp.today()" class="btn btn-sm btn-info">Today</button>
+        <button type="button" ng-click="dp.dt = '2009-08-24'" class="btn btn-sm btn-default">2009-08-24</button>
+        <button type="button" ng-click="dp.clear()" class="btn btn-sm btn-danger">Clear</button>
+        <button type="button" ng-click="dp.toggleMin()" uib-tooltip="After today restriction" class="btn btn-sm btn-default">Min date</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-heading">Time picker</div>
+    <div class="card-body">
+      <div ng-controller="TimepickerDemoCtrl as tp" class="row">
+        <div class="col-md-6">
+          <div uib-timepicker="uib-timepicker" ng-model="tp.mytime" ng-change="tp.changed()" hour-step="tp.hstep" minute-step="tp.mstep" show-meridian="tp.ismeridian"></div>
+          <pre class="alert alert-info">Time is: {{tp.mytime | date:'shortTime' }}</pre>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-xs-6">Hours step is:
+              <select ng-model="tp.hstep" ng-options="opt for opt in tp.options.hstep" class="form-control"></select>
+            </div>
+            <div class="col-xs-6">Minutes step is:
+              <select ng-model="tp.mstep" ng-options="opt for opt in tp.options.mstep" class="form-control"></select>
+            </div>
+          </div>
+          <hr/>
+          <button ng-click="tp.toggleMode()" class="btn btn-info">12H / 24H</button>
+          <button ng-click="tp.update()" class="btn btn-default">Set to 14:00</button>
+          <button ng-click="tp.clear()" class="btn btn-danger">Clear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-heading">Range Sliders</div>
+    <div ng-controller="RangeSliderController as rslider" class="card-body">
+      <p class="clearfix"><span class="pull-left">Single</span><span class="pull-right">Curent Value {{rslider.value}}</span></p>
+      <slider ng-model="value" floor="1" ceiling="100"></slider>
+      <p></p>
+      <p class="clearfix"><span class="pull-left">Single with formatting</span><span class="pull-right">Curent Value {{rslider.formatted}}</span></p>
+      <slider ng-model="rslider.formatted" translate-fn="priceFormat" floor="1" ceiling="100"></slider>
+      <p class="clearfix"><span class="pull-left">Range</span><span class="pull-right">Min:{{rslider.range.min}} - Max:{{rslider.range.max}}</span></p>
+      <slider ng-model="rslider.range.min" ng-model-range="rslider.range.max" floor="1" ceiling="100"></slider>
+      <p>Color options</p>
+      <slider ng-model="rslider.range2.min" ng-model-range="rslider.range2.max" floor="1" ceiling="100" class="slider-success"></slider>
+      <slider ng-model="rslider.range2.min" ng-model-range="rslider.range2.max" floor="1" ceiling="100" class="slider-info"></slider>
+      <slider ng-model="rslider.range2.min" ng-model-range="rslider.range2.max" floor="1" ceiling="100" class="slider-warning"></slider>
+      <slider ng-model="rslider.range2.min" ng-model-range="rslider.range2.max" floor="1" ceiling="100" class="slider-danger"></slider>
+      <slider ng-model="rslider.range2.min" ng-model-range="rslider.range2.max" floor="1" ceiling="100" class="slider-inverse"></slider>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-heading">Note editors (textarea)</div>
+    <div class="card-body">
+      <div class="card">
+        <div class="card-body">
+          <div class="note-area">
+            <textarea rows="10" class="form-control">In elementum magna sed sapien gravida scelerisque.</textarea>
+          </div>
+        </div>
+      </div>
+      <p>With margin</p>
+      <div class="card">
+        <div class="card-body">
+          <div class="note-area note-area-margin">
+            <textarea rows="10" class="form-control">Curabitur tellus mauris, fringilla sed tempus eget, convallis id orci.</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-heading">Color pickers</div>
+    <div ng-controller="ColorPickerController as cpicker" class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="panel">
+            <div class="panel-heading">hex: {{ cpicker.hexPicker.color }}</div>
+            <div class="panel-body">
+              <p>
+                <button ng-click="cpicker.resetColor()" class="btn btn-primary">Update Model</button>
+              </p>
+              <div class="rel-wrapper">
+                <input colorpicker="" ng-model="cpicker.hexPicker.color" colorpicker-parent="true" type="text" class="form-control"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="panel">
+            <div class="panel-heading">rgb: {{ cpicker.rgbPicker.color }}</div>
+            <div class="panel-body">
+              <p>
+                <button ng-click="cpicker.resetRBGColor()" class="btn btn-primary">Update Model</button>
+              </p>
+              <div class="rel-wrapper">
+                <input colorpicker="rgb" ng-model="cpicker.rgbPicker.color" colorpicker-parent="true" type="text" class="form-control"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="panel">
+            <div class="panel-heading">rgba: {{ cpicker.rgbaPicker.color }}</div>
+            <div class="panel-body">
+              <p>
+                <button ng-click="cpicker.resetRBGAColor()" class="btn btn-primary">Update Model</button>
+              </p>
+              <div class="rel-wrapper">
+                <input colorpicker="rgba" colorpicker-position="right" ng-model="cpicker.rgbaPicker.color" colorpicker-parent="true" type="text" class="form-control"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="panel">
+            <div class="panel-heading">Non input element model value: {{ cpicker.nonInput.color }}</div>
+            <div class="panel-body">
+              <p>
+                <button ng-click="cpicker.resetNonInputColor()" class="btn btn-primary">Update Model</button>
+              </p>
+              <div class="rel-wrapper">
+                <button colorpicker="" type="button" colorpicker-position="top" colorpicker-parent="true" ng-model="cpicker.nonInput.color" class="btn btn-success">Change color</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,351 @@
+.container.container-fluid
+
+    .row.mv
+      .col-sm-4
+        button.btn.btn-info(type="button")
+            em.ion-plus.mr-sm
+            | Add Project
+      .col-sm-8.text-right.hidden-xs
+            form.form-inline
+                .form-group.mr
+                    label.mr: small Status
+                    select.form-control.input-sm
+                        option Completed
+                        option Active
+                        option Paused
+                        option Canceled
+                .form-group
+                    label.mr: small Sort by
+                    select.form-control.input-sm
+                        option Name
+                        option Status
+                        option Start Date
+                        option Finish Date
+
+    .row
+        .col-md-6.col-lg-4
+            // Project card
+            .card
+                .card-heading
+                    .pull-right: .label.label-info active
+                    .card-title Project #A
+                    small Web development
+                .card-body
+                    p: strong Description:
+                    .pl-lg.mb-lg Ut turpis urna, tristique sed adipiscing nec, luctus quis leo. Fusce nec volutpat ante.
+                    p: strong Members:
+                    .pl-lg.mb-lg
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/02.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/04.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/05.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/06.jpg', alt='project member')
+                    p: strong Activity:
+                    .pl-lg
+                        ul.list-inline.m0
+                            li.mr
+                                h4.m0 17
+                                p.text-muted Issues
+                            li.mr
+                                h4.m0 780
+                                p.text-muted Posts
+                            li
+                                h4.m0 23
+                                p.text-muted Tests
+                .card-footer
+                    p: small 56%
+                    uib-progressbar.progress-xs.m0(value='56', type='info')
+            // end Project card
+        .col-md-6.col-lg-4
+            // Project card
+            .card
+                .card-heading
+                    .pull-right: .label.label-info active
+                    .card-title Project #B
+                    small Web development
+                .card-body
+                    p: strong Description:
+                    .pl-lg.mb-lg Ut turpis urna, tristique sed adipiscing nec, luctus quis leo. Fusce nec volutpat ante.
+                    p: strong Members:
+                    .pl-lg.mb-lg
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/04.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/03.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/07.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/03.jpg', alt='project member')
+                    p: strong Activity:
+                    .pl-lg
+                        ul.list-inline.m0
+                            li.mr
+                                h4.m0 17
+                                p.text-muted Issues
+                            li.mr
+                                h4.m0 780
+                                p.text-muted Posts
+                            li
+                                h4.m0 23
+                                p.text-muted Tests
+                .card-footer
+                    p: small 56%
+                    uib-progressbar.progress-xs.m0(value='56', type='danger')
+            // end Project card
+        .col-md-6.col-lg-4
+            // Project card
+            .card
+                .card-heading
+                    .pull-right: .label.label-warning paused
+                    .card-title Project #C
+                    small Web development
+                .card-body
+                    p: strong Description:
+                    .pl-lg.mb-lg Ut turpis urna, tristique sed adipiscing nec, luctus quis leo. Fusce nec volutpat ante.
+                    p: strong Members:
+                    .pl-lg.mb-lg
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/04.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/03.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/07.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/03.jpg', alt='project member')
+                    p: strong Activity:
+                    .pl-lg
+                        ul.list-inline.m0
+                            li.mr
+                                h4.m0 17
+                                p.text-muted Issues
+                            li.mr
+                                h4.m0 780
+                                p.text-muted Posts
+                            li
+                                h4.m0 23
+                                p.text-muted Tests
+                .card-footer
+                    p: small 64%
+                    uib-progressbar.progress-xs.m0(value='64', type='success')
+            // end Project card
+
+        .col-md-6.col-lg-4
+            // Project card
+            .card
+                .card-heading
+                    .pull-right: .label.label-info active
+                    .card-title Project #D
+                    small Web development
+                .card-body
+                    p: strong Description:
+                    .pl-lg.mb-lg Ut turpis urna, tristique sed adipiscing nec, luctus quis leo. Fusce nec volutpat ante.
+                    p: strong Members:
+                    .pl-lg.mb-lg
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/03.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/07.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/06.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/05.jpg', alt='project member')
+                    p: strong Activity:
+                    .pl-lg
+                        ul.list-inline.m0
+                            li.mr
+                                h4.m0 17
+                                p.text-muted Issues
+                            li.mr
+                                h4.m0 780
+                                p.text-muted Posts
+                            li
+                                h4.m0 23
+                                p.text-muted Tests
+                .card-footer
+                    p: small 36%
+                    uib-progressbar.progress-xs.m0(value='36', type='warning')
+            // end Project card
+        .col-md-6.col-lg-4
+            // Project card
+            .card
+                .card-heading
+                    .pull-right: .label.label-info active
+                    .card-title Project #A
+                    small Web development
+                .card-body
+                    p: strong Description:
+                    .pl-lg.mb-lg Ut turpis urna, tristique sed adipiscing nec, luctus quis leo. Fusce nec volutpat ante.
+                    p: strong Members:
+                    .pl-lg.mb-lg
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/02.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/04.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/05.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/06.jpg', alt='project member')
+                    p: strong Activity:
+                    .pl-lg
+                        ul.list-inline.m0
+                            li.mr
+                                h4.m0 17
+                                p.text-muted Issues
+                            li.mr
+                                h4.m0 780
+                                p.text-muted Posts
+                            li
+                                h4.m0 23
+                                p.text-muted Tests
+                .card-footer
+                    p: small 56%
+                    uib-progressbar.progress-xs.m0(value='56', type='info')
+            // end Project card
+        .col-md-6.col-lg-4
+            // Project card
+            .card
+                .card-heading
+                    .pull-right: .label.label-success completed
+                    .card-title Project #B
+                    small Web development
+                .card-body
+                    p: strong Description:
+                    .pl-lg.mb-lg Ut turpis urna, tristique sed adipiscing nec, luctus quis leo. Fusce nec volutpat ante.
+                    p: strong Members:
+                    .pl-lg.mb-lg
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/04.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/03.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/07.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/03.jpg', alt='project member')
+                    p: strong Activity:
+                    .pl-lg
+                        ul.list-inline.m0
+                            li.mr
+                                h4.m0 17
+                                p.text-muted Issues
+                            li.mr
+                                h4.m0 780
+                                p.text-muted Posts
+                            li
+                                h4.m0 23
+                                p.text-muted Tests
+                .card-footer
+                    p: small 100%
+                    uib-progressbar.progress-xs.m0(value='100', type='success')
+            // end Project card
+        .col-md-6.col-lg-4
+            // Project card
+            .card
+                .card-heading
+                    .pull-right: .label.label-warning paused
+                    .card-title Project #C
+                    small Web development
+                .card-body
+                    p: strong Description:
+                    .pl-lg.mb-lg Ut turpis urna, tristique sed adipiscing nec, luctus quis leo. Fusce nec volutpat ante.
+                    p: strong Members:
+                    .pl-lg.mb-lg
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/04.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/03.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/07.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/03.jpg', alt='project member')
+                    p: strong Activity:
+                    .pl-lg
+                        ul.list-inline.m0
+                            li.mr
+                                h4.m0 17
+                                p.text-muted Issues
+                            li.mr
+                                h4.m0 780
+                                p.text-muted Posts
+                            li
+                                h4.m0 23
+                                p.text-muted Tests
+                .card-footer
+                    p: small 64%
+                    uib-progressbar.progress-xs.m0(value='64', type='success')
+            // end Project card
+
+        .col-md-6.col-lg-4
+            // Project card
+            .card
+                .card-heading
+                    .pull-right: .label.label-info active
+                    .card-title Project #D
+                    small Web development
+                .card-body
+                    p: strong Description:
+                    .pl-lg.mb-lg Ut turpis urna, tristique sed adipiscing nec, luctus quis leo. Fusce nec volutpat ante.
+                    p: strong Members:
+                    .pl-lg.mb-lg
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/03.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/07.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/06.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/05.jpg', alt='project member')
+                    p: strong Activity:
+                    .pl-lg
+                        ul.list-inline.m0
+                            li.mr
+                                h4.m0 17
+                                p.text-muted Issues
+                            li.mr
+                                h4.m0 780
+                                p.text-muted Posts
+                            li
+                                h4.m0 23
+                                p.text-muted Tests
+                .card-footer
+                    p: small 36%
+                    uib-progressbar.progress-xs.m0(value='36', type='warning')
+            // end Project card
+        .col-md-6.col-lg-4
+            // Project card
+            .card
+                .card-heading
+                    .pull-right: .label.label-info active
+                    .card-title Project #A
+                    small Web development
+                .card-body
+                    p: strong Description:
+                    .pl-lg.mb-lg Ut turpis urna, tristique sed adipiscing nec, luctus quis leo. Fusce nec volutpat ante.
+                    p: strong Members:
+                    .pl-lg.mb-lg
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/02.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/04.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/05.jpg', alt='project member')
+                        a.inline(href='')
+                            img.img-circle.thumb32(src='app/img/user/06.jpg', alt='project member')
+                    p: strong Activity:
+                    .pl-lg
+                        ul.list-inline.m0
+                            li.mr
+                                h4.m0 17
+                                p.text-muted Issues
+                            li.mr
+                                h4.m0 780
+                                p.text-muted Posts
+                            li
+                                h4.m0 23
+                                p.text-muted Tests
+                .card-footer
+                    p: small 56%
+                    uib-progressbar.progress-xs.m0(value='56', type='info')
+            // end Project card

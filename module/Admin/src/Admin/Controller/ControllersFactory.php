@@ -19,10 +19,9 @@ class ControllersFactory implements AbstractFactoryInterface
     public function canCreate(ContainerInterface $serviceLocator, $requestedName) 
     {
         $objects = array(
-            0 => 'Admin\\Controller\\IndexController',
-            1 => 'Admin\\Controller\\AuthController',
-            2 => 'Admin\\Controller\\StatsRestController',
-            3 => 'Admin\\Controller\\AdminsRestController',
+            0 => 'Admin\\Controller\\StatsRestController',
+            1 => 'Admin\\Controller\\AdminsRestController',
+            2 => 'Admin\\Controller\\AuthRestController',
         );
         return in_array($requestedName, $objects);
     }
@@ -32,12 +31,6 @@ class ControllersFactory implements AbstractFactoryInterface
         $services = $serviceLocator;
         if (class_exists($requestedName)) {
             switch ($requestedName){
-                case 'Admin\\Controller\\IndexController':
-                    $o = new $requestedName($serviceLocator);
-                    return $o;
-                case 'Admin\\Controller\\AuthController':
-                    $o = new $requestedName($serviceLocator);
-                    return $o;
                 case 'Admin\\Controller\\StatsRestController':
                     $stats = $services->get('Admin\\Model\\Stats'); 
                     $o = new $requestedName($serviceLocator, $stats);
@@ -45,6 +38,9 @@ class ControllersFactory implements AbstractFactoryInterface
                 case 'Admin\\Controller\\AdminsRestController':
                     $model = $services->get('Admin\\Model\\Admins'); 
                     $o = new $requestedName($serviceLocator, $model);
+                    return $o;
+                case 'Admin\\Controller\\AuthRestController':
+                    $o = new $requestedName($serviceLocator);
                     return $o;
             }
         }

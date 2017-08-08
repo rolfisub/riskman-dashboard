@@ -1,0 +1,28 @@
+
+<div ng-controller="loginCtrl" class="container-full">
+  <div class="container container-xs"><img src="app/img/logo.png" class="mv-lg block-center img-responsive thumb64"/>
+    <form action="" name="loginForm" novalidate="" class="card b0 form-validate">
+      <div class="card-heading">
+        <div class="card-title text-center">Login</div>
+      </div>
+      <div class="card-body">
+        <div class="mda-form-group float-label mda-input-group">
+          <div class="mda-form-control">
+            <input type="text" name="username" ng-model="model.username" required="required" class="form-control"/>
+            <div class="mda-form-control-line"></div>
+            <label>User Name</label>
+          </div><span class="mda-input-group-addon"><em class="ion-ios-email-outline icon-lg"></em></span>
+        </div>
+        <div class="mda-form-group float-label mda-input-group">
+          <div class="mda-form-control">
+            <input type="password" name="password" ng-model="model.password" required="required" ng-keypress="keypress($event)" class="form-control"/>
+            <div class="mda-form-control-line"></div>
+            <label>Password</label>
+          </div><span class="mda-input-group-addon"><em class="ion-ios-locked-outline icon-lg"></em></span>
+        </div>
+      </div>
+      <button type="button" ng-disabled="loginForm.$invalid || loginForm.$pristine" ng-click="auth()" class="btn btn-primary btn-flat">Authenticate</button>
+      <div ng-if="errorLogin.msg" class="alert-warning">{{errorLogin.msg}}</div>
+    </form>
+  </div>
+</div>

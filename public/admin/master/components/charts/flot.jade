@@ -1,0 +1,59 @@
+.container-fluid(ng-controller="FlotChartController as chart")
+    // START row
+    .row
+        .col-lg-4
+            .card
+                .card-heading
+                    .card-title Area
+                .card-body
+                    flot.flot-chart.flot-chart-lg(dataset='chart.areaData', options='chart.areaOptions')
+        .col-lg-4
+            .card
+                .card-heading
+                    .card-title Area Spline
+                .card-body
+                    flot.flot-chart.flot-chart-lg(dataset='chart.splineData', options='chart.splineOptions')
+        .col-lg-4
+            .card
+                .card-heading
+                    .card-title Bar
+                .card-body
+                    flot.flot-chart.flot-chart-lg(dataset='chart.barData', options='chart.barOptions')
+    // END row
+
+    // START row
+    .row
+        .col-lg-4
+            .card
+                .card-heading
+                    .card-title Pie
+                .card-body
+                        flot.flot-chart.flot-chart-lg(dataset='chart.pieData', options='chart.pieOptions')
+        .col-lg-4
+            .card
+                .card-heading
+                    .card-title Donut
+                .card-body
+                        flot.flot-chart.flot-chart-lg(dataset='chart.donutData', options='chart.donutOptions')
+        .col-lg-4
+            .card
+                .card-heading
+                    .card-title Bar - Stacked
+                .card-body
+                        flot.flot-chart.flot-chart-lg(dataset='chart.barStackeData', options='chart.barStackedOptions')
+    // END row
+    // START row
+    .row
+        .col-lg-6
+            .card
+                .card-heading
+                    .card-title Real Time
+                .card-body
+                        flot.flot-chart.flot-chart-lg(dataset='chart.realTimeData', options='chart.realTimeOptions')
+        .col-lg-6
+            .card
+                .card-heading
+                    .card-title Line
+                .card-body
+                        flot.flot-chart.flot-chart-lg(dataset='chart.lineData', options='chart.lineOptions')
+    // END row

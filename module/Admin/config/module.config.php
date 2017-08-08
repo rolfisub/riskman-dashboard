@@ -10,38 +10,12 @@ return array(
     ),
     'router' => array(
         'routes' => array(
-            'Home' => array(
-                'type' => 'Literal',
+            'LoginRest' => array(
+                'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/Admin/home',
+                    'route'    => '/rest/auth',
                     'defaults' => array(
-                        'controller' => 'Admin\Controller\IndexController',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
-            'Login' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route'    => '/Auth',
-                    'defaults' => array(
-                        'controller' => 'Admin\Controller\AuthController',
-                        'action'     => 'login',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'process' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:action]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
+                        'controller' => 'Admin\Controller\AuthRestController',
                     ),
                 ),
             ),
