@@ -43,6 +43,18 @@ return array(
                     ),
                 ),
             ),
+            'BooksRest' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/books[/:id]',
+                    'constraints' => array(
+                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\BooksRestController',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
