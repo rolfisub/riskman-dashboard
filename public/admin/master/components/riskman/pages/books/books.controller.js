@@ -33,16 +33,12 @@
         c.toggleEnDis = function(book) 
         {
             var data = {
-                enabled: book.toogle === true? 0 : 1
+                enabled: book.enabled === 1 ? 0 : 1
             };
-            var r = books.updateBook(1, data);
+            var r = books.updateBook(book.id, data);
             r.then(function(res){
-                console.log(res);
                 c.init();
-            }, function(err){
-                console.log(err);
-            });
-            
+            }, books.onError);
         };
         
         
