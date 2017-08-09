@@ -113,7 +113,7 @@ class Admins
             }
         } else {
             //throw error 400
-            throw new Error400('Admin ' . $user . ' doesn\'t exist.');
+            throw new Error400('Admin ' . $username . ' doesn\'t exist.');
         }
     }
     

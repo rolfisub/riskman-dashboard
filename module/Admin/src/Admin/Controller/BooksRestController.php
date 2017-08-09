@@ -54,12 +54,12 @@ class BooksRestController extends ProtectedRestfulController
     
     /**
      * updates an admin based on the provided array
-     * @param type $username
+     * @param type $id
      * @param type $data
      */
-    public function update($username, $data) 
+    public function update($id, $data) 
     {
-        return new JsonModel();
+        return new JsonModel($this->model->updateBook($id, $data));
     }
     
     
