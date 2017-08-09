@@ -10,6 +10,8 @@ namespace Admin\Entity;
 
 use Admin\Entity\AbstractEntity;
 
+use Zend\Validator\Digits;
+
 use Zend\Validator\StringLength;
 use Zend\I18n\Validator\Alnum;
 use Zend\Validator\EmailAddress;
@@ -29,7 +31,9 @@ class Book extends AbstractEntity
     {
         $this->setCreateReqFields([
             'name'
-        ])->setCreateOptFields([])->setUpdateReqFields([])->setUpdateOptFields([]);
+        ])->setCreateOptFields([])->setUpdateReqFields([])->setUpdateOptFields([
+            'enabled'
+        ]);
         parent::__construct($data);
     }
     
@@ -37,6 +41,15 @@ class Book extends AbstractEntity
     {
         //check structure integrity
         $this->isUpdateStructValid();
+        
+        //enabled field
+        if(isset($this->data['enabled'])) {
+            //validate field
+            $enabled = $this->data['enabled'];
+            if($enabled < 0 || $enabled > 1) {
+                throw new Error400('Enabled field can only be 1 or 0, received: ' . $enabled);
+            }
+        }
         
         return true;
     }

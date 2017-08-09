@@ -48,7 +48,7 @@ return array(
                 'options' => array(
                     'route'    => '/rest/books[/:id]',
                     'constraints' => array(
-                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+                        'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
                         'controller' => 'Admin\Controller\BooksRestController',

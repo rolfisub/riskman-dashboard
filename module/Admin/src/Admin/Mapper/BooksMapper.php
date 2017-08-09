@@ -47,4 +47,41 @@ class BooksMapper extends AbstractMapper
         $data = $result->toArray();
         return $data;
     }
+    
+    public function updateBook(Book $book)
+    {
+        //check if book exist
+        $myBookData = $this->_getBookById($book->data['id']);
+        if(empty($myBookData)) {
+            throw new Error400('Book id ' . $book->data['id'] . ' not found.');
+        }
+        
+        //update enable field
+        if(isset($book->data['enabled'])) {
+            $this->_updateBookEnable($book);
+        }
+        
+        return [
+            'book' => $this->_getBookById($book->data['id'])[0]
+        ];
+    }
+    
+    private function _getBookById($id)
+    {
+        $s = new Select();
+        $s->from('books')->where(['id' => (int)$id]);
+        $res = $this->queryObject($s);
+        $data = $res->toArray();
+        return $data;
+    }
+    
+    private function _updateBookEnable(Book $book)
+    {
+        $u = new Update('books');
+        $u->set([
+            'enabled' => (int)$book->data['enabled']
+        ]);
+        $u->where(['id' => (int)$book->data['id']]);
+        $this->queryObject($u);
+    }
 }

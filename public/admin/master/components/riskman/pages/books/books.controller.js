@@ -10,18 +10,46 @@
     function BooksController($scope, books) {
         var c = this;
         
+        /*
+         * model for books
+         */
         c.myBooks = [];
         
+        /**
+         * prepares toggle switch
+         * @returns {}
+         */
         c.prepEnDis = function() {
             angular.forEach(c.myBooks, function(book){
                 book.toggle = book.enabled === 1;
             });
         };
         
-        c.toggleEnDis = function(book) {
-            c.prepEnDis();
+        /*
+         * toggle action
+         * @param {type} book
+         * @returns {undefined}
+         */
+        c.toggleEnDis = function(book) 
+        {
+            var data = {
+                enabled: book.toogle === true? 0 : 1
+            };
+            var r = books.updateBook(1, data);
+            r.then(function(res){
+                console.log(res);
+                c.init();
+            }, function(err){
+                console.log(err);
+            });
+            
         };
         
+        
+        /**
+         * init the main page
+         * @returns {undefined}
+         */
         c.init = function() {
             var r = books.getBooksList();
             
@@ -31,8 +59,6 @@
             }, books.onError);
         };
         
-        c.init();
-        
         /**
          * listens for refresh calls
          */
@@ -40,7 +66,8 @@
             c.init();
         });
         
-        
+        //triggers on init
+        c.init();
         
         
     }

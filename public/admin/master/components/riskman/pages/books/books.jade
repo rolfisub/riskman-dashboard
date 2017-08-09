@@ -20,7 +20,7 @@
                                 td
                                     p.m0
                                         label.switch.switch-success
-                                            input(type='checkbox', checked="checked", ng-model="book.toggle", ng-click="toggleEnDis(book)")
+                                            input(type='checkbox', checked="checked", ng-model="book.toggle", ng-click="books.toggleEnDis(book)")
                                             span 
                                         | {{book.enabled === 1? 'Enabled':'Disabled'}}
                                 td

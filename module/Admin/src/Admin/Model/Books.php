@@ -8,7 +8,9 @@
 
 namespace Admin\Model;
 
+use Admin\Entity\Book;
 use Admin\Mapper\BooksMapper;
+
 
 /**
  * Description of Admins
@@ -30,6 +32,16 @@ class Books
     public function getBooks()
     {
         return $this->mapper->getAllBooks();
+    }
+    
+    
+    public function updateBook($id, $data)
+    {
+        $book = new Book($data);
+        if($book->checkUpdateValid()) {
+            $book->data['id'] = $id;
+            return $this->mapper->updateBook($book);
+        }
     }
     
     
