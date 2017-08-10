@@ -39,7 +39,7 @@ class BooksRestController extends ProtectedRestfulController
      */
     public function create($data)
     {
-        return new JsonModel();
+        return new JsonModel($this->model->createBook($data));
     }
     
     /**

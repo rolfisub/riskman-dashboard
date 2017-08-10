@@ -49,24 +49,18 @@ class BooksMapper extends AbstractMapper
     }
     
     public function updateBook(Book $book)
-    {
-        //check if book exist
-        $myBookData = $this->_getBookById($book->data['id']);
-        if(empty($myBookData)) {
-            throw new Error400('Book id ' . $book->data['id'] . ' not found.');
-        }
-        
+    {   
         //update enable field
         if(isset($book->data['enabled'])) {
             $this->_updateBookEnable($book);
         }
         
         return [
-            'book' => $this->_getBookById($book->data['id'])[0]
+            'book' => $this->getBookById($book->data['id'])[0]
         ];
     }
     
-    private function _getBookById($id)
+    public function getBookById($id)
     {
         $s = new Select();
         $s->from('books')->where(['id' => (int)$id]);
@@ -83,5 +77,13 @@ class BooksMapper extends AbstractMapper
         ]);
         $u->where(['id' => (int)$book->data['id']]);
         $this->queryObject($u);
+    }
+    
+    public function createBook(Book $book) {
+        $i = new Insert('books');
+        $i->columns(['name'])
+                ->values([$book->data['name']]);
+        $this->queryObject($i);
+        return $this->getAllBooks();
     }
 }

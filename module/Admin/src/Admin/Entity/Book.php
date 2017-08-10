@@ -62,6 +62,13 @@ class Book extends AbstractEntity
         //validate structure
         $this->isCreateStructValid();
         
+        //validate name field
+        if(isset($this->data['name'])) {
+            if(strlen($this->data['name']) < 4) {
+                throw new Error400('Name must be at least 4 characters in length.');
+            }
+        }
+        
         return true;
         
     }
