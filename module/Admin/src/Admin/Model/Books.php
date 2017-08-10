@@ -39,8 +39,24 @@ class Books
     {
         $book = new Book($data);
         if($book->checkUpdateValid()) {
-            $book->data['id'] = $id;
+            //save id
+            $book->data['id'] = (int)$id;
+            
+            //check if book exist
+            $myBookData = $this->mapper->getBookById($book->data['id']);
+            if(empty($myBookData)) {
+                throw new Error400('Book id ' . $book->data['id'] . ' not found.');
+            }
+            
+            //update book
             return $this->mapper->updateBook($book);
+        }
+    }
+    
+    public function createBook($data) {
+        $book = new Book($data);
+        if($book->checkCreateValid()) {
+            return $this->mapper->createBook($book);
         }
     }
     
