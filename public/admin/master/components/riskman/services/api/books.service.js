@@ -12,6 +12,10 @@
         .module("riskman.services")
         .service('books', ['api', function (api) {
         
+        this.createBook = function(data) {
+            return api.create('/books', data);
+        };
+        
         this.updateBook = function(id, data){
             return api.update('/books/' + id, data);
         };
