@@ -77,7 +77,12 @@
                 $scope.createBook = function() {
                     var r = books.createBook($scope.dataCreate);
                     r.then(function(res){
-                        console.log(res);
+                        $scope.$emit('initBooks', {});
+                        $scope.successMsg = {
+                            msg: 'Book created.',
+                            show: true
+                        };
+                        $scope.reset();
                     }, books.onError);
                 };
 
