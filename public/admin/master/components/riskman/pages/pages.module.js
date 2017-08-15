@@ -10,6 +10,7 @@
         .module("riskman.pages",[
             'riskman.admins',
             'riskman.home',
-            'riskman.books'
+            'riskman.books',
+            'riskman.book'
         ]);
 })();
