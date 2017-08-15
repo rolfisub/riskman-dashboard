@@ -6,13 +6,19 @@
 
 (function() {
     'use strict';
-    angular
+    var riskman = angular
         .module("riskman",[
+            'xeditable',
             'mgcrea.ngStrap',
             'riskman.pages',
             'riskman.services',
             'riskman.directives'
         ]);
+    
+    riskman.run(function(editableOptions){
+        editableOptions.theme = 'bs3';
+    });
 })();
+
 
 
