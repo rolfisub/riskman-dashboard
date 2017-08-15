@@ -33,7 +33,7 @@
             //'app.charts',
             //'app.cards',
             //'app.elements',
-            //'app.forms',
+            'app.forms',
             //'app.tables',
             //'app.bootstrapui',
             //'app.maps',
