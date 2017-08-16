@@ -6,44 +6,36 @@
 .container-fluid(ng-controller='BookController as book')
     .row
         .col-xs-12.col-lg-8
-            .card
-                .table-responsive
-                    table.table.table-striped
-                        thead
-                            tr
-                                th Setting
-                                th Value
-                        tbody
-                            tr
-                                td
-                                    p.m0 Id
-                                td
-                                    p.m0 {{book.myBook.id}}
-                            tr
-                                td
-                                    p.m0 Name
-                                td
-                                    p.m0 
-                                        a(editable-text='book.myBook.name') {{book.myBook.name}}
-            .card
-                .table-responsive
-                    table.table.table-striped
-                        thead
-                            tr
-                                th Setting
-                                th Value
-                        tbody
-                            tr
-                                td
-                                    p.m0 Id
-                                td
-                                    p.m0 {{book.myBook.id}}
-                            tr
-                                td
-                                    p.m0 Name
-                                td
-                                    p.m0 
-                                        a(editable-text='book.myBook.name') {{book.myBook.name}}
+            .card.book-card-sm
+                .card-block
+                    .table-responsive
+                        table.table.table-striped
+                            thead
+                                tr
+                                    th Setting
+                                    th Value
+                            tbody
+                                tr
+                                    td
+                                        p.m0 Id
+                                    td
+                                        p.m0 {{book.myBook.id}}
+                                tr
+                                    td
+                                        p.m0 Name
+                                    td
+                                        p.m0 
+                                            a(editable-text='book.myBook.name') {{book.myBook.name}}
+                                tr
+                                    td
+                                        p.m0 Enable/Disable
+                                    td
+                                        p.m0 
+                                            label.switch.switch-success
+                                                input(type='checkbox', checked="checked", ng-model="book.myBook.toggle", ng-click="book.toggleEnDis(book.myBook)")
+                                                span 
+                                            | {{book.myBook.enabled === 1? 'Enabled':'Disabled'}}
+            
                                     
                                         
             
