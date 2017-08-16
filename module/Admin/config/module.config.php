@@ -43,6 +43,30 @@ return array(
                     ),
                 ),
             ),
+            'BooksRest' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/books[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\BooksRestController',
+                    ),
+                ),
+            ),
+            'BookRest' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/book/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\BookRestController',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

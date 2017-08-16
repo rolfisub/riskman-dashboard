@@ -17,7 +17,7 @@ use Zend\Crypt\Password\Bcrypt;
 
 use Admin\Validators\Password;
 use Admin\Error\Error400;
-use Admin\Error\Error500;
+
 /**
  * Description of Admin
  *

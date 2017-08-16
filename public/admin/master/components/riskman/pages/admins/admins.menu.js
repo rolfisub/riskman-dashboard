@@ -12,7 +12,7 @@
         var menuItem = {
             name: 'Administrators',
             sref: 'riskman.admins',
-            order: 9,
+            order: 2,
            //iconclass: 'ion-person-stalker',
             imgpath: 'app/img/icons/person-stalker.svg',
         };
