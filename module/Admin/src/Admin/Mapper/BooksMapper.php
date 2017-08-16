@@ -50,10 +50,8 @@ class BooksMapper extends AbstractMapper
     
     public function updateBook(Book $book)
     {   
-        //update enable field
-        if(isset($book->data['enabled'])) {
-            $this->_updateBookEnable($book);
-        }
+        //update all optional fields
+        $this->_updateBookAll($book);
         
         return [
             'book' => $this->getBookById($book->data['id'])[0]
@@ -69,12 +67,17 @@ class BooksMapper extends AbstractMapper
         return $data;
     }
     
-    private function _updateBookEnable(Book $book)
+    private function _updateBookAll(Book $book)
     {
+        $set = [];
+        if(isset($book->data['enabled'])) {
+            $set = array_merge($set, ['enabled' => (int)$book->data['enabled']]);
+        }
+        if(isset($book->data['name'])) {
+            $set = array_merge($set, ['name' => $book->data['name']]);
+        }
         $u = new Update('books');
-        $u->set([
-            'enabled' => (int)$book->data['enabled']
-        ]);
+        $u->set($set);
         $u->where(['id' => (int)$book->data['id']]);
         $this->queryObject($u);
     }
