@@ -32,6 +32,7 @@ class Book extends AbstractEntity
         $this->setCreateReqFields([
             'name'
         ])->setCreateOptFields([])->setUpdateReqFields([])->setUpdateOptFields([
+            'name',
             'enabled'
         ]);
         parent::__construct($data);
@@ -48,6 +49,14 @@ class Book extends AbstractEntity
             $enabled = $this->data['enabled'];
             if($enabled < 0 || $enabled > 1) {
                 throw new Error400('Enabled field can only be 1 or 0, received: ' . $enabled);
+            }
+        }
+        
+        //check if is a string
+        if(isset($this->data['name'])) {
+            $name = $this->data['name'];
+            if(!is_string($name)) {
+                throw new Error400('Name field must be a string.');
             }
         }
         

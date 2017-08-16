@@ -9,18 +9,14 @@ namespace Admin\Controller;
 use Admin\Controller\ProtectedRestfulController;
 use Zend\View\Model\JsonModel;
 
-use Admin\Model\Books;
 use Admin\Model\BookModel;
 
-class BooksRestController extends ProtectedRestfulController
+class BookRestController extends ProtectedRestfulController
 {
     protected $model;
-    protected $bookModel;
-    
-    public function __construct($cn,  Books $model, BookModel $bookModel) 
+    public function __construct($cn,  BookModel $model) 
     {
         $this->model = $model;
-        $this->bookModel = $bookModel;
         parent::__construct($cn);
     }
     /**
@@ -28,12 +24,12 @@ class BooksRestController extends ProtectedRestfulController
      */
     public function getList() 
     {
-        return new JsonModel($this->model->getBooks());
+        return new JsonModel();
     }
     
     public function get($id)
     {
-        return new JsonModel($this->bookModel->getBook($id));
+        return new JsonModel($this->model->getBook($id));
     }
     
     /**
@@ -43,7 +39,7 @@ class BooksRestController extends ProtectedRestfulController
      */
     public function create($data)
     {
-        return new JsonModel($this->model->createBook($data));
+        return new JsonModel($data);
     }
     
     /**
@@ -51,9 +47,9 @@ class BooksRestController extends ProtectedRestfulController
      * @param string $username
      * @return JsonModel response
      */
-    public function delete($username) 
+    public function delete($id) 
     {
-        return new JsonModel([$username]);
+        return new JsonModel([$id]);
     }
     
     /**
@@ -63,7 +59,7 @@ class BooksRestController extends ProtectedRestfulController
      */
     public function update($id, $data) 
     {
-        return new JsonModel($this->model->updateBook($id, $data));
+        return new JsonModel([$id, $data]);
     }
     
     
