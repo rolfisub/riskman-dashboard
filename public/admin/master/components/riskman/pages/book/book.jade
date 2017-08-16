@@ -25,7 +25,7 @@
                                         p.m0 Name
                                     td
                                         p.m0 
-                                            a(editable-text='book.myBook.name') {{book.myBook.name}}
+                                            a(editable-text='book.myBook.name' onaftersave='book.updateName()') {{book.myBook.name}}
                                 tr
                                     td
                                         p.m0 Enable/Disable

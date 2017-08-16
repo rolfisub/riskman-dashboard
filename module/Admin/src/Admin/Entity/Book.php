@@ -57,6 +57,8 @@ class Book extends AbstractEntity
             $name = $this->data['name'];
             if(!is_string($name)) {
                 throw new Error400('Name field must be a string.');
+            } elseif(strlen($name) < 3) {
+                throw new Error400('Name field must at least 3 characters in length.');
             }
         }
         
