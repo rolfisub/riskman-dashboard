@@ -11,8 +11,8 @@
         var menuItem = {
             name: 'Home',
             sref: 'riskman.home',
-            // iconclass: 'ion-aperture',
-            imgpath: 'app/img/icons/aperture.svg',
+            iconclass: 'ion-aperture',
+            //imgpath: 'app/img/icons/aperture.svg',
             order: 1,
 //            label: {
 //                count: 2,

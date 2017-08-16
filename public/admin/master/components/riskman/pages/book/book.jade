@@ -1,0 +1,44 @@
+.content-heading.bg-white
+    .row
+        .col-sm-9
+            h4.m0.text-thin RiskMan Book 
+            small Create, Edit, Enable/Disable Book
+.container-fluid(ng-controller='BookController as book')
+    .row
+        a.icon.ion-android-arrow-dropleft-circle.book-icon-back.text-primary(ui-sref='riskman.books')
+    .row
+        .col-xs-12.col-lg-8
+            .card.book-card-sm
+                .card-block
+                    .table-responsive
+                        table.table.table-striped
+                            thead
+                                tr
+                                    th Setting
+                                    th Value
+                            tbody
+                                tr
+                                    td
+                                        p.m0 Id
+                                    td
+                                        p.m0 {{book.myBook.id}}
+                                tr
+                                    td
+                                        p.m0 Name
+                                    td
+                                        p.m0 
+                                            a(editable-text='book.myBook.name' onaftersave='book.updateName()') {{book.myBook.name}}
+                                tr
+                                    td
+                                        p.m0 Enable/Disable
+                                    td
+                                        p.m0 
+                                            label.switch.switch-success
+                                                input(type='checkbox', checked="checked", ng-model="book.myBook.toggle", ng-click="book.toggleEnDis(book.myBook)")
+                                                span 
+                                            | {{book.myBook.enabled === 1? 'Enabled':'Disabled'}}
+            
+                                    
+                                        
+            
+                
