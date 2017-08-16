@@ -23,7 +23,10 @@
          * @returns {undefined}
          */
         c.init = function() {
-            
+            var r = book.getBook(c.myBook.id);
+            r.then(function(res){
+                console.log(res);
+            }, book.onError)
         };
         
         /**
