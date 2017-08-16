@@ -42,6 +42,7 @@
         };
         
         
+        
         /**
          * init the main page
          * @returns {undefined}
