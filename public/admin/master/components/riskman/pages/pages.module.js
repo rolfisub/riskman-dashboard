@@ -11,6 +11,7 @@
             'riskman.admins',
             'riskman.home',
             'riskman.books',
+            'riskman.books.default',
             'riskman.book'
         ]);
 })();
