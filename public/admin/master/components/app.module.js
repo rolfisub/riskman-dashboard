@@ -32,7 +32,7 @@
             //'app.dashboard',
             //'app.charts',
             //'app.cards',
-            //'app.elements',
+            'app.elements',
             'app.forms',
             //'app.tables',
             //'app.bootstrapui',
