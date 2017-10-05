@@ -14,7 +14,7 @@
                         .col-sm-6
                             button.btn.btn-success(ng-if="!o.bookAuth.exists" ng-click="o.createAuth()") Create
                             button.btn.btn-danger(ng-if="o.bookAuth.exists" ng-click="o.deleteAuth()") Delete
-                            button.btn.btn-warning(ng-if="o.bookAuth.exists") Save
+                            button.btn.btn-warning(ng-if="o.bookAuth.exists" ng-click="o.saveAuth()") Save
                         .col-sm-6
                             button.btn.btn-info(ng-if="o.bookAuth.exists") Generate Random Password
                     .row(ng-if="o.bookAuth.exists")

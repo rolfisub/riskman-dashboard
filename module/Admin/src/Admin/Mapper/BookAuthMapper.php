@@ -17,7 +17,7 @@ use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Expression as SqlExpression;
 use Zend\Crypt\Password\Bcrypt;
 use Admin\Error\Error400;
-use Admin\Entity\Admin;
+use Admin\Entity\BookAuth;
 
 /**
  * Description of StatsMapper
@@ -45,100 +45,20 @@ class BookAuthMapper extends AbstractMapper
         
     }
     
-    public function getAdminsData()
-    {
+    public function updateBookAuth($bookId, BookAuth $bookAuth) {
+        $bookAuth2 = $this->getBookAuthByBookId($bookId);
+        if($bookAuth2) {
+            //update
+        } else {
+           //create
+           
+        }
         return [
-            'admins_data' => $this->_getAdminsData(),
+            'test' => $bookAuth2
         ];
     }
     
-    /**
-     * gets the amount of successful requests
-     * @return array
-     */
-    private function _getAdminsData()
-    {
-        $s = new Select();
-        $s->from(['a'=>'admins'])
-            ->columns([
-                'user_name',
-                'datetime'
-            ])
-            ->join(
-                ['ai'=>'admins_info'],
-                'a.id = ai.id',
-                [
-                    'email',
-                    'first_name',
-                    'last_name'
-                    ]
-                    
-            );   
-        $result = $this->queryObject($s);
-        $data = $result->toArray();
-        return $data;
-    }
     
-    /**
-     * gets an admin entity from sql result
-     * @param string $username
-     * @return Admin
-     */
-    public function getAdminByUser($username)
-    {
-        $s = new Select();
-        $s->from(['a'=>'admins'])
-            ->columns([
-                'user_name as username',
-                'datetime'
-            ])
-            ->join(
-                ['ai'=>'admins_info'],
-                'a.id = ai.id',
-                [
-                    'email',
-                    'first_name',
-                    'last_name'
-                    ]
-                    
-            )->where(['a.user_name'=> $username]);
-        $result = $this->queryObject($s);
-        $data = $result->toArray();
-        $adminData = $this->getAdminDataFromSqlResult($data);
-        return new Admin($adminData);
-    }
-    
-    /**
-     * maps sql result to Admin entity
-     * @param array $data
-     * @return array
-     */
-    private function getAdminDataFromSqlResult(array $data)
-    {
-        if(isset($data[0])) {
-            return [
-                'username' => $data[0]['username'],
-                'email' => $data[0]['email'],
-                'firstname' => $data[0]['first_name'],
-                'lastname' => $data[0]['last_name']
-            ];
-        }
-        return [];
-    }
-    
-    /**
-     * is the username taken?
-     * @param Admin $admin
-     * @return boolean
-     */
-    public function isAdminUserExist(Admin $admin)
-    {
-       $a = $this->getAdminByUser($admin->data['username']);
-       if($a->data['username'] !== null){
-           return true;
-       }
-       return false;
-    }
     
     /**
      * 

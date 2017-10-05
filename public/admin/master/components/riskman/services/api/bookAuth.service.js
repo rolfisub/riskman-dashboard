@@ -17,6 +17,10 @@
             return api.read('/bookAuth/' + bookId);
         };
         
+        this.createUpdateBook = function (bookId, data) {
+            return api.update('/bookAuth/' + bookId, data);
+        };
+        
         
         this.onError = function(response) {
             api.errorCallback(response);

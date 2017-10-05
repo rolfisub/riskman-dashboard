@@ -9,6 +9,8 @@
 namespace Admin\Model;
 
 use Admin\Mapper\BookAuthMapper;
+
+use Admin\Entity\BookAuth as BookAuthEntity;
 /**
  * Description of AuthBook
  *
@@ -30,6 +32,18 @@ class BookAuth
     {
         return [
             'bookAuth' => $this->mapper->getBookAuthByBookId($bookId)
+        ];
+    }
+    
+    public function createUpdateBookAuth($bookId, $data) 
+    {
+        $bookAuth = new BookAuthEntity($data);
+        $result = [];
+        if($bookAuth->checkUpdateValid() || $bookAuth->checkCreateValid()) {
+            $result = $this->mapper->updateBookAuth($bookId, $bookAuth);
+        }
+        return[
+            'bookAuth' => $result
         ];
     }
     
