@@ -67,6 +67,18 @@ return array(
                     ),
                 ),
             ),
+            'BookAuth' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/bookAuth/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\BookAuthRestController',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

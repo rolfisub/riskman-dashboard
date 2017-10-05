@@ -22,9 +22,9 @@
          * bookAuth model
          */
         c.bookAuth = {
-            client_id:"mock user",
-            client_secret:"mock password",
-            exists: true
+            client_id: "",
+            client_secret: "",
+            exists: false
         };
         
         /**
@@ -49,6 +49,8 @@
             r.then(function(res){
                 console.log('get book auth');
                 console.log(res.data);
+                angular.merge(c.bookAuth, res.data.bookAuth);
+                c.bookAuth.exists = true;
             }, function(err){
                 console.log('ERROR get book auth');
                 console.log(err);
