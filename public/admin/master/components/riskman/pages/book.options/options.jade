@@ -3,8 +3,31 @@
         .col-sm-9
             h4.m0.text-thin RiskMan Book Options
             small update Book Risk Management options
-.container-fluid(ng-controller='OptionsController as book')
-    
+.container-fluid(ng-controller='OptionsController as o')
+    .row
+        .col-sm-6
+            .card
+                .card-body
+                    h4.card-title Client Credentials (OAuth 2)
+                    p.card-text In this section you can create, reset or delete credentials. This Authorizes the book access to the API.
+                    .row
+                        .col-sm-6
+                            button.btn.btn-success(ng-if="!o.bookAuth.exists" ng-click="o.createAuth()") Create
+                            button.btn.btn-danger(ng-if="o.bookAuth.exists" ng-click="o.deleteAuth()") Delete
+                            button.btn.btn-warning(ng-if="o.bookAuth.exists") Save
+                        .col-sm-6
+                            button.btn.btn-info(ng-if="o.bookAuth.exists") Generate Random Password
+                    .row(ng-if="o.bookAuth.exists")
+                        form
+                            .form-group
+                                .col-sm-6
+                                    label.form-control-label(for="username") Username:
+                                    input.form-control(type="text" placeholder="username" id="username" ng-model="o.bookAuth.client_id") 
+                            .form-group
+                                .col-sm-6
+                                    label.form-control-label(for="password") Password:
+                                    input.form-control(type="text" placeholder="password" id="password" ng-model="o.bookAuth.client_secret")
+                    
             
                                     
                                         

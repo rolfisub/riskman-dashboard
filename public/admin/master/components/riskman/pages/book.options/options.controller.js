@@ -5,9 +5,9 @@
         .module('riskman.book.options')
         .controller('OptionsController', OptionsController);
 
-    OptionsController.$inject = ['$scope', '$stateParams', 'book', 'books'];
+    OptionsController.$inject = ['$scope', '$stateParams', 'book', 'books', 'bookAuth'];
 
-    function OptionsController($scope, $stateParams, book, books) {
+    function OptionsController($scope, $stateParams, book, books, bookAuth) {
         var c = this;
         
         /*
@@ -19,6 +19,44 @@
         };
         
         /**
+         * bookAuth model
+         */
+        c.bookAuth = {
+            client_id:"mock user",
+            client_secret:"mock password",
+            exists: true
+        };
+        
+        /**
+         * delete oauth credentials
+         */
+        c.deleteAuth = function(){
+            c.bookAuth.exists = false;
+        };
+        
+        /*
+         * create oauth credentials
+         */
+        c.createAuth = function(){
+            c.bookAuth.exists = true;
+        };
+        
+        /*
+         * get the book auth data
+         */
+        c.bookAuthInit = function(bookId) {
+            var r = bookAuth.getBookAuth(bookId);
+            r.then(function(res){
+                console.log('get book auth');
+                console.log(res.data);
+            }, function(err){
+                console.log('ERROR get book auth');
+                console.log(err);
+            });
+        };
+        
+        
+        /**
          * init the main page
          * @returns {undefined}
          */
@@ -27,6 +65,8 @@
             r.then(function(res){
                 c.myBook = res.data.book;
             }, book.onError);
+            
+            c.bookAuthInit(c.myBook.id);
         };
         
         
