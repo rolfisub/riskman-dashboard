@@ -14,7 +14,7 @@
         
         //private functions
         this.getBookAuth = function(bookId) {   
-            return api.read('/books/' + bookId);
+            return api.read('/bookAuth/' + bookId);
         };
         
         
