@@ -9,12 +9,13 @@ namespace Admin\Controller;
 use Admin\Controller\ProtectedRestfulController;
 use Zend\View\Model\JsonModel;
 
-use Admin\Model\BookAuth;
+use Admin\Model\BookAuth as BookAuthModel;
+use Admin\Entity\BookAuth;
 
 class BookAuthRestController extends ProtectedRestfulController
 {
     protected $model;
-    public function __construct($cn,  BookAuth $model) 
+    public function __construct($cn,  BookAuthModel $model) 
     {
         $this->model = $model;
         parent::__construct($cn);
@@ -57,9 +58,9 @@ class BookAuthRestController extends ProtectedRestfulController
      * @param type $id
      * @param type $data
      */
-    public function update($id, $data) 
+    public function update($bookId, $data) 
     {
-        return new JsonModel([$id, $data]);
+        return new JsonModel($this->model->createUpdateBookAuth($bookId, $data));
     }
     
     

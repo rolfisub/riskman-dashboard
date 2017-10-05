@@ -35,6 +35,21 @@
         };
         
         /*
+         * save action
+         */
+        c.saveAuth = function() {
+            var data = {
+                client_id: c.bookAuth.client_id,
+                client_secret: c.bookAuth.client_secret
+            };
+            var r = bookAuth.createUpdateBook(c.myBook.id, data);
+            r.then(function(res){
+                c.bookAuthInit(c.myBook.id);
+                console.log(res);
+            }, bookAuth.onError)
+        };
+        
+        /*
          * create oauth credentials
          */
         c.createAuth = function(){
@@ -47,14 +62,13 @@
         c.bookAuthInit = function(bookId) {
             var r = bookAuth.getBookAuth(bookId);
             r.then(function(res){
-                console.log('get book auth');
-                console.log(res.data);
-                angular.merge(c.bookAuth, res.data.bookAuth);
-                c.bookAuth.exists = true;
-            }, function(err){
-                console.log('ERROR get book auth');
-                console.log(err);
-            });
+                if(res.data.bookAuth.length !== 0) {
+                    angular.merge(c.bookAuth, res.data.bookAuth);
+                    c.bookAuth.exists = true;
+                } else {
+                    c.bookAuth.exists = false;
+                }
+            }, bookAuth.onError);
         };
         
         
