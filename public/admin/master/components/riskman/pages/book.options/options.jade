@@ -3,30 +3,40 @@
         .col-sm-9
             h4.m0.text-thin RiskMan Book Options
             small update Book Risk Management options
-.container-fluid(ng-controller='OptionsController as o')
+.container-fluid
     .row
         .col-sm-6
-            .card
+            .card(ng-controller='OptionsAuthController as o')
                 .card-body
                     h4.card-title Client Credentials (OAuth 2)
                     p.card-text In this section you can create, reset or delete credentials. This Authorizes the book access to the API.
                     .row
-                        .col-sm-6
-                            button.btn.btn-success(ng-if="!o.bookAuth.exists" ng-click="o.createAuth()") Create
-                            button.btn.btn-danger(ng-if="o.bookAuth.exists" ng-click="o.deleteAuth()") Delete
-                            button.btn.btn-warning(ng-if="o.bookAuth.exists" ng-click="o.saveAuth()") Save
-                        .col-sm-6
-                            button.btn.btn-info(ng-if="o.bookAuth.exists") Generate Random Password
+                        .col-sm-12
+                            button.btn.btn-success(ng-show="!o.bookAuth.exists" ng-click="o.createAuth()") Create
+                            button.btn.btn-danger(ng-show="o.bookAuth.exists" ng-click="o.deleteAuth()") Delete
+                            button.btn.btn-warning(ng-show="o.bookAuth.exists" ng-click="o.saveAuth(); o.isFormValid() " ng-disabled="o.saveDisable") Save
+                            button.btn.btn-info(ng-show="o.bookAuth.exists") Generate Random Password
+                            
                     .row(ng-if="o.bookAuth.exists")
                         form
                             .form-group
                                 .col-sm-6
                                     label.form-control-label(for="username") Username:
-                                    input.form-control(type="text" placeholder="username" id="username" ng-model="o.bookAuth.client_id") 
+                                        button.btn.btn-raised(ng-show="o.userAvail !== -1" ng-class="{'btn-success':(o.userAvail === 1), 'btn-danger':(o.userAvail === 0)}")
+                                            span(ng-class="{'ion-checkmark': (o.userAvail === 1), 'ion-close-circled': (o.userAvail === 0)}")
+                                    input.form-control(type="text" placeholder="username" id="username" ng-model="o.bookAuth.client_id" ng-change="o.isUserAvail(); o.validateUser(); o.isFormValid();") 
                             .form-group
                                 .col-sm-6
                                     label.form-control-label(for="password") Password:
-                                    input.form-control(type="text" placeholder="password" id="password" ng-model="o.bookAuth.client_secret")
+                                        button.btn.btn-raised(ng-show="o.passAvail !== -1" ng-class="{'btn-success':(o.passAvail === 1), 'btn-danger':(o.passAvail === 0)}")
+                                            span(ng-class="{'ion-checkmark': (o.passAvail === 1), 'ion-close-circled': (o.passAvail === 0)}")
+                                    input.form-control(type="text" placeholder="password" id="password" ng-model="o.bookAuth.client_secret" ng-change="o.validatePass();o.isFormValid();")
+                    .row.margin-top
+                        .form-group
+                            .col-sm-6
+                                .alert.alert-warning(ng-show="!o.userError.valid" role="alert") {{o.userError.msg}}
+                            .col-sm-6
+                                .alert.alert-warning(ng-show="!o.passError.valid" role="alert") {{o.passError.msg}}
                     
             
                                     

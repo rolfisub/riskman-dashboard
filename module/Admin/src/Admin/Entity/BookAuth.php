@@ -29,7 +29,9 @@ class BookAuth extends AbstractEntity
         $this->setCreateReqFields([
             'client_id',
             'client_secret'
-        ])->setCreateOptFields([])->setUpdateReqFields([
+        ])->setCreateOptFields([
+            'query_type'
+        ])->setUpdateReqFields([
             'client_id'
         ])->setUpdateOptFields([
             'client_secret'
