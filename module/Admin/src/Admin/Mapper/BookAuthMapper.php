@@ -59,6 +59,28 @@ class BookAuthMapper extends AbstractMapper
     }
     
     
+    /**
+     * checks if a username is available
+     * @param type $user
+     * @return boolean
+     */
+    public function isUserAvail($user) {
+        $s = new Select('oauth_clients');
+        $s->columns([
+            'client_id'
+        ]);
+        $s->where([
+            'client_id' => $user
+        ]);
+        $res = $this->queryObject($s);
+        $data = $res->toArray();
+        if($data) {
+            return false;
+        } 
+        return true;
+    }
+    
+    
     
     /**
      * 

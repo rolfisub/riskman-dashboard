@@ -10,7 +10,6 @@ use Admin\Controller\ProtectedRestfulController;
 use Zend\View\Model\JsonModel;
 
 use Admin\Model\BookAuth as BookAuthModel;
-use Admin\Entity\BookAuth;
 
 class BookAuthRestController extends ProtectedRestfulController
 {
@@ -40,7 +39,14 @@ class BookAuthRestController extends ProtectedRestfulController
      */
     public function create($data)
     {
-        return new JsonModel($data);
+        
+        if(isset($data['query_type'])) {
+            if($data['query_type'] === 'UserAvail') {
+                
+                return new JsonModel($this->model->isUserAvail($data['client_id']));
+            }
+        }
+        return new JsonModel(['data'=>$data]);
     }
     
     /**

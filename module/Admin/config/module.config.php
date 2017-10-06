@@ -70,7 +70,7 @@ return array(
             'BookAuth' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/rest/bookAuth/:id',
+                    'route'    => '/rest/bookAuth[/:id]',
                     'constraints' => array(
                         'id'     => '[0-9]+',
                     ),

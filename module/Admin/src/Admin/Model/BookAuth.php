@@ -9,6 +9,7 @@
 namespace Admin\Model;
 
 use Admin\Mapper\BookAuthMapper;
+use Admin\Error\Error400;
 
 use Admin\Entity\BookAuth as BookAuthEntity;
 /**
@@ -45,6 +46,14 @@ class BookAuth
         return[
             'bookAuth' => $result
         ];
+    }
+    
+    public function isUserAvail ($user) {        
+        if($this->mapper->isUserAvail($user)) {
+            return ["isAvail" => true];
+        } else {
+            throw new Error400('User not available');
+        }
     }
     
 }
