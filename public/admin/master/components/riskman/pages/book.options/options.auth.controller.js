@@ -5,9 +5,9 @@
         .module('riskman.book.options')
         .controller('OptionsAuthController', OptionsAuthController);
 
-    OptionsAuthController.$inject = ['$scope', '$stateParams', 'book', 'books', 'bookAuth', 'adminFields'];
+    OptionsAuthController.$inject = ['$scope', '$stateParams', 'book', 'bookAuth', 'adminFields'];
 
-    function OptionsAuthController($scope, $stateParams, book, books, bookAuth, adminFields) {
+    function OptionsAuthController($scope, $stateParams, book, bookAuth, adminFields) {
         var c = this;
         
         /*
@@ -37,6 +37,7 @@
             c.userError.valid = true;
             c.passError.valid = true;
             c.userAvail = -1;
+            c.passAvail = -1;
         };
         
         /*
@@ -207,6 +208,18 @@
                     c.bookAuth.exists = false;
                 }
             }, bookAuth.onError);
+        };
+        
+        /**
+         * Generate random password
+         */
+        c.generatePass = function(){
+            var regex = /[a-zA-Z0-9]/;
+            var pass = generatePassword(12, false, regex);
+            while(!adminFields.password(pass).valid){
+                pass = generatePassword(12, false, regex);
+            }
+            c.bookAuth.client_secret = pass;
         };
         
         
