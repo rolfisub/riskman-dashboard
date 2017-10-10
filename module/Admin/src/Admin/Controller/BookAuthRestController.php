@@ -56,7 +56,7 @@ class BookAuthRestController extends ProtectedRestfulController
      */
     public function delete($id) 
     {
-        return new JsonModel([$id]);
+        return new JsonModel($this->model->deleteBookAuth($id));
     }
     
     /**

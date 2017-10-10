@@ -48,6 +48,12 @@ class BookAuth
         ];
     }
     
+    public function deleteBookAuth($bookId) {
+        return [
+            $this->mapper->deleteBookAuth($bookId)
+        ];
+    }
+    
     public function isUserAvail ($user) {        
         if($this->mapper->isUserAvail($user)) {
             return ["isAvail" => true];
