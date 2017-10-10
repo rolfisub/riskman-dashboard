@@ -85,7 +85,8 @@
     "datatables": "1.10.12",
     "loaders.css": "0.1.2",
     "angular-strap": "^2.3.12",
-    "angular-motion": "^0.4.4"
+    "angular-motion": "^0.4.4",
+    "password-generator": "^2.2.0"
   },
   "resolutions": {
     "angular": "1.5.8",

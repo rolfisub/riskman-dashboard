@@ -14,10 +14,10 @@
                         .col-sm-12
                             button.btn.btn-success(ng-show="!o.bookAuth.exists" ng-click="o.createAuth()") Create
                             button.btn.btn-danger(ng-show="o.bookAuth.exists" ng-click="o.deleteAuth()") Delete
-                            button.btn.btn-warning(ng-show="o.bookAuth.exists" ng-click="o.saveAuth(); o.isFormValid() " ng-disabled="o.saveDisable") Save
-                            button.btn.btn-info(ng-show="o.bookAuth.exists") Generate Random Password
+                            button.btn.btn-warning(ng-show="o.bookAuth.exists" ng-click="o.saveAuth(); o.isFormValid();" ng-disabled="o.saveDisable") Save
+                            button.btn.btn-info(ng-show="o.bookAuth.exists" ng-click="o.generatePass(); o.validatePass();") Generate Random Password
                             
-                    .row(ng-if="o.bookAuth.exists")
+                    .row.margin-top(ng-if="o.bookAuth.exists")
                         form
                             .form-group
                                 .col-sm-6
