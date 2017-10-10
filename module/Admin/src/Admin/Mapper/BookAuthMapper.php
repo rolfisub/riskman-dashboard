@@ -49,13 +49,51 @@ class BookAuthMapper extends AbstractMapper
         $bookAuth2 = $this->getBookAuthByBookId($bookId);
         if($bookAuth2) {
             //update
+            $this->updateAuth($bookId, $bookAuth);
+            $bookAuth2 = $this->getBookAuthByBookId($bookId);
         } else {
-           //create
-           
+            //create
+            $this->insertAuth($bookId, $bookAuth);
+            $bookAuth2 = $this->getBookAuthByBookId($bookId);
         }
         return [
-            'test' => $bookAuth2
+            $bookAuth2
         ];
+    }
+    
+    private function updateAuth ($bookId, BookAuth $ba) {
+        $u = new Update('oauth_clients');
+        $u->set([
+            'client_id' => $ba->data['client_id'],
+            'client_secret' => $this->getHash($ba->data['client_secret'])
+        ]);
+        $u->where([
+            'user_id' => $bookId
+        ]);
+        $this->queryObject($u);
+        return;
+    }
+    
+    private function insertAuth ($bookId, BookAuth $ba) {
+        $i = new Insert('oauth_clients');
+        $i->columns(['client_id', 'client_secret', 'user_id', 'redirect_uri'])
+                ->values([
+                    $ba->data['client_id'],
+                    $this->getHash($ba->data['client_secret']),
+                    $bookId,
+                    ''
+                ]);
+        $this->queryObject($i);
+        return;
+    }
+    
+    /**
+     * returns the hash of a string using BCrypt
+     * @return string hash
+     */
+    private function getHash($input)
+    {
+        return (new Bcrypt())->create($input);
     }
     
     
