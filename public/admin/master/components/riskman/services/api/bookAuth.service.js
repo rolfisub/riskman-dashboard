@@ -30,6 +30,10 @@
             return api.create('/bookAuth', obj);
         };
         
+        this.deleteBookAuth = function(bookId) {
+            return api.delete('/bookAuth/' + bookId);
+        };
+        
         
         this.onError = function(response) {
             api.errorCallback(response);

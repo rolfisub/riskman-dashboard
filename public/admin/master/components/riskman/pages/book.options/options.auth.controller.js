@@ -31,13 +31,16 @@
          * delete oauth credentials
          */
         c.deleteAuth = function(){
-            c.bookAuth.exists = false;
-            c.bookAuth.client_id = '';
-            c.bookAuth.client_secret = '';
-            c.userError.valid = true;
-            c.passError.valid = true;
-            c.userAvail = -1;
-            c.passAvail = -1;
+            var r = bookAuth.deleteBookAuth(c.myBook.id);
+            r.then(function(res){
+                c.bookAuth.exists = false;
+                c.bookAuth.client_id = '';
+                c.bookAuth.client_secret = '';
+                c.userError.valid = true;
+                c.passError.valid = true;
+                c.userAvail = -1;
+                c.passAvail = -1;
+            }, bookAuth.OnError);
         };
         
         /*
