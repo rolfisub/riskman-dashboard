@@ -183,7 +183,6 @@
                 var r = bookAuth.createUpdateBook(c.myBook.id, data);
                 r.then(function(res){
                     c.bookAuthInit(c.myBook.id);
-                    console.log(res);
                 }, bookAuth.onError)
             }
         };
