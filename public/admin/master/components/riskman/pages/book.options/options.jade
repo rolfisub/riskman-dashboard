@@ -8,7 +8,7 @@
         .col-sm-6
             .card(ng-controller='OptionsAuthController as o')
                 .card-body
-                    h4.card-title Client Credentials (OAuth 2)
+                    h4.card-title Client API Credentials (OAuth 2)
                     p.card-text In this section you can create, reset or delete credentials. This Authorizes the book access to the API.
                     .row
                         .col-sm-12
@@ -37,7 +37,35 @@
                                 .alert.alert-warning(ng-show="!o.userError.valid" role="alert") {{o.userError.msg}}
                             .col-sm-6
                                 .alert.alert-warning(ng-show="!o.passError.valid" role="alert") {{o.passError.msg}}
-                    
+        .col-sm-6
+            .card(ng-controller="OptionsFormatController as of")
+                .card-body
+                    h4.card-title API Format Options
+                    p.card-text Input/Output Formatting Options
+                    margin-top
+                        form
+                            .form-group
+                                .row
+                                    .col-md-12
+                                        label.form-control-label(for="currency") Currency:
+                                            select.form-control(name="currency" ng-model="of.bookFormat.currency")
+                                                option(value="USD") USD
+                                        p Input Currency to be converted to USD. This will be used in reports to visualize data in USD.
+                                    .col-md-12
+                                        label.form-control-label(for="timezone") Time Zone:
+                                            select.form-control(name="timezone" ng-model="of.bookFormat.time_zone")
+                                                option(value="America/New_York") America/New_York
+                                        p Feed and Bets Time Zone used by the operator. To be converted to server time. Also used for report calculation.
+                                    .col-md-12
+                                        label.form-control-label(for="oddformat") Odd Format:
+                                            select.form-control(name="oddformat" ng-model="of.bookFormat.odd_format")
+                                                option(value="American") American
+                                                option(value="Decimal") Decimal
+                                        p Expected Input/Output for odds. Will be converted to our internal format.
+                                    .col-md-12
+                                        button.btn.btn-warning(ng-click="of.updateFormat()" ng-disabled="of.successMsg") Update
+                                        button.btn.btn-raised.btn-success.am-slide-right(ng-show="of.successMsg")
+                                            span.ion-checkmark
             
                                     
                                         

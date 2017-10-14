@@ -29,7 +29,7 @@ class BookFormatRestController extends ProtectedRestfulController
     
     public function get($id)
     {
-        return new JsonModel($this->model->getBookAuthByBookId($id));
+        return new JsonModel($this->model->getBookFormatByBookId($id));
     }
     
     /**
@@ -40,13 +40,7 @@ class BookFormatRestController extends ProtectedRestfulController
     public function create($data)
     {
         
-        if(isset($data['query_type'])) {
-            if($data['query_type'] === 'UserAvail') {
-                
-                return new JsonModel($this->model->isUserAvail($data['client_id']));
-            }
-        }
-        return new JsonModel(['data'=>$data]);
+        return new JsonModel(['test' => $data]);
     }
     
     /**
@@ -56,7 +50,7 @@ class BookFormatRestController extends ProtectedRestfulController
      */
     public function delete($id) 
     {
-        return new JsonModel($this->model->deleteBookAuth($id));
+        return new JsonModel(['test' => 'test']);
     }
     
     /**
@@ -66,7 +60,7 @@ class BookFormatRestController extends ProtectedRestfulController
      */
     public function update($bookId, $data) 
     {
-        return new JsonModel($this->model->createUpdateBookAuth($bookId, $data));
+        return new JsonModel($this->model->updateBookFormat($bookId, $data));
     }
     
     

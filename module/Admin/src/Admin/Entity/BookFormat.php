@@ -28,13 +28,11 @@ class BookFormat extends AbstractEntity
             'time_zone',
             'currency'
         ])->setCreateOptFields([
-            'default'
         ])->setUpdateReqFields([
-        ])->setUpdateOptFields([
             'odd_format',
             'time_zone',
-            'currency',
-            'default'
+            'currency'
+        ])->setUpdateOptFields([
         ]);
         parent::__construct($data);
     }

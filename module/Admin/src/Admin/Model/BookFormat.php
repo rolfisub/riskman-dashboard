@@ -29,22 +29,22 @@ class BookFormat
     /**
      * get oauth2 info by book id
      */
-    public function getBookAuthByBookId($bookId)
+    public function getBookFormatByBookId($bookId)
     {
         return [
-            'bookAuth' => $this->mapper->getBookAuthByBookId($bookId)
+            'bookFormat' => $this->mapper->getBookFormatByBookId($bookId)
         ];
     }
     
-    public function createUpdateBookAuth($bookId, $data) 
+    public function updateBookFormat($bookId, $data) 
     {
-        $bookAuth = new BookFormatEntity($data);
+        $bookFormat = new BookFormatEntity($data);
         $result = [];
-        if($bookAuth->checkUpdateValid() || $bookAuth->checkCreateValid()) {
-            $result = $this->mapper->updateBookAuth($bookId, $bookAuth);
+        if($bookFormat->checkUpdateValid()) {
+            $result = $this->mapper->updateBookFormat($bookId, $bookFormat);
         }
         return[
-            'bookAuth' => $result
+            'bookFormat' => $result
         ];
     }
     

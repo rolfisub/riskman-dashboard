@@ -24,7 +24,8 @@ class ControllersFactory implements AbstractFactoryInterface
             2 => 'Admin\\Controller\\AuthRestController',
             3 => 'Admin\\Controller\\BooksRestController',
             4 => 'Admin\\Controller\\BookRestController',
-            5 => 'Admin\\Controller\\BookAuthRestController'
+            5 => 'Admin\\Controller\\BookAuthRestController',
+            6 => 'Admin\\Controller\\BookFormatRestController'
         );
         return in_array($requestedName, $objects);
     }
@@ -56,6 +57,10 @@ class ControllersFactory implements AbstractFactoryInterface
                     return $o;
                 case 'Admin\\Controller\\BookAuthRestController':
                     $model = $services->get('Admin\\Model\\BookAuth');
+                    $o = new $requestedName($serviceLocator, $model);
+                    return $o;
+                case 'Admin\\Controller\\BookFormatRestController':
+                    $model = $services->get('Admin\\Model\\BookFormat');
                     $o = new $requestedName($serviceLocator, $model);
                     return $o;
                 
