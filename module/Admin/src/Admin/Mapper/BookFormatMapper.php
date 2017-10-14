@@ -17,7 +17,7 @@ use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Expression as SqlExpression;
 use Zend\Crypt\Password\Bcrypt;
 use Admin\Error\Error400;
-use Admin\Entity\BookAuth;
+use Admin\Entity\BookFormat;
 
 /**
  * Description of StatsMapper
@@ -27,58 +27,39 @@ use Admin\Entity\BookAuth;
 class BookFormatMapper extends AbstractMapper
 {
     
-    public function getBookAuthByBookId($bookId){
-        $s = new Select('oauth_clients');
+    public function getBookFormatByBookId($bookId){
+        $s = new Select('book_format');
         $s->columns([
-            'client_id'
+            'odd_format',
+            'time_zone',
+            'currency'
         ]);
         $s->where([
-            'user_id' => $bookId
+            'book_id' => $bookId
         ]);
         $result = $this->queryObject($s);
         $data = $result->toArray();
-        if($data) {
-            $data[0]['client_secret'] = '********';
-            return $data[0];
+        if(isset($data[0])) {
+            $return = $data[0];
+        } else {
+            $return = $data;
         }
-        return $data;
+        return $return;
         
     }
     
-    public function updateBookAuth($bookId, BookAuth $bookAuth) {
-        $bookAuth2 = $this->getBookAuthByBookId($bookId);
-        if($bookAuth2) {
-            //update
-            $this->updateAuth($bookId, $bookAuth);
-            $bookAuth2 = $this->getBookAuthByBookId($bookId);
-        } else {
-            //create
-            $this->insertAuth($bookId, $bookAuth);
-            $bookAuth2 = $this->getBookAuthByBookId($bookId);
-        }
-        return [
-            $bookAuth2
-        ];
-    }
-    
-    public function deleteBookAuth($bookId) {
-        $d = new Delete('oauth_clients');
-        $d->where(['user_id' => $bookId]);
-        $this->queryObject($d);
-        return[$bookId];
-    }
-    
-    private function updateAuth ($bookId, BookAuth $ba) {
-        $u = new Update('oauth_clients');
+    public function updateBookFormat ($bookId, BookFormat $ba) {
+        $u = new Update('book_format');
         $u->set([
-            'client_id' => $ba->data['client_id'],
-            'client_secret' => $this->getHash($ba->data['client_secret'])
+            'odd_format' => $ba->data['odd_format'],
+            'time_zone' => $ba->data['time_zone'],
+            'currency' => $ba->data['currency']
         ]);
         $u->where([
-            'user_id' => $bookId
+            'book_id' => $bookId
         ]);
-        $this->queryObject($u);
-        return;
+        $result = $this->queryObject($u);
+        return [$result];
     }
     
     private function insertAuth ($bookId, BookAuth $ba) {
