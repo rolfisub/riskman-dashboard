@@ -39,6 +39,17 @@
            }, secs * 1000);
         };
         
+        /*
+         * error model
+         */
+        c.errorMsg = false;
+        var showErrorFor = function(secs){
+           c.errorMsg = true;
+           $timeout(function(){
+               c.errorMsg = false;
+           }, secs * 1000);
+        };
+        
         /**
          * 
          * @returns {undefined}
@@ -47,7 +58,13 @@
             var r = bookFormat.updateBookFormat(c.myBook.id, c.bookFormat);
             r.then(function(res) {
                 showSuccessFor(3);
-            }, bookFormat.onError)
+            }, function(err){
+                if(err.status === 400) {
+                    showErrorFor(3);
+                } else {
+                    bookFormat.onError(err);
+                }
+            })
         };
         
         /**
