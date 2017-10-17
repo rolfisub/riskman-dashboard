@@ -68,6 +68,17 @@
                                             span.ion-checkmark
                                         button.btn.btn-raised.btn-danger.am-slide-right(ng-show="of.errorMsg")
                                             span.ion-close-circled
+    .row
+        .col-sm-12
+            .card(ng-controller="OptionsRankingController as or")
+                .card-body
+                    h4.card-title API Ranking Options
+                    p.card-text In this section we edit the raking settings for the suggestion system.
+                    margin-top
+                        .row
+                            .col-sm-12
+                                #gridContainer(dx-data-grid="or.gridOptions")
+                                        
             
                                     
                                         
