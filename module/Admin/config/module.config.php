@@ -79,6 +79,18 @@ return array(
                     ),
                 ),
             ),
+            'BookFormat' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/bookFormat[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\BookFormatRestController',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

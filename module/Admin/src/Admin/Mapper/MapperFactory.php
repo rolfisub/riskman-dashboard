@@ -24,7 +24,8 @@ class MapperFactory implements AbstractFactoryInterface
             1 => 'Admin\\Mapper\\AdminsMapper',
             2 => 'Admin\\Mapper\\BooksMapper',
             3 => 'Admin\\Mapper\\BookMapper',
-            4 => 'Admin\\Mapper\\BookAuthMapper'
+            4 => 'Admin\\Mapper\\BookAuthMapper',
+            5 => 'Admin\\Mapper\\BookFormatMapper'
         );
         return in_array($requestedName, $objects);
     }
@@ -50,6 +51,10 @@ class MapperFactory implements AbstractFactoryInterface
                     $o = new $requestedName($adapter);
                     return $o;
                 case 'Admin\\Mapper\\BookAuthMapper':
+                    $adapter = $serviceLocator->get('DatabaseService');
+                    $o = new $requestedName($adapter);
+                    return $o;
+                case 'Admin\\Mapper\\BookFormatMapper':
                     $adapter = $serviceLocator->get('DatabaseService');
                     $o = new $requestedName($adapter);
                     return $o;
