@@ -62,14 +62,14 @@ class BookFormatMapper extends AbstractMapper
         return [$result];
     }
     
-    private function insertAuth ($bookId, BookAuth $ba) {
-        $i = new Insert('oauth_clients');
-        $i->columns(['client_id', 'client_secret', 'user_id', 'redirect_uri'])
+    public function insertBookFormat($bookId, BookFormat $ba) {
+        $i = new Insert('book_format');
+        $i->columns(['book_id', 'odd_format', 'time_zone', 'currency'])
                 ->values([
-                    $ba->data['client_id'],
-                    $this->getHash($ba->data['client_secret']),
                     $bookId,
-                    ''
+                    $ba->data['odd_format'],
+                    $ba->data['time_zone'],
+                    $ba->data['currency']
                 ]);
         $this->queryObject($i);
         return;
