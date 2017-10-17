@@ -38,10 +38,17 @@ class BookFormat
     
     public function updateBookFormat($bookId, $data) 
     {
+        $exists = $this->mapper->getBookFormatByBookId($bookId);
         $bookFormat = new BookFormatEntity($data);
         $result = [];
-        if($bookFormat->checkUpdateValid()) {
-            $result = $this->mapper->updateBookFormat($bookId, $bookFormat);
+        if($exists) {
+            if($bookFormat->checkUpdateValid()) {
+                $result = $this->mapper->updateBookFormat($bookId, $bookFormat);
+            }
+        } else {
+            if($bookFormat->checkCreateValid()) {
+                $result = $this->mapper->insertBookFormat($bookId, $bookFormat);
+            }
         }
         return[
             'bookFormat' => $result
