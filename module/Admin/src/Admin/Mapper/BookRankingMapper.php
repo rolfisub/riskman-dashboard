@@ -19,6 +19,7 @@ use Zend\Crypt\Password\Bcrypt;
 use Admin\Error\Error400;
 use Admin\Entity\BookRanking;
 
+
 /**
  * Description of StatsMapper
  *
@@ -27,12 +28,11 @@ use Admin\Entity\BookRanking;
 class BookRankingMapper extends AbstractMapper
 {
     
+    
     public function getBookRankingByBookId($bookId){
-        $s = new Select('book_format');
+        $s = new Select('book_ranking');
         $s->columns([
-            'odd_format',
-            'time_zone',
-            'currency'
+            'rankings'
         ]);
         $s->where([
             'book_id' => $bookId
@@ -40,20 +40,18 @@ class BookRankingMapper extends AbstractMapper
         $result = $this->queryObject($s);
         $data = $result->toArray();
         if(isset($data[0])) {
-            $return = $data[0];
+            $return = ['rankings' => json_decode($data[0]['rankings'])];
         } else {
-            $return = $data;
+            $return = NULL;
         }
         return $return;
         
     }
     
     public function updateBookRanking ($bookId, BookRanking $ba) {
-        $u = new Update('book_format');
+        $u = new Update('book_ranking');
         $u->set([
-            'odd_format' => $ba->data['odd_format'],
-            'time_zone' => $ba->data['time_zone'],
-            'currency' => $ba->data['currency']
+            'rankings' => $ba->data['rankings']
         ]);
         $u->where([
             'book_id' => $bookId
@@ -63,13 +61,11 @@ class BookRankingMapper extends AbstractMapper
     }
     
     public function insertBookRanking($bookId, BookRanking $ba) {
-        $i = new Insert('book_format');
-        $i->columns(['book_id', 'odd_format', 'time_zone', 'currency'])
+        $i = new Insert('book_ranking');
+        $i->columns(['book_id', 'rankings'])
                 ->values([
                     $bookId,
-                    $ba->data['odd_format'],
-                    $ba->data['time_zone'],
-                    $ba->data['currency']
+                    $ba->data['rankings']
                 ]);
         $this->queryObject($i);
         return;

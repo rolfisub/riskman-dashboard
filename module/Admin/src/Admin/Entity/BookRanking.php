@@ -22,6 +22,7 @@ class BookRanking extends AbstractEntity
     public function __construct($data) 
     {
         $this->setCreateReqFields([
+            'rankings'
         ])->setCreateOptFields([
         ])->setUpdateReqFields([
             'rankings'
@@ -53,14 +54,13 @@ class BookRanking extends AbstractEntity
     {
         //validate structure
         $this->isCreateStructValid();
-        /*
-        $oddRanking = new OddRanking();
-        if(!$oddRanking->isValid($this->data['odd_format'])) {
-            throw new Error400($oddRanking->getMessages());
-        }
-        */
-                
         
+        //rankings
+        $Rankings = new Rankings();
+        if(!$Rankings->isValid($this->data['rankings'])) {
+            throw new Error400($Rankings->getMessages());
+        }
+
         return true;
         
     }

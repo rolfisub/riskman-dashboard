@@ -28,8 +28,8 @@ class Rankings extends AbstractValidator
         $this->setValue($value);
         
         $isValid = true;
-
-        if(true === false) {
+        
+        if(false) {
             $this->error(self::INVALID);
             $isValid = false;
         }        
