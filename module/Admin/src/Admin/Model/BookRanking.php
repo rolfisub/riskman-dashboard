@@ -10,6 +10,7 @@ namespace Admin\Model;
 
 use Admin\Mapper\BookRankingMapper;
 use Admin\Error\Error400;
+use Admin\Traits\RankingsDefault;
 
 use Admin\Entity\BookRanking as BookRankingEntity;
 /**
@@ -19,6 +20,8 @@ use Admin\Entity\BookRanking as BookRankingEntity;
  */
 class BookRanking
 {
+    use RankingsDefault;
+    
     public $mapper;
     
     public function __construct(BookRankingMapper $mapper) {
@@ -31,8 +34,16 @@ class BookRanking
      */
     public function getBookRankingByBookId($bookId)
     {
+        $rankings = $this->mapper->getBookRankingByBookId($bookId);
+        if($rankings) {
+            return [
+                'bookRanking' => $rankings
+            ];
+        }
         return [
-            'bookRanking' => $this->mapper->getBookRankingByBookId($bookId)
+            'bookRanking' => [
+                'rankings' => $this->rankingsDefault
+            ]
         ];
     }
     
