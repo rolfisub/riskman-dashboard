@@ -76,18 +76,51 @@
                     p.card-text In this section we edit the raking settings for the suggestion system.
                     margin-top
                         .row
-                            .col-sm-12
-                                #gridContainer(dx-data-grid="or.gridOptions" dx-item-alias="ranking")
-                                    div(data-options="dxTemplate:{ name: 'rank'}") 
-                                        span {{ranking.data.rank}}
-                                    div(data-options="dxTemplate:{ name: 'max_line_change_percent'}")
-                                        span {{ranking.data.max_line_change_percent}}
-                                    div(data-options="dxTemplate:{ name: 'max_amount_expected'}")
-                                        span {{ranking.data.max_amount_expected}}
-                                    div(data-options="dxTemplate:{ name: 'limit_percent'}")
-                                        span {{ranking.data.limit_percent}}
-                                    div(data-options="dxTemplate:{ name: 'limit_amount'}")
-                                        span {{ranking.data.limit_amount}}
+                            .table-responsive
+                                table.table.table-striped
+                                    thead
+                                        tr
+                                            th Rank
+                                            th Line Move Max %
+                                            th Max Expected
+                                            th Limit %
+                                            th Limit per bet
+                                    tbody
+                                        tr(ng-repeat='ranking in or.bookRanking')
+                                            td
+                                                p.m0 {{ranking.rank}}
+                                            td
+                                                p.m0
+                                                    a(
+                                                        editable-number='ranking.max_line_change_percent' 
+                                                        onbeforesave='or.checkPercentage100($data, ranking)'
+                                                        e-step="any"
+                                                        onaftersave=''
+                                                    ) {{ranking.max_line_change_percent + '%'}}
+                                            td
+                                                p.m0 
+                                                    a(
+                                                        editable-number='ranking.max_amount_expected' 
+                                                        onbeforesave='or.checkRankingLimits($data, ranking)'
+                                                        onaftersave='or.setMaxExpected($data, ranking)'
+                                                    ) {{ranking.max_amount_expected | currency}}
+                                            td
+                                                p.m0 
+                                                    a(
+                                                        editable-number='ranking.limit_percent' 
+                                                        onbeforesave='or.checkPercentage100($data, ranking)'
+                                                        e-step="any"
+                                                        onaftersave='or.setLimitPercent($data, ranking)'
+                                                    ) {{ranking.limit_percent + '%'}}
+                                            td
+                                                p.m0 
+                                                    a(
+                                                        editable-number='ranking.limit_amount' 
+                                                        onbeforesave='or.checkLimitAmount($data, ranking)'
+                                                        onaftersave='or.setLimitAmount($data, ranking)'
+                                                    ) {{ranking.limit_amount | currency}}
+                                    
+                                    
                                         
             
                                     
