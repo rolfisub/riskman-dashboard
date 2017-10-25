@@ -37,12 +37,18 @@ class BookRanking
         $rankings = $this->mapper->getBookRankingByBookId($bookId);
         if($rankings) {
             return [
-                'bookRanking' => $rankings
+                'bookRanking' => [
+                    'rankings' => json_decode($rankings['rankings'])
+                ]
             ];
+        } else {
+            //insert default
+            $bookRanking = new BookRankingEntity($this->rankingsDefault);
+            $this->mapper->insertBookRanking($bookId, $bookRanking);
         }
         return [
             'bookRanking' => [
-                'rankings' => $this->rankingsDefault
+                'rankings' => $this->rankingsDefault['rankings']
             ]
         ];
     }

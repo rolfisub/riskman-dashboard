@@ -51,7 +51,7 @@ class BookRankingMapper extends AbstractMapper
     public function updateBookRanking ($bookId, BookRanking $ba) {
         $u = new Update('book_ranking');
         $u->set([
-            'rankings' => $ba->data['rankings']
+            'rankings' => json_encode($ba->data['rankings'])
         ]);
         $u->where([
             'book_id' => $bookId
@@ -65,7 +65,7 @@ class BookRankingMapper extends AbstractMapper
         $i->columns(['book_id', 'rankings'])
                 ->values([
                     $bookId,
-                    $ba->data['rankings']
+                    json_encode($ba->data['rankings'])
                 ]);
         $this->queryObject($i);
         return;

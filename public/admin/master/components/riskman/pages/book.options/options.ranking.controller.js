@@ -24,131 +24,99 @@
         c.bookRanking = [
         ];
         
-        /**
-         * set value bookranking model
+        
+        
+        /*
+         * checks if input is percentage > 0 and < 100
          */
-        c.setRankingValue = function(updateKey, updateValue) {
-            angular.forEach(c.bookRanking, function(value, key){
-                if(updateKey === value) {
-                    angular.merge(c.bookRanking[key], updateValue);
-                    return;
-                }
-            }, this);
-            console.log("Updating Controller Model");
-            console.log(c.bookRanking);
+        c.checkPercentage100 = function(data) {
+            var num = parseFloat(data);
+            if(num <= 0.01 || num >= 100.00) {
+                return 'Percentage must be between 1 and 100.';
+            }
+        };
+        
+        /*
+         * touched variable
+         */
+        c.touched = false;
+        
+        /**
+         * set limit percentage and calculate limit amount
+         */
+        c.setLimitPercent = function(value, item){
+            item.limit_percent = value;
+            item.limit_amount = (item.max_amount_expected / 100) * item.limit_percent;
+            c.touched = true;
+        };
+        
+        /*
+         * set max line change percent
+         */
+        c.setMaxLineChangePercent = function(value, item) {
+            item.max_line_change_percent = value;
+            c.touched = true;
         };
         
         /**
-         * grid options
+         * set limit percentage and calculate limit amount
          */
-        c.gridOptions = {
-            dataSource: /*c.bookRanking,*/
-            {
-                load: function(){
-                    console.log("Data Source Load");
-                    var def = $q.defer();
-                    var r = bookRanking.getBookRanking(c.myBook.id);
-                    r.then(function(res){
-                        def.resolve(res.data.bookRanking.rankings);
-                        angular.merge(c.bookRanking, res.data.bookRanking.rankings);
-                    }, bookRanking.onError);
-                    return def.promise;
-                },
-                update: function(key, value){
-                    console.log("Data Source Update");
-                    c.setRankingValue(key, value);
-                    var def = $q.defer();
-                    var data = {
-                        rankings: JSON.stringify(c.bookRanking) 
-                    };
-                    var r = bookRanking.updateBookRanking(c.myBook.id, data);
-                    r.then(function(res){
-                        def.resolve(c.bookRanking);
-                    }, bookRanking.onError)
-                    return def.promise;
+        c.setLimitAmount = function(value, item){
+            item.limit_amount = value;
+            item.limit_percent = (value / item.max_amount_expected) * 100;
+            c.touched = true;
+        };
+        
+        /**
+         * set max amount expected and calculates limit amount
+         */
+        c.setMaxExpected = function(value, item) {
+            item.max_amount_expected = value;
+            item.limit_amount = (item.max_amount_expected / 100) * item.limit_percent;  
+            c.touched = true;
+        };
+        
+        /**
+         * check limit amount boundaries
+         */
+        c.checkLimitAmount = function(value, item) {
+            var row = 0;
+            angular.forEach(c.bookRanking, function(ranking, key) {
+                if(ranking.rank === item.rank) {
+                    row = key;
                 }
-            },
-            onEditingStart: function(e) {
-                console.log("EditingStart");
-                console.log(e);
-                
-            },
-            onInitNewRow: function(e) {
-                console.log("InitNewRow");
-            },
-            onRowInserting: function(e) {
-                console.log("RowInserting");
-            },
-            onRowInserted: function(e) {
-                console.log("RowInserted");
-            },
-            onRowUpdating: function(e) {
-                console.log("RowUpdating");
-                console.log(e);
-            },
-            onRowUpdated: function(e) {
-                console.log("RowUpdated");
-                console.log(e);
-            },
-            onRowRemoving: function(e) {
-                console.log("RowRemoving");
-            },
-            onRowRemoved: function(e) {
-                console.log("RowRemoved");
-            },
-            allowColumnReordering: false,
-            allowColumnResizing: false,
-            columnAutoWidth: true,
-            columnChooser: {
-                enabled: false
-            },
-            columnFixing: { 
-                enabled: false
-            },
-            editing:{
-                mode: 'batch',
-                allowUpdating: true,
-                allowDeleting: false,
-                allowAdding: false
-            },
-            columns:[
-                {
-                    caption: 'Rank',
-                    alignment: 'center',
-                    cellTemplate: 'rank',
-                    dataField: 'rank'
-                },
-                {
-                    caption: 'Max % Line Move',
-                    alignment: 'center',
-                    cellTemplate: 'max_line_change_percent',
-                    dataField: 'max_line_change_percent'
-                },
-                {
-                    caption: 'Max Expected',
-                    alignment: 'center',
-                    cellTemplate: 'max_amount_expected',
-                    dataField: 'max_amount_expected'
-                },
-                {
-                    caption: 'Limit %',
-                    alignment: 'center',
-                    cellTemplate: 'limit_percent',
-                    dataField: 'limit_percent'
-                },
-                {
-                    caption: 'Limit',
-                    alignment: 'center',
-                    cellTemplate: 'limit_amount',
-                    dataField: 'limit_amount'
-                },
-                
-//                'rank', 
-//                'max_line_change_percent',
-//                'max_amount_expected', 
-//                'limit_percent', 
-//                'limit_amount'
-            ]
+            }, this);
+            if(row === 0) {
+                if(value <= 0 || value > item.max_amount_expected) {
+                    return 'Limit per bet must be greater than 0 and less than ' + item.max_amount_expected;
+                }
+            } else {
+                if(value <= c.bookRanking[row - 1].limit_amount || value > item.max_amount_expected) {
+                    return 'Limit per bet must be greater than ' + c.bookRanking[row - 1].limit_amount + ' and less than ' + item.max_amount_expected;
+                }
+            }
+        };
+        
+        /*
+         * check ranking limits
+         */
+        c.checkRankingLimits = function(value, item) {
+            var mae = value;
+            var row = 0;
+            angular.forEach(c.bookRanking, function(ranking, key) {
+                if(ranking.rank === item.rank) {
+                    row = key;
+                }
+            }, this);
+            if(row === 0) {
+                if(mae <= 0 || mae > c.bookRanking[row + 1].max_amount_expected) {
+                    return 'Max Amount must be between 0 and ' + c.bookRanking[row + 1].max_amount_expected;
+                }
+            } else {
+                if(mae <= c.bookRanking[row - 1].max_amount_expected || mae >= c.bookRanking[row + 1].max_amount_expected) {
+                    return 'Max Amount must be between ' + c.bookRanking[row - 1].max_amount_expected +  ' and ' + c.bookRanking[row + 1].max_amount_expected;
+                }
+            }
         };
         
         /**
@@ -183,10 +151,29 @@
             var r = bookRanking.getBookRanking(c.myBook.id);
             r.then(function(res){
                 angular.merge(c.bookRanking, res.data.bookRanking.rankings);
+                c.touched = false;
             }, bookRanking.onError);
         };
         
-        
+        /*
+         * Update danking
+         */
+        c.updateRanking = function() {
+            var data = {
+                rankings: JSON.stringify(c.bookRanking)
+            };
+            var r = bookRanking.updateBookRanking(c.myBook.id, data);
+            r.then(function(res){
+                c.touched = false;
+                showSuccessFor(3);
+            }, function(err) {
+                if(err.status === 400) {
+                    showErrorFor(3);
+                } else {
+                    bookRanking.onError(err);
+                }
+            });
+        };
         
         /**
          * listens for refresh calls
