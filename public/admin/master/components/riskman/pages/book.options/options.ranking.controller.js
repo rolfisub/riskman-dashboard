@@ -29,12 +29,17 @@
         /*
          * checks if input is percentage > 0 and < 100
          */
-        c.checkPercentage100 = function(data, item) {
+        c.checkPercentage100 = function(data) {
             var num = parseFloat(data);
             if(num <= 0.01 || num >= 100.00) {
                 return 'Percentage must be between 1 and 100.';
             }
         };
+        
+        /*
+         * touched variable
+         */
+        c.touched = false;
         
         /**
          * set limit percentage and calculate limit amount
@@ -42,6 +47,15 @@
         c.setLimitPercent = function(value, item){
             item.limit_percent = value;
             item.limit_amount = (item.max_amount_expected / 100) * item.limit_percent;
+            c.touched = true;
+        };
+        
+        /*
+         * set max line change percent
+         */
+        c.setMaxLineChangePercent = function(value, item) {
+            item.max_line_change_percent = value;
+            c.touched = true;
         };
         
         /**
@@ -50,6 +64,7 @@
         c.setLimitAmount = function(value, item){
             item.limit_amount = value;
             item.limit_percent = (value / item.max_amount_expected) * 100;
+            c.touched = true;
         };
         
         /**
@@ -58,6 +73,7 @@
         c.setMaxExpected = function(value, item) {
             item.max_amount_expected = value;
             item.limit_amount = (item.max_amount_expected / 100) * item.limit_percent;  
+            c.touched = true;
         };
         
         /**
@@ -135,10 +151,29 @@
             var r = bookRanking.getBookRanking(c.myBook.id);
             r.then(function(res){
                 angular.merge(c.bookRanking, res.data.bookRanking.rankings);
+                c.touched = false;
             }, bookRanking.onError);
         };
         
-        
+        /*
+         * Update danking
+         */
+        c.updateRanking = function() {
+            var data = {
+                rankings: JSON.stringify(c.bookRanking)
+            };
+            var r = bookRanking.updateBookRanking(c.myBook.id, data);
+            r.then(function(res){
+                c.touched = false;
+                showSuccessFor(3);
+            }, function(err) {
+                if(err.status === 400) {
+                    showErrorFor(3);
+                } else {
+                    bookRanking.onError(err);
+                }
+            });
+        };
         
         /**
          * listens for refresh calls
