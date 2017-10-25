@@ -39,7 +39,6 @@
             //'app.maps',
             //'app.pages',
             'app.user',
-            'dx',
             'riskman'
         ]);
 })();
