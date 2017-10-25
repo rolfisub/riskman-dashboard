@@ -60,8 +60,7 @@ class BookRankingRestController extends ProtectedRestfulController
      */
     public function update($bookId, $data) 
     {
-        return new JsonModel($data);
-        //return new JsonModel($this->model->updateBookRanking($bookId, $data));
+        return new JsonModel($this->model->updateBookRanking($bookId, $data));
     }
     
     

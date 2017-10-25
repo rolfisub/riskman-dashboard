@@ -63,7 +63,7 @@
                                                 option(value="Decimal") Decimal
                                         p Expected Input/Output for odds. Will be converted to our internal format.
                                     .col-md-12
-                                        button.btn.btn-warning(ng-click="of.updateFormat()" ng-disabled="of.successMsg") Update
+                                        button.btn.btn-warning(ng-click="of.updateFormat()" ng-disabled="of.successMsg") Save
                                         button.btn.btn-raised.btn-success.am-slide-right(ng-show="of.successMsg")
                                             span.ion-checkmark
                                         button.btn.btn-raised.btn-danger.am-slide-right(ng-show="of.errorMsg")
@@ -74,6 +74,12 @@
                 .card-body
                     h4.card-title API Ranking Options
                     p.card-text In this section we edit the raking settings for the suggestion system.
+                    button.btn.btn-warning(ng-click="or.updateRanking()" ng-disabled="or.successMsg") Save
+                    button.btn.btn-danger(ng-click="or.init()" ng-show="or.touched") Cancel
+                    button.btn.btn-raised.btn-success.am-slide-right(ng-show="or.successMsg")
+                        span.ion-checkmark
+                    button.btn.btn-raised.btn-danger.am-slide-right(ng-show="or.errorMsg")
+                        span.ion-close-circled
                     margin-top
                         .row
                             .table-responsive
@@ -93,9 +99,9 @@
                                                 p.m0
                                                     a(
                                                         editable-number='ranking.max_line_change_percent' 
-                                                        onbeforesave='or.checkPercentage100($data, ranking)'
+                                                        onbeforesave='or.checkPercentage100($data)'
                                                         e-step="any"
-                                                        onaftersave=''
+                                                        onaftersave='or.setMaxLineChangePercent($data, ranking)'
                                                     ) {{ranking.max_line_change_percent + '%'}}
                                             td
                                                 p.m0 
@@ -108,7 +114,7 @@
                                                 p.m0 
                                                     a(
                                                         editable-number='ranking.limit_percent' 
-                                                        onbeforesave='or.checkPercentage100($data, ranking)'
+                                                        onbeforesave='or.checkPercentage100($data)'
                                                         e-step="any"
                                                         onaftersave='or.setLimitPercent($data, ranking)'
                                                     ) {{ranking.limit_percent + '%'}}
