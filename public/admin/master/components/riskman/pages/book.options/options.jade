@@ -16,7 +16,6 @@
                             button.btn.btn-danger(ng-show="o.bookAuth.exists" ng-click="o.deleteAuth()") Delete
                             button.btn.btn-warning(ng-show="o.bookAuth.exists" ng-click="o.saveAuth(); o.isFormValid();" ng-disabled="o.saveDisable") Save
                             button.btn.btn-info(ng-show="o.bookAuth.exists" ng-click="o.generatePass(); o.validatePass();") Generate Random Password
-                            
                     .row.margin-top(ng-if="o.bookAuth.exists")
                         form
                             .form-group
@@ -40,36 +39,37 @@
         .col-sm-6
             .card(ng-controller="OptionsFormatController as of")
                 .card-body
-                    h4.card-title API Format Options
-                    p.card-text Input/Output Formatting Options
-                    margin-top
-                        form
-                            .form-group
-                                .row
-                                    .col-md-12
-                                        label.form-control-label(for="currency") Currency:
-                                            select.form-control(name="currency" ng-model="of.bookFormat.currency")
-                                                option(value="USD") USD
-                                        p Input Currency to be converted to USD. This will be used in reports to visualize data in USD.
-                                    .col-md-12
-                                        label.form-control-label(for="timezone") Time Zone:
-                                            select.form-control(name="timezone" ng-model="of.bookFormat.time_zone")
-                                                option(value="America/New_York") America/New_York
-                                        p Feed and Bets Time Zone used by the operator. To be converted to server time. Also used for report calculation.
-                                    .col-md-12
-                                        label.form-control-label(for="oddformat") Odd Format:
-                                            select.form-control(name="oddformat" ng-model="of.bookFormat.odd_format")
-                                                option(value="American") American
-                                                option(value="Decimal") Decimal
-                                        p Expected Input/Output for odds. Will be converted to our internal format.
-                                    .col-md-12
-                                        button.btn.btn-warning(ng-click="of.updateFormat()" ng-disabled="of.successMsg") Save
-                                        button.btn.btn-raised.btn-success.am-slide-right(ng-show="of.successMsg")
-                                            span.ion-checkmark
-                                        button.btn.btn-raised.btn-danger.am-slide-right(ng-show="of.errorMsg")
-                                            span.ion-close-circled
+                    h4.card-title API Input Format Options
+                    p.card-text In this section we define what the expected incomming data input format is.
+                    .row.margin-top
+                        .col-sm-12
+                            form
+                                .form-group
+                                    .row
+                                        .col-md-12
+                                            label.form-control-label(for="currency") Currency:
+                                                select.form-control(name="currency" ng-model="of.bookFormat.currency")
+                                                    option(value="USD") USD
+                                            p Input Currency to be converted to USD. This will be used in reports to visualize data in USD.
+                                        .col-md-12
+                                            label.form-control-label(for="timezone") Time Zone:
+                                                select.form-control(name="timezone" ng-model="of.bookFormat.time_zone")
+                                                    option(value="America/New_York") America/New_York
+                                            p Feed and Bets Time Zone used by the operator. To be converted to server time. Also used for report calculation.
+                                        .col-md-12
+                                            label.form-control-label(for="oddformat") Odd Format:
+                                                select.form-control(name="oddformat" ng-model="of.bookFormat.odd_format")
+                                                    option(value="American") American
+                                                    option(value="Decimal") Decimal
+                                            p Expected Input/Output for odds. Will be converted to our internal format.
+                                        .col-md-12
+                                            button.btn.btn-warning(ng-click="of.updateFormat()" ng-disabled="of.successMsg") Save
+                                            button.btn.btn-raised.btn-success.am-slide-right(ng-show="of.successMsg")
+                                                span.ion-checkmark
+                                            button.btn.btn-raised.btn-danger.am-slide-right(ng-show="of.errorMsg")
+                                                span.ion-close-circled
     .row
-        .col-sm-12
+        .col-sm-8
             .card(ng-controller="OptionsRankingController as or")
                 .card-body
                     h4.card-title API Ranking Options
@@ -80,52 +80,61 @@
                         span.ion-checkmark
                     button.btn.btn-raised.btn-danger.am-slide-right(ng-show="or.errorMsg")
                         span.ion-close-circled
-                    margin-top
-                        .row
-                            .table-responsive
-                                table.table.table-striped
-                                    thead
-                                        tr
-                                            th Rank
-                                            th Line Move Max %
-                                            th Max Expected
-                                            th Limit %
-                                            th Limit per bet
-                                    tbody
-                                        tr(ng-repeat='ranking in or.bookRanking')
-                                            td
-                                                p.m0 {{ranking.rank}}
-                                            td
-                                                p.m0
-                                                    a(
-                                                        editable-number='ranking.max_line_change_percent' 
-                                                        onbeforesave='or.checkPercentage100($data)'
-                                                        e-step="any"
-                                                        onaftersave='or.setMaxLineChangePercent($data, ranking)'
-                                                    ) {{ranking.max_line_change_percent + '%'}}
-                                            td
-                                                p.m0 
-                                                    a(
-                                                        editable-number='ranking.max_amount_expected' 
-                                                        onbeforesave='or.checkRankingLimits($data, ranking)'
-                                                        onaftersave='or.setMaxExpected($data, ranking)'
-                                                    ) {{ranking.max_amount_expected | currency}}
-                                            td
-                                                p.m0 
-                                                    a(
-                                                        editable-number='ranking.limit_percent' 
-                                                        onbeforesave='or.checkPercentage100($data)'
-                                                        e-step="any"
-                                                        onaftersave='or.setLimitPercent($data, ranking)'
-                                                    ) {{ranking.limit_percent + '%'}}
-                                            td
-                                                p.m0 
-                                                    a(
-                                                        editable-number='ranking.limit_amount' 
-                                                        onbeforesave='or.checkLimitAmount($data, ranking)'
-                                                        onaftersave='or.setLimitAmount($data, ranking)'
-                                                    ) {{ranking.limit_amount | currency}}
-                                    
+                    .row.margin-top
+                        .table-responsive
+                            table.table.table-striped
+                                thead
+                                    tr
+                                        th Rank
+                                        th Line Move Max %
+                                        th Max Expected
+                                        th Limit %
+                                        th Limit per bet
+                                tbody
+                                    tr(ng-repeat='ranking in or.bookRanking')
+                                        td
+                                            p.m0 {{ranking.rank}}
+                                        td
+                                            p.m0
+                                                a(
+                                                    editable-number='ranking.max_line_change_percent' 
+                                                    onbeforesave='or.checkPercentage100($data)'
+                                                    e-step="any"
+                                                    onaftersave='or.setMaxLineChangePercent($data, ranking)'
+                                                ) {{ranking.max_line_change_percent + '%'}}
+                                        td
+                                            p.m0 
+                                                a(
+                                                    editable-number='ranking.max_amount_expected' 
+                                                    onbeforesave='or.checkRankingLimits($data, ranking)'
+                                                    onaftersave='or.setMaxExpected($data, ranking)'
+                                                ) {{ranking.max_amount_expected | currency}}
+                                        td
+                                            p.m0 
+                                                a(
+                                                    editable-number='ranking.limit_percent' 
+                                                    onbeforesave='or.checkPercentage100($data)'
+                                                    e-step="any"
+                                                    onaftersave='or.setLimitPercent($data, ranking)'
+                                                ) {{ranking.limit_percent + '%'}}
+                                        td
+                                            p.m0 
+                                                a(
+                                                    editable-number='ranking.limit_amount' 
+                                                    onbeforesave='or.checkLimitAmount($data, ranking)'
+                                                    onaftersave='or.setLimitAmount($data, ranking)'
+                                                ) {{ranking.limit_amount | currency}}
+        .col-sm-4
+            .card(ng-controller="OptionsCentlineController as oc")
+                .card-body
+                    h4.card-title API Centline Options
+                    p.card-text In this section we can choose a predefined centline and edit its values if necessary.
+                    button.btn.btn-warning(ng-click="" ng-disabled="oc.successMsg") Save
+                    button.btn.btn-danger(ng-click="oc.init()" ng-show="oc.touched") Cancel
+                    button.btn.btn-raised.btn-success.am-slide-right(ng-show="oc.successMsg")
+                        span.ion-checkmark
+                    button.btn.btn-raised.btn-danger.am-slide-right(ng-show="oc.errorMsg")
+                        span.ion-close-circled                   
                                     
                                         
             
