@@ -91,6 +91,18 @@ return array(
                     ),
                 ),
             ),
+            'BookRanking' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/bookRanking[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\BookRankingRestController',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
