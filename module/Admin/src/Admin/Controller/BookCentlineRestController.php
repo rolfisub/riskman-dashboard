@@ -27,9 +27,14 @@ class BookCentlineRestController extends ProtectedRestfulController
         return new JsonModel();
     }
     
-    public function get($id)
+    public function get($arg)
     {
-        return new JsonModel($this->model->getBookCentlineByBookId($id));
+        if(is_numeric($arg)) {
+            return new JsonModel($this->model->getBookCentlineByBookId($id));
+        } elseif ($arg === 'getPresets') {
+            return new JsonModel(["centlinePresets" => $this->model->centlinePresets]);
+        }
+        
     }
     
     /**
@@ -39,7 +44,6 @@ class BookCentlineRestController extends ProtectedRestfulController
      */
     public function create($data)
     {
-        
         return new JsonModel(['test' => $data]);
     }
     

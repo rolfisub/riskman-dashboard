@@ -30,9 +30,9 @@ class BookCentlineMapper extends AbstractMapper
     
     
     public function getBookCentlineByBookId($bookId){
-        $s = new Select('book_ranking');
+        $s = new Select('book_centline');
         $s->columns([
-            'rankings'
+            'centline'
         ]);
         $s->where([
             'book_id' => $bookId
@@ -40,7 +40,7 @@ class BookCentlineMapper extends AbstractMapper
         $result = $this->queryObject($s);
         $data = $result->toArray();
         if(isset($data[0])) {
-            $return = ['rankings' => json_decode($data[0]['rankings'])];
+            $return = ['centline' => json_decode($data[0]['centline'])];
         } else {
             $return = NULL;
         }

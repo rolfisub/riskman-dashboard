@@ -30,25 +30,21 @@ class BookCentline
     
     
     /**
-     * get oauth2 info by book id
+     * get centline info by book id
      */
     public function getBookCentlineByBookId($bookId)
     {
-        $rankings = $this->mapper->getBookCentlineByBookId($bookId);
-        if($rankings) {
+        $centline = $this->mapper->getBookCentlineByBookId($bookId);
+        if($centline) {
             return [
-                'bookRanking' => [
-                    'rankings' => json_decode($rankings['rankings'])
+                'bookCentline' => [
+                    'centline' => json_decode($centline['centline'])
                 ]
             ];
-        } else {
-            //insert default
-            $bookRanking = new BookCentlineEntity($this->rankingsDefault);
-            $this->mapper->insertBookCentline($bookId, $bookRanking);
         }
         return [
-            'bookRanking' => [
-                'rankings' => $this->rankingsDefault['rankings']
+            'bookCentline' => [
+                'centline' => []
             ]
         ];
     }
