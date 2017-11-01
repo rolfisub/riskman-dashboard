@@ -21,13 +21,57 @@
         /**
          * bookCentline model
          */
-        c.bookCentline = [
-        ];
+        c.bookCentline = {
+            presetSelected: '',
+            presets: [],
+            current: []
+        };
         
-        /*
-         * touched variable
+        
+        /**
+         * Load selected preset 
+         * @returns {undefined}
          */
-        c.touched = false;
+        c.loadPresetClick = function(){
+            if(c.bookCentline.presetSelected !== '') {
+                var key = c.bookCentline.presetSelected;
+                c.bookCentline.current = c.bookCentline.presets[key];
+            } else {
+                //please select a preset to load
+                console.log("please select a preset to load");
+            }
+        };
+        
+        
+        
+        /**
+         * init the main page
+         * @returns {undefined}
+         */
+        c.init = function() {
+            var r = bookCentline.getBookCentline(c.myBook.id);
+            r.then(function(res){
+                console.log(res);
+            }, bookCentline.onError);
+            
+            /**
+             * get presets
+             */
+            var p = bookCentline.getBookCentlinePresets();
+            p.then(function(res){
+                c.bookCentline.presets = res.data.centlinePresets;
+            }, bookCentline.onError);
+        };
+        
+        /**
+         * listens for refresh calls
+         */
+        $scope.$on('initCentlineOptions', function(data){
+            c.init();
+        });
+        
+        //triggers on init
+        c.init();
         
         /**
          * success model
@@ -50,29 +94,5 @@
                c.errorMsg = false;
            }, secs * 1000);
         };
-        
-        /**
-         * init the main page
-         * @returns {undefined}
-         */
-        c.init = function() {
-            var r = bookCentline.getBookCentline(c.myBook.id);
-            r.then(function(res){
-                
-                c.touched = false;
-            }, bookCentline.onError);
-        };
-        
-        /**
-         * listens for refresh calls
-         */
-        $scope.$on('initCentlineOptions', function(data){
-            c.init();
-        });
-        
-        //triggers on init
-        c.init();
-        
-        
     }
 })();
