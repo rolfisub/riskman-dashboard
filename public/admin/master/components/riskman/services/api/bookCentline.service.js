@@ -18,7 +18,11 @@
         
         this.updateBookCentline = function (bookId, data) {
             return api.update('/bookCentline/' + bookId, data);
-        };        
+        };
+        
+        this.getBookCentlinePresets = function () {
+            return api.read('/bookCentline/getPresets');
+        };
         
         this.onError = function(response) {
             api.errorCallback(response);
