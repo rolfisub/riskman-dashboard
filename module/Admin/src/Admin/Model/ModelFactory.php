@@ -27,7 +27,8 @@ class ModelFactory implements AbstractFactoryInterface
             3 => 'Admin\\Model\\BookModel',
             4 => 'Admin\\Model\\BookAuth',
             5 => 'Admin\\Model\\BookFormat',
-            6 => 'Admin\\Model\\BookRanking'
+            6 => 'Admin\\Model\\BookRanking',
+            7 => 'Admin\\Model\\BookCentline',
         );
         return in_array($requestedName, $objects);
     }
@@ -63,6 +64,10 @@ class ModelFactory implements AbstractFactoryInterface
                     return $o;
                 case 'Admin\\Model\\BookRanking':
                     $mapper = $serviceLocator->get('Admin\\Mapper\\BookRankingMapper');
+                    $o = new $requestedName($mapper);
+                    return $o;
+                case 'Admin\\Model\\BookCentline':
+                    $mapper = $serviceLocator->get('Admin\\Mapper\\BookCentlineMapper');
                     $o = new $requestedName($mapper);
                     return $o;
             }

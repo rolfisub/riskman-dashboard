@@ -103,6 +103,18 @@ return array(
                     ),
                 ),
             ),
+            'BookCentline' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/bookCentline[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\BookCentlineRestController',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
