@@ -69,7 +69,7 @@
                                             button.btn.btn-raised.btn-danger.am-slide-right(ng-show="of.errorMsg")
                                                 span.ion-close-circled
     .row
-        .col-sm-8
+        .col-sm-7
             .card(ng-controller="OptionsRankingController as or")
                 .card-body
                     h4.card-title API Ranking Options
@@ -124,7 +124,7 @@
                                                     onbeforesave='or.checkLimitAmount($data, ranking)'
                                                     onaftersave='or.setLimitAmount($data, ranking)'
                                                 ) {{ranking.limit_amount | currency}}
-        .col-sm-4
+        .col-sm-5
             .card(ng-controller="OptionsCentlineController as oc")
                 .card-body
                     h4.card-title API Centline Options
@@ -139,7 +139,7 @@
                                 ) {{sel}} Cents
                         .btn.btn-raised.btn-primary(ng-click="oc.loadPresetClick()") Load
                         p Select Centline preset to load.
-                    button.btn.btn-warning(ng-click="" ng-disabled="oc.successMsg") Save
+                    button.btn.btn-warning(ng-click="oc.saveBookCentline()" ng-disabled="oc.successMsg") Save
                     button.btn.btn-danger(ng-click="oc.init()" ng-show="oc.touched") Cancel
                     button.btn.btn-raised.btn-success.am-slide-right(ng-show="oc.successMsg")
                         span.ion-checkmark
@@ -156,21 +156,21 @@
                                 tbody
                                     tr(ng-repeat='(pos, centline) in oc.bookCentline.current')
                                         td
-                                            p.m0 {{pos}}
+                                            p.m0 {{pos + 1}}
                                         td
                                             p.m0
                                                 a(
                                                     editable-number='centline.ml' 
-                                                    onbeforesave=''
+                                                    onbeforesave='oc.checkMLInput($data, pos)'
                                                     e-step="any"
-                                                    onaftersave=''
+                                                    onaftersave='oc.touch()'
                                                 ) {{centline.ml}}
                                         td
                                             p.m0 
                                                 a(
                                                     editable-number='centline.cent' 
-                                                    onbeforesave=''
-                                                    onaftersave=''
+                                                    onbeforesave='oc.checkCentInput($data, pos)'
+                                                    onaftersave='oc.touch()'
                                                 ) {{centline.cent}}
                                         
             
