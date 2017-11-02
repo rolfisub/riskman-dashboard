@@ -100,23 +100,23 @@
          * checks if cent value is valid
          */
         c.checkCentInput = function(cent, pos){
-            console.log(cent);console.log(pos);
             //check for greater than 5 and less than next pos
             if(cent < 5) {
                 return 'Cent cannot be less than 5';
             }
-            var bottomCent = c.bookCentline.current[pos +1].cent;
-            if(pos === 0) {
-                if(cent >= bottomCent) {
-                    return 'Cent needs to be less than ' + bottomCent;
+            if(pos + 1 === c.bookCentline.current.length) {
+                var topCent = c.bookCentline.current[pos -1].cent;
+                if(cent <= topCent) {
+                    return 'Cent needs to be greater than ' + topCent;
                 }
             } else {
-                var topCent = c.bookCentline.current[pos -1].cent;
-                if(pos + 1 === c.bookCentline.current.length) {
-                    if(cent <= topCent) {
-                        return 'Cent needs to be greater than ' + topCent;
+                var bottomCent = c.bookCentline.current[pos +1].cent;
+                if(pos === 0) {
+                    if(cent >= bottomCent) {
+                        return 'Cent needs to be less than ' + bottomCent;
                     }
                 } else {
+                    var topCent = c.bookCentline.current[pos -1].cent;
                     if(cent <= topCent) {
                         return 'Cent needs to be greater than ' + topCent;
                     }
