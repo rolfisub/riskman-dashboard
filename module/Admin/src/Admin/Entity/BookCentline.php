@@ -10,7 +10,7 @@ namespace Admin\Entity;
 
 use Admin\Entity\AbstractEntity;
 use Admin\Error\Error400;
-use Admin\Validators\Rankings;
+use Admin\Validators\Centline;
 
 /**
  * Description of Admin
@@ -22,10 +22,10 @@ class BookCentline extends AbstractEntity
     public function __construct($data) 
     {
         $this->setCreateReqFields([
-            'rankings'
+            'centline'
         ])->setCreateOptFields([
         ])->setUpdateReqFields([
-            'rankings'
+            'centline'
         ])->setUpdateOptFields([
         ]);
         parent::__construct($data);
@@ -37,9 +37,9 @@ class BookCentline extends AbstractEntity
         $this->isUpdateStructValid();
         
         //rankings
-        if(isset($this->data['rankings'])) {
-            $Rankings = new Rankings();
-            if(!$Rankings->isValid($this->data['rankings'])) {
+        if(isset($this->data['centline'])) {
+            $Rankings = new Centline();
+            if(!$Rankings->isValid($this->data['centline'])) {
                 throw new Error400($Rankings->getMessages());
             }
         }
@@ -56,8 +56,8 @@ class BookCentline extends AbstractEntity
         $this->isCreateStructValid();
         
         //rankings
-        $Rankings = new Rankings();
-        if(!$Rankings->isValid($this->data['rankings'])) {
+        $Rankings = new Centline();
+        if(!$Rankings->isValid($this->data['centline'])) {
             throw new Error400($Rankings->getMessages());
         }
 
