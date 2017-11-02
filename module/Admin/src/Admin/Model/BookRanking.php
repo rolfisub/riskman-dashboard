@@ -35,10 +35,11 @@ class BookRanking
     public function getBookRankingByBookId($bookId)
     {
         $rankings = $this->mapper->getBookRankingByBookId($bookId);
+        
         if($rankings) {
             return [
                 'bookRanking' => [
-                    'rankings' => json_decode($rankings['rankings'])
+                    'rankings' => $rankings['rankings']
                 ]
             ];
         } else {
