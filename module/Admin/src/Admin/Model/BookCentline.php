@@ -35,7 +35,7 @@ class BookCentline
     public function getBookCentlineByBookId($bookId)
     {
         $centline = $this->mapper->getBookCentlineByBookId($bookId);
-        if($centline) {
+        if($centline['centline']) {
             return [
                 'bookCentline' => [
                     'centline' => json_decode($centline['centline'])
@@ -52,19 +52,19 @@ class BookCentline
     public function updateBookCentline($bookId, $data) 
     {
         $exists = $this->mapper->getBookCentlineByBookId($bookId);
-        $bookRanking = new BookCentlineEntity($data);
+        $bookCentline = new BookCentlineEntity($data);
         $result = [];
         if($exists) {
-            if($bookRanking->checkUpdateValid()) {
-                $result = $this->mapper->updateBookCentline($bookId, $bookRanking);
+            if($bookCentline->checkUpdateValid()) {
+                $result = $this->mapper->updateBookCentline($bookId, $bookCentline);
             }
         } else {
-            if($bookRanking->checkCreateValid()) {
-                $result = $this->mapper->insertBookCentline($bookId, $bookRanking);
+            if($bookCentline->checkCreateValid()) {
+                $result = $this->mapper->insertBookCentline($bookId, $bookCentline);
             }
         }
         return[
-            'bookRanking' => $result
+            'bookCentline' => $result
         ];
     }
     

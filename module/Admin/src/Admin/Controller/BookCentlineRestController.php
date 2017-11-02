@@ -30,7 +30,7 @@ class BookCentlineRestController extends ProtectedRestfulController
     public function get($arg)
     {
         if(is_numeric($arg)) {
-            return new JsonModel($this->model->getBookCentlineByBookId($id));
+            return new JsonModel($this->model->getBookCentlineByBookId($arg));
         } elseif ($arg === 'getPresets') {
             return new JsonModel(["centlinePresets" => $this->model->centlinePresets]);
         }
