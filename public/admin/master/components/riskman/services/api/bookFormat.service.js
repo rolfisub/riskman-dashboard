@@ -16,6 +16,10 @@
             return api.read('/bookFormat/' + bookId);
         };
         
+        this.getTimeZones = function() {   
+            return api.read('/bookFormat/getTimeZones');
+        };
+        
         this.updateBookFormat = function (bookId, data) {
             return api.update('/bookFormat/' + bookId, data);
         };        

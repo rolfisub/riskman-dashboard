@@ -54,7 +54,7 @@
                                         .col-md-12
                                             label.form-control-label(for="timezone") Time Zone:
                                                 select.form-control(name="timezone" ng-model="of.bookFormat.time_zone")
-                                                    option(value="America/New_York") America/New_York
+                                                    option(ng-repeat="zone in of.timeZones" ng-value="zone") {{zone}}
                                             p Feed and Bets Time Zone used by the operator. To be converted to server time. Also used for report calculation.
                                         .col-md-12
                                             label.form-control-label(for="oddformat") Odd Format:
