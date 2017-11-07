@@ -68,6 +68,19 @@
         };
         
         /**
+         * get timezone list
+         * @returns {undefined}
+         */
+        c.timeZones = [];
+        
+        c.getTimeZones = function(){
+            var r = bookFormat.getTimeZones();
+            r.then(function(res){
+                c.timeZones = res.data.timeZones;
+            },bookFormat.onError);
+        };
+        
+        /**
          * init the main page
          * @returns {undefined}
          */
@@ -79,6 +92,9 @@
                 c.bookFormat = angular.merge(c.bookFormat, res.data.bookFormat);
             }, bookFormat.onError);
             
+            
+            //get timezones list from php
+            c.getTimeZones();
         };
         
         
