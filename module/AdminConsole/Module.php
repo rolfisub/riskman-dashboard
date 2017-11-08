@@ -47,6 +47,7 @@ class Module {
     public function getConsoleUsage(Console $console)
     {
         return [
+            'test'
                 // Describe available commands
 //                'get happen [--verbose|-v] <doname>'    => 'Get Process already happen',
 

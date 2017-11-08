@@ -6,13 +6,15 @@
  * and open the template in the editor.
  */
 
-namespace AdminsConsole\Crons\Currency;
+namespace AdminConsole\Crons\Currency;
 
+use Admin\Mapper\AbstractMapper;
 /**
  * Description of CurrencyMapper
  *
  * @author rolf
  */
-class CurrencyMapper {
-    //put your code here
+class CurrencyMapper extends AbstractMapper
+{
+    
 }

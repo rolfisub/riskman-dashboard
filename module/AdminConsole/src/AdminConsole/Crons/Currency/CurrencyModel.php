@@ -6,13 +6,25 @@
  * and open the template in the editor.
  */
 
-namespace AdminsConsole\Crons\Currency;
+namespace AdminConsole\Crons\Currency;
 
+use AdminConsole\Crons\Currency\CurrencyMapper;
 /**
  * Description of CurrencyModel
  *
  * @author rolf
  */
-class CurrencyModel {
-    //put your code here
+class CurrencyModel 
+{
+    private $mapper;
+    
+    public function __construct(CurrencyMapper $mapper) {
+        $this->mapper = $mapper;
+    }
+    
+    
+    public function updateCurrencyRates () 
+    {
+        return 'test model is up and running :-)';
+    }
 }
