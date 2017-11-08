@@ -9,6 +9,9 @@
 namespace AdminConsole\Crons\Currency;
 
 use AdminConsole\Crons\Currency\CurrencyMapper;
+
+use Zend\Http\Client\Adapter\Curl;
+use Zend\Http\Client;
 /**
  * Description of CurrencyModel
  *
@@ -17,14 +20,42 @@ use AdminConsole\Crons\Currency\CurrencyMapper;
 class CurrencyModel 
 {
     private $mapper;
+    private $curlAdapter;
+    private $curl;
+    private $config;
     
-    public function __construct(CurrencyMapper $mapper) {
+    public function __construct(CurrencyMapper $mapper, array $currencyConfig) {
         $this->mapper = $mapper;
+        $this->config = $currencyConfig;
+        $this->curlAdapter = new Curl();
+        $this->curl = new Client();
+        $this->curl->setAdapter($this->curlAdapter);
+        $this->setUpRatesAPI();
+    }
+    
+    private function setUpRatesAPI()
+    {
+        $this->curl->setUri($this->config['uri']);
+        $this->curl->setMethod('GET');
+        $this->curl->setParameterGet([
+            'app_id' => $this->config['appId']
+        ]);        
+    }
+    
+    protected function getRates()
+    {
+        echo "Getting currency update from API...";
+        $this->curl->send();
+        echo " done.\n";
+        return json_decode($this->curl->getResponse()->getBody());
     }
     
     
     public function updateCurrencyRates () 
     {
+        $rates = $this->getRates();
+        
+        
         return 'test model is up and running :-)';
     }
 }

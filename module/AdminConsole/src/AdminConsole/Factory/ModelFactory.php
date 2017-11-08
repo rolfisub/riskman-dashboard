@@ -40,7 +40,8 @@ class ModelFactory implements AbstractFactoryInterface
             switch ($requestedName) {
                 case CurrencyModel::class:
                     $mapper = $container->get(CurrencyMapper::class);
-                    return new CurrencyModel($mapper);
+                    $config = $container->get('Config')['CurrencyConfig'];
+                    return new CurrencyModel($mapper, $config);
             }
         } else {
             throw new Exception("Class " . $requestedName . " does not exist. :-(");
