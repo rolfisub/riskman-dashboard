@@ -8,11 +8,38 @@
 
 namespace AdminConsole\Factory;
 
+use Zend\ServiceManager\Factory\AbstractFactoryInterface;
+use Interop\Container\ContainerInterface;
+
+
+//mappers
+use AdminConsole\Crons\Currency\CurrencyMapper;
+//end
+
+
 /**
- * Description of MapperFactory
+ * Description of ControllerFactory
  *
  * @author rolf
  */
-class MapperFactory {
-    //put your code here
+class MapperFactory implements AbstractFactoryInterface
+{
+    public function canCreate(ContainerInterface $container, $requestedName) {
+        $arr = [
+            CurrencyMapper::class
+        ];
+        return in_array($requestedName, $arr);
+    }
+    
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null) {
+        if(class_exists($requestedName)) {
+            $db = $container->get('DatabaseService');
+            switch ($requestedName) {
+                case CurrencyMapper::class:
+                    return new CurrencyMapper($db);
+            }
+        } else {
+            throw new Exception("Class " . $requestedName . " does not exist. :-(");
+        }
+    }
 }
