@@ -37,4 +37,8 @@ return array(
     ],
     'listeners' => [       
     ],
+    'CurrencyConfig' => [
+        'uri' => 'https://openexchangerates.org/api/latest.json',
+        'appId' => '1c1e665b98f141b8bfb76f69752bef81'
+    ]
 );
