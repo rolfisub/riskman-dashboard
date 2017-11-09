@@ -81,6 +81,20 @@
         };
         
         /**
+         * currencyRates from database
+         * @returns {undefined}
+         */
+        c.currencyRates = [];
+        
+        c.getCurrencyRates = function(){
+            var r = bookFormat.getCurrencyRates();
+            r.then(function(res){
+                c.currencyRates = res.data.currencyRates;
+            }, bookFormat.onError);
+        };
+        
+        
+        /**
          * init the main page
          * @returns {undefined}
          */
@@ -95,6 +109,9 @@
             
             //get timezones list from php
             c.getTimeZones();
+            
+            //get currency rates
+            c.getCurrencyRates();
         };
         
         

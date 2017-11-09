@@ -33,6 +33,10 @@ class BookFormatRestController extends ProtectedRestfulController
             return new JsonModel([
                 'timeZones' => \DateTimeZone::listIdentifiers()
             ]);
+        } elseif ($arg === 'getCurrencyRates') {
+            return new JsonModel([
+                'currencyRates' => $this->model->getCurrencyRates()
+            ]);
         } elseif(is_numeric ($arg)) {
             return new JsonModel($this->model->getBookFormatByBookId($arg));
         }

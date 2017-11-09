@@ -69,4 +69,9 @@ class BookFormat
         }
     }
     
+    public function getCurrencyRates()
+    {
+        return $this->mapper->getCurrencyRates();
+    }
+    
 }
