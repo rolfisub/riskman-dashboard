@@ -106,4 +106,16 @@ class BookFormatMapper extends AbstractMapper
         return true;
     }
     
+    public function getCurrencyRates()
+    {
+        $s = new Select('exchange_rates');
+        $s->columns([
+            'code',
+            'rate'
+        ]);
+        $res = $this->queryObject($s);
+        $data = $res->toArray();
+        return $data;
+    }
+    
 }
