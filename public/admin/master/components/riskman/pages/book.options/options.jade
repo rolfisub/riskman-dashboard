@@ -49,12 +49,12 @@
                                         .col-md-12
                                             label.form-control-label(for="currency") Currency:
                                                 select.form-control(name="currency" ng-model="of.bookFormat.currency")
-                                                    option(value="USD") USD
+                                                    option(ng-repeat="rate in of.currencyRates" ng-value="rate.code") {{rate.code}}
                                             p Input Currency to be converted to USD. This will be used in reports to visualize data in USD.
                                         .col-md-12
                                             label.form-control-label(for="timezone") Time Zone:
                                                 select.form-control(name="timezone" ng-model="of.bookFormat.time_zone")
-                                                    option(value="America/New_York") America/New_York
+                                                    option(ng-repeat="zone in of.timeZones" ng-value="zone") {{zone}}
                                             p Feed and Bets Time Zone used by the operator. To be converted to server time. Also used for report calculation.
                                         .col-md-12
                                             label.form-control-label(for="oddformat") Odd Format:
