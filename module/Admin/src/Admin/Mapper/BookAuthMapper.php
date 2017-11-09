@@ -65,6 +65,20 @@ class BookAuthMapper extends AbstractMapper
         $d = new Delete('oauth_clients');
         $d->where(['user_id' => $bookId]);
         $this->queryObject($d);
+        
+        //delete the tokens as well
+        $this->deleteBookAuthTokens($bookId);
+        return[$bookId];
+    }
+    
+    /**
+     * deletes the tokens so access is disabled
+     * @param type $bookId
+     */
+    private function deleteBookAuthTokens($bookId) {
+        $d = new Delete('oauth_access_tokens');
+        $d->where(['user_id' => $bookId]);
+        $this->queryObject($d);
         return[$bookId];
     }
     
