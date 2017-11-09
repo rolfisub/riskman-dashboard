@@ -47,15 +47,15 @@ class CurrencyModel
         echo "Getting currency update from API...";
         $this->curl->send();
         echo " done.\n";
-        return json_decode($this->curl->getResponse()->getBody());
+        return new CurrencyEntity(json_decode($this->curl->getResponse()->getBody(), true));
     }
     
     
     public function updateCurrencyRates () 
     {
+        echo "Updating Rates...\n";
         $rates = $this->getRates();
-        
-        
-        return 'test model is up and running :-)';
+        $this->mapper->updateRates($rates);
+        return "Rates UPDATED.\n";
     }
 }
