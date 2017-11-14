@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('riskman.admins')
+        .module('riskman.books')
         .controller('BooksController', BooksController);
 
     BooksController.$inject = ['$scope', 'books'];

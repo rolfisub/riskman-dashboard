@@ -49,14 +49,14 @@ class ErrorHandlerListener extends AbstractListenerAggregate
     public function __invoke(MvcEvent $event)
     {
         $response = $event->getResponse();
-
+       
         if ($response instanceof ConsoleResponse) {
             error_log($event->getResult());
             return;
         }
 
         $exception = $event->getParam('exception');
-
+        
         if ($exception instanceof Abstract4xx) {
             $response->setStatusCode($exception->getCode());
             $model = new JsonErrorModel(
@@ -72,7 +72,7 @@ class ErrorHandlerListener extends AbstractListenerAggregate
         } else {
             $model = new JsonErrorModel($response->getReasonPhrase());
         }
-
+        
         $model->setTerminal(true);
         $event->setResult($model);
         $event->setViewModel($model);

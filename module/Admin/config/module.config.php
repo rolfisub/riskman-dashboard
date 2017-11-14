@@ -67,6 +67,54 @@ return array(
                     ),
                 ),
             ),
+            'BookAuth' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/bookAuth[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\BookAuthRestController',
+                    ),
+                ),
+            ),
+            'BookFormat' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/bookFormat[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\BookFormatRestController',
+                    ),
+                ),
+            ),
+            'BookRanking' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/bookRanking[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\BookRankingRestController',
+                    ),
+                ),
+            ),
+            'BookCentline' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/rest/bookCentline[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\BookCentlineRestController',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

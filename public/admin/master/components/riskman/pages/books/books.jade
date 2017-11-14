@@ -3,6 +3,8 @@
         .col-sm-9
             h4.m0.text-thin RiskMan Books
             small Create, Edit, Enable/Disable Books
+            a(ui-sref='riskman.books.default')
+                button.btn.btn-primary Default Options
 .container-fluid(ng-controller='BooksController as books')
     .row
         .col-xs-12.col-lg-8
@@ -16,6 +18,7 @@
                                 th ID
                                 th Name
                                 th Modified
+                                th Options  
                         tbody
                             tr(ng-repeat='book in books.myBooks')
                                 td
@@ -31,3 +34,8 @@
                                         a(ui-sref='riskman.book({bookId: book.id})') {{book.name}}
                                 td
                                     p.m0 {{book.datetime}}
+                                td
+                                    p.m0  
+                                        a(ui-sref='riskman.book.options({bookId: book.id})')
+                                            button.btn.btn-raised.btn-warning
+                                                i.ion-gear-b.edit-icon-size

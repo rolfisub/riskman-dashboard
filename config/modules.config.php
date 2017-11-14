@@ -34,5 +34,7 @@ return [
     'Zend\Router',
     'Zend\Validator',
     'Application',
-    'Admin'
+    'Admin',
+    'AdminConsole'
+    
 ];
